@@ -2,7 +2,7 @@
   "id": "china-yuan-devaluation-2015",
   "name": "China devalues the yuan",
   "date": "2015-08-11",
-  "type": "financial_crisis",
+  "type": "currency_crisis",
   "regions": [
     "east_asia",
     "global"

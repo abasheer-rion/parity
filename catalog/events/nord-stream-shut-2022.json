@@ -1,0 +1,27 @@
+{
+  "id": "nord-stream-shut-2022",
+  "name": "Russia keeps the Nord Stream gas pipeline shut",
+  "date": "2022-09-05",
+  "type": "oil_supply_shock",
+  "regions": [
+    "europe",
+    "russia_cis"
+  ],
+  "actors": [
+    "russia",
+    "germany",
+    "eu"
+  ],
+  "severity": 3,
+  "commodities": [
+    "gas"
+  ],
+  "description": "Gazprom said after the close on Friday 2 September that Nord Stream 1 would stay shut indefinitely; European gas prices jumped on the next trading day.",
+  "sources": [
+    {
+      "title": "Nord Stream",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Nord_Stream"
+    }
+  ]
+}

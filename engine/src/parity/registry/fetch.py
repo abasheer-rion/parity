@@ -81,7 +81,7 @@ def has_fetcher(rec: dict) -> bool:
 
 
 def history(con: sqlite3.Connection, rec: dict, save: bool = True,
-            root=None) -> pd.Series:
+            root=None, at: str | None = None) -> pd.Series:
     """Fetch a series' full history, log the attempt, and save it where the store reads."""
     if not has_fetcher(rec):
         raise NoFetcher(f"no history fetcher for source {rec['source_id']}")
@@ -89,10 +89,10 @@ def history(con: sqlite3.Connection, rec: dict, save: bool = True,
     try:
         data = FETCHERS[rec["source_id"]](rec)
         data = data[~data.index.duplicated(keep="last")].sort_index().astype(float).dropna()
-        log(con, rec["source_id"], rec["id"], True, time.time() - t0)
+        log(con, rec["source_id"], rec["id"], True, time.time() - t0, at=at)
     except Exception as exc:
         log(con, rec["source_id"], rec["id"], False, time.time() - t0,
-            f"{type(exc).__name__}: {exc}"[:200])
+            f"{type(exc).__name__}: {exc}"[:200], at=at)
         raise
     if save:
         path = store._path(as_series(rec), root or store.DEFAULT_DIR)
@@ -110,10 +110,12 @@ def cached(rec: dict, root=None) -> pd.Series | None:
 
 
 def log(con: sqlite3.Connection, source_id: str, series_id: str | None, ok: bool,
-        seconds: float, error: str | None = None) -> None:
+        seconds: float, error: str | None = None, at: str | None = None) -> None:
+    from ..data.sources import redact
+
     con.execute("INSERT INTO fetch_log (at, source_id, series_id, ok, seconds, error) VALUES "
-                "(?, ?, ?, ?, ?, ?)", (db.now(), source_id, series_id, int(ok),
-                                       round(seconds, 2), error))
+                "(?, ?, ?, ?, ?, ?)", (at or db.now(), source_id, series_id, int(ok),
+                                       round(seconds, 2), redact(error) if error else None))
     con.execute("DELETE FROM fetch_log WHERE at < datetime('now', '-30 days')")
 
 

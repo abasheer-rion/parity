@@ -8,15 +8,15 @@ import type { McpCaller } from "./auth";
 import { loadCourses, type McpCourse } from "./academy";
 import type { Schema } from "./schema";
 import type { Report, StrategyRun } from "../types";
+import { displayName, strategySearchText, tagline } from "../strategyNames";
 import type { SearchDoc } from "../data";
 import type { TermIndex, TermSeries } from "../../terminal/data";
 import type { ImpactDoc, RankRow } from "../newsImpact";
 import { evidenceWord } from "../newsImpact";
-import { checkDescription, checkFile } from "../verify/checks";
-import { priceBook, type PriceBook } from "../verify/prices";
-import type { Claim, EquityPoint, InputKind, Parsed, Trade } from "../verify/types";
+import { NOTE, ToolError } from "./common";
+import { VERIFY_TOOLS } from "./verify";
 
-export const NOTE = "Research only, not investment advice.";
+export { NOTE, ToolError };
 
 /** Static files published with the site, read without going back through the network. */
 export interface Data { json<T>(path: string): Promise<T | null> }
@@ -28,9 +28,6 @@ export interface Db {
 }
 
 export interface ToolContext { caller: McpCaller; data: Data; db: Db; origin: string; now: Date }
-
-/** A problem the AI app should read and fix (bad input, nothing found). Not a server fault. */
-export class ToolError extends Error {}
 
 export interface Tool {
   name: string;
@@ -65,18 +62,19 @@ async function report(ctx: ToolContext): Promise<Report> {
   return r;
 }
 
-async function termIndex(ctx: ToolContext): Promise<TermIndex> {
+export async function termIndex(ctx: Pick<ToolContext, "data">): Promise<TermIndex> {
   const t = await ctx.data.json<TermIndex>("/data/terminal/index.json");
   if (!t) throw new ToolError("The market data has not been published yet.");
   return t;
 }
 
-const runName = (r: StrategyRun) => r.display_name || r.strategy;
+const runName = (r: StrategyRun) => displayName(r.strategy, r.display_name);
 
 function runSummary(r: StrategyRun) {
   return {
     id: r.strategy,
     name: runName(r),
+    tagline: tagline(r.strategy) || null,
     benchmark: r.is_benchmark,
     tags: r.tags ?? null,
     verdict: r.gauntlet?.verdict ?? null,
@@ -106,68 +104,11 @@ async function findLesson(ctx: ToolContext, course: string, lesson: string) {
   return { c, l };
 }
 
-function seriesRow(s: TermSeries) {
+export function seriesRow(s: TermSeries) {
   return {
     key: s.key, name: s.label, short: s.short, class: s.class, unit: s.unit, frequency: s.freq,
     first: s.first, as_of: s.asof, last: s.last, change_1w: round(s.chg?.w1 ?? null), change_1m: round(s.chg?.m1 ?? null),
     source: s.source, licence: s.licence,
-  };
-}
-
-// ---------------------------------------------------------------------------- Verify input
-
-const claimSchema: Schema = {
-  type: "object",
-  description: "What was claimed, for example on a seller's page. Rates are fractions: 0.92 means 92%.",
-  properties: {
-    winRate: { type: "number", minimum: 0, maximum: 1 },
-    monthlyReturn: { type: "number", minimum: -1, maximum: 100 },
-    maxDrawdown: { type: "number", minimum: 0, maximum: 1 },
-    takeProfit: { type: "number", minimum: 0, maximum: 10 },
-    stopLoss: { type: "number", minimum: 0, maximum: 10 },
-    maxLoss: { type: "number", minimum: 0, maximum: 1 },
-    tradesPerMonth: { type: "number", minimum: 0, maximum: 100000 },
-    trades: { type: "integer", minimum: 0, maximum: 10000000 },
-    months: { type: "number", minimum: 0, maximum: 1200 },
-    leverage: { type: "number", minimum: 0, maximum: 10000 },
-    grid: { type: "boolean" },
-    martingale: { type: "boolean" },
-    maxLossCapped: { type: "boolean" },
-  },
-  additionalProperties: false,
-};
-
-function toClaim(v: unknown): Claim {
-  const out: Claim = {};
-  if (!v || typeof v !== "object") return out;
-  for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
-    if (typeof x === "number" || typeof x === "boolean") (out as Record<string, unknown>)[k] = x;
-  }
-  return out;
-}
-
-const isoTime = (s: string): string => (/^\d{4}-\d{2}-\d{2}$/.test(s) ? `${s}T00:00:00` : s.replace(" ", "T").slice(0, 19));
-
-function toTrades(raw: unknown[]): Trade[] {
-  return raw.map((x) => {
-    const t = x as Record<string, unknown>;
-    const trade: Trade = { closeTime: isoTime(str(t.close_time)), pnl: Number(t.pnl), fees: typeof t.fees === "number" ? t.fees : 0 };
-    if (typeof t.open_time === "string") trade.openTime = isoTime(t.open_time);
-    if (typeof t.symbol === "string") trade.symbol = t.symbol;
-    if (t.side === "buy" || t.side === "sell") trade.side = t.side;
-    for (const k of ["size", "entry", "exit"] as const) if (typeof t[k] === "number") trade[k] = t[k] as number;
-    return trade;
-  }).sort((a, b) => (a.closeTime < b.closeTime ? -1 : a.closeTime > b.closeTime ? 1 : 0));
-}
-
-function compactResult(r: ReturnType<typeof checkFile>) {
-  return {
-    verdict: r.verdict,
-    what: r.what, kind: r.kind, tries: r.tries, method_version: r.methodVersion,
-    date_from: r.dateFrom, date_to: r.dateTo, trades: r.trades, starting_balance: r.balance,
-    profit_per_trade: r.card1, worst_losses: r.card2, luck_check: r.card3,
-    signs_of_peeking_or_editing: r.card4, signs_of_tuning: r.card5, claim_arithmetic: r.claims,
-    notes: r.notes,
   };
 }
 
@@ -176,6 +117,9 @@ function compactResult(r: ReturnType<typeof checkFile>) {
 const READ = (title: string) => ({ title, readOnlyHint: true, openWorldHint: false });
 
 export const TOOLS: Tool[] = [
+  // Verify first (DEC-0082): verify_trades, verify_strategy, verify_claim. The two old names
+  // stay listed after the other read tools, marked deprecated.
+  ...VERIFY_TOOLS.slice(0, 3),
   {
     name: "search_strategies",
     title: "Search tested strategies",
@@ -196,7 +140,7 @@ export const TOOLS: Tool[] = [
       const q = str(a.query).toLowerCase().trim();
       const asset = str(a.asset).toLowerCase();
       const rows = r.runs.filter((run) =>
-        (!q || has([run.strategy, run.display_name, run.description, run.summary, ...Object.values(run.tags ?? {})], q))
+        (!q || has([strategySearchText(run.strategy, run.display_name), run.description, run.summary, ...Object.values(run.tags ?? {})], q))
         && (!asset || (run.tags?.asset ?? "").toLowerCase() === asset)
         && (typeof a.beats_sp500 !== "boolean" || (run.gauntlet?.beats_sp500 ?? false) === a.beats_sp500));
       return {
@@ -259,82 +203,6 @@ export const TOOLS: Tool[] = [
         .slice(0, int(a.limit, 15))
         .map((x) => ({ id: x.id, name: x.name, line: x.line, family: x.family, asset: x.asset, years: x.years, cagr: round(x.cagr), sharpe: round(x.sharpe, 2), max_drawdown: round(x.max_dd), breakeven_cost_bps: round(x.breakeven_bps, 1), beats_market: x.beats_market, deflated_sharpe: round(x.deflated, 3), spec: x.spec }));
       return { generated_at: s.generated_at, trials: s.trials, beat_market: s.beat_market, passed_luck_check: s.passed_luck_check, leads: rows, note: NOTE };
-    },
-  },
-  {
-    name: "verify_record",
-    title: "Run Verify on a trading record",
-    description: "Runs Parity Verify's checks on a trade list or an equity curve you supply: profit per trade, worst losses, a luck check that counts how many things were tried, signs of peeking or edited history, signs of tuning, and whether stated claims add up. The numbers are checked in memory and are not stored. Give trades (each with close_time and pnl) or equity (each with date and equity).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        kind: { type: "string", enum: ["real", "demo", "backtest"], description: "Real money, a demo account, or a backtest." },
-        trades: {
-          type: "array", maxItems: 5000, description: "Closed trades, any order.",
-          items: {
-            type: "object",
-            properties: {
-              close_time: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}", description: "YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS" },
-              pnl: { type: "number", description: "Profit after fees, in the account's money." },
-              fees: { type: "number" }, open_time: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}" },
-              symbol: { type: "string", maxLength: 40 }, side: { type: "string", enum: ["buy", "sell"] },
-              size: { type: "number" }, entry: { type: "number" }, exit: { type: "number" },
-            },
-            required: ["close_time", "pnl"],
-          },
-        },
-        equity: {
-          type: "array", maxItems: 5000, description: "Account value by date, oldest first.",
-          items: { type: "object", properties: { date: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$" }, equity: { type: "number" }, cashflow: { type: "number" } }, required: ["date", "equity"] },
-        },
-        starting_balance: { type: "number", minimum: 0, maximum: 1e12, description: "Needed to turn a trade list into returns." },
-        tries: { type: "integer", minimum: 1, maximum: 10000000, description: "How many strategies, bots or settings were tried before this one. Default 1." },
-        claim: claimSchema,
-      },
-      required: ["kind"],
-      additionalProperties: false,
-    },
-    annotations: READ("Run Verify on a trading record"),
-    async run(a, ctx) {
-      const trades = Array.isArray(a.trades) && a.trades.length ? toTrades(a.trades) : undefined;
-      const equity = !trades && Array.isArray(a.equity) && a.equity.length
-        ? (a.equity as Record<string, unknown>[]).map((p): EquityPoint => ({ date: str(p.date), equity: Number(p.equity), ...(typeof p.cashflow === "number" ? { cashflow: p.cashflow } : {}) }))
-        : undefined;
-      if (!trades && !equity) throw new ToolError("Give trades (each with close_time and pnl) or equity (each with date and equity).");
-      const parsed: Parsed = {
-        format: trades ? "trades" : "equity", table: { headers: [], rows: [] }, mapping: {}, dropped: [],
-        trades, equity, warnings: [], backtestExport: false,
-      };
-      const doc = trades ? await ctx.data.json<Parameters<typeof priceBook>[0]>("/data/verify/prices.json").catch(() => null) : null;
-      const prices: PriceBook | null = doc ? priceBook(doc) : null;
-      const tries = int(a.tries, 1);
-      const balance = typeof a.starting_balance === "number" && a.starting_balance > 0 ? a.starting_balance : null;
-      const result = checkFile({
-        parsed, prices, triesDefaulted: a.tries == null,
-        answers: { kind: str(a.kind) as InputKind, balance, tries, claim: toClaim(a.claim), noCashflows: true },
-      });
-      return { ...compactResult(result), note: NOTE };
-    },
-  },
-  {
-    name: "verify_description",
-    title: "Run Verify on a described bot",
-    description: "Checks a trading bot or signal described in words, and any numbers claimed for it, for arithmetic that cannot hold (for example a win rate and payoff that cannot make money, or an uncapped loss). A description cannot show an edge; this only catches claims that fail on their own numbers.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        text: { type: "string", minLength: 1, maxLength: 4000, description: "The description, as written by the seller or author." },
-        settings: { type: "integer", minimum: 0, maximum: 10000, description: "How many settings the bot has that were tuned." },
-        trades: { type: "integer", minimum: 0, maximum: 10000000, description: "How many trades the record is said to have." },
-        claim: claimSchema,
-      },
-      required: ["text"],
-      additionalProperties: false,
-    },
-    annotations: READ("Run Verify on a described bot"),
-    async run(a) {
-      const r = checkDescription({ text: str(a.text), claim: toClaim(a.claim), settings: typeof a.settings === "number" ? a.settings : null, trades: typeof a.trades === "number" ? a.trades : null });
-      return { verdict: r.verdict, claim_arithmetic: r.claims, signs_of_tuning: r.card5, notes: r.notes, note: NOTE };
     },
   },
   {
@@ -474,7 +342,7 @@ export const TOOLS: Tool[] = [
       const hit = (hay: (string | undefined)[]) => words.length > 0 && words.some((w) => has(hay, w));
       const results: { id: string; title: string; url: string }[] = [];
       const r = await ctx.data.json<Report>("/data/latest.json");
-      for (const run of r?.runs ?? []) if (hit([run.strategy, run.display_name, run.description, run.summary])) results.push({ id: `strategy:${run.strategy}`, title: `Strategy: ${runName(run)}`, url: strategyUrl(ctx.origin, run.strategy) });
+      for (const run of r?.runs ?? []) if (hit([strategySearchText(run.strategy, run.display_name), run.description, run.summary])) results.push({ id: `strategy:${run.strategy}`, title: `Strategy: ${runName(run)}`, url: strategyUrl(ctx.origin, run.strategy) });
       for (const c of await loadCourses(ctx.data)) for (const l of c.lessons) if (hit([c.title, l.title, ...l.terms])) results.push({ id: `lesson:${c.id}/${l.id}`, title: `Lesson: ${l.title}`, url: lessonUrl(ctx.origin, c.id, l.id) });
       const t = await ctx.data.json<TermIndex>("/data/terminal/index.json");
       for (const s of t?.series ?? []) if (hit([s.key, s.label])) results.push({ id: `series:${s.key}`, title: `Market series: ${s.label}`, url: `${ctx.origin}/trade/` });
@@ -511,6 +379,7 @@ export const TOOLS: Tool[] = [
       throw new ToolError("Unknown id. Use an id from search.");
     },
   },
+  ...VERIFY_TOOLS.slice(3),
   {
     name: "list_demo_accounts",
     title: "List my demo accounts",

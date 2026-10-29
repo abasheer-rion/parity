@@ -154,7 +154,7 @@ describe("the static 404 page", () => {
 describe("the Verify badge function answers 404 for an unknown id", () => {
   const env = { ASSETS: { fetch: async () => new Response("<html><head><title>x</title></head><body></body></html>", { headers: { "Content-Type": "text/html" } }) } };
   const rows = (r: Partial<PublicBadge>[]) => vi.fn(async () => new Response(JSON.stringify(r), { status: 200 })) as unknown as typeof fetch;
-  const call = (id: string, fetcher: typeof fetch) => badgePage({ request: new Request(`https://parity.endyland.com/v/${id}`), env, params: { id } }, fetcher);
+  const call = (id: string, fetcher: typeof fetch) => badgePage({ request: new Request(`https://paritytrading.app/v/${id}`), env, params: { id } }, fetcher);
 
   it("serves the page with 404 when no badge has the id", async () => {
     const res = await call("AbCdEf123456", rows([]));

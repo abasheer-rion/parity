@@ -59,10 +59,13 @@ const BACKDROPS: Record<string, RGBA> = {
   "a hovered row on a raised card": over(tok("color-hover"), tok("color-surface-raised")),
   "a pressed control on a card": over(tok("color-pressed"), tok("color-surface")),
   "a selected row": over(tok("color-selected"), tok("color-surface")),
-  "the red badge": over(tok("color-accent-soft"), tok("color-surface")),
+  "a table header row": tok("color-table-head"),
+  "a hovered table row": over(tok("color-row-hover"), tok("color-surface")),
+  "a hovered table row on the canvas": over(tok("color-row-hover"), canvas),
+  "the accent badge": over(tok("color-accent-soft"), tok("color-surface")),
 };
 
-const TEXT = ["color-text", "color-text-body", "color-text-muted", "color-text-faint", "color-link", "color-accent-text",
+const TEXT = ["color-text", "color-text-body", "color-text-muted", "color-text-faint", "color-link", "color-accent-text", "color-table-head-text",
   "color-positive", "color-negative", "color-warning", "color-info"];
 // The parts of a control that show what it is and what state it is in.
 const CONTROL = ["color-focus", "color-accent", "color-border-control", "color-positive", "color-negative"];
@@ -87,7 +90,7 @@ describe("text on filled buttons and badges is at least 4.5:1", () => {
   const pairs: [string, string, RGBA][] = [
     ["primary button", "color-on-primary", tok("color-primary")],
     ["primary button, hovered", "color-on-primary", tok("color-primary-hover")],
-    ["red button", "color-on-accent", tok("color-accent-hover")],
+    ["accent button", "color-on-accent", tok("color-accent-hover")],
     ["green badge", "color-positive", over(tok("color-positive-soft"), tok("color-surface"))],
     ["coral badge", "color-negative", over(tok("color-negative-soft"), tok("color-surface"))],
     ["amber badge", "color-warning", over(tok("color-warning-soft"), tok("color-surface"))],

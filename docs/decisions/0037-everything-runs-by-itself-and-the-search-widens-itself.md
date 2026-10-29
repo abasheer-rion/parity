@@ -44,7 +44,7 @@ The owner asked that everything should always run by itself, and keep running mo
    - One cycle runs:
      - Bot Battle on 1,000 fresh made-up paths. Seeds start at 1,000,000 and never repeat.
      - 2,000 Sim World bootstrap paths of 26 weeks for the euro, yen, oil, US stocks and an equal basket.
-     - `world export`, `scenario export`, `terminal export` and `bots export`, through the same command line code as by hand.
+     - `world export`, `world stress` (added by [DEC-0066](0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)), `scenario export`, `terminal export` and `bots export`, through the same command line code as by hand.
    - It keeps running totals and fixed-bin histograms, not the paths, so a million paths still cost a few hundred kilobytes in `engine/output/sims.db`. A step that fails is recorded, and the rest of the cycle still runs.
    - `scripts/sims-service/run.sh` and `install.sh` copy the search service's pattern:
      - launchd label `com.endyland.parity-sims`, running as the user;
@@ -78,7 +78,9 @@ The owner asked that everything should always run by itself, and keep running mo
 - [DEC-0045: We track how old our data is at every hop and how fast pages get it](0045-we-track-how-old-our-data-is-at-every-hop-and-how-fast-pages-get-it.md)
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
+- [REF-0028: Database egress, what used it and what we cut](../reference/0028-database-egress-what-used-it-and-what-we-cut.md)
 - [LOG-0014: Everything runs by itself](../log/2026-10-24-ayan-work-log-everything-runs-by-itself.md)
 - [LOG-0017: Ayan work log, competitor profiles, feedback collector and architecture](../log/2026-10-24-ayan-work-log-competitor-profiles-feedback-collector-and-architecture.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)

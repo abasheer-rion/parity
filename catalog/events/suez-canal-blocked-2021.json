@@ -1,0 +1,26 @@
+{
+  "id": "suez-canal-blocked-2021",
+  "name": "Ever Given blocks the Suez Canal",
+  "date": "2021-03-23",
+  "type": "supply_chain_shock",
+  "regions": [
+    "middle_east",
+    "africa",
+    "global"
+  ],
+  "actors": [
+    "egypt"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "A large container ship ran aground and blocked the Suez Canal for six days, holding up hundreds of ships and about 12% of world trade.",
+  "sources": [
+    {
+      "title": "2021 Suez Canal obstruction",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2021_Suez_Canal_obstruction"
+    }
+  ]
+}

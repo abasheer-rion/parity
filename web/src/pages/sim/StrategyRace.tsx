@@ -10,7 +10,7 @@ import {
 } from "../../ui";
 import { colorMap } from "../../lib/colors";
 import { usePrefs } from "../../lib/prefs";
-import { ASSET_LABEL, FAMILY_LABEL, insightsFor, nameOf, tagsOf } from "../../lib/strategyMeta";
+import { ASSET_LABEL, FAMILY_LABEL, insightsFor, nameOf, searchTextOf, taglineOf, tagsOf } from "../../lib/strategyMeta";
 import type { Point, Report, StrategyRun } from "../../lib/types";
 import { Race } from "./Race";
 import { dollars, windowStats } from "./shared";
@@ -41,7 +41,7 @@ export function StrategyRace({ report }: { report: Report }) {
     { id: "sharpe", label: "Positive Sharpe", test: (r) => (r.run.metrics.sharpe ?? 0) > 0 },
     { id: "tests", label: "Passed 6+ tests", test: (r) => (r.run.gauntlet?.passed ?? 0) >= 6 },
   ], []);
-  const f = useFilters(rows.filter((r) => !r.run.is_benchmark), defs, (r) => `${r.run.strategy} ${nameOf(r.run)} ${r.run.summary}`);
+  const f = useFilters(rows.filter((r) => !r.run.is_benchmark), defs, (r) => searchTextOf(r.run));
   const field = f.filtered.filter((r) => (!market || r.market === market) && (family === "all" || r.family === family));
   const assets = [...new Set(rows.filter((r) => !r.run.is_benchmark).map((r) => r.market))];
   const families = [...new Set(rows.filter((r) => !r.run.is_benchmark).map((r) => r.family))];
@@ -104,7 +104,7 @@ export function StrategyRace({ report }: { report: Report }) {
                     <span className="sw-tag">{ASSET_LABEL[r.market] ?? r.market}</span>
                     {tagsOf(r.run).style && <span className="sw-tag">{tagsOf(r.run).style}</span>}
                   </div>
-                  <p className="sw-card-sum" title={r.run.summary}>{r.run.description || r.run.summary}</p>
+                  <p className="sw-card-sum" title={r.run.description || r.run.summary}>{taglineOf(r.run) || r.run.description || r.run.summary}</p>
                   <div className="sw-card-spark"><Sparkline points={r.run.equity} width={240} height={36} /></div>
                   <dl className="sw-card-stats">
                     <div><dt>Ends at</dt><dd><Money value={start * (1 + r.total)} cents={false} /></dd></div>
@@ -133,7 +133,7 @@ export function StrategyRace({ report }: { report: Report }) {
             <LineChart label="Growth of the starting amount" format={dollars} log height={280}
               series={[
                 ...pickedRows.map((r) => ({ name: nameOf(r.run), color: colors[r.run.strategy], points: r.run.equity.map(([d, v]) => [d, v * start] as Point), emphasis: true })),
-                ...(bench ? [{ name: "US stock market", color: colors[bench.strategy], points: bench.equity.map(([d, v]) => [d, v * start] as Point) }] : []),
+                ...(bench ? [{ name: nameOf(bench), color: colors[bench.strategy], points: bench.equity.map(([d, v]) => [d, v * start] as Point) }] : []),
               ]} />
           </Panel>
           <div className={`sw-compare-cols n${pickedRows.length}`}>

@@ -1,0 +1,23 @@
+{
+  "id": "mexico-election-2024",
+  "name": "Morena wins big in Mexico",
+  "date": "2024-06-02",
+  "type": "election",
+  "regions": [
+    "latin_america",
+    "north_america"
+  ],
+  "actors": [
+    "mexico"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Claudia Sheinbaum won Mexico's presidency and her coalition neared a two-thirds majority; the peso fell about 4% the next day.",
+  "sources": [
+    {
+      "title": "2024 Mexican general election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2024_Mexican_general_election"
+    }
+  ]
+}

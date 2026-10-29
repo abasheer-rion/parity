@@ -7,7 +7,7 @@
 // and lost updates. It redraws at most twice a second, not per tick.
 import { useEffect, useRef, useState } from "react";
 import { Popover } from "../ui";
-import { subscribeStatus, type FeedStatus } from "../lib/live/client";
+import { subscribeStatus, subscribeTicks, type FeedStatus } from "../lib/live/client";
 import { freshness, msText, type Freshness } from "../lib/live/latency";
 import { feedLabel, feedShort, type FeedType } from "../lib/live/protocol";
 import { INTERNAL_LABEL, sourceById } from "../lib/live/sources";
@@ -71,7 +71,8 @@ export function LiveBadge({ src, compact = false }: { src: string; compact?: boo
         <div><dt>Feed</dt><dd>{kind}</dd></div>
         <div><dt>Source</dt><dd>{meta ? <a href={meta.terms} target="_blank" rel="noreferrer">{meta.name}</a> : src}</dd></div>
         {internal && <div><dt>Who sees it</dt><dd>Team only. Not shown to the public.</dd></div>}
-        {src === "onchain" && <div><dt>Timing</dt><dd>From the Base block. A swap waits up to 2 s for its block.</dd></div>}
+        {src === "onchain" && <div><dt>Timing</dt><dd>From the block. A swap waits for its block: 0.25 s on Arbitrum, 2 s on Base, 12 s on Ethereum.</dd></div>}
+        {src === "onchain" && <div><dt>Method</dt><dd>Every pool on six chains, combined like Pyth: weighted median and a confidence band.</dd></div>}
         <div><dt>Exchange time</dt><dd className="tabular">{time(s?.lastTe)}</dd></div>
         <div><dt>Our edge got it</dt><dd className="tabular">+{msText(s?.last?.feed)}</dd></div>
         <div><dt>Our edge sent it</dt><dd className="tabular">+{msText(s?.last?.edge)}</dd></div>
@@ -116,4 +117,22 @@ export function StaticBadge({ feed, source, asOf, compact = false, terms, delayM
       </dl>
     </Popover>
   );
+}
+
+/**
+ * The confidence of an aggregate price (the Parity price, DEC-0065), next to the chart:
+ * "± 0.42". Written straight to the page on each update, not through React.
+ */
+export function ConfidenceTag({ src, sym }: { src: string; sym: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => subscribeTicks(src, sym, (t) => {
+    const el = ref.current;
+    if (!el || t.c == null || !Number.isFinite(t.c)) return;
+    const pct = t.p > 0 ? (t.c / t.p) * 100 : 0;
+    const digits = t.c >= 100 ? 0 : t.c >= 1 ? 2 : Math.min(8, Math.max(2, 2 - Math.floor(Math.log10(t.c || 1e-8))));
+    el.textContent = `± ${t.c.toFixed(digits)}`;
+    el.title = `Confidence: the price is likely within ${t.c.toFixed(digits)} (${pct.toFixed(pct < 0.1 ? 3 : 2)}%) either side.`;
+    el.hidden = false;
+  }), [src, sym]);
+  return <span ref={ref} className="tabular lvb-conf" hidden aria-live="off" />;
 }

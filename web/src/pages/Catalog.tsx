@@ -105,8 +105,8 @@ export function Catalog() {
                 return (
                   <tr key={a.id}>
                     <td className="wrap"><a href={`#/algo/${a.slug}`}><strong>{a.name}</strong></a><div className="muted small">{a.id}</div></td>
-                    <td>{a.family}</td>
-                    <td>{a.markets.join(", ")}</td>
+                    <td className="wrap-sm">{a.family}</td>
+                    <td className="wrap-sm">{a.markets.join(", ")}</td>
                     <td>{a.horizon}</td>
                     <td>{yr ?? "n/a"}{yr ? <span className="muted small"> ({thisYear - yr}y)</span> : null}</td>
                     <td>{a.origin.type}</td>

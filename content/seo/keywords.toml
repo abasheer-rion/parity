@@ -1,0 +1,54 @@
+# Parity's keyword plan (DEC-0073). Five topic clusters. For each one:
+#   seeds   words that put a Search Console query in this cluster (scripts/seo/keywords.py)
+#   page    the pages that should rank for it, with the keyword each one targets. CI fails
+#           when a page's keyword is in neither its title nor its description
+#           (scripts/seo/meta_check.py).
+# The weekly SEO report suggests changes from real queries: a query with many impressions in a
+# cluster whose page does not use it yet. Change a keyword here, then the page's title or
+# description, in the same pull request.
+
+[[cluster]]
+id = "strategies"
+label = "Trading strategies"
+seeds = ["strategy", "strategies", "carry", "momentum", "trend following", "mean reversion", "trading idea", "algorithm", "quant", "factor"]
+page = [
+  { path = "/", keyword = "trading strategies" },
+  { path = "/ideas/", keyword = "trading strategy" },
+]
+
+[[cluster]]
+id = "backtesting"
+label = "Backtesting"
+seeds = ["backtest", "back test", "backtesting", "sharpe", "drawdown", "overfit", "walk forward", "deflated", "out of sample"]
+page = [
+  { path = "/learn/backtest/", keyword = "backtest" },
+  { path = "/learn/academy/reading-a-backtest/", keyword = "backtest" },
+  { path = "/learn/overfitting/", keyword = "overfitting" },
+]
+
+[[cluster]]
+id = "bots"
+label = "Trading bots"
+seeds = ["bot", "bots", "automated trading", "algo trading", "grid trading", "copy trading", "signal service", "expert advisor"]
+page = [
+  { path = "/ideas/technical-indicator-trading-bots/", keyword = "indicator bots" },
+  { path = "/ideas/crypto-grid-trading-bot/", keyword = "grid trading bot" },
+  { path = "/ideas/copy-trading-signal-services/", keyword = "copy trading" },
+]
+
+[[cluster]]
+id = "verify"
+label = "Verify a trading record"
+seeds = ["verify", "verified", "track record", "trade log", "trading record", "myfxbook", "audit", "proof of profit", "profit per trade"]
+page = [
+  { path = "/", keyword = "trade log" },
+]
+
+[[cluster]]
+id = "markets"
+label = "Markets"
+seeds = ["market", "markets", "forex", "fx", "currency", "currencies", "crypto", "stocks", "s&p 500", "oil", "interest rate", "news"]
+page = [
+  { path = "/learn/academy/how-markets-move/", keyword = "markets move" },
+  { path = "/news/", keyword = "market news" },
+]

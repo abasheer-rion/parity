@@ -1,12 +1,10 @@
 Confirm it is you
 
-You are changing something sensitive on your Parity account, such as your password. Type this code to confirm it is you:
+Type this code to confirm the change to your Parity account: {{ .Token }}
 
-    {{ .Token }}
-
-The code works once and expires in 60 minutes. If you did not ask for it, change your password.
+The code works once and expires in 60 minutes. Not you? Change your password.
 
 --
-Sent by Parity to {{ .Email }}. Research only, not investment advice.
-You are getting this because someone used this address on Parity ({{ .SiteURL }}).
-If that was not you, you can ignore this email.
+Didn't ask for this? You can safely ignore this email.
+Sent to {{ .Email }} by Parity Trading ({{ .SiteURL }}). Research only, not investment advice.
+Parity Trading, Inc., 7213 Continental Drive, Newark, Delaware, United States

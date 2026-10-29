@@ -6,14 +6,36 @@ import type { Field, Mapping, Table } from "../types";
 
 /** Header names that look personal: account number, name, email, server, login, IP and the like. */
 const PII_NAME = /^(account|acct|account ?(number|no\.?|num|id|#|name|holder)|login|user ?(name|id)?|name|full ?name|first ?name|last ?name|client( ?(name|id|number))?|customer( ?(name|id))?|trader( ?name)?|owner|e-?mail( ?address)?|server|broker ?server|trade ?server|ip|ip ?address|phone( ?number)?|address|country|city)$/i;
-const PII_PART = /\b(e-?mail|ip ?address|account ?(number|no|num|id|holder|name)|login|server|phone|passport|tax ?id)\b/i;
+const PII_PART = /\b(e-?mail|ip ?address|(account|acct) ?(number|no|num|id|holder|name|alias)|login|server|phone|passport|tax ?id)\b/i;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const IPV4 = /^(\d{1,3}\.){3}\d{1,3}(:\d+)?$/;
 
 /** True when a header name looks like personal data. */
 export function isPersonalHeader(h: string): boolean {
   const s = h.trim().replace(/[_]+/g, " ").replace(/\s+/g, " ");
-  return PII_NAME.test(s) || PII_PART.test(s);
+  // Also with camelCase split, so ClientAccountID and AccountAlias (Interactive Brokers) are caught.
+  const split = s.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2");
+  return PII_NAME.test(s) || PII_PART.test(s) || PII_NAME.test(split) || PII_PART.test(split);
+}
+
+/** Removes the columns whose header matches any pattern (a format's order and fill ids), returning their names. */
+export function dropColumns(t: Table, patterns: RegExp[]): { table: Table; dropped: string[] } {
+  const drop = t.headers.map((h, i) => (patterns.some((p) => p.test(norm(h))) ? i : -1)).filter((i) => i >= 0);
+  if (!drop.length) return { table: t, dropped: [] };
+  const keep = t.headers.map((_, i) => i).filter((i) => !drop.includes(i));
+  return { table: { headers: keep.map((i) => t.headers[i]), rows: t.rows.map((r) => keep.map((i) => r[i] ?? "")) }, dropped: drop.map((i) => t.headers[i]) };
+}
+
+/** A number with a unit written next to it: "0.0100000000BTC", "1.00 Lots", "USDT 25". */
+export function numLoose(cell: string | undefined): number | null {
+  if (cell == null) return null;
+  return num(cell.trim().replace(/^[A-Za-z]{2,10}\s+/, "").replace(/\s*[A-Za-z]{2,10}$/, ""));
+}
+
+/** The unit written after a number, upper case: "0.00001BNB" gives "BNB". */
+export function unitOf(cell: string | undefined): string | undefined {
+  const m = (cell ?? "").trim().match(/[\d.)]\s*([A-Za-z]{2,10})$/);
+  return m ? m[1].toUpperCase() : undefined;
 }
 
 /**
@@ -61,6 +83,7 @@ export function reader(m: Mapping, decimalComma = false) {
   return {
     text: (r: string[], f: Field) => (m[f] == null ? undefined : (r[m[f]!] ?? "").trim() || undefined),
     num: (r: string[], f: Field) => (m[f] == null ? null : num(r[m[f]!], decimalComma)),
+    loose: (r: string[], f: Field) => (m[f] == null ? null : numLoose(r[m[f]!])),
     date: (r: string[], f: Field, dayFirst = false) => (m[f] == null ? null : parseDate(r[m[f]!], dayFirst)),
   };
 }

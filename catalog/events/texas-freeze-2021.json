@@ -1,0 +1,25 @@
+{
+  "id": "texas-freeze-2021",
+  "name": "Winter storm shuts Texas power and gas",
+  "date": "2021-02-15",
+  "type": "natural_disaster",
+  "regions": [
+    "north_america"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [
+    "gas",
+    "oil"
+  ],
+  "description": "A winter storm knocked out power for millions in Texas; gas wells and pipelines froze and spot gas prices jumped many times over.",
+  "sources": [
+    {
+      "title": "2021 Texas power crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2021_Texas_power_crisis"
+    }
+  ]
+}

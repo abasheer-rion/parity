@@ -1,0 +1,28 @@
+# One case per line, in load order. For each NAME the build loads:
+#   NAME.sql          world graph + claims as they arrived (required)
+#   NAME.prices       price windows to fetch: lines of "FROM TO TICKER:EXCHANGE ..." (optional)
+#   NAME_story.sql    hindsight write-up that needs prices (optional)
+seed_renesas
+case_renesas
+case_starbucks
+case_export_controls
+case_disney
+case_huawei
+case_rusal
+case_h20
+case_svb
+case_iran_war
+case_korea_chips
+case_brazil_election
+case_abqaiq
+case_israel_iran_2025
+case_us_election_2024
+case_argentina_2023
+case_brazil_2022
+case_dotcom_intel
+case_fed_surprises
+case_fed_powell_warsh
+exposures
+# Convention: case N numbers its case_step ids N*100 .. N*100+99 (auto-numbered steps stay below 100 per file order).
+rule_log
+analyst_views

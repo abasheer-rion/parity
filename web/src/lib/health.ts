@@ -17,12 +17,44 @@ export function ago(iso: string, now: number): string {
   return `${Math.round(hours / 24)} days ago`;
 }
 
-export interface HealthPart { service: "search" | "sims"; text: string; stale: boolean }
+export interface HealthPart { service: "search" | "sims" | "data" | "egress"; text: string; stale: boolean }
 
 const n = (v: unknown) => (typeof v === "number" ? v.toLocaleString("en-US") : null);
 
+/**
+ * The data registry's part (DEC-0064), from the counts the sims service sends with its
+ * heartbeat: "data: 320 live, 4 degraded". Null until the service sends them.
+ */
+export function dataPart(rows: Heartbeat[], now: number = Date.now()): HealthPart | null {
+  const row = rows.find((r) => r.service === "sims");
+  const d = row?.summary.data as Record<string, number> | undefined;
+  if (!row || !d || typeof d.series !== "number") return null;
+  const stale = now - Date.parse(row.reported_at) > STALE_AFTER_MS;
+  const bad = (d.degraded ?? 0);
+  const text = `data: ${n(d.live ?? 0)} live${bad ? `, ${n(bad)} degraded` : ""}${d.candidate ? `, ${n(d.candidate)} waiting` : ""}`;
+  return { service: "data", stale: stale || bad > 0, text };
+}
+
+/**
+ * The daily egress check's part (REF-0028), shown only while it warns that the database
+ * is on course to pass the free plan's monthly transfer: "database transfer: 6.2 GB a
+ * month at this rate, plan allows 5 GB".
+ */
+export function egressPart(rows: Heartbeat[]): HealthPart | null {
+  const s = rows.find((r) => r.service === "egress")?.summary;
+  if (!s || s.warn !== true || typeof s.gb_30d_projected !== "number") return null;
+  const limit = typeof s.limit_gb === "number" ? `, plan allows ${s.limit_gb} GB` : "";
+  return { service: "egress", stale: true, text: `database transfer: ${s.gb_30d_projected} GB a month at this rate${limit}` };
+}
+
 /** One short part per service, in a fixed order, e.g. "search: 130,466 tries, last batch 2 min ago". */
 export function healthParts(rows: Heartbeat[], now: number = Date.now()): HealthPart[] {
+  const data = dataPart(rows, now);
+  const egress = egressPart(rows);
+  return [...partsFor(rows, now), ...(data ? [data] : []), ...(egress ? [egress] : [])];
+}
+
+function partsFor(rows: Heartbeat[], now: number): HealthPart[] {
   return (["search", "sims"] as const).map((service) => {
     const row = rows.find((r) => r.service === service);
     if (!row) return { service, text: `${service}: no report yet`, stale: true };

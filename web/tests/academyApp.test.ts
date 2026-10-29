@@ -22,18 +22,18 @@ describe("old #/academy links", () => {
     expect(academyHashFor(from)).toBe(to);
   });
 
-  it("opens academy.endyland.com on endyland.com and /academy/ elsewhere", () => {
-    const onSite = /(^|\.)endyland\.com$/.test(window.location.hostname);
-    expect(academyUrl()).toBe(onSite ? "https://academy.endyland.com/" : "/academy/");
-    expect(academyUrl("luck-vs-skill/noise")).toBe(onSite ? "https://academy.endyland.com/#/luck-vs-skill/noise" : "/academy/#/luck-vs-skill/noise");
+  it("opens academy.paritytrading.app on paritytrading.app and /academy/ elsewhere", () => {
+    const onSite = /(^|\.)paritytrading\.app$/.test(window.location.hostname);
+    expect(academyUrl()).toBe(onSite ? "https://academy.paritytrading.app/" : "/academy/");
+    expect(academyUrl("luck-vs-skill/noise")).toBe(onSite ? "https://academy.paritytrading.app/#/luck-vs-skill/noise" : "/academy/#/luck-vs-skill/noise");
   });
 });
 
 describe("appLink", () => {
   it("sends each page to its own app", () => {
-    const onSite = /(^|\.)endyland\.com$/.test(window.location.hostname);
-    const main = onSite ? "https://parity.endyland.com" : "";
-    const sub = (name: string, rest: string) => (onSite ? `https://${name}.endyland.com/${rest}` : `/${name}/${rest}`);
+    const onSite = /(^|\.)paritytrading\.app$/.test(window.location.hostname);
+    const main = onSite ? "https://paritytrading.app" : "";
+    const sub = (name: string, rest: string) => (onSite ? `https://${name}.paritytrading.app/${rest}` : `/${name}/${rest}`);
     expect(appLink("product", "#/strategies")).toBe(`${main}/app/#/strategies`);
     expect(appLink("both", "#/learn/cagr")).toBe(`${main}/app/#/learn/cagr`);
     expect(appLink("research", "#/doc/DEC-0026")).toBe(`${main}/research/#/doc/DEC-0026`);

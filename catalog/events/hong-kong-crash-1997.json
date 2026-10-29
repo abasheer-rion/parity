@@ -1,0 +1,24 @@
+{
+  "id": "hong-kong-crash-1997",
+  "name": "Hong Kong crash spreads worldwide",
+  "date": "1997-10-23",
+  "type": "financial_crisis",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "hong_kong",
+    "china"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Hong Kong shares fell about 10% as rates rose to defend the dollar peg; on 27 October the Dow fell 7% and trading was halted.",
+  "sources": [
+    {
+      "title": "October 27, 1997, mini-crash",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/October_27,_1997,_mini-crash"
+    }
+  ]
+}

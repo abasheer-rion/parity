@@ -5,9 +5,11 @@ import { parityAnalytics } from "./plugins/analytics";
 import { parityBoot } from "./plugins/boot";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
+import { SAMPLE_DOWNLOAD } from "./src/lib/desktopDownload";
 import { parityMeta, parityOg } from "./plugins/meta";
 import { parityNotFound } from "./plugins/notFound";
 import { paritySite } from "./plugins/site";
+import { parityVersion } from "./plugins/version";
 import react from "@vitejs/plugin-react";
 
 // The engine's output folder. PARITY_OUTPUT_DIR points the dev server at another one, such
@@ -16,6 +18,24 @@ const OUTPUT = process.env.PARITY_OUTPUT_DIR ? resolve(process.env.PARITY_OUTPUT
 
 // In local development the dashboard can read the engine's latest run straight
 // from disk, so you can see results without Supabase. This never runs in a build.
+// The download page's links (DEC-0072) are a Pages Function in production. The dev server
+// (and the smoke test that runs on it) answers them with a fixed sample and never calls GitHub.
+function localDownload(): Plugin {
+  return {
+    name: "parity-local-download",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/download/latest", (req, res) => {
+        const what = (req.url ?? "").replace(/^\//, "").split("?")[0];
+        if (what === "info") { res.setHeader("Content-Type", "application/json"); res.end(JSON.stringify(SAMPLE_DOWNLOAD)); return; }
+        res.statusCode = 302;
+        res.setHeader("Location", SAMPLE_DOWNLOAD.notes);
+        res.end();
+      });
+    },
+  };
+}
+
 function localResults(): Plugin {
   const file = resolve(OUTPUT, "./latest.json");
   return {
@@ -41,6 +61,14 @@ function localResults(): Plugin {
       // `parity search export` writes the strategy search's results here (DEC-0014).
       server.middlewares.use("/local/search.json", (_req, res, next) => {
         const path = resolve(OUTPUT, "./search.json");
+        if (!existsSync(path)) return next();
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(path));
+      });
+      // The pairs engine writes its results here (src/lib/pairs.ts). Without it the page falls
+      // back to the committed snapshot, public/data/pairs.json.
+      server.middlewares.use("/local/pairs.json", (_req, res, next) => {
+        const path = resolve(OUTPUT, "./pairs.json");
         if (!existsSync(path)) return next();
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(path));
@@ -107,6 +135,16 @@ function localScenarios(): Plugin {
         res.setHeader("Content-Type", "application/json");
         res.end(readFileSync(file));
       });
+      server.middlewares.use("/local/stress.json", (_req, res) => {
+        const file = resolve(OUTPUT, "./stress.json");
+        if (!existsSync(file)) {
+          res.statusCode = 404;
+          res.end("Run `parity world stress` first.");
+          return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(readFileSync(file));
+      });
       server.middlewares.use("/local/world.json", (_req, res) => {
         if (!existsSync(world)) {
           res.statusCode = 404;
@@ -154,19 +192,20 @@ function localScenarios(): Plugin {
 //   vite build               the app, /app/, with every asset under /app/assets/ so the
 //                            sign-in check in functions/_middleware.ts covers all of it.
 //   vite build --mode sim    Sim World on its own (DEC-0020), /sim/, with every asset under
-//                            /sim/assets/: sim.endyland.com sends /app/* away, so the sim
+//                            /sim/assets/: sim.paritytrading.app sends /app/* away, so the sim
 //                            must not load anything from /app/.
 //   vite build --mode trade  Parity Trade on its own (DEC-0040), /trade/, assets under
-//                            /trade/assets/, for the same reason (trade.endyland.com).
+//                            /trade/assets/, for the same reason (trade.paritytrading.app).
 //   vite build --mode academy  Parity Academy on its own (DEC-0042), /academy/, assets
-//                            under /academy/assets/ (academy.endyland.com).
+//                            under /academy/assets/ (academy.paritytrading.app).
 //   vite build --mode lab    Parity Workbench on its own (DEC-0043), /lab/, assets under
-//                            /lab/assets/ (lab.endyland.com).
+//                            /lab/assets/ (lab.paritytrading.app).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
   "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
-  "connect/index", "oauth/consent/index", "oauth/openrouter/index",
-  "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
+  "connect/index", "connect/claude/index", "connect/chatgpt/index", "connect/gemini/index", "oauth/consent/index", "oauth/openrouter/index",
+  "developers/index", "methodology/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
+  "download/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 // Libraries that change rarely get their own files, so a deploy that only changes Parity's
@@ -181,7 +220,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg(), parityVersion()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

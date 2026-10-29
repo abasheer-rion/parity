@@ -1,0 +1,23 @@
+{
+  "id": "celsius-freeze-2022",
+  "name": "Celsius freezes withdrawals",
+  "date": "2022-06-12",
+  "type": "crypto_crash",
+  "regions": [
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "usa"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The crypto lender Celsius stopped customer withdrawals; bitcoin fell below 25,000 dollars the next day as other lenders came under strain.",
+  "sources": [
+    {
+      "title": "Celsius Network",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Celsius_Network"
+    }
+  ]
+}

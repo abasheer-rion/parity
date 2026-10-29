@@ -1,0 +1,22 @@
+{
+  "id": "brazil-devaluation-1999",
+  "name": "Brazil devalues the real",
+  "date": "1999-01-13",
+  "type": "currency_crisis",
+  "regions": [
+    "latin_america"
+  ],
+  "actors": [
+    "brazil"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "Brazil widened the real's trading band and two days later let it float, after money left the country in the wake of the Russian default.",
+  "sources": [
+    {
+      "title": "Samba effect",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Samba_effect"
+    }
+  ]
+}

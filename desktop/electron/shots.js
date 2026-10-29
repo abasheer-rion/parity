@@ -24,11 +24,11 @@ function bits(img) {
   return { buf, w, h: Math.round(buf.length / 4 / w) };
 }
 
-/** Draws `src` into `out` at row `y`, blending by alpha (BGRA, premultiplied or not, treated as straight). */
-function blit(out, W, H, src, y0) {
+/** Draws `src` into `out` at row `y0` and column `x0`, blending by alpha (BGRA, premultiplied or not, treated as straight). */
+function blit(out, W, H, src, y0, x0 = 0) {
   for (let y = 0; y < src.h && y0 + y < H; y++) {
-    for (let x = 0; x < Math.min(src.w, W); x++) {
-      const s = (y * src.w + x) * 4, d = ((y0 + y) * W + x) * 4;
+    for (let x = 0; x < src.w && x0 + x < W; x++) {
+      const s = (y * src.w + x) * 4, d = ((y0 + y) * W + x0 + x) * 4;
       const a = src.buf[s + 3] / 255;
       if (a >= 0.999) { out[d] = src.buf[s]; out[d + 1] = src.buf[s + 1]; out[d + 2] = src.buf[s + 2]; out[d + 3] = 255; }
       else if (a > 0) {
@@ -41,10 +41,11 @@ function blit(out, W, H, src, y0) {
 
 async function captureWindow(w) {
   const parts = [];
-  if (!w.focusMode) parts.push({ view: w.titlebar, y: 0 });
   const pageY = w.active?.view.getBounds().y ?? 0;
   if (w.active?.saved) parts.push({ view: w.bar, y: w.bar.getBounds().y });
   if (w.active) parts.push({ view: w.active.view, y: pageY });
+  // The controls sit over the page's top row.
+  if (!w.focusMode) parts.push({ view: w.titlebar, y: 0, x: w.titlebar.getBounds().x, overlay: true });
   if (w.overlayMode) parts.push({ view: w.overlay, y: w.overlay.getBounds().y, overlay: true });
   const { width, height } = w.win.getContentBounds();
   const imgs = [];
@@ -53,7 +54,7 @@ async function captureWindow(w) {
   const W = Math.round(width * scale), H = Math.round(height * scale);
   const out = Buffer.alloc(W * H * 4);
   for (let i = 0; i < out.length; i += 4) { out[i] = 8; out[i + 1] = 6; out[i + 2] = 5; out[i + 3] = 255; }
-  for (const p of imgs) blit(out, W, H, p.img, Math.round(p.y * scale));
+  for (const p of imgs) blit(out, W, H, p.img, Math.round(p.y * scale), Math.round((p.x || 0) * scale));
   return nativeImage.createFromBitmap(out, { width: W, height: H, scaleFactor: scale }).toPNG();
 }
 

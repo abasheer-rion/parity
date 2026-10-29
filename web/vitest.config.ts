@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     include: ["tests/**/*.test.{ts,tsx}"],
     environment: "jsdom",
-    environmentOptions: { jsdom: { url: "https://parity.endyland.com/login/" } },
+    environmentOptions: { jsdom: { url: "https://paritytrading.app/login/" } },
     css: false,
     setupFiles: ["tests/setup.ts"],
     restoreMocks: true,

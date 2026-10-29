@@ -22,9 +22,9 @@ describe("OpenRouter sign-in (PKCE)", () => {
 
   it("sends the person to OpenRouter with our callback and swaps the code for a key", async () => {
     const store = memoryStore();
-    const url = new URL(await startUrl("https://lab.endyland.com", "/lab/#/try", store));
+    const url = new URL(await startUrl("https://lab.paritytrading.app", "/lab/#/try", store));
     expect(url.origin + url.pathname).toBe("https://openrouter.ai/auth");
-    expect(url.searchParams.get("callback_url")).toBe("https://lab.endyland.com/oauth/openrouter/");
+    expect(url.searchParams.get("callback_url")).toBe("https://lab.paritytrading.app/oauth/openrouter/");
     expect(url.searchParams.get("code_challenge_method")).toBe("S256");
     const f = vi.fn(async (_u: string, init?: RequestInit) => {
       const body = JSON.parse(String(init?.body));
@@ -82,7 +82,7 @@ describe("one tool round with each provider", () => {
         : { role: "assistant", content: "Carry fails 7 of 11 tests." };
       return new Response(JSON.stringify({ choices: [{ message: msg }] }));
     });
-    const a = await ask({ provider: "openrouter", key: "sk-or-1", model: "openrouter/auto", conversation: null, question: "carry?", tools: TOOLS, callTool: callToolFn, origin: "https://parity.endyland.com", fetch: f as unknown as typeof fetch });
+    const a = await ask({ provider: "openrouter", key: "sk-or-1", model: "openrouter/auto", conversation: null, question: "carry?", tools: TOOLS, callTool: callToolFn, origin: "https://paritytrading.app", fetch: f as unknown as typeof fetch });
     expect(a.text).toBe("Carry fails 7 of 11 tests.");
     expect(a.steps).toEqual([{ kind: "tool", name: "get_strategy", isError: false }]);
     expect(callToolFn).toHaveBeenCalledWith("get_strategy", { id: "carry" });

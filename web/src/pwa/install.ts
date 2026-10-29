@@ -8,6 +8,8 @@
 //
 // The card is fixed to the corner of the screen, so it never moves the page (CLS).
 
+import { startUpdateCheck } from "../lib/siteVersion";
+
 interface InstallEvent extends Event { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> }
 
 const KEY = "parity.install.dismissed";
@@ -90,6 +92,8 @@ let started = false;
 export function startPwa({ offer = true }: { offer?: boolean } = {}) {
   if (started || typeof window === "undefined" || isNativeApp()) return;
   started = true;
+  // The desktop app and the installed site offer a reload when a newer deploy is live (DEC-0086).
+  startUpdateCheck();
   if (import.meta.env.PROD && "serviceWorker" in navigator) {
     const register = () => { navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => {}); };
     if (document.readyState === "complete") register();

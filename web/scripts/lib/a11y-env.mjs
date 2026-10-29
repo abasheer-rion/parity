@@ -15,7 +15,7 @@ const here = (p) => resolve(import.meta.dirname, "../..", p);
 
 /** Pages outside routes.mjs: sign-in edge cases, the 404 page and each app's not-found view. */
 export const EXTRA_PAGES = [
-  "/verify/?type=email&token_hash=example", "/connect/", "/oauth/consent/?authorization_id=example", "/oauth/openrouter/",
+  "/verify/?type=email&token_hash=example", "/verify/", "/methodology/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/oauth/consent/?authorization_id=example", "/oauth/openrouter/",
   "/v/no-such-badge", "/no-such-page-xyz/",
   ...["app", "research", "sim", "trade", "academy", "lab"].map((a) => `/${a}/#/no-such-page-xyz`),
 ];

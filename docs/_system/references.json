@@ -9075,7 +9075,8 @@
       "verification": "verified",
       "verification_checked": "2026-10-21",
       "used_in": [
-        "catalog/events/greece-junk-downgrade-2010.json"
+        "catalog/events/greece-junk-downgrade-2010.json",
+        "catalog/events/italy-yields-7-percent-2011.json"
       ],
       "metadata": {
         "source": "repo",
@@ -39822,6 +39823,3091 @@
       "note": "Read for DEC-0063 (public node failover).",
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-dev-forum-pyth-network-t-863",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "dev-forum.pyth.network/t/863",
+      "venue": "dev-forum.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://dev-forum.pyth.network/t/863",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-llms-txt",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/llms.txt",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/llms.txt",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-oracle-integrity-staking",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/oracle-integrity-staking",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/oracle-integrity-staking",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-how-lazer-works",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/how-lazer-works",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/how-lazer-works",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-on-chain-fees",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/on-chain-fees",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/on-chain-fees",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-sponsored-feeds",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/sponsored-feeds",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/sponsored-feeds",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-pro-understanding-price-data",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/pro/understanding-price-data",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/pro/understanding-price-data",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-docs-pyth-network-whitepaper",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "docs.pyth.network/whitepaper",
+      "venue": "docs.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.pyth.network/whitepaper",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-pyth-network-whitepaper",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "pyth.network/whitepaper",
+      "venue": "pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pyth.network/whitepaper",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-www-pyth-network-data-license",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "www.pyth.network/data-license",
+      "venue": "www.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pyth.network/data-license",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "pyth-www-pyth-network-legal-terms-conditions",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "www.pyth.network/legal/terms-conditions",
+      "venue": "www.pyth.network",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.pyth.network/legal/terms-conditions",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "ok",
+      "verification_checked": "2026-10-26",
+      "used_in": [],
+      "note": "Read for RES-0027 and DEC-0065.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4750faec",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1998-2002 Argentine great depression",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/argentina-default-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-06b34613",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2023 Argentine general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2023_Argentine_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/argentina-election-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6f2f9fee",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019 Balakot airstrike",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019_Balakot_airstrike",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/balakot-airstrike-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-eaf8709f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bear Stearns",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bear_Stearns",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/bear-stearns-rescue-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-c5a6293e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2007-2008 financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/bnp-paribas-funds-frozen-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-f9924197",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Samba effect",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Samba_effect",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/brazil-devaluation-1999.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a791dfa4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2002 Brazilian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2002_Brazilian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/brazil-election-2002.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6e9b1942",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Celsius Network",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Celsius_Network",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/celsius-freeze-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-bae37343",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Chinese stock bubble of 2007",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Chinese_stock_bubble_of_2007",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/china-stock-drop-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-5c40fff5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Continental Illinois",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Continental_Illinois",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/continental-illinois-1984.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-71ff86b6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2018 cryptocurrency crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2018_cryptocurrency_crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/crypto-crash-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6b756381",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Cryptocurrency bubble",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Cryptocurrency_bubble",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/crypto-crash-may-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-8e488740",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2012-2013 Cypriot financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2012%E2%80%932013_Cypriot_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/cyprus-deposit-levy-2013.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-83bb6c6d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Dubai World",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Dubai_World",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/dubai-world-standstill-2009.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-18fadaa6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Western African Ebola virus epidemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Western_African_Ebola_virus_epidemic",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ebola-emergency-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a21a688d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Evergrande liquidity crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Evergrande_liquidity_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/evergrande-crisis-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-db7bf9f5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2010 flash crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2010_flash_crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/flash-crash-2010.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-84dc4669",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 French legislative election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_French_legislative_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/france-snap-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-190b96e1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2017 French presidential election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2017_French_presidential_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/french-election-2017.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-f15a36ec",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Bankruptcy of FTX",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Bankruptcy_of_FTX",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ftx-collapse-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-feb140e4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2014 Gaza War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2014_Gaza_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/gaza-war-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-558969f4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Greek government-debt crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Greek_government-debt_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/greece-capital-controls-2015.json",
+        "catalog/events/greece-debt-swap-2012.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3fa7caaa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "January 2015 Greek legislative election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/January_2015_Greek_legislative_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/greek-election-2015.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-a5c194f6",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "October 27, 1997, mini-crash",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/October_27,_1997,_mini-crash",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/hong-kong-crash-1997.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e3036b25",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2008-2011 Icelandic financial crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2008%E2%80%932011_Icelandic_financial_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/iceland-banks-collapse-2008.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-de92d636",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 Indian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_Indian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/india-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-4f387a1e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Post-2008 Irish economic downturn",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Post-2008_Irish_economic_downturn",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ireland-bailout-2010.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-82d67e60",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2018 Italian general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2018_Italian_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/italy-election-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-934838c2",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Japanese yen",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Japanese_yen",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/japan-yen-intervention-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3e1e9fc0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Latin American debt crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Latin_American_debt_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mexico-debt-crisis-1982.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-dcc06cb1",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2024 Mexican general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2024_Mexican_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mexico-election-2024.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-147edad7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2022-2023 mpox outbreak",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2022%E2%80%932023_mpox_outbreak",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mpox-emergency-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-b14a352b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Mt. Gox",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Mt._Gox",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/mt-gox-collapse-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ecada088",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Second Nagorno-Karabakh War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/nagorno-karabakh-war-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-75e61a74",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nord Stream",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Nord_Stream",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/nord-stream-shut-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-23443d3d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Nationalisation of Northern Rock",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Nationalisation_of_Northern_Rock",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/northern-rock-run-2007.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-2cd7e6d7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "SARS-CoV-2 Omicron variant",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/omicron-variant-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e36983c4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2010s oil glut",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2010s_oil_glut",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/opec-cut-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-2da45d8d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OPEC+",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/OPEC%2B",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/opec-plus-surprise-cut-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-278bf524",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Operation Sindoor",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Operation_Sindoor",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/operation-sindoor-2025.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3c848282",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Red Sea crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Red_Sea_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/red-sea-shipping-attacks-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-c8e506ed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Russian financial crisis (2014-2017)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Russian_financial_crisis_(2014%E2%80%932017)",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/ruble-crisis-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e2cebb0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Rusal",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Rusal",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/rusal-sanctions-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-81c06e48",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions during the Russo-Ukrainian War",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Russo-Ukrainian_War",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/russia-sectoral-sanctions-2014.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-1379c449",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2022 Shanghai COVID-19 outbreak",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2022_Shanghai_COVID-19_outbreak",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/shanghai-lockdown-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-0d3a2754",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019-present Sri Lankan economic crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019%E2%80%93present_Sri_Lankan_economic_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/sri-lanka-default-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-7d1b4e1f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "1976 sterling crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/1976_sterling_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/sterling-crisis-1976.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-fc78e2d9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021 Suez Canal obstruction",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021_Suez_Canal_obstruction",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/suez-canal-blocked-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-fa52c890",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Taper tantrum",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Taper_tantrum",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/taper-tantrum-2013.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-cf4b8d16",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Terra (blockchain)",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Terra_(blockchain)",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/terra-luna-collapse-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-d74ca887",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021 Texas power crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021_Texas_power_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/texas-freeze-2021.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3a93f530",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2016 Turkish coup attempt",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2016_Turkish_coup_attempt",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-coup-attempt-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-b7a514ed",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2001 Turkish economic crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2001_Turkish_economic_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-crisis-2001.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-595f0d4f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Turkish currency and debt crisis, 2018",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Turkish_currency_and_debt_crisis,_2018",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/turkey-lira-crisis-2018.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-e01ef720",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2019 United Kingdom general election",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2019_United_Kingdom_general_election",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/uk-election-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-37b440bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "United States New Export Controls on Advanced Computing and Semiconductors to China",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/United_States_New_Export_Controls_on_Advanced_Computing_and_Semiconductors_to_China",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/us-chip-export-controls-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ccce2123",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2021-2023 inflation surge",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2021%E2%80%932023_inflation_surge",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/us-inflation-shock-2022.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-bafdce0d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "International sanctions during the Venezuelan crisis",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/International_sanctions_during_the_Venezuelan_crisis",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/venezuela-oil-sanctions-2019.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-3a3f2c19",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Venezuelan general strike of 2002-2003",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Venezuelan_general_strike_of_2002%E2%80%932003",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/venezuela-oil-strike-2002.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-ecb2161d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Wagner Group rebellion",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/Wagner_Group_rebellion",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/wagner-rebellion-2023.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-0c08671d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "COVID-19 pandemic in mainland China",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic_in_mainland_China",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/wuhan-lockdown-2020.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-7c7d7898",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "2015-2016 Zika virus epidemic",
+      "venue": "Wikipedia",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://en.wikipedia.org/wiki/2015%E2%80%932016_Zika_virus_epidemic",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "verified",
+      "verification_checked": "2026-10-26",
+      "used_in": [
+        "catalog/events/zika-emergency-2016.json"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "page summary read through the Wikipedia REST API"
+      }
+    },
+    {
+      "key": "url-6c14c160",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0069-parity-moves-to-paritytrading-app.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0069"
+    },
+    {
+      "key": "url-8e76d327",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity MCP server",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/mcp",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/guides/0006-connecting-ai-tools-to-parity-with-mcp.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0069"
+    },
+    {
+      "key": "url-99d6ebbc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Parity OAuth consent page",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/oauth/consent",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/decisions/0069-parity-moves-to-paritytrading-app.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      },
+      "note": "Parity's own address after DEC-0069"
+    },
+    {
+      "key": "davolio2002",
+      "type": "paper",
+      "authors": [
+        "D'Avolio, Gene"
+      ],
+      "year": 2002,
+      "title": "The market for borrowing stock",
+      "venue": "Journal of Financial Economics 66(2-3), 271-306",
+      "doi": "10.1016/s0304-405x(02)00206-4",
+      "arxiv": null,
+      "url": "https://doi.org/10.1016/S0304-405X(02)00206-4",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "do2012",
+      "type": "paper",
+      "authors": [
+        "Do, Binh",
+        "Faff, Robert"
+      ],
+      "year": 2012,
+      "title": "ARE PAIRS TRADING PROFITS ROBUST TO TRADING COSTS?",
+      "venue": "Journal of Financial Research 35(2), 261-287",
+      "doi": "10.1111/j.1475-6803.2012.01317.x",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/j.1475-6803.2012.01317.x",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "elliott2005",
+      "type": "paper",
+      "authors": [
+        "Elliott, Robert J.",
+        "Van Der Hoek *, John",
+        "Malcolm, William P."
+      ],
+      "year": 2005,
+      "title": "Pairs trading",
+      "venue": "Quantitative Finance 5(3), 271-276",
+      "doi": "10.1080/14697680500149370",
+      "arxiv": null,
+      "url": "https://doi.org/10.1080/14697680500149370",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "engelberg2018",
+      "type": "paper",
+      "authors": [
+        "Engelberg, Joseph E.",
+        "Reed, Adam V.",
+        "Ringgenberg, Matthew C."
+      ],
+      "year": 2018,
+      "title": "Short-Selling Risk",
+      "venue": "The Journal of Finance 73(2), 755-786",
+      "doi": "10.1111/jofi.12601",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/jofi.12601",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "engle1987",
+      "type": "paper",
+      "authors": [
+        "Engle, Robert F.",
+        "Granger, C. W. J."
+      ],
+      "year": 1987,
+      "title": "Co-Integration and Error Correction: Representation, Estimation, and Testing",
+      "venue": "Econometrica 55(2), 251",
+      "doi": "10.2307/1913236",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/1913236",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "johansen1991",
+      "type": "paper",
+      "authors": [
+        "Johansen, Soren"
+      ],
+      "year": 1991,
+      "title": "Estimation and Hypothesis Testing of Cointegration Vectors in Gaussian Vector Autoregressive Models",
+      "venue": "Econometrica 59(6), 1551",
+      "doi": "10.2307/2938278",
+      "arxiv": null,
+      "url": "https://doi.org/10.2307/2938278",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "krauss2016",
+      "type": "paper",
+      "authors": [
+        "Krauss, Christopher"
+      ],
+      "year": 2016,
+      "title": "STATISTICAL ARBITRAGE PAIRS TRADING STRATEGIES: REVIEW AND OUTLOOK",
+      "venue": "Journal of Economic Surveys 31(2), 513-545",
+      "doi": "10.1111/joes.12153",
+      "arxiv": null,
+      "url": "https://doi.org/10.1111/joes.12153",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "mackinnon1999",
+      "type": "paper",
+      "authors": [
+        "MacKinnon, James G.",
+        "Haug, Alfred A.",
+        "Michelis, Leo"
+      ],
+      "year": 1999,
+      "title": "Numerical distribution functions of likelihood ratio tests for cointegration",
+      "venue": "Journal of Applied Econometrics 14(5), 563-577",
+      "doi": "10.1002/(sici)1099-1255(199909/10)14:5<563::aid-jae530>3.0.co;2-r",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/(SICI)1099-1255(199909/10)14:5%3C563::AID-JAE530%3E3.0.CO;2-R",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref",
+        "doi_explicit": true
+      }
+    },
+    {
+      "key": "url-12fa0e62",
+      "type": "book",
+      "authors": [
+        "Vidyamurthy, Ganapathy"
+      ],
+      "year": 2004,
+      "title": "Pairs Trading: Quantitative Methods and Analysis",
+      "venue": "Wiley",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.wiley.com/en-us/Pairs+Trading%3A+Quantitative+Methods+and+Analysis-p-9780471460671",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3465fab3",
+      "type": "preprint",
+      "authors": [
+        "MacKinnon, James G."
+      ],
+      "year": 2010,
+      "title": "Critical Values for Cointegration Tests",
+      "venue": "Queen's Economics Department Working Paper 1227",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c7f4fb7f",
+      "type": "paper",
+      "authors": [
+        "MacKinnon, James G.",
+        "Haug, Alfred A.",
+        "Michelis, Leo"
+      ],
+      "year": 1999,
+      "title": "Numerical distribution functions of likelihood ratio tests for cointegration",
+      "venue": "Journal of Applied Econometrics 14(5), 563-577",
+      "doi": "10.1002/(sici)1099-1255(199909/10)14:5",
+      "arxiv": null,
+      "url": "https://doi.org/10.1002/(SICI)1099-1255(199909/10)14:5",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "not checked",
+      "used_in": [
+        "docs/research/0028-pairs-trading-and-statistical-arbitrage.md"
+      ],
+      "metadata": {
+        "source": "crossref-not-found",
+        "doi_explicit": true,
+        "crossref": "not found"
+      }
+    },
+    {
+      "key": "url-bb0e4823",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "connector_platform_oauth_redirect",
+      "venue": "chatgpt.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://chatgpt.com/connector_platform_oauth_redirect",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-71c523c0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "oauth",
+      "venue": "chatgpt.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://chatgpt.com/connector/oauth/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e3897a9e",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "manage",
+      "venue": "claude.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.ai/directory/manage",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-507c40bc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "authentication.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/authentication.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b821db22",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "review-criteria.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/review-criteria.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff5a1dac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "submission.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/connectors/building/submission.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ed71fd79",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "publish.md",
+      "venue": "claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://claude.com/docs/directory/publish.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-64d04381",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp-configuration",
+      "venue": "code.visualstudio.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://code.visualstudio.com/docs/copilot/reference/mcp-configuration",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f17d4992",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp.md",
+      "venue": "cursor.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cursor.com/docs/mcp.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e5d01b8f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "install-links.md",
+      "venue": "cursor.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cursor.com/docs/mcp/install-links.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-04e8250f",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "custom-mcp-server.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/api/docs/guides/custom-mcp-server.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d778b3f9",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "auth.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/build/auth.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6dc62cd4",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "app-review.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/deploy/app-review.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a7909cc",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "submission.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/deploy/submission.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-075b10be",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "plugin-guidelines",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/plugin-guidelines",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-045b3caa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "quickstart.md",
+      "venue": "developers.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.openai.com/plugins/quickstart.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6a3ebbc5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "browse",
+      "venue": "geminicli.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://geminicli.com/extensions/browse/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2aa3d3ac",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "releasing.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/releasing.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c44d07c8",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "mcp-server.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-7ead9252",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "?assistant=on",
+      "venue": "lab.paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://lab.paritytrading.app/?assistant=on",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-10f4a678",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "connect",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5a08a802",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "chatgpt",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/chatgpt/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b761cffa",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "claude",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/claude/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2b02ed3d",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "gemini",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/connect/gemini/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-53a8babb",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "privacy",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/legal/privacy/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-35597222",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "terms",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/legal/terms/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3528e093",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "signup",
+      "venue": "paritytrading.app",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://paritytrading.app/signup/",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5f1b7398",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "plugins",
+      "venue": "platform.openai.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://platform.openai.com/plugins",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00cdface",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "13145358-anthropic-software-directory-policy",
+      "venue": "support.claude.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://support.claude.com/en/articles/13145358-anthropic-software-directory-policy",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b071788",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "redirect",
+      "venue": "vscode.dev",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://vscode.dev/redirect",
+      "also_at": [],
+      "accessed": "2026-10-27",
+      "verification": "not checked",
+      "used_in": [
+        "docs/reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6b415a56",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Indexing API Quickstart",
+      "venue": "Google Search Central",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.google.com/search/apis/indexing-api/v3/quickstart",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-75a0b4a0",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Spam policies for Google web search",
+      "venue": "Google Search Central",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-ae28dca7",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Sitemaps XML format",
+      "venue": "sitemaps.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.sitemaps.org/protocol.html",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-fd2cc8bf",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "IndexNow documentation",
+      "venue": "IndexNow",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.indexnow.org/documentation",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-af93d875",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "Lighthouse CI",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/GoogleChrome/lighthouse-ci",
+      "also_at": [],
+      "accessed": "2026-10-26",
+      "verification": "unverified",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md"
+      ],
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false,
+        "title_from": "set by hand"
+      }
+    },
+    {
+      "key": "url-523bc440",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "Federal Reserve, FOMC statement, 28 October 2026",
+      "venue": "federalreserve.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3f26428c",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "FOMC statement, 29 April 2026",
+      "venue": "atlantafed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.atlantafed.org/news-and-events/2026/04/29/fomc-statement",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-062c5897",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "NPR on the June meeting",
+      "venue": "npr.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.npr.org/2026/06/17/nx-s1-5860084/fed-chief-warsh-first-fomc-meeting",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e63b8538",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on the July meeting",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/07/29/fed-rate-decision-july-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-525cd654",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "July press conference transcript",
+      "venue": "federalreserve.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/mediacenter/files/FOMCpresconf20260729.pdf",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-66181ece",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNN on the September hike",
+      "venue": "cnn.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-september",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6dc6be74",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on September CPI",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1b96b022",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on September jobs",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/10/02/jobs-report-september-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5adf5420",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "Treasury daily par yield curve",
+      "venue": "home.treasury.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4e824862",
+      "type": "dataset",
+      "authors": [],
+      "year": 2026,
+      "title": "San Francisco Fed monetary policy surprises",
+      "venue": "frbsf.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.frbsf.org/research-and-insights/data-and-indicators/monetary-policy-surprises/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0e2591ce",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "FatTail futures timeline",
+      "venue": "fattail.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fattail.ai/warsh-data-vs-fedspeak/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9c0576f",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "Euronews preview",
+      "venue": "euronews.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://euronews.com/2026/10/27/what-to-expect-from-the-fed-as-warsh-weighs-hot-inflation-oil-and-us-midterms",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ada7183b",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "investingLive preview",
+      "venue": "investinglive.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investinglive.com/central-banks/fomc-preview-a-hawkish-hold-as-markets-watch-for-signals-about-timing-and-extent-of-further-tightening/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f6b243ed",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kalshi odds",
+      "venue": "news.kalshi.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.kalshi.com/p/interest-rate-odds-fed-october-2026",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-97653257",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "straits.live brief",
+      "venue": "straits.live",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://straits.live/briefs/2026-10-28",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f47072f8",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "event-graph/calls/fed_2026-10-28.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/abasheer-rion/parity/blob/main/event-graph/calls/fed_2026-10-28.md",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     }

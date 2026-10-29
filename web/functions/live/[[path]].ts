@@ -31,7 +31,7 @@ interface Context { request: Request; env: Env; params: { path?: string[] }; wai
 
 /** Pages that may call /live with a sign-in from another origin: Parity's own addresses, its
  *  preview deploys and the desktop app's bundled copy. Exact hosts, not every subdomain. */
-const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/((www|trade|sim|academy|lab)\.)?parity\.endyland\.com|https:\/\/(trade|sim|academy|lab)\.endyland\.com|https:\/\/[a-z0-9-]+\.parity-research\.pages\.dev|https:\/\/parity-research\.pages\.dev)$/;
+const CORS_ORIGIN = /^(app:\/\/parity|https:\/\/((www|trade|sim|academy|lab)\.)?paritytrading\.app|https:\/\/((www|trade|sim|academy|lab)\.)?parity\.endyland\.com|https:\/\/(trade|sim|academy|lab)\.endyland\.com|https:\/\/[a-z0-9-]+\.parity-research\.pages\.dev|https:\/\/parity-research\.pages\.dev)$/;
 
 function corsFor(req: Request): Record<string, string> {
   const o = req.headers.get("Origin") ?? "";
@@ -182,7 +182,7 @@ export const onRequest = async (ctx: Context): Promise<Response> => {
         try { return json(request, 200, await universe(env, true), 3600); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
       }, true);
     }
-    return cached(ctx, "pub/universe/v4", 86_400, async () => {
+    return cached(ctx, "pub/universe/v5", 86_400, async () => {
       try { return json(request, 200, await universe(env), 86_400); } catch (e) { console.error("universe", String(e)); return json(request, 502, { error: "Symbol list unavailable" }); }
     });
   }

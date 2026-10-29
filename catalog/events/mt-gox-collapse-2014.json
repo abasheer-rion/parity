@@ -1,0 +1,23 @@
+{
+  "id": "mt-gox-collapse-2014",
+  "name": "Mt. Gox stops trading",
+  "date": "2014-02-25",
+  "type": "crypto_crash",
+  "regions": [
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "japan"
+  ],
+  "severity": 1,
+  "commodities": [],
+  "description": "Mt. Gox, then the largest bitcoin exchange, went offline and later said it had lost about 850,000 bitcoins.",
+  "sources": [
+    {
+      "title": "Mt. Gox",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Mt._Gox"
+    }
+  ]
+}

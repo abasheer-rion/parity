@@ -17,8 +17,11 @@ The pages:
                                 lesson with a still frame of its picture drawn by web/scripts/academy-frames.ts
   /learn/private-markets/       private markets in plain words (docs/_system/private-markets.json, DEC-0029)
   /blog/ and /news/             the newsroom, built by scripts/newsroom/build.py from content/newsroom/ (DEC-0057)
+  /changelog/, /announcements/  built by scripts/updates/build.py when it is there (DEC-0073); the
+  and /status/                  rest of the site builds without it
 and then the files search engines read:
-  sitemap.xml          every public URL (front page, legal pages and the pages above)
+  sitemap.xml          a sitemap index listing /sitemaps/<section>.xml, which hold every public URL
+  robots.txt           allows the public pages; served only on the real address (functions/robots.txt.ts)
   seo-manifest.json    URL -> content hash, so the pipeline can tell IndexNow what changed
 It also fills the search-engine verification marker in the built front page from the
 GSC_VERIFICATION and BING_VERIFICATION environment variables (both optional).
@@ -51,8 +54,21 @@ LEGAL = [("/legal/privacy/", "Privacy"), ("/legal/terms/", "Terms"), ("/legal/co
          ("/legal/regulatory/", "Regulatory")]
 DISCLAIMER = ("Research and education only. Not investment advice. Results are backtests and simulations "
               "on past data.")
+# Changelog, announcements and status (scripts/updates/, DEC-0073): linked from every public footer.
+UPDATES = [("/changelog/", "Changelog"), ("/announcements/", "Announcements"), ("/status/", "Status")]
+# The site-wide warnings banner (web/public/status-banner.js): it reads /status.json and fills
+# the slot after the header. Nothing shows when there are no warnings or the file is missing.
+STATUS_BANNER = '<script src="/status-banner.js" defer></script>'
+STATUS_SLOT = '<div class="status-slot" data-status-banner></div>'
 
 e = html.escape
+
+
+def updates_nav() -> str:
+    """The footer row of update links, with their RSS feeds."""
+    links = "".join(f'<a href="{h}">{n}</a>' for h, n in UPDATES)
+    feeds = ", ".join(f'<a href="{h}feed.xml">{n.lower()}</a>' for h, n in UPDATES)
+    return f'<nav aria-label="Updates">{links}<span>RSS feeds: {feeds}</span></nav>'
 
 
 # ---------------------------------------------------------------- content loading
@@ -111,17 +127,30 @@ def load_academy() -> list[dict]:
     return sorted(courses, key=lambda c: c["order"])
 
 
-def academy_frames() -> dict[str, list[str]]:
-    """Every lesson picture's step frames as SVG, drawn by the app's own code (needs Node 22.6+).
+def academy_frames() -> tuple[dict[str, list[str]], dict[str, dict]]:
+    """Every lesson picture's step frames as SVG, drawn by the app's own code (needs Node 22.6+),
+    and for signature pictures (DEC-0067) the table of numbers behind each one.
 
     Without Node the lesson pages still build, with the step captions but no picture."""
     try:
         out = subprocess.run(["node", "--experimental-strip-types", str(ROOT / "web/scripts/academy-frames.ts")],
                              capture_output=True, text=True, timeout=120, check=True).stdout
-        return json.loads(out)
+        data = json.loads(out)
+        return data.get("frames", {}), data.get("tables", {})
     except (OSError, subprocess.SubprocessError, json.JSONDecodeError) as err:
         print(f"build_public: no Academy pictures ({err.__class__.__name__}); pages keep their captions", file=sys.stderr)
-        return {}
+        return {}, {}
+
+
+def academy_table(t: dict | None) -> str:
+    """The numbers behind a picture as a plain table, folded under the still."""
+    if not t:
+        return ""
+    head = "".join(f'<th scope="col">{e(h)}</th>' for h in t["head"])
+    rows = "".join("<tr>" + "".join((f'<th scope="row">{e(c)}</th>' if j == 0 else f"<td>{e(c)}</td>") for j, c in enumerate(r)) + "</tr>"
+                   for r in t["rows"])
+    return (f'<details class="numbers"><summary>Show the numbers</summary><div class="table-wrap" tabindex="0" role="region" aria-label="Table: {e(t["caption"])}">'
+            f'<table><caption>{e(t["caption"])}</caption><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div></details>')
 def load_private_markets() -> dict:
     return json.loads((ROOT / "docs/_system/private-markets.json").read_text())
 
@@ -220,6 +249,43 @@ def plain_text(md: str, limit: int = 158) -> str:
     return cut + "..."
 
 
+# Search results show about 60 characters of a title and 155 of a description, so
+# scripts/seo/meta_check.py fails the build outside these (DEC-0073).
+TITLE_MAX = 65
+DESC_MIN = 50
+
+
+def seo_title(title: str, path: str = "") -> str:
+    """The <title>: the page's title with " | Parity" when it fits in TITLE_MAX characters.
+    A longer title loses its brackets, then words from the end, never in the middle of a word."""
+    if path == "/":
+        return title
+    if len(title) + len(" | Parity") <= TITLE_MAX:
+        return f"{title} | Parity"
+    short = re.sub(r"\s*\([^)]*\)", "", title).strip()
+    if len(short) + len(" | Parity") <= TITLE_MAX:
+        return f"{short} | Parity"
+    if len(short) <= TITLE_MAX:
+        return short
+    for tail in (": what it means", ": how it works and the evidence", ": a short course"):
+        if short.endswith(tail):
+            short = short[: -len(tail)]
+            return seo_title(short, path)
+    head = short.split(": ", 1)[0]
+    if head != short and len(head) >= 20 and len(head) + len(" | Parity") <= TITLE_MAX:
+        return f"{head} | Parity"
+    return short[:TITLE_MAX + 1].rsplit(" ", 1)[0].rstrip(",;:")
+
+
+def seo_description(description: str, section: str) -> str:
+    """A description of at least DESC_MIN characters: a short one gets a plain sentence about the page added."""
+    if len(description) >= DESC_MIN:
+        return description
+    tail = {"learn": "Explained in plain words in Parity's glossary.", "ideas": "How it works, with the evidence and the risks.",
+            "notes": "From Parity's research notes, in plain words."}.get(section, "From Parity, a research project that tests trading ideas.")
+    return f"{description.rstrip('.')}. {tail}" if description else tail
+
+
 # ---------------------------------------------------------------- page shell
 
 CSS = """
@@ -258,7 +324,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 .tablewrap{overflow-x:auto}
 .fig{background:#0c0e15;border:1px solid var(--line);border-radius:14px;padding:10px;margin:0 0 14px}.fig svg{display:block;width:100%;height:auto}
 .fig figcaption{padding:8px 6px 2px;font-size:14px;color:var(--muted)}.fig figcaption ol{margin:6px 0 0;padding-left:20px}
-details{margin:6px 0 0}summary{cursor:pointer;color:var(--blue-text)}.q{margin:0 0 16px}.q ul{margin:6px 0;padding-left:20px;color:#dfe2ec}
+details{margin:6px 0 0}summary{cursor:pointer;color:var(--blue-text)}.numbers .table-wrap{overflow-x:auto;margin-top:6px}.numbers table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}.numbers caption{text-align:left;padding:0 0 6px}.numbers th,.numbers td{padding:3px 10px 3px 0;text-align:right;border-bottom:1px solid var(--line)}.numbers th[scope=row],.numbers thead th:first-child{text-align:left}.q{margin:0 0 16px}.q ul{margin:6px 0;padding-left:20px;color:#dfe2ec}
 .pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 0}
 .cta{margin:48px 0 0;background:linear-gradient(135deg,#101633,#0c0e15);border:1px solid var(--line-2);border-radius:16px;padding:24px}
 .cta p{margin:0 0 14px;color:var(--muted)}.cta strong{color:var(--text);display:block;font-size:18px;margin-bottom:4px}
@@ -283,7 +349,7 @@ def crumbs_ld(trail: list[tuple[str, str]]) -> dict:
 # The public sections, in the order the header lists them. Blog and News are built by
 # scripts/newsroom/build.py (DEC-0057).
 NAV = (("learn", "/learn/", "Learn"), ("ideas", "/ideas/", "Ideas"), ("notes", "/notes/", "Notes"),
-       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"))
+       ("blog", "/blog/", "Blog"), ("news", "/news/", "News"), ("download", "/download/", "Download"))
 
 
 def nav_html(section: str, path: str = "") -> str:
@@ -296,7 +362,8 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
          ld: list[dict], og_type: str = "article") -> str:
     url = f"{SITE}{path}"
     image = f"{SITE}/og/{section}.png"
-    full_title = f"{title} | Parity" if path != "/" else title
+    full_title = seo_title(title, path)
+    description = seo_description(description, section)
     graph = {"@context": "https://schema.org", "@graph": [org_ld(), crumbs_ld(trail), *ld]}
     nav = nav_html(section, path)
     crumb_html = " / ".join(f'<a href="{p}">{e(n)}</a>' for n, p in trail[:-1]) + (" / " if len(trail) > 1 else "")
@@ -329,6 +396,7 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 {jsonld(graph)}
 <style>{CSS.strip()}</style>
 <!--parity-analytics--><script type="module" src="/a/boot.js"></script>
+{STATUS_BANNER}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -337,6 +405,7 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 <nav class="site" aria-label="Site">{nav}</nav>
 <nav class="acct" aria-label="Account"><a href="/login/">Log in</a><a class="btn primary" href="/signup/">Sign up</a></nav>
 </div></header>
+{STATUS_SLOT}
 <main id="main" tabindex="-1"><div class="wrap">
 <p class="crumbs">{crumb_html}<span aria-current="page">{e(trail[-1][0])}</span></p>
 {body}
@@ -348,6 +417,7 @@ def page(*, path: str, title: str, description: str, body: str, section: str, tr
 </div></main>
 <footer><div class="wrap">
 <nav aria-label="Legal">{legal}</nav>
+{updates_nav()}
 <p>{DISCLAIMER}</p>
 <p>&copy; 2026 {ORG} &middot; <a href="mailto:{CONTACT}">{CONTACT}</a></p>
 </div></footer>
@@ -458,6 +528,7 @@ def build_ideas(ideas: list[dict], refs: dict) -> dict[str, str]:
               "about": a.get("family", "").replace("-", " ")}
         if a.get("last_reviewed"):
             ld["dateModified"] = a["last_reviewed"]
+            ld["datePublished"] = a.get("first_published") or a["last_reviewed"]
         pages[path] = page(path=path, title=f"{a['name']}: how it works and the evidence", description=plain_text(how.get("simple", "")),
                            body=body, section="ideas", trail=[("Home", "/"), ("Ideas", "/ideas/"), (a["name"], path)], ld=[ld])
     items = "".join(f'<li><a href="/ideas/{a["slug"]}/">{e(a["name"])}<small>{e(plain_text(a["how_it_works"]["simple"], 90))}</small></a></li>'
@@ -581,6 +652,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 <p class="lede" style="font-size:14px">Members get an interactive version of this checklist that ranks the pitfalls for a specific idea.</p>
 {reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(lab["intro"]),
+          "datePublished": lab.get("published", "2026-10-23"),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
     return {path: page(path=path, title=title, description=plain_text(lab["intro"]), body=body, section="learn",
@@ -592,7 +664,7 @@ def build_edge_lab(lab: dict, notes: list[dict], terms: list[dict], refs: dict) 
 ACADEMY_NOTE = ("Pictures use made-up or example numbers unless they say otherwise. "
                 "Members get the moving version of each picture and a quick check that saves their progress.")
 # Parity Academy, the signed-in course player (DEC-0042). The path works on every address
-# of the site; on endyland.com the app also answers at academy.endyland.com.
+# of the site; on paritytrading.app the app also answers at academy.paritytrading.app.
 ACADEMY_APP = "/academy/"
 
 
@@ -623,7 +695,7 @@ def academy_link(k: dict, term_ids: set[str]) -> str:
 
 def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[str, str]:
     term_names = {t["id"]: t["term"] for t in terms}
-    frames = academy_frames()
+    frames, tables = academy_frames()
     pages = {}
     base = "/learn/academy/"
     for c in courses:
@@ -642,7 +714,7 @@ def build_academy(courses: list[dict], terms: list[dict], refs: dict) -> dict[st
             svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-label="{e(v["alt"])}">{shot}</svg>'
                    if shot else f'<p>{e(v["alt"])}</p>')
             fig = (f'<figure class="fig">{svg}<figcaption>The picture, step by step (the still above is the last step):'
-                   f"<ol>{steps}</ol></figcaption></figure>")
+                   f"<ol>{steps}</ol>{academy_table(tables.get(c['id'] + '/' + l['id']))}</figcaption></figure>")
             body_text = "".join(f"<p>{inline(p, {}, refs)}</p>" for p in l["body"])
             links = "".join(f'<li><a href="{e(academy_link(k, set(term_names)))}">{e(k["label"])}</a></li>' for k in l["inParity"])
             words = [f'<a href="/learn/{t}/">{e(term_names[t])}</a>' for t in l["terms"] if t in term_names]
@@ -755,6 +827,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 <p class="lede" style="font-size:14px">Members get a calculator for IRR, TVPI, DPI and PME, counts of private offerings filed with the SEC, and a study of how much smoothing hides.</p>
 {reading_html}"""
     ld = {"@type": "Article", "@id": f"{SITE}{path}#article", "headline": title, "description": plain_text(pm["intro"]),
+          "datePublished": pm.get("published", "2026-10-23"),
           "url": f"{SITE}{path}", "mainEntityOfPage": f"{SITE}{path}", "author": {"@id": f"{SITE}/#org"},
           "publisher": {"@id": f"{SITE}/#org"}, "image": f"{SITE}/og/learn.png", "articleSection": "Learn"}
     return {path: page(path=path, title=title, description=plain_text(pm["intro"]), body=body, section="learn",
@@ -763,12 +836,52 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/"]
+STATIC_PUBLIC = ["/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/verify/", "/methodology/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:
     rows = "".join(f"<url><loc>{e(SITE + p)}</loc>{f'<lastmod>{m}</lastmod>' if m else ''}</url>\n" for p, m in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}</urlset>\n'
+
+
+# One sitemap per section, listed in /sitemap.xml (a sitemap index, sitemaps.org protocol), so
+# Search Console reports submitted and indexed pages per section (DEC-0073).
+SECTIONS = {"learn": "learn", "ideas": "ideas", "notes": "notes", "blog": "blog", "authors": "blog", "tags": "blog",
+            "news": "news", "changelog": "updates", "announcements": "updates", "status": "updates"}
+
+
+def section_of(path: str) -> str:
+    return SECTIONS.get(path.strip("/").split("/")[0], "pages")
+
+
+def write_sitemaps(out: Path, urls: list[tuple[str, str]]) -> list[str]:
+    """Writes /sitemaps/<section>.xml and the index at /sitemap.xml. Returns the sitemap paths."""
+    groups: dict[str, list[tuple[str, str]]] = {}
+    for p, m in urls:
+        groups.setdefault(section_of(p), []).append((p, m))
+    (out / "sitemaps").mkdir(exist_ok=True)
+    paths, rows = [], []
+    for name in sorted(groups):
+        path = f"/sitemaps/{name}.xml"
+        (out / path.lstrip("/")).write_text(sitemap(groups[name]))
+        newest = max((m for _, m in groups[name] if m), default="")
+        rows.append(f"<sitemap><loc>{e(SITE + path)}</loc>{f'<lastmod>{newest}</lastmod>' if newest else ''}</sitemap>\n")
+        paths.append(path)
+    (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                     + "".join(rows) + "</sitemapindex>\n")
+    return paths
+
+
+def robots_txt() -> str:
+    """dist/robots.txt. It is served only on the site's real address; functions/robots.txt.ts
+    answers every other host with Disallow: / (DEC-0073)."""
+    private = ["/app/", "/research/", "/sim/", "/trade/", "/academy/", "/lab/", "/data/", "/login/", "/signup/",
+               "/reset/", "/connect/", "/oauth/", "/v/", "/badge/"]
+    lines = ["# Parity. Public: the front page, /verify/, /methodology/, /legal/, /learn/, /ideas/, /notes/, /blog/, /news/, /authors/,",
+             "# /tags/, /changelog/, /announcements/ and /status/. The apps and their data sit behind sign-in.",
+             "User-agent: *", "Allow: /", *[f"Disallow: {p}" for p in private], "", f"Sitemap: {SITE}/sitemap.xml", ""]
+    return "\n".join(lines)
 
 
 def fill_verification(out: Path) -> None:
@@ -777,10 +890,12 @@ def fill_verification(out: Path) -> None:
         return
     text = index.read_text()
     tags = []
+    # Each may hold several values, comma separated: the repository variable and the token the
+    # deploy fetched from Google's Site Verification API (scripts/seo/site_verify.py, DEC-0073).
     for env, name in (("GSC_VERIFICATION", "google-site-verification"), ("BING_VERIFICATION", "msvalidate.01")):
-        value = os.environ.get(env, "").strip()
-        if re.fullmatch(r"[\w.-]{8,128}", value):
-            tags.append(f'<meta name="{name}" content="{value}" />')
+        for value in dict.fromkeys(v.strip() for v in os.environ.get(env, "").split(",")):
+            if re.fullmatch(r"[\w.-]{8,128}", value):
+                tags.append(f'<meta name="{name}" content="{value}" />')
     index.write_text(text.replace("<!--seo:verify-->", "\n    ".join(tags)))
 
 
@@ -793,6 +908,34 @@ def write_academy_data(courses: list[dict], out: Path) -> None:
     dest = out / "data" / "academy" / "courses.json"
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(doc, ensure_ascii=False))
+
+
+UPDATES_BUILD = ROOT / "scripts/updates/build.py"
+
+
+def build_updates(out: Path, script: Path = UPDATES_BUILD) -> list[tuple[str, str]]:
+    """The changelog, announcements and status pages (scripts/updates/build.py, DEC-0073).
+
+    Loaded from its file under its own module name, because the newsroom's build.py is
+    already imported as `build`. When the file is missing or does not import, the rest of
+    the site still builds and this prints a note."""
+    if not script.exists():
+        print(f"build_public: no {script.relative_to(ROOT)}, so no changelog, announcements or status pages", file=sys.stderr)
+        return []
+    import importlib.util  # noqa: PLC0415
+    sys.path.insert(0, str(script.parent))
+    try:
+        spec = importlib.util.spec_from_file_location("parity_updates_build", script)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        build_into = mod.build_into
+    except (ImportError, AttributeError) as err:
+        print(f"build_public: the updates pages did not load ({err.__class__.__name__}: {err}); the rest still builds",
+              file=sys.stderr)
+        return []
+    finally:
+        sys.path.remove(str(script.parent))
+    return list(build_into(out))
 
 
 def main() -> int:
@@ -823,8 +966,7 @@ def main() -> int:
     lastmod.update({f"/notes/{n['id'].lower()}/": n["updated"] for n in notes})
     urls = [(p, "") for p in STATIC_PUBLIC] + [(p, lastmod.get(p, "")) for p in sorted(pages)]
 
-    # Blog and News (DEC-0057). They go in sitemap.xml but not in seo-manifest.json, so the
-    # deploy never pushes them to IndexNow while the site is on its temporary address.
+    # Blog and News (DEC-0057), now sent to IndexNow like every other public page (DEC-0073).
     sys.path.insert(0, str(ROOT / "scripts/newsroom"))
     from build import build_into  # noqa: PLC0415
     from model import ValidationError  # noqa: PLC0415
@@ -835,18 +977,20 @@ def main() -> int:
         for p in err.problems:
             print(f"  - {p}", file=sys.stderr)
         return 1
-    (out / "sitemap.xml").write_text(sitemap(urls + newsroom_urls))
+    urls = urls + newsroom_urls + build_updates(out)
+    sitemaps = write_sitemaps(out, urls)
+    (out / "robots.txt").write_text(robots_txt())
 
     manifest = {}
     for p, _ in urls:
         f = out / p.strip("/") / "index.html" if p != "/" else out / "index.html"
         if f.exists():
             manifest[p] = hashlib.sha256(f.read_bytes()).hexdigest()[:16]
-    (out / "seo-manifest.json").write_text(json.dumps({"site": SITE, "urls": manifest}, indent=0, sort_keys=True))
+    (out / "seo-manifest.json").write_text(json.dumps({"site": SITE, "sitemaps": sitemaps, "urls": manifest}, indent=0, sort_keys=True))
     fill_verification(out)
     lessons = sum(len(c["lessons"]) for c in academy)
     print(f"build_public: {len(terms)} terms, {len(ideas)} ideas, {len(notes)} notes, {len(academy)} courses ({lessons} lessons), "
-          f"{len(urls)} URLs in sitemap.xml")
+          f"{len(urls)} URLs in {len(sitemaps)} sitemaps")
     return 0
 
 

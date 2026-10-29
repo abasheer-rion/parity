@@ -1,0 +1,28 @@
+{
+  "id": "opec-plus-surprise-cut-2023",
+  "name": "OPEC+ surprise cut",
+  "date": "2023-04-03",
+  "type": "oil_supply_shock",
+  "regions": [
+    "middle_east",
+    "russia_cis",
+    "global"
+  ],
+  "actors": [
+    "opec",
+    "saudi_arabia",
+    "russia"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Saudi Arabia and other OPEC+ members announced unexpected cuts of over 1 million barrels a day on Sunday 2 April; oil rose about 6% when markets opened.",
+  "sources": [
+    {
+      "title": "OPEC+",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/OPEC%2B"
+    }
+  ]
+}

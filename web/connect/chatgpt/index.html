@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). Shared blocks: plugins/guides.ts. -->
+    <!--legal:head-->
+  </head>
+  <body>
+    <!--legal:header-->
+    <main id="main" tabindex="-1">
+      <article class="lg-wrap">
+        <!--guide:nav-->
+        <h1>Connect ChatGPT to Parity</h1>
+        <p class="lg-meta">Last checked against OpenAI's docs: <time datetime="2026-10-26">26 October 2026</time></p>
+        <p class="gd-lead">Add Parity to ChatGPT and ChatGPT can verify a trade record, one of our tested strategies or a seller's claim, and read tested strategies, market data and Academy lessons in a chat. ChatGPT reads your Parity data as you and cannot change anything unless you allow it.</p>
+
+        <nav class="lg-toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#setup">Add Parity to ChatGPT</a></li>
+            <li><a href="#use">Use it in a chat</a></li>
+            <li><a href="#tools">What ChatGPT can use</a></li>
+            <li><a href="#limits">What it can and cannot do</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#disconnect">Disconnect</a></li>
+            <li><a href="#trouble">If it does not work</a></li>
+          </ol>
+        </nav>
+
+        <!--guide:verify-->
+
+        <h2>The address</h2>
+        <div class="gd-copy">
+          <pre id="url" tabindex="0"><!--guide:url--></pre>
+          <button type="button" data-copy="url" hidden>Copy</button>
+          <span role="status" class="gd-sr"></span>
+        </div>
+        <!--guide:flow-->
+
+        <h2 id="setup">1. Add Parity to ChatGPT</h2>
+        <p>Adding your own server is done on chatgpt.com in a browser. Once added, it also works in the ChatGPT apps. OpenAI calls these plugins now; older menus say apps or connectors. On a work or school workspace, your admin decides whether custom servers are allowed.</p>
+        <ol class="gd-steps">
+          <li>Go to <strong>Plugins</strong> on chatgpt.com (chatgpt.com/plugins). If your menu still says <strong>Settings</strong>, then <strong>Apps and connectors</strong>, turn on <strong>Developer mode</strong> under <strong>Advanced</strong> first.</li>
+          <li>Choose the plus button, then <strong>Add custom MCP server</strong> (or <strong>Create</strong>).</li>
+          <li>Name it <strong>Parity</strong>, paste the address above as the server URL and choose <strong>OAuth</strong> for authentication. Leave the client ID and secret empty.</li>
+          <li>Read OpenAI's warning about custom servers and choose <strong>I understand and want to continue</strong>, then <strong>Create</strong>.</li>
+          <li>ChatGPT opens Parity's log-in page. Log in, check the Allow page names ChatGPT and chatgpt.com, and choose <strong>Allow</strong>.</li>
+          <li>Back in ChatGPT, Parity shows in your plugins with its tools listed.</li>
+        </ol>
+        <figure class="gd-fig">
+          <svg viewBox="0 0 720 330" role="img" aria-labelledby="gpt-add-t gpt-add-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="gpt-add-t">Adding a custom MCP server in ChatGPT</title>
+            <desc id="gpt-add-d">A drawing of ChatGPT's form for a custom MCP server. Name: Parity. Server URL: https://paritytrading.app/mcp. Authentication: OAuth is chosen. A box for "I understand and want to continue" is ticked, and there is a Create button.</desc>
+            <rect class="s-panel" x="110" y="16" width="500" height="298" rx="14" />
+            <text class="s-title" x="136" y="52">Add custom MCP server</text>
+            <text class="s-text" x="136" y="88">Name</text>
+            <rect class="s-field" x="136" y="96" width="448" height="34" rx="8" />
+            <text class="s-mono" x="148" y="118">Parity</text>
+            <text class="s-text" x="136" y="154">Server URL</text>
+            <rect class="s-field" x="136" y="162" width="448" height="34" rx="8" />
+            <text class="s-mono" x="148" y="184">https://paritytrading.app/mcp</text>
+            <text class="s-text" x="136" y="220">Authentication</text>
+            <rect class="s-field" x="136" y="228" width="200" height="34" rx="8" />
+            <text class="s-mono" x="148" y="250">OAuth</text>
+            <rect class="s-mark" x="136" y="278" width="14" height="14" rx="3" />
+            <text class="s-muted" x="158" y="290">I understand and want to continue</text>
+            <rect class="s-btn" x="494" y="268" width="90" height="32" rx="8" />
+            <text class="s-btn-text" x="516" y="289">Create</text>
+          </svg>
+          <figcaption>Drawn by Parity to show the fields. ChatGPT's own screen may look a little different.</figcaption>
+        </figure>
+        <!--guide:consent-->
+
+        <h2 id="use">2. Use it in a chat</h2>
+        <ol class="gd-steps">
+          <li>In the message box, type <code>@</code> and choose <strong>Parity</strong>, or pick it from the plus menu.</li>
+          <li>Ask, for example, "Use Parity to find tested carry strategies and tell me which ones passed the most tests."</li>
+          <li>ChatGPT shows which Parity tool it wants to use. It asks you first before any tool that changes something.</li>
+        </ol>
+
+        <h2 id="tools">3. What ChatGPT can use</h2>
+        <!--guide:tools-->
+        <p>ChatGPT's deep research uses the <code>search</code> and <code>fetch</code> tools.</p>
+
+        <h2 id="limits">4. What it can and cannot do</h2>
+        <!--guide:limits-->
+
+        <h2 id="privacy">5. Privacy</h2>
+        <!--guide:privacy-->
+
+        <h2 id="disconnect">6. Disconnect</h2>
+        <ul>
+          <li><strong>From Parity:</strong> open <a href="/connect/">Connect your AI</a>, find ChatGPT under "Your connected apps" and choose <strong>Disconnect</strong>. ChatGPT's next call fails and it has to ask you to log in again.</li>
+          <li><strong>From ChatGPT:</strong> open your plugins (or Settings, then Apps and connectors), choose Parity and remove or disconnect it.</li>
+          <li>To stop changes but stay connected, untick "May make changes" for ChatGPT on <a href="/connect/">Connect your AI</a>.</li>
+        </ul>
+
+        <h2 id="trouble">7. If it does not work</h2>
+        <ul>
+          <li><strong>No way to add a custom server.</strong> Your plan or workspace may not allow it, or developer mode is off. On a work workspace, ask your admin.</li>
+          <li><strong>The log-in page does not open.</strong> Check the address ends in <code>/mcp</code> and that OAuth is chosen, not "No authentication".</li>
+          <li><strong>"This request has expired or is not valid".</strong> The sign-in link is single use. Start again from ChatGPT.</li>
+          <li><strong>ChatGPT says it cannot place an order.</strong> Changes are off. Tick "May make changes" for ChatGPT on <a href="/connect/">Connect your AI</a>. Orders are demo orders only.</li>
+          <li><strong>"Too many calls".</strong> You reached 30 calls in a minute or 1000 in a day. Wait and ask again.</li>
+          <li>Still stuck? Email <a href="mailto:contact@paritytrading.app">contact@paritytrading.app</a> with the time it failed and the message ChatGPT showed.</li>
+        </ul>
+
+        <h2>Use your own model inside Parity</h2>
+        <!--guide:byom-->
+      </article>
+    </main>
+    <!--legal:footer-->
+  </body>
+</html>

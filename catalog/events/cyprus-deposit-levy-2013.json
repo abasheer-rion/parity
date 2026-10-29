@@ -1,0 +1,23 @@
+{
+  "id": "cyprus-deposit-levy-2013",
+  "name": "Cyprus plans a levy on bank deposits",
+  "date": "2013-03-16",
+  "type": "bank_run",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "cyprus",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "A rescue for Cyprus first proposed taxing all bank deposits, including insured ones; banks stayed shut for almost two weeks and capital controls followed.",
+  "sources": [
+    {
+      "title": "2012-2013 Cypriot financial crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2012%E2%80%932013_Cypriot_financial_crisis"
+    }
+  ]
+}

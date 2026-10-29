@@ -3,52 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Discover and follow trading strategies, each tested honestly against the S&amp;P 500, with an open research side behind every result." />
+    <meta name="description" content="AI-native verification platform for retail traders of all sizes. Check algos, trade logs, trading strategies and claims on the web, by API or from your AI." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <title>Parity: trading strategies, tested honestly</title>
-    <link rel="canonical" href="https://parity.endyland.com/" />
+    <title>Parity: AI-native verification for retail traders</title>
+    <link rel="canonical" href="https://paritytrading.app/" />
     <meta property="og:site_name" content="Parity" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Parity: trading strategies, tested honestly" />
-    <meta property="og:description" content="Discover and follow trading strategies, each tested honestly against the S&amp;P 500, with an open research side behind every result." />
-    <meta property="og:url" content="https://parity.endyland.com/" />
-    <meta property="og:image" content="https://parity.endyland.com/og/default.png" />
+    <meta property="og:title" content="Parity: AI-native verification for retail traders" />
+    <meta property="og:description" content="AI-native verification platform for retail traders of all sizes. Check algos, trade logs, trading strategies and claims on the web, by API or from your AI." />
+    <meta property="og:url" content="https://paritytrading.app/" />
+    <meta property="og:image" content="https://paritytrading.app/og/default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Parity: trading strategies, tested honestly" />
-    <meta name="twitter:description" content="Trading strategies, each tested honestly against the S&amp;P 500, failures included." />
-    <meta name="twitter:image" content="https://parity.endyland.com/og/default.png" />
+    <meta name="twitter:title" content="Parity: AI-native verification for retail traders" />
+    <meta name="twitter:description" content="Check algos, trades, strategies and claims on the web, through the API or from your AI. Free today." />
+    <meta name="twitter:image" content="https://paritytrading.app/og/default.png" />
     <!-- Search engine verification. scripts/seo/build_public.py fills this from the
          GSC_VERIFICATION and BING_VERIFICATION build variables; empty by default. -->
     <!--seo:verify-->
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://parity.endyland.com/#org","name":"Parity Trading, Inc.","alternateName":"Parity","url":"https://parity.endyland.com/","logo":"https://parity.endyland.com/icon-512.png","email":"contact@paritytrading.ai"},{"@type":"WebSite","@id":"https://parity.endyland.com/#site","name":"Parity","url":"https://parity.endyland.com/","publisher":{"@id":"https://parity.endyland.com/#org"},"inLanguage":"en"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://paritytrading.app/#org","name":"Parity Trading, Inc.","alternateName":"Parity","url":"https://paritytrading.app/","logo":"https://paritytrading.app/icon-512.png","email":"contact@paritytrading.app"},{"@type":"WebSite","@id":"https://paritytrading.app/#site","name":"Parity","url":"https://paritytrading.app/","publisher":{"@id":"https://paritytrading.app/#org"},"inLanguage":"en"}]}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=optional" rel="stylesheet" />
     <!--
-      The public front page (DEC-0039). Plain HTML and inline CSS, so it paints at once and
-      reads with no script. One module script (src/site/main.ts) adds the motion: the hero
-      field, scroll-driven scenes, counters and reveals. Every picture's finished state is
-      the default, so with no script or reduced motion everything is still there.
+      The public front page (DEC-0039), focused on Parity Verify (DEC-0079, DEC-0080). Plain
+      HTML and inline CSS, so it paints at once and reads with no script. One module script
+      (src/site/main.ts) adds the motion: the hero field, two scroll-driven scenes, counters
+      and reveals. Every picture's finished state is the default, so with no script or
+      reduced motion everything is still there.
     -->
     <!--site-kit-->
     <style>
-      /* No top bar: a skip link, the logo in the corner and two quiet floating controls. */
+      /* No top bar: a skip link, the logo in the corner and the floating corner nav. */
       .skip { position: fixed; z-index: var(--z-popover); left: 16px; top: -60px; padding: 10px 14px; border-radius: 10px; background: var(--text); color: var(--palette-black); font-weight: 600; text-decoration: none; transition: top var(--dur-2) var(--ease); }
       .skip:focus { top: 16px; }
       .corner-nav { right: 16px; }
       .corner-nav a { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 9px; font-size: var(--type-md); font-weight: 500; text-decoration: none; color: var(--muted); transition: color var(--dur-2), background-color var(--dur-2); }
       .corner-nav a:hover { color: var(--text); background: var(--color-hover); }
-      .corner-nav a.su { color: var(--color-canvas); background: var(--text); }
-      .corner-nav a.su:hover { background: var(--palette-white); color: var(--palette-black); }
+      .corner-nav a.vf { color: var(--text); }
+      .corner-nav .gap { width: 1px; height: 18px; margin: 0 4px; background: var(--line-2); }
+      .corner-nav a.su { color: var(--color-on-accent); background: var(--color-accent); }
+      .corner-nav a.su:hover { background: var(--color-accent-hover); color: var(--color-on-accent); }
 
       .link { color: var(--text); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--line-3); padding-bottom: 2px; transition: border-color var(--dur-2); }
       .link:hover { border-color: var(--text); }
 
-      /* Hero: the field fills it; the copy sits on the left. */
+      /* Hero: the field fills the right side; the tagline sits on the left. */
       .hero { position: relative; isolation: isolate; height: 100svh; min-height: 680px; max-height: 1080px; overflow: clip; display: flex; flex-direction: column; justify-content: center; }
       .field-box { position: absolute; z-index: -2; left: max(44%, calc(50% - 40px)); right: -3%; top: 20%; height: 62%; pointer-events: none; }
       .field-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity var(--dur-pulse) var(--ease); }
@@ -58,19 +61,12 @@
       .hero.field-live .field-canvas { opacity: 1; }
       .hero.field-live .field-poster { opacity: 0; }
       .hero-shade { position: absolute; z-index: -1; inset: 0; pointer-events: none;
-        background: linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 94%, transparent) 0%, color-mix(in srgb, var(--color-canvas) 80%, transparent) 34%, color-mix(in srgb, var(--color-canvas) 35%, transparent) 50%, transparent 64%), linear-gradient(180deg, transparent 72%, color-mix(in srgb, var(--color-canvas) 70%, transparent)); }
+        background: linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 94%, transparent) 0%, color-mix(in srgb, var(--color-canvas) 80%, transparent) 38%, color-mix(in srgb, var(--color-canvas) 35%, transparent) 54%, transparent 68%), linear-gradient(180deg, transparent 72%, color-mix(in srgb, var(--color-canvas) 70%, transparent)); }
       .hero-in { padding-top: 40px; }
-      h1 { font-size: clamp(var(--type-8xl), 5.3vw, var(--type-8xl)); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; margin: 0 0 24px; max-width: 15ch; }
-      /* A step lighter than --faint: the red glow sits behind it (contrast over the glow, WCAG 1.4.3). */
-      h1 span { color: var(--muted); }
-      .lead { font-size: clamp(var(--type-2xl), 1.4vw, var(--type-3xl)); color: var(--muted); margin: 0 0 32px; max-width: 540px; }
-      .cta { display: flex; gap: 12px; flex-wrap: wrap; }
-      .fine { margin: 18px 0 0; color: var(--faint); font-size: var(--type-sm); }
-      .proof { position: absolute; left: 0; right: 0; bottom: 28px; }
-      .proof dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); }
-      .proof dl > div { padding: 18px 24px 0 0; display: flex; flex-direction: column; }
-      .proof dd { order: -1; margin: 0; font-size: clamp(var(--type-5xl), 2.4vw, var(--type-7xl)); font-weight: 560; letter-spacing: -0.03em; line-height: 1.15; }
-      .proof dt { color: var(--faint); font-size: var(--type-sm); line-height: 1.45; margin-top: 4px; max-width: 30ch; }
+      h1 { font-size: var(--type-display); line-height: 1.02; letter-spacing: -0.04em; font-weight: 650; margin: 0 0 28px; max-width: 15ch; color: var(--text); }
+      .lead { font-size: clamp(var(--type-2xl), 1.4vw, var(--type-3xl)); color: var(--muted); margin: 0 0 36px; max-width: 540px; }
+      .cta { display: flex; gap: 12px 24px; flex-wrap: wrap; align-items: center; }
+      .fine { margin: 20px 0 0; color: var(--faint); font-size: var(--type-sm); }
 
       /* Backers */
       .backers { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--color-surface) 40%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
@@ -80,10 +76,32 @@
       .backers-list li { color: var(--color-text-body); font-size: var(--type-3xl); font-weight: 600; letter-spacing: -0.015em; }
 
       /* Sections */
-      .sec { padding: 200px 0; border-top: 1px solid var(--line); }
+      .sec { padding: 180px 0; border-top: 1px solid var(--line); }
       h2 { font-size: clamp(var(--type-7xl), 4.4vw, var(--type-8xl)); line-height: 1.04; letter-spacing: -0.035em; font-weight: 600; margin: 0 0 20px; max-width: 18ch; }
       h2 .dim { color: var(--faint); }
-      .sub { color: var(--muted); margin: 0 0 28px; max-width: 560px; font-size: var(--type-2xl); }
+      .sub { color: var(--muted); margin: 0 0 28px; max-width: 580px; font-size: var(--type-2xl); }
+
+      /* Cards: big, bold and solid, on layered charcoal (never black, never light). */
+      .card { position: relative; display: flex; flex-direction: column; gap: 14px; padding: 32px; border-radius: var(--radius-xl); background: linear-gradient(180deg, var(--color-surface-raised), var(--color-surface)); border: 1px solid var(--color-border-strong); box-shadow: 0 1px 0 color-mix(in srgb, var(--palette-white) 6%, transparent) inset, 0 30px 60px -30px color-mix(in srgb, var(--palette-black) 80%, transparent); transition: border-color var(--dur-3), transform var(--dur-3) var(--ease); }
+      .card:has(a.go:hover) { border-color: var(--color-border-max); transform: translateY(-2px); }
+      .card h3 { margin: 0; font-size: clamp(var(--type-5xl), 2.2vw, var(--type-7xl)); line-height: 1.12; letter-spacing: -0.025em; font-weight: 650; }
+      .card p { margin: 0; color: var(--color-text-body); font-size: var(--type-xl); line-height: 1.55; }
+      .card a.go { margin-top: auto; padding-top: 8px; color: var(--color-accent-text); font-size: var(--type-lg); font-weight: 600; text-decoration: none; }
+      .card a.go::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+      .card a.go:focus-visible { outline: none; }
+      .card:has(a.go:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+      .ex { margin: 6px 0 4px; padding: 14px 16px; border-radius: var(--radius-md); background: var(--color-bar); border: 1px solid var(--color-border); font: var(--type-md)/1.55 var(--mono); color: var(--text); overflow-wrap: anywhere; white-space: pre-wrap; }
+      .ex .q { color: var(--faint); }
+      pre.ex { font-size: var(--type-sm); }
+      #business h2 { max-width: 24ch; }
+      .ex-file { display: flex; align-items: center; gap: 12px; font-family: inherit; white-space: normal; }
+      .ex-file svg { flex: none; color: var(--muted); }
+      .ex-file small { display: block; color: var(--faint); font-size: var(--type-xs); }
+
+      /* Three ways in */
+      .ways { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .ways .tools { color: var(--muted); font-size: var(--type-md); }
+      .ways .tools code { font: var(--type-sm)/1 var(--mono); color: var(--text); }
 
       /* Panels: every demo sits in one framed box, centred and sized to its content. */
       .panel { position: relative; margin: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface-raised) 62%, transparent), color-mix(in srgb, var(--color-bar) 70%, transparent)); border: 1px solid color-mix(in srgb, var(--palette-white) 10%, transparent); border-radius: 18px; box-shadow: 0 1px 0 color-mix(in srgb, var(--palette-white) 6%, transparent) inset, 0 40px 80px -20px color-mix(in srgb, var(--palette-black) 70%, transparent); overflow: hidden; backdrop-filter: blur(22px) saturate(1.25); -webkit-backdrop-filter: blur(22px) saturate(1.25); }
@@ -169,70 +187,53 @@
       .motion .f-row:not(.in) .f-bar i { transform: scaleX(0); }
       .f-note { margin: 16px 0 0; color: var(--faint); font-size: var(--type-sm); }
 
-      /* Coverage: the markets, very large. */
-      .cover { padding: 200px 0; border-top: 1px solid var(--line); }
-      .cv { list-style: none; margin: 0; padding: 0; }
-      .cv li { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 8px 40px; align-items: end; padding: 18px 0 22px; border-bottom: 1px solid var(--line); }
-      .cv li:first-child { border-top: 1px solid var(--line); }
-      .cv-w { font-size: clamp(var(--type-8xl), 10.5vw, var(--type-8xl)); font-weight: 600; letter-spacing: -0.055em; line-height: .92; }
-      .cv-m { padding-bottom: 10px; }
-      .cv-n { display: block; height: 22px; font: 500 var(--type-md)/22px var(--mono); color: var(--text); }
-      .cv-d { display: block; color: var(--faint); font-size: var(--type-md); line-height: 1.45; }
-      .cv-src { margin: 22px 0 0; color: var(--faint); font: var(--type-xs)/1.6 var(--mono); }
-      .motion .cv li .cv-w { transition: opacity var(--dur-6) var(--ease), transform var(--dur-6) var(--ease); }
-      .motion .cv li:not(.in) .cv-w { opacity: .08; transform: translateY(18px); }
+      /* Proof: the five verdicts and an example badge. */
+      .proof-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: start; margin-top: 96px; }
+      .proof-grid h3 { margin: 0 0 18px; font-size: clamp(var(--type-5xl), 2.4vw, var(--type-7xl)); letter-spacing: -0.025em; font-weight: 650; line-height: 1.15; }
+      .verdicts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+      .verdicts li { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 4px 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+      .verdicts i { width: 10px; height: 10px; border-radius: 50%; margin-top: 9px; background: var(--c, var(--muted)); }
+      .verdicts b { font-size: var(--type-3xl); font-weight: 600; letter-spacing: -0.015em; }
+      .verdicts span { grid-column: 2; color: var(--muted); font-size: var(--type-lg); line-height: 1.5; }
+      .badge-ex { margin: 0; }
+      .badge-ex .tag { display: inline-block; margin-bottom: 14px; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line-3); color: var(--text); font-size: var(--type-sm); font-weight: 600; }
+      .badge { position: relative; max-width: 480px; padding: 22px 24px 22px 30px; border-radius: var(--radius-lg); background: var(--color-surface-raised); border: 1px solid var(--color-border-strong); }
+      .badge::before { content: ""; position: absolute; left: 0; top: 16px; bottom: 16px; width: 5px; border-radius: 3px; background: var(--warn); }
+      .badge .bk { display: block; color: var(--muted); font-size: var(--type-xs); letter-spacing: .12em; text-transform: uppercase; }
+      .badge .bv { display: block; margin-top: 6px; color: var(--warn); font-size: var(--type-6xl); font-weight: 650; letter-spacing: -0.02em; line-height: 1.15; }
+      .badge .bn { display: block; margin-top: 4px; color: var(--text); font-size: var(--type-xl); }
+      .badge .bt { display: block; margin-top: 10px; color: var(--muted); font-size: var(--type-sm); line-height: 1.45; }
+      .badge-ex figcaption { margin-top: 14px; color: var(--faint); font-size: var(--type-sm); max-width: 480px; }
 
-      /* How a strategy is tested: three framed, looping demos. */
-      .steps { display: grid; gap: 28px; margin-top: 56px; }
-      .step { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 56px; align-items: center; padding: 28px 0; }
-      .step h3 { margin: 0 0 10px; font-size: clamp(var(--type-4xl), 2.2vw, var(--type-6xl)); letter-spacing: -0.025em; font-weight: 600; line-height: 1.2; }
-      .step p { margin: 0; color: var(--muted); font-size: var(--type-xl); max-width: 440px; }
-      .step .n { display: block; color: var(--faint); font: 500 var(--type-xs)/1 var(--mono); margin-bottom: 14px; }
-      .demo { max-width: 560px; width: 100%; justify-self: center; }
-      .demo-body { padding: 22px; }
-      .plan-row { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); font-size: var(--type-md); }
-      .plan-row:first-of-type { border-top: 0; }
-      .plan-row b { color: var(--faint); font-weight: 500; font-size: var(--type-xs); text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
-      .plan-h { margin: 0 0 8px; font-size: var(--type-2xl); font-weight: 600; }
-      .seal { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 6px 12px; border: 1px solid var(--line-3); border-radius: 999px; font: 500 var(--type-xs)/1 var(--mono); color: var(--text); }
-      .seal i { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
-      .g-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
-      .g-head b { font-size: var(--type-2xl); font-weight: 600; }
-      .g-head strong { font-size: var(--type-6xl); font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
-      .g-bar { height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; margin-bottom: 14px; }
-      .g-bar i { display: block; height: 100%; width: 100%; background: var(--text); transform-origin: left; transform: scaleX(var(--g, .636)); transition: transform var(--dur-4) var(--ease); }
-      .g-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; font-size: var(--type-sm); }
-      .g-list li { display: flex; align-items: center; gap: 8px; transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease); }
-      .g-list li::before { content: "+"; flex: none; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; font: 700 var(--type-2xs)/1 var(--mono); background: color-mix(in srgb, var(--color-positive) 14%, transparent); color: var(--good); }
-      .g-list li.x::before { content: "\2212"; background: color-mix(in srgb, var(--color-negative) 14%, transparent); color: var(--bad); }
-      .demo.looping .g-list li:not(.on) { opacity: .15; transform: translateX(-4px); }
-      .r-chart { position: relative; height: 150px; margin: 6px 0 12px; }
-      .r-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-      .r-line { fill: none; stroke-width: 1.8; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 0; }
-      .demo.looping .r-line { animation: r-draw var(--dur-loop) var(--ease) infinite; }
-      @keyframes r-draw { 0%, 6% { stroke-dashoffset: 1; } 45%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
-      .r-key { display: flex; gap: 16px; color: var(--faint); font-size: var(--type-xs); margin-bottom: 12px; }
-      .r-key i { display: inline-block; width: 14px; height: 2px; margin-right: 6px; vertical-align: 3px; }
-      .verdict { display: inline-block; font-size: var(--type-xs); padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--text); margin-left: 8px; vertical-align: 2px; font-weight: 500; }
-      .kv { display: flex; justify-content: space-between; font-size: var(--type-sm); color: var(--muted); padding: 9px 0; border-top: 1px solid var(--line); }
-      .kv strong { color: var(--text); font-weight: 500; }
-      .demo.looping .typed { animation: typed var(--dur-loop-slow) steps(40, end) infinite; display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; max-width: 100%; }
-      @keyframes typed { 0%, 4% { max-width: 0; } 35%, 94% { max-width: 100%; } 100% { max-width: 0; } }
-      .demo.looping .seal { animation: seal var(--dur-loop-slow) var(--ease) infinite; }
-      @keyframes seal { 0%, 40% { opacity: 0; transform: scale(.8); } 46%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      /* Pricing */
+      .tiers { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .tier { gap: 8px; }
+      .tier h3 { font-size: var(--type-4xl); }
+      .tier .price { margin: 4px 0 0; color: var(--text); font-size: var(--type-8xl); font-weight: 650; letter-spacing: -0.035em; line-height: 1.05; }
+      .tier .price small { color: var(--muted); font-size: var(--type-xl); font-weight: 500; letter-spacing: 0; }
+      .tier p.what { color: var(--muted); font-size: var(--type-lg); }
+      .tier.now { border-color: var(--color-accent); }
+      .tier .now-tag { color: var(--color-accent-text); font-size: var(--type-md); font-weight: 600; }
+      .p-note { margin: 24px 0 0; color: var(--faint); font-size: var(--type-sm); max-width: 680px; }
 
-      /* Also on Parity */
-      .more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--color-border); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; list-style: none; padding: 0; margin: 40px 0 0; }
-      .more li { position: relative; background: color-mix(in srgb, var(--color-surface) 78%, transparent); padding: 24px 22px; display: flex; flex-direction: column; gap: 6px; transition: background-color var(--dur-3); }
-      .more li:hover { background: color-mix(in srgb, var(--color-surface-overlay) 85%, transparent); }
-      .more h3 { margin: 0; font-size: var(--type-2xl); font-weight: 600; letter-spacing: -0.01em; }
-      .more p { margin: 0; color: var(--muted); font-size: var(--type-md); }
-      .more a { margin-top: auto; padding-top: 10px; color: var(--text); font-size: var(--type-md); font-weight: 500; text-decoration: none; }
-      .more a::after { content: ""; position: absolute; inset: 0; }
+      /* For businesses */
+      .biz { list-style: none; margin: 56px 0 40px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+      .biz .card { padding: 28px; }
+      .biz .card h3 { font-size: var(--type-4xl); }
+      .biz .card p { font-size: var(--type-lg); color: var(--muted); }
+
+      /* Explore Parity: quieter, small type, no cards. */
+      .explore { padding: 120px 0; border-top: 1px solid var(--line); }
+      .explore h2 { font-size: var(--type-5xl); letter-spacing: -0.02em; margin: 0 0 28px; }
+      .explore ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 32px; }
+      .explore li { display: flex; flex-direction: column; gap: 4px; }
+      .explore a { color: var(--text); font-size: var(--type-lg); font-weight: 600; text-decoration: none; }
+      .explore a:hover { text-decoration: underline; text-underline-offset: 3px; }
+      .explore span { color: var(--faint); font-size: var(--type-sm); line-height: 1.5; }
 
       /* Closing */
-      .closing { text-align: center; padding: 240px 0; border-top: 1px solid var(--line); position: relative; isolation: isolate; overflow: clip; }
-            .closing h2 { margin: 0 auto 18px; }
+      .closing { text-align: center; padding: 220px 0; border-top: 1px solid var(--line); position: relative; isolation: isolate; overflow: clip; }
+      .closing h2 { margin: 0 auto 18px; }
       .closing p { color: var(--muted); margin: 0 auto 32px; max-width: 480px; font-size: var(--type-2xl); }
       .closing .cta { justify-content: center; }
       footer { border-top: 1px solid var(--line); color: var(--faint); font-size: var(--type-sm); }
@@ -243,10 +244,11 @@
       .motion .rv.in { opacity: 1; transform: none; }
 
       @media (max-width: 1100px) {
-        .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .biz { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .explore ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 960px) {
-        .pin-grid, .step { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+        .pin-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
         .motion .pin .pin-in { align-items: flex-start; padding-top: 72px; }
         .pin-copy .sub { font-size: var(--type-xl); margin-bottom: 0; }
         .pin-copy .link, .pin-copy .meter, .verify .pin-copy .btn { display: none; }
@@ -256,8 +258,9 @@
         .verify .vsteps li b { display: inline; }
         .verify .vsteps li span { display: none; }
         .f-row { grid-template-columns: minmax(0, 1fr); }
-        .cv li { grid-template-columns: minmax(0, 1fr); }
-        .sec, .cover { padding: 140px 0; }
+        .ways, .tiers, .proof-grid { grid-template-columns: minmax(0, 1fr); }
+        .proof-grid { gap: 48px; margin-top: 72px; }
+        .sec { padding: 140px 0; }
         .pin-in { padding: 140px 0; }
       }
       /* The sign-in panel (DEC-0044). Log in and Sign up fade the page out over the same
@@ -270,17 +273,14 @@
 
       @media (max-width: 760px) {
         .wrap { padding: 0 16px; }
-        .hero { min-height: 640px; justify-content: flex-end; padding-bottom: 168px; }
+        .corner-nav .wide, .corner-nav .gap { display: none; }
+        .hero { min-height: 640px; justify-content: flex-end; padding-bottom: 56px; }
         .field-box { left: -4%; right: -4%; top: 9%; height: 30%; }
         .hero-shade { background: linear-gradient(180deg, transparent 10%, color-mix(in srgb, var(--color-canvas) 60%, transparent) 40%, var(--bg) 62%); }
         .hero-in { padding-top: 0; }
-        h1 { font-size: clamp(var(--type-7xl), 11vw, var(--type-8xl)); }
-        .lead { font-size: var(--type-xl); margin-bottom: 24px; }
-        .proof { bottom: 18px; }
-        .proof dl > div { padding: 14px 12px 0 0; }
-        .proof dd { font-size: var(--type-4xl); }
-        .proof dt { font-size: var(--type-xs); }
+        .lead { font-size: var(--type-xl); margin-bottom: 28px; }
         .backers-list li { font-size: var(--type-xl); }
+        .card { padding: 24px; }
         .panel-bar { padding: 0 14px; }
         .bot-stats > div { padding: 12px 14px; }
         .bot-chart { height: 180px; margin: 14px 14px 0; }
@@ -292,11 +292,11 @@
         .vchecks span { display: none; }
         .vv-tag { font-size: var(--type-2xl); }
         .motion .pin.verify { height: 300vh; }
-        .demo-body { padding: 16px; }
-        .g-list { grid-template-columns: minmax(0, 1fr); font-size: var(--type-sm); }
-        .more { grid-template-columns: minmax(0, 1fr); }
-        .sec, .cover { padding: 112px 0; }
+        .biz, .explore ul { grid-template-columns: minmax(0, 1fr); }
+        .tier .price { font-size: var(--type-7xl); }
+        .sec { padding: 112px 0; }
         .pin-in { padding: 112px 0; }
+        .explore { padding: 96px 0; }
         .closing { padding: 140px 0; }
       }
       @media (max-width: 380px) {
@@ -310,6 +310,8 @@
       :root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after { animation: none !important; transition: none !important; }
     </style>
     <script type="module" src="/src/site/main.ts"></script>
+    <!-- The warnings banner (DEC-0073): reads /status.json, shows nothing when all is well. -->
+    <script src="/status-banner.js" defer></script>
   </head>
   <body>
     <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -320,35 +322,64 @@
         <img class="letters" src="/brand/2026-10-22-wordmark/parity-letters-on-dark.svg" width="70" height="15" alt="" />
       </a>
     </div>
-    <nav class="corner corner-nav" aria-label="Account">
+    <nav class="corner corner-nav" aria-label="Site">
+      <a class="vf" href="/verify/">Verify</a>
+      <a class="wide" href="/developers/">Developers</a>
+      <a class="wide" href="/connect/">Connect AI</a>
+      <span class="gap" aria-hidden="true"></span>
       <a class="li" href="/login/" data-auth="login">Log in</a>
       <a class="su" href="/signup/" data-auth="signup">Sign up</a>
     </nav>
+    <div class="status-slot" data-status-banner data-offset="64"></div>
     <main id="main" tabindex="-1">
       <section class="hero" id="top" aria-labelledby="hero-h">
         <div class="field-box" id="field-box" aria-hidden="true"><!--field-poster--></div>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="wrap hero-in">
-          <h1 id="hero-h">The lie detector <span>for trading strategies and bots.</span></h1>
-          <p class="lead">Upload a trade log, describe a bot or pick a strategy. Parity runs five checks and says whether the record holds up, counting every setting that was tried to get it.</p>
+          <h1 id="hero-h">AI-native verification platform for retail traders of all sizes.</h1>
+          <p class="lead">Check an algo, a trade record, a strategy or a claim. Parity runs five checks, counts every try behind the result and gives one of five verdicts.</p>
           <div class="cta">
-            <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
-            <a class="btn" href="#verify">How it works</a>
+            <a class="btn primary" href="/verify/">Verify a strategy or trade record <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="link" href="/methodology/">See how it works</a>
           </div>
-          <p class="fine">Free. Files are checked on your device and not uploaded. Not investment advice.</p>
-        </div>
-        <div class="proof">
-          <div class="wrap">
-            <dl aria-label="Parity in numbers">
-              <div><dt>tries counted by our always-on strategy search</dt><dd class="num" data-count="" data-stat="variations_searched">Thousands</dd></div>
-              <div><dt>strategies put through the same 11 tests</dt><dd class="num" data-count="" data-stat="strategies_tested">100+</dd></div>
-              <div><dt>beat holding the US market after costs and the luck check</dt><dd class="num" data-count="" data-stat="strategies_beat_market" data-zero="0">Few</dd></div>
-            </dl>
-          </div>
+          <p class="fine">Free today. Not investment advice.</p>
         </div>
       </section>
 
       <section class="backers" aria-label="Startup programs"><div class="wrap"><!--backers--></div></section>
+
+      <section class="sec" id="ways" aria-labelledby="ways-h">
+        <div class="wrap">
+          <h2 id="ways-h" class="rv">Three ways in.</h2>
+          <p class="sub rv">On the website, through the API, or from the AI you already use. The same checks and the same verdicts every way.</p>
+          <ul class="ways">
+            <li class="card rv">
+              <h3>On the web</h3>
+              <p>Upload a trade file or describe a bot in words. The verdict comes back in under a minute.</p>
+              <div class="ex ex-file">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v4h4M9 12h6M9 15.5h6" /></svg>
+                <span>trades_2024_2026.csv<small>MetaTrader 5, 412 closed trades</small></span>
+              </div>
+              <a class="go" href="/verify/">Open Verify <span aria-hidden="true">&rarr;</span></a>
+            </li>
+            <li class="card rv" style="--d: 1">
+              <h3>Through the API</h3>
+              <p>Send a trade list or an equity curve. Get the five checks and the verdict back as JSON.</p>
+              <pre class="ex"><code>curl https://paritytrading.app/api/v1/verify \
+  -H "Authorization: Bearer $PARITY_API_KEY" \
+  -d @trades.json</code></pre>
+              <a class="go" href="/developers/">Read the API docs <span aria-hidden="true">&rarr;</span></a>
+            </li>
+            <li class="card rv" style="--d: 2">
+              <h3>From your AI</h3>
+              <p>Connect Claude, ChatGPT, Gemini or your own agent through MCP.</p>
+              <p class="ex"><span class="q">You:</span> Check these trades with Parity.</p>
+              <p class="tools">Tools: <code>verify_trades</code>, <code>verify_strategy</code>, <code>verify_claim</code></p>
+              <a class="go" href="/connect/">Connect your AI <span aria-hidden="true">&rarr;</span></a>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <section class="pin bot" id="bots" aria-labelledby="bots-h" data-scrub="bot">
         <div class="pin-in">
@@ -384,7 +415,7 @@
                 <li><b>Five checks run.</b> <span>Profit per trade, worst losses, luck, look-ahead and overfitting.</span></li>
                 <li><b>Get a verdict.</b> <span>One of five, with the number of tries the result survives. Share it as a badge if you want.</span></li>
               </ol>
-              <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
+              <a class="btn primary" href="/verify/">Verify a strategy or trade record <span class="arr" aria-hidden="true">&rarr;</span></a>
             </div>
             <figure class="panel vpanel" aria-label="An example check of a made-up trade log: four checks pass or flag, the luck check fails, and the verdict is Could be luck, surviving up to 6 of the 40 settings tried.">
               <div class="panel-bar"><span>Parity Verify</span><span>Example, made-up record</span></div>
@@ -412,96 +443,86 @@
         </div>
       </section>
 
-      <section class="sec" id="tries" aria-labelledby="tries-h">
+      <section class="sec" id="proof" aria-labelledby="proof-h">
         <div class="wrap">
-          <h2 id="tries-h" class="rv">Every try is counted.</h2>
+          <h2 id="proof-h" class="rv">Every try is counted.</h2>
           <p class="sub rv">Test enough settings and one will look good by chance. Parity counts every try behind a result, and the bar a result must clear rises with the count.</p>
           <dl class="funnel">
-            <div class="f-row rv"><dd class="num" data-count="" data-stat="variations_searched">Thousands</dd><dt>tries in our always-on strategy search</dt><div class="f-bar" aria-hidden="true"><i data-bar="variations_searched"></i></div></div>
+            <div class="f-row rv"><dd class="num" data-count="" data-stat="variations_searched">Thousands</dd><dt>tries counted in our always-on strategy search</dt><div class="f-bar" aria-hidden="true"><i data-bar="variations_searched"></i></div></div>
             <div class="f-row rv"><dd class="num" data-count="" data-stat="strategies_tested">100+</dd><dt>strategies put through the same 11 tests</dt><div class="f-bar" aria-hidden="true"><i data-bar="strategies_tested" style="--w: .4"></i></div></div>
             <div class="f-row rv"><dd class="num" data-count="" data-stat="strategies_beat_market" data-zero="0">Few</dd><dt>beat holding the US market after costs and the luck check</dt><div class="f-bar" aria-hidden="true"><i data-bar="strategies_beat_market" style="--w: .02"></i></div></div>
           </dl>
           <p class="f-note rv">Bars on a log scale. Counts from the newest research run, updated each deploy. Failures stay published.</p>
-        </div>
-      </section>
 
-      <section class="cover" id="markets" aria-labelledby="markets-h">
-        <div class="wrap">
-          <h2 id="markets-h" class="sr">Markets covered</h2>
-          <ul class="cv">
-            <li><span class="cv-w">Currencies.</span><span class="cv-m"><span class="cv-n" data-groups="fx_g10,fx_wider,ecb,fx_index"></span><span class="cv-d">G10 and emerging currencies, ECB reference rates, dollar indexes</span></span></li>
-            <li><span class="cv-w">Rates.</span><span class="cv-m"><span class="cv-n" data-groups="ust_curve,euro_curve,policy"></span><span class="cv-d">US Treasury and euro yield curves, policy rates</span></span></li>
-            <li><span class="cv-w">Stocks.</span><span class="cv-m"><span class="cv-n" data-groups="us_equities,industries,factors"></span><span class="cv-d">The US market, its industries and factors, and US funds</span></span></li>
-            <li><span class="cv-w">Commodities.</span><span class="cv-m"><span class="cv-n" data-groups="commodities,positioning"></span><span class="cv-d">Oil, gas and metals, with CFTC positioning</span></span></li>
-            <li><span class="cv-w">Crypto.</span><span class="cv-m"><span class="cv-n" data-groups="crypto,perps"></span><span class="cv-d">Major coins and perpetual futures</span></span></li>
-          </ul>
-          <p class="cv-src">Data: FRED, ECB, BIS, US Treasury, EIA, CFTC, SEC, Kenneth French data library, CoinGecko. Daily closes, not live prices.</p>
-        </div>
-      </section>
-
-      <section class="sec" id="how" aria-labelledby="how-h">
-        <div class="wrap">
-          <h2 id="how-h" class="rv">How our strategies are tested.</h2>
-          <p class="sub rv">The research behind Verify. The same steps for every strategy.</p>
-          <div class="steps">
-            <div class="step">
-              <div class="rv"><span class="n">01</span><h3>The plan is written down first.</h3><p>What we expect, what would prove it wrong, and the settings. Fixed before the test runs.</p></div>
-              <figure class="panel demo rv" data-demo="plan" aria-label="An example plan, sealed before the test.">
-                <div class="panel-bar"><span>Plan</span><span>Currency momentum</span></div>
-                <div class="demo-body">
-                  <p class="plan-h"><span class="typed">Own last year's strongest currencies</span></p>
-                  <div class="plan-row"><b>Expect</b><span>More return per unit of risk than holding stocks</span></div>
-                  <div class="plan-row"><b>Wrong if</b><span>It fails the luck check, or works in one period only</span></div>
-                  <div class="plan-row"><b>Settings</b><span>Fixed now. No tuning after the test.</span></div>
-                  <span class="seal"><i aria-hidden="true"></i>Sealed before the test</span>
-                </div>
-              </figure>
+          <div class="proof-grid">
+            <div class="rv">
+              <h3>Five verdicts, said plainly.</h3>
+              <ul class="verdicts">
+                <li style="--c: var(--good)"><i aria-hidden="true"></i><b>Holds up</b><span>Makes money after costs and clears the luck check for the number of tries behind it.</span></li>
+                <li style="--c: var(--warn)"><i aria-hidden="true"></i><b>Could be luck</b><span>Makes money, but the result does not clear the luck check for the tries behind it.</span></li>
+                <li style="--c: var(--warn)"><i aria-hidden="true"></i><b>Fragile</b><span>Makes money on average, but one bad run of losses could erase the gains.</span></li>
+                <li style="--c: var(--bad)"><i aria-hidden="true"></i><b>Does not hold up</b><span>Loses money on average after costs, or the file contradicts the claim.</span></li>
+                <li style="--c: var(--muted)"><i aria-hidden="true"></i><b>Not enough data</b><span>Fewer than 30 trades or 60 daily returns. Parity says nothing until there is more.</span></li>
+              </ul>
             </div>
-            <div class="step">
-              <div class="rv"><span class="n">02</span><h3>Every strategy faces the same 11 tests.</h3><p>Costs, other periods, other settings, and a luck check that counts every try. Most strategies fail some.</p></div>
-              <figure class="panel demo rv" data-demo="gauntlet" aria-label="An example result: 7 of 11 tests passed.">
-                <div class="panel-bar"><span>The 11 tests</span><span>Stock trend, 10-month</span></div>
-                <div class="demo-body">
-                  <div class="g-head"><b>Tests passed</b><strong class="num"><span id="g-n">7</span> of 11</strong></div>
-                  <div class="g-bar"><i id="g-bar"></i></div>
-                  <ul class="g-list" id="g-list">
-                    <li>Better return for the risk</li><li>More at the same risk</li><li class="x">Not luck from many tries</li><li>Survives double costs</li>
-                    <li class="x">Wins in every era</li><li class="x">Wins in recent years</li><li>Clearly above zero</li><li>Timing matters</li>
-                    <li>Not one lucky setting</li><li>Not one lucky year</li><li class="x">Does not crash with stocks</li>
-                  </ul>
-                </div>
-              </figure>
-            </div>
-            <div class="step">
-              <div class="rv"><span class="n">03</span><h3>Every result is published, failures too.</h3><p>With its verdict in plain words and every test it passed or failed.</p></div>
-              <figure class="panel demo rv" data-demo="result" aria-label="An example result: the strategy against the market, verdict Promising, 7 of 11 tests passed, does not beat the market after costs.">
-                <div class="panel-bar"><span>Result</span><span>Example</span></div>
-                <div class="demo-body">
-                  <p class="plan-h">Stock trend, 10-month <span class="verdict">Promising</span></p>
-                  <div class="r-chart">
-                    <svg viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
-                      <polyline class="r-line" pathLength="1" style="stroke: var(--color-text-disabled)" points="0,90 30,83 60,92 90,78 120,83 150,66 180,72 210,52 240,57 270,38 300,32" />
-                      <polyline class="r-line" pathLength="1" style="stroke: var(--color-text)" points="0,90 30,86 60,83 90,74 120,76 150,62 180,58 210,46 240,42 270,28 300,22" />
-                    </svg>
-                  </div>
-                  <div class="r-key" aria-hidden="true"><span><i style="background: var(--color-text)"></i>Strategy</span><span><i style="background: var(--color-text-disabled)"></i>US market</span></div>
-                  <div class="kv"><span>Tests passed</span><strong>7 of 11</strong></div>
-                  <div class="kv"><span>Beats the market after costs</span><strong>No</strong></div>
-                </div>
-              </figure>
-            </div>
+            <figure class="badge-ex rv" style="--d: 1">
+              <span class="tag">Example</span>
+              <div class="badge" role="img" aria-label="Example badge. Parity Verify: Could be luck. Survives up to 6 tries, 412 trades. Self-reported: Parity checked the numbers in the file, not where the file came from. Not a recommendation.">
+                <span class="bk">Parity Verify</span>
+                <span class="bv">Could be luck</span>
+                <span class="bn">Survives up to 6 tries, 412 trades</span>
+                <span class="bt">Self-reported: Parity checked the numbers in the file, not where the file came from. Not a recommendation.</span>
+              </div>
+              <figcaption>A made-up record, shown the way a shared badge looks. Every badge links to a page with the checks behind it, and a withdrawn badge says so.</figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section class="sec" id="more" aria-labelledby="more-h">
+      <section class="sec" id="pricing" aria-labelledby="pricing-h">
         <div class="wrap">
-          <h2 id="more-h" class="rv">Also on Parity.</h2>
-          <ul class="more">
-            <li class="rv"><h3>Parity Research</h3><p>Every test, decision and result, in the open.</p><a href="/research/">Open research <span aria-hidden="true">&rarr;</span></a></li>
-            <li class="rv" style="--d: 1"><h3>Parity Academy</h3><p><span data-count="<!--stat:lessons-->"><!--stat:lessons--></span> free lessons on backtests, luck and risk. No sign-up.</p><a href="/learn/academy/">Start learning <span aria-hidden="true">&rarr;</span></a></li>
-            <li class="rv" style="--d: 2"><h3>Parity Terminal</h3><p><span data-stat="series_count">Over 100</span> daily market series, with sources named.</p><a href="/sim/">Open the terminal <span aria-hidden="true">&rarr;</span></a></li>
-            <li class="rv" style="--d: 3"><h3>Sim World</h3><p>Past crises replayed across markets, and the range of paths a mix could take.</p><a href="https://sim.endyland.com/">Open Sim World <span aria-hidden="true">&rarr;</span></a></li>
+          <h2 id="pricing-h" class="rv">Checking is free today.</h2>
+          <p class="sub rv">Paid plans are not on sale yet. These are the prices we plan to start with.</p>
+          <ul class="tiers">
+            <li class="card tier now rv"><h3>Free</h3><p class="price">$0</p><p class="what">5 checks a month, all five checks, public badges.</p><span class="now-tag">Available now</span></li>
+            <li class="card tier rv" style="--d: 1"><h3>Pro</h3><p class="price">$15 <small>a month</small></p><p class="what">Unlimited checks, private reports, PDF export and a history of past checks.</p></li>
+            <li class="card tier rv" style="--d: 2"><h3>Seller</h3><p class="price">$49 <small>a month</small></p><p class="what">A public profile of every badge, embeds and monthly re-check reminders.</p></li>
+            <li class="card tier rv"><h3>API</h3><p class="price"><small>from</small> $500 <small>a month</small></p><p class="what">2,000 scored records a month, then $0.25 each.</p></li>
+            <li class="card tier rv" style="--d: 1"><h3>Platform</h3><p class="price"><small>from</small> $2,000 <small>a month</small></p><p class="what">25,000 or more scored records a month, white-label badges, webhooks and support.</p></li>
+            <li class="card tier rv" style="--d: 2"><h3>Data licence</h3><p class="price"><small>from</small> $25,000 <small>a year</small></p><p class="what">The aggregate dataset of tested strategies, refreshed monthly. Free for academic use.</p></li>
+          </ul>
+          <p class="p-note rv">Nothing is charged today and there is no checkout. Prices may change before paid plans open.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="business" aria-labelledby="business-h">
+        <div class="wrap">
+          <h2 id="business-h" class="rv">For prop firms, copy-trading platforms, bot and signal marketplaces, and brokers.</h2>
+          <p class="sub rv">Put an independent check on the records your customers see.</p>
+          <ul class="biz">
+            <li class="card rv"><h3>A score on every listing</h3><p>Score each trader, bot or signal you list through the API, with the checks behind it.</p></li>
+            <li class="card rv" style="--d: 1"><h3>Screen funded traders</h3><p>Check an applicant's record for luck and large losses before you fund it.</p></li>
+            <li class="card rv" style="--d: 2"><h3>Badges</h3><p>Show a Parity badge on profiles. A withdrawn badge stays listed as withdrawn.</p></li>
+            <li class="card rv" style="--d: 3"><h3>Webhooks, later</h3><p>Hear when a scored record changes. Planned, not built yet.</p></li>
+          </ul>
+          <div class="cta rv">
+            <a class="btn primary" href="mailto:contact@paritytrading.app?subject=Parity%20Verify%20for%20my%20business">Email contact@paritytrading.app</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="explore" id="explore" aria-labelledby="explore-h">
+        <div class="wrap">
+          <h2 id="explore-h">Explore Parity</h2>
+          <ul>
+            <li><a href="/trade/">Trade</a><span>Charts, a screener and demo accounts on delayed prices. No real money.</span></li>
+            <li><a href="https://sim.paritytrading.app/">Sim World</a><span>Past crises replayed across markets, and the paths a mix could take.</span></li>
+            <li><a href="/learn/academy/">Academy</a><span><!--stat:lessons--> free lessons on backtests, luck and risk.</span></li>
+            <li><a href="/lab/">Workbench</a><span>Try settings, ask what if, and compare strategies side by side.</span></li>
+            <li><a href="/sim/">Terminal</a><span><span data-stat="series_count">Over 100</span> daily market series, with sources named.</span></li>
+            <li><a href="/research/">Research</a><span>Every test, decision and result, in the open.</span></li>
+            <li><a href="/app/#/markets">Markets</a><span>Crypto, perps and new ETFs, with their plain risks.</span></li>
+            <li><a href="/download/">Desktop app</a><span>Parity for Mac and Windows. It keeps you signed in and updates itself.</span></li>
           </ul>
         </div>
       </section>
@@ -509,9 +530,9 @@
       <section class="closing" aria-labelledby="close-h">
         <div class="wrap">
           <h2 id="close-h" class="rv">Check a trading record before you trust it.</h2>
-          <p class="rv">Free. Five checks, one verdict, in under a minute.</p>
+          <p class="rv">Free today. Five checks, one verdict, in under a minute.</p>
           <div class="cta rv">
-            <a class="btn primary" href="/app/#/verify">Check a strategy free <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <a class="btn primary" href="/verify/">Verify a strategy or trade record <span class="arr" aria-hidden="true">&rarr;</span></a>
             <a class="btn" href="/signup/" data-auth="signup">Create an account</a>
           </div>
         </div>
@@ -527,6 +548,13 @@
           <a href="/notes/">Notes</a>
           <a href="/blog/">Blog</a>
           <a href="/news/">News</a>
+          <a href="/download/">Download</a>
+          <a href="/changelog/">Changelog</a>
+          <a href="/announcements/">Announcements</a>
+          <a href="/status/">Status</a>
+          <a href="/changelog/feed.xml">Changelog RSS</a>
+          <a href="/announcements/feed.xml">Announcements RSS</a>
+          <a href="/status/feed.xml">Status RSS</a>
         </nav>
         <nav class="site-legal" aria-label="Legal">
           <a href="/legal/privacy/">Privacy</a>

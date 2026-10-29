@@ -8,6 +8,7 @@ import { track } from "../lib/analytics";
 import { onTableChange } from "../lib/userStore";
 import { COLUMN, DOABLE, type ItemId, type Signals, type Stamps } from "./items";
 import { localSignals, remoteSignals } from "./signals";
+import { introDue, picksFor, writePicks, type IntroGoal, type IntroLevel, type IntroMarket, type IntroStatus } from "./introRules";
 
 export interface OnboardingRow {
   checklist_hidden: boolean;
@@ -16,6 +17,12 @@ export interface OnboardingRow {
   notify_brokerage: boolean;
   email_at: string | null; ai_at: string | null; verify_at: string | null; trade_at: string | null;
   watch_at: string | null; lesson_at: string | null; mfa_at: string | null; wallet_at: string | null;
+  /** The first-run intro (DEC-0077): set once it ends, so it never opens again. */
+  intro_status: IntroStatus | null;
+  intro_step: number;
+  intro_goal: IntroGoal | null;
+  intro_level: IntroLevel | null;
+  intro_markets: IntroMarket[];
 }
 
 export interface OnboardingState {
@@ -27,11 +34,14 @@ export interface OnboardingState {
   mfaAvailable: boolean;
   /** True once the live signals have been read, so the checklist draws once, without a jump. */
   checked: boolean;
+  /** True while the first-run intro is on screen, so tours wait for it. Not saved. */
+  introOpen: boolean;
 }
 
 const EMPTY: OnboardingRow = {
   checklist_hidden: false, tours_off: false, tours_seen: [], notify_brokerage: false,
   email_at: null, ai_at: null, verify_at: null, trade_at: null, watch_at: null, lesson_at: null, mfa_at: null, wallet_at: null,
+  intro_status: null, intro_step: 0, intro_goal: null, intro_level: null, intro_markets: [],
 };
 const LOCAL_KEY = "parity.onboarding.v1";
 const AREA = /^[a-z][a-z0-9-]{0,39}$/;
@@ -50,7 +60,7 @@ function readCache(): Partial<OnboardingState> {
   }
 }
 
-let state: OnboardingState = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, ...(typeof window !== "undefined" ? readCache() : {}) };
+let state: OnboardingState = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, introOpen: false, ...(typeof window !== "undefined" ? readCache() : {}) };
 let userId: string | null = null;
 const listeners = new Set<() => void>();
 let loading: Promise<void> | null = null;
@@ -88,6 +98,8 @@ export function ensureLoaded(): Promise<void> {
       const { data: row, error } = await sb.from("onboarding_state").select("*").eq("user_id", userId).maybeSingle();
       if (error) throw error;
       set({ ready: true, local: false, row: { ...EMPTY, ...(row ?? {}) } });
+      // The intro's answer is kept with the account: this browser's suggestions follow it.
+      if (state.row.intro_goal || state.row.intro_level) writePicks(picksFor(state.row.intro_goal, state.row.intro_level));
     } catch {
       // The table is missing (migration not applied yet) or the network failed: keep going in
       // this browser so nothing breaks, and never block a page on it.
@@ -180,7 +192,7 @@ export function setNotifyBrokerage(on: boolean) {
 
 /** Whether the first-run tour for `area` should open now. */
 export function tourDue(s: OnboardingState, area: string): boolean {
-  return s.ready && !s.row.tours_off && !s.row.tours_seen.includes(area);
+  return s.ready && !s.row.tours_off && !s.row.tours_seen.includes(area) && !s.introOpen && !introDue(s);
 }
 
 /** Records that the person finished or skipped one area's tour, so it never opens again. */
@@ -212,6 +224,29 @@ export function resetTours() {
   return save({ tours_off: false, tours_seen: [] });
 }
 
+// ---------------------------------------------------------------- the first-run intro
+
+/** Saves the intro's answers and the screen the person is on, so a closed tab resumes there. */
+export function saveIntro(patch: Partial<Pick<OnboardingRow, "intro_step" | "intro_goal" | "intro_level" | "intro_markets">>) {
+  if (patch.intro_goal !== undefined || patch.intro_level !== undefined) {
+    writePicks(picksFor(patch.intro_goal ?? state.row.intro_goal, patch.intro_level ?? state.row.intro_level));
+  }
+  return save(patch);
+}
+
+/** Ends the intro for good: finished, or skipped (Skip, Escape, the close button). */
+export function endIntro(status: IntroStatus, step: number) {
+  if (state.row.intro_status) return Promise.resolve();
+  track("intro_ended", { status, step });
+  // Finishing lands on Home with its next step: Home's tour would only repeat it.
+  const seen = status === "done" ? [...new Set([...state.row.tours_seen, "home"])].slice(-40) : state.row.tours_seen;
+  return save({ intro_status: status, intro_step: Math.max(0, Math.min(9, step)), tours_seen: seen });
+}
+
+export function setIntroOpen(open: boolean) {
+  if (state.introOpen !== open) set({ introOpen: open });
+}
+
 /** The store, kept up to date. Loads the row on first use. */
 export function useOnboarding(): OnboardingState {
   useEffect(() => { void ensureLoaded(); }, []);
@@ -220,7 +255,7 @@ export function useOnboarding(): OnboardingState {
 
 /** Tests start from a clean store. */
 export function resetForTests(next?: Partial<OnboardingState>) {
-  state = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, ...next };
+  state = { ready: false, local: true, row: EMPTY, signals: {}, mfaAvailable: true, checked: false, introOpen: false, ...next };
   loading = next?.ready ? Promise.resolve() : null;
   userId = null;
 }

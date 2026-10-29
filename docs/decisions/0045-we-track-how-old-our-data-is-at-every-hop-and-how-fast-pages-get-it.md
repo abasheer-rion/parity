@@ -69,9 +69,11 @@ The owner asked us to track how slow our data and refreshes are. Now every sourc
 - [DEC-0059: A Parity page is never black, it shows a loading screen or says what went wrong](0059-a-parity-page-is-never-black-it-shows-a-loading-screen-or-says-what-went-wrong.md)
 - [DEC-0063: The public sees live prices from our own on-chain feed](0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [DEC-0064: One data registry finds, enrols, tests and watches every series by itself](0064-one-data-registry-finds-enrols-tests-and-watches-every-series-by-itself.md)
+- [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 - [REF-0018: Parity latency baseline](../reference/0018-parity-latency-baseline.md)
 - [REF-0021: Parity database schema and data model](../reference/0021-parity-database-schema-and-data-model.md)
 - [REF-0022: Product analytics events](../reference/0022-product-analytics-events.md)
 - [REF-0024: App speed, how we measure it and what we changed](../reference/0024-app-speed-how-we-measure-it-and-what-we-changed.md)
+- [REF-0028: Database egress, what used it and what we cut](../reference/0028-database-egress-what-used-it-and-what-we-cut.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

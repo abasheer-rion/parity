@@ -118,6 +118,51 @@ def parse_fred_csv(text: str, series: Series) -> pd.Series:
     return out
 
 
+ALPACA_BARS = "https://data.alpaca.markets/v2/stocks/bars"
+
+
+def fetch_alpaca(series: Series) -> pd.Series:
+    """Daily bars for one US stock or ETF from Alpaca's market data API, adjusted for
+    splits and dividends, since 2016 (DEC-0075). Research only: the values feed
+    statistics and backtests and are never shown. Needs the team's ALPACA_KEY_ID and
+    ALPACA_SECRET_KEY; without them the series is skipped. The free plan allows 200 calls
+    a minute; we pause between pages."""
+    headers = {"APCA-API-KEY-ID": api_key("ALPACA_KEY_ID"),
+               "APCA-API-SECRET-KEY": api_key("ALPACA_SECRET_KEY"),
+               "User-Agent": USER_AGENT}
+    params = {"symbols": series.code, "timeframe": "1Day", "start": "2016-01-01",
+              "adjustment": "all", "feed": "sip", "limit": 10000}
+    pages: list[dict] = []
+    for _ in range(50):
+        time.sleep(0.4)
+        try:
+            resp = requests.get(ALPACA_BARS, params=params, headers=headers, timeout=TIMEOUT)
+            resp.raise_for_status()
+        except requests.RequestException as exc:  # never echo the headers
+            raise RuntimeError(f"Alpaca bars for {series.code} failed: "
+                               f"{type(exc).__name__}") from None
+        payload = resp.json()
+        pages.append(payload)
+        token = payload.get("next_page_token")
+        if not token:
+            break
+        params["page_token"] = token
+    return parse_alpaca_bars(pages, series)
+
+
+def parse_alpaca_bars(pages: list[dict], series: Series) -> pd.Series:
+    """Closing prices from one or more pages of Alpaca's multi-symbol bars response."""
+    rows = []
+    for page in pages:
+        for bar in (page.get("bars") or {}).get(series.code, []) or []:
+            rows.append((bar["t"][:10], float(bar["c"])))
+    if not rows:
+        raise ValueError(f"No Alpaca bars for {series.code}")
+    out = pd.Series([r[1] for r in rows], index=pd.to_datetime([r[0] for r in rows]))
+    out = out[~out.index.duplicated(keep="last")].sort_index()
+    return out.rename(series.key)
+
+
 def fetch_yahoo(series: Series) -> pd.Series:
     """Daily adjusted close from Yahoo's chart endpoint."""
     resp = _get(
@@ -377,7 +422,8 @@ def fetch_eia(series: Series) -> pd.Series:
     return parse_eia_json(resp.json(), series)
 
 
-FETCHERS = {"fred": fetch_fred, "yahoo": fetch_yahoo, "french": fetch_french,
+FETCHERS = {"fred": fetch_fred, "yahoo": fetch_yahoo, "alpaca": fetch_alpaca,
+            "french": fetch_french,
             "ecb": fetch_ecb, "bis": fetch_bis, "treasury": fetch_treasury,
             "cftc": fetch_cftc, "eia": fetch_eia}
 

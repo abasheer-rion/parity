@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). How Verify
+         judges a record (REF-0030). The verify markers below are filled at build time from
+         the code that runs the checks (plugins/legal.ts), so the numbers cannot drift. -->
+    <!--legal:head-->
+  </head>
+  <body>
+    <!--legal:header-->
+    <main id="main" tabindex="-1">
+      <div class="lg-wrap lg-dev">
+  <h1>Verify methodology</h1>
+  <p class="lg-lede">How Parity Verify judges a trading record: the order of the verdicts, every check and its threshold, the luck check, trust levels and what is stored. This page describes the code as it runs today.</p>
+  <p class="lg-meta">Method version <code><!--verify:method-version--></code>. Research only. Not investment advice. A verdict is about the record, not about the future.</p>
+
+  <nav class="lg-toc" aria-label="On this page">
+    <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
+    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#imports">Imports</a>
+    <a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
+  </nav>
+
+  <h2 id="inputs">Inputs</h2>
+  <ul>
+    <li><strong>A file.</strong> A trade list or an equity curve as CSV or tab separated text, up to 5 MB and 50,000 rows. It is read and checked in your browser and never sent to our servers. Before the checks run you say whether it is real money, a demo account or a backtest (default: backtest), the starting balance, how many strategies, bots or settings you tried before this one (default: 1), and optionally what was claimed.</li>
+    <li><strong>A description of a bot.</strong> A rule-based reader pulls out the claimed win rate, return, drawdown, trade count, take-profit, stop-loss and whether it adds to losers. Only the claim arithmetic and the settings count can be checked. A description cannot show an edge.</li>
+    <li><strong>One of our tested strategies.</strong> Its equity curve from our research run, judged at the number of tries our research and search have counted.</li>
+  </ul>
+
+  <h2 id="returns">From a record to returns</h2>
+  <ul>
+    <li><strong>Trades and a starting balance</strong> become daily returns. Every weekday from the first close to the last is a day (a weekend day too when a trade closed on it), so quiet days count as zero. A day's return is its profit divided by the account value the evening before.</li>
+    <li><strong>An equity curve</strong> becomes returns as (value minus money paid in that period) divided by the previous value, minus 1, so deposits are not profit. A return column is used as it is.</li>
+    <li><strong>Trades with no starting balance</strong> have no returns. Card 3 then uses each trade's profit, and the largest fall from a high is not measured.</li>
+    <li>A series counts as daily when it has at least 180 values a year, weekly from 40, monthly from 10.</li>
+  </ul>
+
+  <h2 id="verdict">The verdict</h2>
+  <p>The verdicts are checked in this order and the first that applies wins.</p>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="The verdict"><table>
+    <thead><tr><th>Order</th><th>Verdict</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Not enough data</td><td>Fewer than <!--verify:min-trades--> trades and fewer than <!--verify:min-returns--> daily returns</td></tr>
+      <tr><td>2</td><td>Does not hold up</td><td>A claim the file contradicts by more than 5 percentage points, or expectancy at or below zero after fees</td></tr>
+      <tr><td>3</td><td>Fragile</td><td>A red flag on card 2: the worst loss wipes out more than <!--verify:wipeout-limit--> average wins, a martingale or grid pattern, or a fall of more than <!--verify:drawdown-limit--> from a high</td></tr>
+      <tr><td>4</td><td>Could be luck</td><td>The luck check is below <!--verify:luck-line--> at the stated tries or cannot be measured, or any check on card 4 or card 5 failed</td></tr>
+      <tr><td>5</td><td>Holds up</td><td>None of the above</td></tr>
+    </tbody>
+  </table></div>
+  <p>The sentence under the verdict is built from the numbers that decided it, for example "Wins 99.0% of trades, but the 1.0% of losses are 150 times larger than the average win, so on average each trade loses 0.51."</p>
+  <p>A description is judged differently: "Does not hold up" when a claim fails on arithmetic, "Fragile" when the loss is not capped or there are too many settings for the trades, otherwise "Not enough data".</p>
+
+  <h2 id="expectancy">Card 1: win rate against expectancy</h2>
+  <p>One result is a closed trade's profit after fees, or one period's return for an equity curve.</p>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 1: win rate against expectancy"><table>
+    <thead><tr><th>Number</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>Win rate</td><td>Share of results above zero</td></tr>
+      <tr><td>Average win, average loss</td><td>Mean of the winners, mean size of the losers</td></tr>
+      <tr><td>Payoff ratio</td><td>Average win divided by average loss</td></tr>
+      <tr><td>Expectancy</td><td>Win rate times average win, minus loss rate times average loss; also as a share of the starting balance when it is known</td></tr>
+      <tr><td>Break-even win rate</td><td>Average loss divided by (average win plus average loss). Equivalently 1 / (1 + payoff ratio)</td></tr>
+      <tr><td>Profit factor</td><td>Gross profit divided by gross loss</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="tail">Card 2: tail risk</h2>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 2: tail risk"><table>
+    <thead><tr><th>Number</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td>Worst trade</td><td>The largest loss, in money and as a share of the account value before that trade (needs a balance)</td></tr>
+      <tr><td>Worst day</td><td>The lowest daily (or period) return</td></tr>
+      <tr><td>Wins wiped out</td><td>The worst loss divided by the average win</td></tr>
+      <tr><td>Largest fall from a high</td><td>Maximum drawdown of the account value, and the longest time below a previous high in calendar days</td></tr>
+      <tr><td>Expected shortfall (5%)</td><td>Mean of the worst 5% of period returns (at least one)</td></tr>
+      <tr><td>Skew</td><td>Of daily returns, or of trade profits when there are no returns</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Martingale or grid.</strong> Needs position sizes on at least 90% of trades and at least 8 sized trades; otherwise the card says it cannot be checked. A losing streak counts when the record continues after it, and it "grew" when every trade after a loss in the streak is larger than the one before (by more than 0.01%). The pattern is found when there are at least 3 such streaks and size grew in at least 3 out of 4 of them, or when at least 3 times a new position opened on the same symbol and side at a worse price while an earlier one was still open.</p>
+  <p><strong>Red flag</strong> when the worst loss wipes out more than <!--verify:wipeout-limit--> average wins, a martingale or grid pattern is found, or the account fell more than <!--verify:drawdown-limit--> from a high.</p>
+
+  <h2 id="luck">Card 3: the luck check</h2>
+  <p>The luck check is the deflated Sharpe ratio of Bailey and L&oacute;pez de Prado (2014): the probability that the true Sharpe ratio is above zero, once the number of things tried is allowed for. It is a line for line port of the function our research uses, tested against it to 3 decimal places.</p>
+  <pre tabindex="0" aria-label="The luck check formula"><code>DSR = &Phi;( (SR &minus; SR0) &times; &radic;(T &minus; 1) / &radic;(1 &minus; skew &times; SR + (kurt &minus; 1) / 4 &times; SR&sup2;) )
+SR0 = &radic;V &times; ( (1 &minus; &gamma;) &times; &Phi;&#8315;&sup1;(1 &minus; 1/N) + &gamma; &times; &Phi;&#8315;&sup1;(1 &minus; 1/(N e)) ),  SR0 = 0 when N = 1
+V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
+  <ul>
+    <li>SR is the mean over the sample standard deviation of the observations, not annualised. T is the number of observations, at least 30. Skew and kurtosis are the plain sample moments (kurtosis is 3 for a normal distribution). &gamma; is the Euler constant, 0.5772. N is the number of tries.</li>
+    <li><strong>V is a stand-in.</strong> The paper uses the spread of Sharpe ratios across all the tries. For an upload that spread is unknown, so V is the sampling variance of a single Sharpe estimate, as in our own research.</li>
+    <li><strong>The line is <!--verify:luck-line-->,</strong> the same as test A3 of our own strategy tests.</li>
+    <li><strong>"Survives up to N tries"</strong> is the largest whole number of tries for which the luck check is still <!--verify:luck-line--> or more, found by a search up to <!--verify:max-tries-->. 0 means it fails even as the only thing tried.</li>
+    <li><strong>Minimum track record length</strong> (Bailey and L&oacute;pez de Prado, 2012) is solved for the same check and stand-in: T* = 1 + ((z &times; D + &radic;(1 + SR&sup2;/2) &times; K) / SR)&sup2;, where z = &Phi;&#8315;&sup1;(0.95), D is the denominator above and K the bracket in SR0. It is shown as months still needed at the record's own pace. It is never reached when SR is zero or below.</li>
+    <li>The observations are daily (weekly, monthly) returns when there are at least 30 of them, otherwise each trade's profit, which is how a trade list without a balance is judged.</li>
+  </ul>
+
+  <h2 id="lookahead">Card 4: look-ahead and data flags</h2>
+  <p>Every check is listed as passed, failed or "cannot be checked from this input". The last group is never hidden.</p>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 4: look-ahead and data flags"><table>
+    <thead><tr><th>Check</th><th>Fails when</th></tr></thead>
+    <tbody>
+      <tr><td>Fills outside the day's range</td><td>Where we hold the day's high and low: an entry or exit price more than 0.1% outside them</td></tr>
+      <tr><td>Fills far from the day's price</td><td>Where we hold one price a day: a fill further from that day's price than 3 times the 1-in-100 daily move of that market, and never less than 1%</td></tr>
+      <tr><td>Perfect timing</td><td>Where we hold the day's high and low, with at least 10 dated entries: more than 30% of entries within 0.05% of the day's best price (the low for buys, the high for sells)</td></tr>
+      <tr><td>Too smooth</td><td>Lag-one autocorrelation of returns above 0.3, or, for daily returns, no losing month in more than 24 months with under 3% losing days. Needs at least 30 returns. The measure follows Getmansky, Lo and Makarov (2004)</td></tr>
+      <tr><td>Edited history</td><td>At least 10 trades: the record trades most days (median gap between trading days of 3 days or less) but has gaps of more than 30 days. For TradingView exports and plain trade lists, whose numbers run 1, 2, 3, also when at least 90% of the steps are 1 and some numbers are skipped. MetaTrader tickets are shared across a broker's server, so their skips are not checked</td></tr>
+      <tr><td>Backtest labelled as real</td><td>You said real money, but the file is a TradingView Strategy Tester export</td></tr>
+      <tr><td>Strategy look-ahead test</td><td>Only for our own strategies: the data is cut at several dates and no earlier position may change</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>The one-price-a-day limit.</strong> For major currency pairs, Bitcoin, Ether and the S&amp;P 500 we hold one price a day from free sources, not the day's high and low. So for these the fill check becomes "fills far from the day's price", which catches made-up or misdated prices but not small ones, and perfect timing cannot be checked. A symbol we hold nothing for, or a record checked without our daily price file (for example signed out), gets "cannot be checked from this input". The only request Verify makes after a file is chosen is for that price file.</p>
+
+  <h2 id="overfit">Card 5: overfitting flags</h2>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 5: overfitting flags"><table>
+    <thead><tr><th>Check</th><th>Fails when</th></tr></thead>
+    <tbody>
+      <tr><td>Short sample</td><td>Fewer than 100 trades, or less than 12 months (a month is 30.44 days)</td></tr>
+      <tr><td>First part against last part</td><td>The Sharpe ratio of the last 30% of the results is below half that of the first 70%, when the first is positive. Needs at least 30 results</td></tr>
+      <tr><td>Concentration</td><td>At least 10 trades and an overall profit: the best 5 trades make more than 50% of it</td></tr>
+      <tr><td>Many settings, few trades</td><td>Descriptions only: more than one adjustable setting per 20 trades</td></tr>
+      <tr><td>Claim against file</td><td>A claimed win rate, monthly return (compounded average) or largest fall differs from the file by more than 5 percentage points</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="claims">Claim arithmetic</h2>
+  <ol>
+    <li>Break-even average loss = take-profit &times; win rate / (1 &minus; win rate). A stated stop-loss wider than this means the average trade loses before costs if most losers hit it. With no stop, the card says nothing keeps losses under that figure.</li>
+    <li>A stated largest fall smaller than a stated single loss is impossible.</li>
+    <li>A monthly return above 10% kept for more than 12 months is shown as the yearly figure it compounds to, next to about 10% a year for the S&amp;P 500 over the long run.</li>
+    <li>A grid or martingale bot with no stated maximum loss is flagged "loss is not capped".</li>
+    <li>A win rate above 90% with no stated average loss or stop gets "the win rate alone says nothing about profit".</li>
+  </ol>
+
+  <h2 id="imports">Imports</h2>
+  <p>Verify reads exports from MetaTrader 4 and 5, TradingView, Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca and any CSV with a close date and a profit. Where an export lists fills, they are paired first in, first out per symbol into round trips: each closing fill is one trade, so a partial close is its own trade, and its profit is the price difference times quantity and contract size, minus the fees of both the opening and closing fills (opening fees shared by quantity). Columns that look personal (account number, name, email, server, login, IP address, and order ids that identify an account) are removed before anything else reads the file. The full list, with the layouts we have not yet confirmed against an official export, is on the <a href="/verify/#supported">Verify page</a>.</p>
+
+  <h2 id="trust">Trust levels</h2>
+  <ul>
+    <li><strong>Self-reported.</strong> Every upload today. Parity checked the numbers in the file, not where the file came from. The badge says so in those words.</li>
+    <li><strong>Broker-connected.</strong> Planned, through read-only connections to brokers and exchanges. Not available yet.</li>
+  </ul>
+  <p>A verdict is never a recommendation.</p>
+
+  <h2 id="stored">What is stored</h2>
+  <ul>
+    <li><strong>Never:</strong> the file, its trades, or the columns that look personal. If you leave the page, nothing remains on our side.</li>
+    <li><strong>A badge, only if you publish one</strong> (signed in, up to 20 a day): the verdict, "survives up to N tries", the five cards' numbers, the kind of record, the stated tries, the date range, the trade count, the method version and the file's SHA-256, so anyone with the same file can check it. Withdrawing deletes the numbers and the page then says when it was withdrawn.</li>
+    <li><strong>The research dataset, only if you tick its box:</strong> summary numbers, the kind of record, asset classes and stated tries, with dates rounded to the month and no user id, file hash or name.</li>
+  </ul>
+
+  <h2 id="changelog">Method versions</h2>
+  <p>Changing a check or a threshold changes the method version, and every badge shows the version that judged it.</p>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Method versions"><table>
+    <thead><tr><th>Version</th><th>From</th><th>What changed</th></tr></thead>
+    <tbody>
+        <!--verify:changelog-->
+    </tbody>
+  </table></div>
+
+  <h2 id="cite">Cite this</h2>
+<pre tabindex="0" aria-label="Citation, plain text"><code>Parity Trading, Inc. (2026). Parity Verify methodology, version <!--verify:method-version-->. https://paritytrading.app/methodology/</code></pre>
+<pre tabindex="0" aria-label="Citation, BibTeX"><code>@misc{parity_verify_methodology,
+  author = {{Parity Trading, Inc.}},
+  title  = {Parity Verify methodology, version <!--verify:method-version-->},
+  year   = {2026},
+  url    = {https://paritytrading.app/methodology/}
+}</code></pre>
+
+  <h2 id="references">References</h2>
+  <ul>
+    <li>Bailey, D. H. and L&oacute;pez de Prado, M. (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. <em>The Journal of Portfolio Management</em> 40(5), 94 to 107. <a href="https://doi.org/10.3905/jpm.2014.40.5.094">doi:10.3905/jpm.2014.40.5.094</a></li>
+    <li>Bailey, D. H. and L&oacute;pez de Prado, M. (2012). The Sharpe ratio efficient frontier. <em>The Journal of Risk</em> 15(2), 3 to 44. <a href="https://doi.org/10.21314/JOR.2012.255">doi:10.21314/JOR.2012.255</a></li>
+    <li>Getmansky, M., Lo, A. W. and Makarov, I. (2004). An econometric model of serial correlation and illiquidity in hedge fund returns. <em>Journal of Financial Economics</em> 74(3), 529 to 609. <a href="https://doi.org/10.1016/j.jfineco.2004.04.001">doi:10.1016/j.jfineco.2004.04.001</a></li>
+  </ul>
+  <p class="lg-meta">Check a record at <a href="/verify/">/verify/</a>. The repository copy of this page is REF-0030.</p>
+      </div>
+    </main>
+    <!--legal:footer-->
+  </body>
+</html>

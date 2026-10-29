@@ -7,7 +7,7 @@ Everything about how people sign in to Parity and the emails they get. The reaso
 ## How it works
 
 - `/` is a public front page. `/login/`, `/signup/`, `/reset/` and `/verify/` are public sign-in pages, and `/legal/` holds the legal pages. The product app (`/app/`), the research app (`/research/`), Sim World (`/sim/`, or `sim.endyland.com`), Parity Trade (`/trade/`, or `trade.endyland.com`), Parity Academy (`/academy/`, or `academy.endyland.com`) and Parity Workbench (`/lab/`, or `lab.endyland.com`) need a session, and all six use the same guard.
-- After signing in, people go back to where they started (`?next=`). Only addresses on this site or on `https://*.endyland.com` are followed; anything else goes to `/app/` (`web/src/auth/redirect.ts`, tested in `web/tests/redirect.test.ts`).
+- After signing in, people go back to where they started (`?next=`). Only addresses on this site or on `https://*.paritytrading.app` (and `https://*.endyland.com` until 25 November 2026) are followed; anything else goes to `/app/` (`web/src/auth/redirect.ts`, tested in `web/tests/redirect.test.ts`).
 - Supabase Auth holds the accounts. People log in with email and password, a 6-digit email code, Google or GitHub (when switched on), or a passkey (when switched on). Accounts can add an authenticator app for two-step sign-in.
 - The browser keeps the session in a cookie. A Cloudflare Pages function (`web/functions/_middleware.ts`) checks that cookie's token against Supabase's public keys before it serves anything under `/app/` or `/data/`. No secret is needed for that check. Without a valid session, `/app/` sends you to `/login/` and `/data/` answers 401.
 - The database lets any signed-in person read published research. The team list (`public.members`) now only gives a "Parity team" badge in Account settings.
@@ -66,8 +66,17 @@ Every link has the form `{{ .SiteURL }}/verify/?type=<type>&token_hash={{ .Token
 - Tables for layout and inline styles, so Gmail, Outlook and Apple Mail all show the same thing.
 - Light by default. Apple Mail, iOS Mail and Outlook switch to our dark surfaces (`#10101a`, `#171721`) when the reader uses dark mode. Gmail applies its own dark mode, and every colour still reads after it does.
 - One blue button (`#2f6bff`) per email, drawn twice: once for Outlook on Windows, once for everyone else.
-- The logo is a PNG at `https://parity.endyland.com/brand/2026-10-21-starburst/parity-icon-dark.png` with alt text. Email apps block SVG and embedded images, so it must be a hosted PNG. The `/brand/` folder is public.
+- The header is a dark band with the site logo (starburst and PARITY wordmark) as a 2x PNG, `web/public/email/parity-logo-on-dark@2x.png`, rendered from `web/public/brand/2026-10-22-wordmark/parity-wordmark-on-dark.svg`. Our own sender attaches it inline by Content-ID (`cid:parity-logo`), so it shows without "download images". The SMTP fallback links the hosted copy instead, and its alt text reads PARITY on the band.
 - Each email stays under 100 kB (Gmail cuts off longer ones). `build.py` checks.
+
+## Who sends the emails
+
+Since 27 October 2026 Supabase hands every auth email to our own sender, a Supabase Send Email hook: the Edge Function `supabase/functions/send-email`. It checks each call is signed with the hook secret (Standard Webhooks), picks the email for the action (sign-up, code, reset, email change, invite, reauthentication, plus short security notices), fills in every value and sends it through the Resend API with the logo attached inline. A secure email change sends two emails, one to each address, each with its own code and link.
+
+- Templates: `auth/build.py` writes `supabase/functions/send-email/templates.ts` and `logo.ts` from the same sources as `auth/dist/`. Tests: `deno test supabase/functions/send-email/compose.test.ts`.
+- Secrets (Edge Function secrets): `SEND_EMAIL_HOOK_SECRET` (Keychain `parity-send-email-hook-secret`, same value as on the hook) and `RESEND_API_KEY`.
+- Deploy: `SUPABASE_ACCESS_TOKEN=$(vault get supabase-access-token) supabase functions deploy send-email --project-ref ttqvpxvctnomfbeoqbbs --no-verify-jwt --use-api`.
+- Fallback: Supabase SMTP (Resend SMTP) stays configured with the same templates. `auth/send_email_hook.sh --off` switches back to it at once; `--on` switches our sender back on.
 
 ## Changing an email
 

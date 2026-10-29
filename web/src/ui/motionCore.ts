@@ -1,16 +1,19 @@
 // The Motion setting (REF-0023), without React, so the plain-script front page can use it
-// too. Three choices, kept in this browser under `parity.motion`:
+// too. Four choices, kept in this browser under `parity.motion`:
 //   "system"   follow the device (the default): full motion, or reduced if the device asks
 //   "full"     full motion even when the device asks for less
 //   "reduced"  reduced motion even when the device does not ask for it
+//   "off"      nothing moves or fades by itself; videos play only when asked (DEC-0085)
 // The choice is written to <html data-motion> so CSS can override the media query, and
 // "reduced" means less, not none: short fades and crossfades stay, movement goes
-// (no slides, rises, scales or counting numbers). The React hooks are in motionPref.ts.
-export type MotionPref = "system" | "full" | "reduced";
+// (no slides, rises, scales or counting numbers). "off" is written as "reduced" plus
+// <html data-motion-off>, so every reduced-motion rule applies and the stylesheet can also
+// drop the fades. The React hooks are in motionPref.ts.
+export type MotionPref = "system" | "full" | "reduced" | "off";
 export type MotionLevel = "full" | "reduced";
 
 export const MOTION_KEY = "parity.motion";
-export const MOTION_PREFS: readonly MotionPref[] = ["system", "full", "reduced"];
+export const MOTION_PREFS: readonly MotionPref[] = ["system", "full", "reduced", "off"];
 export const REDUCE_QUERY = "(prefers-reduced-motion: reduce)";
 /** Fired on window when the choice changes on this page. */
 export const MOTION_EVENT = "parity:motion";
@@ -39,25 +42,34 @@ export function deviceWantsReduced(): boolean {
 /** What actually plays: the choice wins, "system" follows the device. */
 export function resolveMotion(pref: MotionPref, deviceReduced: boolean): MotionLevel {
   if (pref === "full") return "full";
-  if (pref === "reduced") return "reduced";
+  if (pref === "reduced" || pref === "off") return "reduced";
   return deviceReduced ? "reduced" : "full";
 }
 
 /** The choice in force on this page: what is on <html data-motion>, else what is stored. */
 export function currentMotionPref(): MotionPref {
+  if (typeof document !== "undefined" && document.documentElement.dataset.motionOff === "1") return "off";
   const v = typeof document !== "undefined" ? document.documentElement.dataset.motion : undefined;
   return isPref(v) ? v : readMotionPref();
 }
 
-/** The level right now, for code outside React. */
+/** The level right now, for code outside React. "off" counts as reduced here. */
 export function motionLevel(): MotionLevel {
   return resolveMotion(currentMotionPref(), deviceWantsReduced());
+}
+
+/** True when the choice is Off: nothing plays by itself, not even a fade. */
+export function motionOff(): boolean {
+  return currentMotionPref() === "off";
 }
 
 /** Puts the choice on <html data-motion>, where the stylesheet reads it. */
 export function applyMotionPref(pref: MotionPref = readMotionPref()) {
   if (typeof document === "undefined") return;
-  document.documentElement.dataset.motion = pref;
+  const root = document.documentElement;
+  root.dataset.motion = pref === "off" ? "reduced" : pref;
+  if (pref === "off") root.dataset.motionOff = "1";
+  else delete root.dataset.motionOff;
 }
 
 /** Saves the choice, applies it and tells every hook on the page. */

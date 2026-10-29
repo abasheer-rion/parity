@@ -48,3 +48,30 @@
 .wal-list li { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--color-border); font-size: var(--type-sm); }
 .wal-list code { font-family: var(--font-mono); font-size: var(--type-xs); color: var(--color-text); }
 .wal-list .grow { flex: 1; }
+
+/* The setup ring at the top right of the product app (DEC-0075). .app-top is drawn by Shell;
+   it holds no layout space, and main keeps room for it, so the page never moves. */
+.setup-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 2px 10px 2px 2px; border: 0; border-radius: var(--radius-pill); background: var(--ds-background-secondary); color: var(--text-body); font: inherit; font-size: var(--type-sm); cursor: pointer; }
+.setup-btn:hover { background: var(--color-fill-strong); color: var(--text); }
+.setup-btn:focus-visible { outline: 2px solid var(--ds-border-focus-ring); outline-offset: 2px; }
+.setup-btn .onb-ring-fg { stroke: var(--color-accent-text); }
+.onb-pop { margin: 0; box-shadow: none; background: none; padding: 0; border: 0; }
+.onb-pop .onb-list { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) { .setup-lbl { display: none; } }
+
+/* One clear next step on Home after the first-run intro (NextStep.tsx, DEC-0077): a big card
+   on the charcoal layers with one Invicta blue button. */
+.onb-next {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-6);
+  margin: 0 0 var(--space-6); padding: var(--space-8);
+  border: 1px solid var(--color-border); border-radius: var(--radius-xl);
+  background:
+    radial-gradient(70% 120% at 0% 0%, color-mix(in srgb, var(--color-glow) 30%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
+}
+.onb-next-text { flex: 1 1 26rem; min-width: 0; }
+.onb-next-title { margin: 0; font-family: var(--font-display); font-size: var(--type-display-sm); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+.onb-next-body { margin: var(--space-3) 0 0; max-width: 60ch; color: var(--color-text-body); font-size: var(--type-xl); line-height: 1.5; }
+.onb-next-count { margin: var(--space-3) 0 0; color: var(--color-text-muted); font-size: var(--type-sm); }
+.onb-next-acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+@media (max-width: 640px) { .onb-next { padding: var(--space-5); } }

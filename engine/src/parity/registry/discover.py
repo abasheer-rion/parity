@@ -354,20 +354,36 @@ AERODROME_FACTORY = "0x5e7BB104d84c7CB9B682AaC2F3d509f5F406809A"
 UNI_FEES = (100, 500, 3000, 10000)
 AERO_SPACINGS = (1, 50, 100, 200, 2000)
 #: A pool is deep enough when its quote side holds at least this many US dollars (the same
-#: bar as web/scripts/onchain-pools.mjs).
+#: bar as web/scripts/onchain-discover.ts uses, 50,000).
 POOL_MIN_USD = 40_000
-ONCHAIN_TS = ROOT / "web/live/src/venues/onchain.ts"
+ONCHAIN_REGISTRY = ROOT / "web/live/src/venues/onchain-registry.json"
+#: Pools the gate enrolled since the last refresh, joined to the feed at load (DEC-0078).
+ONCHAIN_ENROLLED = ROOT / "web/live/src/venues/onchain-enrolled.json"
+#: Base quote tokens the live feed prices against (web/live/src/venues/onchainRegistry.ts).
+BASE_QUOTES = {"USDC": ("0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", 6),
+               "WETH": ("0x4200000000000000000000000000000000000006", 18)}
 #: The deepest WETH/USDC pool (Uniswap v3 0.05%), whose price turns WETH depth into dollars.
 ETH_USDC_POOL = "0xd0b53d9277642d899df5c87a3966a349a798f224"
 
 
-def onchain_config(path: Path = ONCHAIN_TS) -> tuple[dict[str, tuple[str, int]], set[str]]:
-    """The tokens and pools the live on-chain feed uses, read from its source file."""
-    text = path.read_text()
-    tokens = {m[0]: (m[1].lower(), int(m[2])) for m in
-              re.findall(r'(\w+): \["(0x[0-9a-fA-F]{40})", (\d+)\]', text)}
-    pools = {a.lower() for a in re.findall(r'\["\w+", "(?:USDC|WETH)", "(0x[0-9a-fA-F]{40})"',
-                                           text)}
+def onchain_config(path: Path = ONCHAIN_REGISTRY) -> tuple[dict[str, tuple[str, int]], set[str]]:
+    """The Base tokens the live on-chain feed (the Parity price, DEC-0065) prices, and every pool
+    it reads on any chain, from its registry file. A token is named by the wrapped form its
+    pools trade (CBBTC for BTC on Base) or by its ticker."""
+    reg = json.loads(path.read_text())
+    tokens: dict[str, tuple[str, int]] = dict(BASE_QUOTES)
+    pools: set[str] = set()
+    for t in reg.get("tokens", []):
+        for p in t.get("pools", []):
+            pools.add(p["pool"].lower())
+            if p.get("chain") == "base":
+                label = p.get("via") or t["sym"].removesuffix("-USD")
+                name = re.sub(r"[^A-Z0-9]", "", label.upper())
+                tokens.setdefault(name, (p["base"].lower(), int(p["decimals"])))
+    enrolled = path.with_name(ONCHAIN_ENROLLED.name)
+    if enrolled.exists():
+        for p in json.loads(enrolled.read_text()).get("pools", []):
+            pools.add(p["pool"].lower())
     return tokens, pools
 
 

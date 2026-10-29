@@ -46,7 +46,9 @@ interface Row { p: number; o?: number; c?: number; v?: number; te: number }
 export class LiveHub {
   private adapter: Adapter | null = null;
   private src = "";
-  private up: WorkerSocket | null = null;
+  /** The upstream line: a socket, or a source's own lines (Adapter.connect) behind the same two calls. */
+  private up: Pick<WorkerSocket, "send" | "close"> | null = null;
+  private lines: { state?(): string } | null = null;
   private upState: "up" | "connecting" | "down" = "down";
   private why = "";
   private ready = false;
@@ -329,10 +331,11 @@ export class LiveHub {
   private async openUpstream() {
     const a = this.adapter!;
     this.setState("connecting");
+    if (a.connect) { await this.openLines(); return; }
     let ws: WorkerSocket | null = null;
     try {
       await a.prepare?.();
-      const res = await fetch(a.url.replace(/^ws/, "http"), { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.ai)" } });
+      const res = await fetch(a.url.replace(/^ws/, "http"), { headers: { Upgrade: "websocket", "User-Agent": "parity-live (contact@paritytrading.app)" } });
       ws = (res as Response & { webSocket?: WorkerSocket }).webSocket ?? null;
       if (!ws) throw new Error(`upstream answered ${res.status}`);
     } catch (e) {
@@ -387,6 +390,7 @@ export class LiveHub {
   private dropUpstream() {
     const ws = this.up;
     this.up = null;
+    this.lines = null;
     this.ready = false;
     this.upTrades.clear(); this.upBooks.clear(); this.boardOn = false;
     if (this.pinger) { clearInterval(this.pinger); this.pinger = null; }
@@ -399,11 +403,38 @@ export class LiveHub {
     setTimeout(() => { if (!this.up && this.wanted().any) void this.openUpstream(); }, wait);
   }
 
-  private onUpstream(data: string) {
+  /** A source with its own lines (several chains, its own failover): it opens them and
+   *  hands back what they carry; we keep the same subscriptions, timers and stall check. */
+  private async openLines() {
+    const a = this.adapter!;
+    try { await a.prepare?.(); } catch (e) { console.log(`[${this.src}] prepare failed: ${String(e)}`); }
+    const conn = a.connect!((p) => { if (this.up === line) this.onParsed(p); }, (why) => { console.log(`[${this.src}] ${why}`); this.why = why; });
+    const line = { send: (m: string) => conn.send(m), close: () => conn.close() };
+    this.up = line;
+    this.lines = conn;
+    this.retry = 0;
+    if (this.stats.upstreamOpens > 0) this.stats.reconnects += 1;
+    this.stats.upstreamOpens += 1;
+    this.upTrades.clear(); this.upBooks.clear(); this.boardOn = false; this.books.clear();
+    this.ready = true;
     this.lastUpMsg = Date.now();
-    this.stats.upstreamMsgs += 1;
+    this.setState("up");
+    if (this.pinger) clearInterval(this.pinger);
+    this.pinger = setInterval(() => {
+      if (this.up === line && Date.now() - this.lastUpMsg > (a.stallMs ?? STALL_MS)) this.lost("no data from source");
+    }, 20_000);
+    this.reconcile();
+  }
+
+  private onUpstream(data: string) {
     let p: Parsed;
     try { p = this.adapter!.parse(data); } catch (e) { console.log(`[${this.src}] parse failed: ${String(e)}`); return; }
+    this.onParsed(p);
+  }
+
+  private onParsed(p: Parsed) {
+    this.lastUpMsg = Date.now();
+    this.stats.upstreamMsgs += 1;
     if (p.fail) { console.log(`[${this.src}] source said: ${p.fail}`); this.why = p.fail; }
     if (p.drop) { this.lost(p.fail ?? "source refused"); return; }
     if (p.ready && !this.ready) { this.ready = true; this.setState("up"); this.reconcile(); }
@@ -582,6 +613,7 @@ export class LiveHub {
       src: this.src, feed: this.adapter?.feed, internal: !!this.adapter?.internal, upstream: this.upState, why: this.why || null,
       viewers: v.length, ...(this.adapter?.internal ? {} : { symbols: [...this.upTrades], books: [...this.upBooks] }), overviewRows: this.board.size, overviewOn: this.boardOn || !!this.boardPoller,
       lastUpstreamMsgAgoMs: this.lastUpMsg ? Date.now() - this.lastUpMsg : null,
+      ...(this.lines?.state ? { lines: this.lines.state() } : {}),
       feedLagMs: { p50: q(0.5), p95: q(0.95), p99: q(0.99), n: lag.length },
       folded: this.conflator.folded, now: Date.now(),
     };

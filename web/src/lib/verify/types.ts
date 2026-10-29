@@ -4,6 +4,15 @@
 /** Bump when a check or a threshold changes, so a badge says which rules judged it. */
 export const METHOD_VERSION = "verify-1.0";
 
+/**
+ * Every method version, newest first, with the date it took effect and what changed. The
+ * public methodology page (/methodology/) prints this list, so add a row whenever
+ * METHOD_VERSION changes (a test checks the first row matches it).
+ */
+export const METHOD_CHANGELOG: { version: string; date: string; changes: string }[] = [
+  { version: "verify-1.0", date: "2026-10-24", changes: "First version: five verdicts in a fixed order, five check cards, the luck check (deflated Sharpe ratio) with \"survives up to N tries\", claim arithmetic, and fill checks against one price a day." },
+];
+
 export type InputKind = "real" | "demo" | "backtest";
 export type Source = "file" | "description" | "strategy";
 
@@ -28,13 +37,30 @@ export interface Trade {
 /** One row of an equity curve: a value, or a return, plus any money paid in (+) or out (-). */
 export interface EquityPoint { date: string; equity?: number; ret?: number; cashflow?: number }
 
-export type FormatId = "mt4" | "mt5" | "mt5deals" | "tradingview" | "trades" | "equity";
+export type FormatId =
+  | "mt4" | "mt5" | "mt5deals" | "tradingview"
+  | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "coinbase" | "kraken"
+  | "ctrader" | "ninjatrader" | "tradovate" | "tos" | "alpaca"
+  | "trades" | "equity";
 
 export const FORMAT_LABEL: Record<FormatId, string> = {
   mt4: "MetaTrader 4 history",
   mt5: "MetaTrader 5 history",
   mt5deals: "MetaTrader 5 deals",
   tradingview: "TradingView list of trades",
+  ibkr: "Interactive Brokers Flex trades",
+  ibkr_activity: "Interactive Brokers activity statement",
+  binance_spot: "Binance spot trade history",
+  binance_futures: "Binance futures trade history",
+  bybit: "Bybit trade history",
+  bybit_pnl: "Bybit closed P&L",
+  coinbase: "Coinbase fills",
+  kraken: "Kraken trades",
+  ctrader: "cTrader history",
+  ninjatrader: "NinjaTrader trades",
+  tradovate: "Tradovate performance",
+  tos: "thinkorswim trade history",
+  alpaca: "Alpaca activities",
   trades: "Trade list",
   equity: "Equity curve",
 };
@@ -42,7 +68,8 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
 /** The fields a column can be mapped to. */
 export type Field =
   | "id" | "openTime" | "closeTime" | "symbol" | "side" | "size" | "entry" | "exit" | "commission" | "swap" | "fees" | "pnl"
-  | "date" | "equity" | "ret" | "cashflow" | "direction" | "tvType" | "position";
+  | "date" | "equity" | "ret" | "cashflow" | "direction" | "tvType" | "position"
+  | "value" | "multiplier" | "realized" | "feeCurrency" | "rowType" | "expiry" | "strike" | "assetType";
 
 export type Mapping = Partial<Record<Field, number>>;
 

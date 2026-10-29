@@ -1,0 +1,24 @@
+{
+  "id": "sri-lanka-default-2022",
+  "name": "Sri Lanka stops paying its foreign debt",
+  "date": "2022-04-12",
+  "type": "sovereign_default",
+  "regions": [
+    "south_asia"
+  ],
+  "actors": [
+    "sri_lanka"
+  ],
+  "severity": 2,
+  "commodities": [
+    "oil"
+  ],
+  "description": "Sri Lanka suspended payments on its foreign debt after running out of reserves to import fuel, food and medicine.",
+  "sources": [
+    {
+      "title": "2019-present Sri Lankan economic crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2019%E2%80%93present_Sri_Lankan_economic_crisis"
+    }
+  ]
+}

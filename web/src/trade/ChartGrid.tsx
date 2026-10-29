@@ -10,7 +10,7 @@ import { digitsFor, loadBars, priceText, type Instrument, type Loadable } from "
 import { newId, table, useRows, type Row } from "../lib/userStore";
 import { toast } from "../ui";
 import type { Cell, Layout } from "./state";
-import { LiveBadge, StaticBadge } from "../components/LiveBadge";
+import { ConfidenceTag, LiveBadge, StaticBadge } from "../components/LiveBadge";
 import type { CandleBuilder, LiveTf } from "../lib/live/candles";
 import type { Signal } from "../lib/signals";
 import { instrumentForKey, tfFor, tfsFor, useClosedCount, useLiveBars, useUniverse, type UniverseDoc } from "./live";
@@ -107,6 +107,7 @@ function ChartCell({ cell, index, active, list, universe, signalsOn, type, log, 
         </span>
         {liveRef?.src === "coingecko" && <a className="cg-attr" href="https://www.coingecko.com/" target="_blank" rel="noreferrer">Data provided by CoinGecko</a>}
         {liveRef && active && <PauseLive />}
+        {liveRef?.src === "onchain" && <ConfidenceTag src={liveRef.src} sym={liveRef.sym} />}
         {liveRef ? <LiveBadge src={liveRef.src} compact={!active} />
           : ext?.stock ? <StaticBadge feed="eod" source="No licensed feed" asOf={null} compact={!active} />
           : inst ? <StaticBadge feed="eod" source={inst.source} asOf={inst.asof || null} compact={!active} /> : null}

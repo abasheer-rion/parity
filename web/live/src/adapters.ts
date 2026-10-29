@@ -161,7 +161,7 @@ export interface UniverseDoc {
 }
 
 const secList = async (env: AdapterEnv): Promise<[string, string, string][]> => {
-  const contact = env.PARITY_CONTACT || "contact@paritytrading.ai";
+  const contact = env.PARITY_CONTACT || "contact@paritytrading.app";
   const doc = await getJson<{ fields: string[]; data: (string | number | null)[][] }>("https://www.sec.gov/files/company_tickers_exchange.json", { headers: { "User-Agent": `Parity research ${contact}` } });
   const iT = doc.fields.indexOf("ticker"), iN = doc.fields.indexOf("name"), iE = doc.fields.indexOf("exchange");
   const seen = new Set<string>();

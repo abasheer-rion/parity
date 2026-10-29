@@ -1,0 +1,20 @@
+{
+  "id": "crypto-crash-2018",
+  "name": "Crypto prices crash after the 2017 boom",
+  "date": "2018-01-16",
+  "type": "crypto_crash",
+  "regions": [
+    "global"
+  ],
+  "actors": [],
+  "severity": 2,
+  "commodities": [],
+  "description": "Bitcoin and other cryptocurrencies fell sharply in mid January 2018 amid talk of trading bans in South Korea and China; most lost over 80% within the year.",
+  "sources": [
+    {
+      "title": "2018 cryptocurrency crash",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2018_cryptocurrency_crash"
+    }
+  ]
+}

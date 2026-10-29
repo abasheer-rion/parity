@@ -1,0 +1,23 @@
+{
+  "id": "japan-yen-intervention-2022",
+  "name": "Japan buys yen for the first time since 1998",
+  "date": "2022-09-22",
+  "type": "central_bank_surprise",
+  "regions": [
+    "east_asia"
+  ],
+  "actors": [
+    "japan",
+    "boj"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Japan's finance ministry sold dollars and bought yen after the yen fell past 145 per dollar, its first intervention to support the currency in 24 years.",
+  "sources": [
+    {
+      "title": "Japanese yen",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Japanese_yen"
+    }
+  ]
+}

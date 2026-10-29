@@ -6,7 +6,7 @@
 import { WINDOW_MS, type Tick } from "./protocol";
 
 /** One trade as an adapter reports it. */
-export interface Trade { s: string; p: number; v: number; te: number; /** 1 buy, 2 sell (the taker side), 0 or missing when unknown. */ side?: 0 | 1 | 2 }
+export interface Trade { s: string; p: number; v: number; te: number; /** 1 buy, 2 sell (the taker side), 0 or missing when unknown. */ side?: 0 | 1 | 2; /** Confidence of an aggregate price (DEC-0065), USD either side. */ c?: number }
 
 interface Slot { pending: Tick | null; lastSent: number; seq: number }
 
@@ -35,10 +35,11 @@ export class Conflator {
       const p = slot.pending;
       p.p = t.p; p.h = Math.max(p.h, t.p); p.l = Math.min(p.l, t.p); p.v += v; p.n += 1;
       p.te = Math.max(p.te, t.te); p.tr = now;
+      if (t.c != null) p.c = t.c;
       this.folded += 1;
       return out;
     }
-    const tick: Tick = { s: t.s, o: t.p, p: t.p, h: t.p, l: t.p, v, n: 1, te: t.te, tr: now, ts: 0, q: 0 };
+    const tick: Tick = { s: t.s, o: t.p, p: t.p, h: t.p, l: t.p, v, n: 1, te: t.te, tr: now, ts: 0, q: 0, ...(t.c != null && Number.isFinite(t.c) ? { c: t.c } : {}) };
     if (!out.length && now - slot.lastSent >= this.windowMs) out.push(this.stamp(slot, tick, now));
     else slot.pending = tick;
     return out;

@@ -1,0 +1,25 @@
+{
+  "id": "us-chip-export-controls-2022",
+  "name": "US limits chip exports to China",
+  "date": "2022-10-07",
+  "type": "trade_war",
+  "regions": [
+    "north_america",
+    "east_asia",
+    "global"
+  ],
+  "actors": [
+    "usa",
+    "china"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "The US barred exports of advanced chips and chip-making tools to China; chip stocks fell on the next trading days.",
+  "sources": [
+    {
+      "title": "United States New Export Controls on Advanced Computing and Semiconductors to China",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/United_States_New_Export_Controls_on_Advanced_Computing_and_Semiconductors_to_China"
+    }
+  ]
+}

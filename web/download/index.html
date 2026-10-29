@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description, icons and share tags: src/lib/meta.ts (DEC-0038). -->
+    <!--legal:head-->
+    <link rel="stylesheet" href="/src/legal/download.css" />
+    <script type="module" src="/src/legal/download.ts"></script>
+  </head>
+  <body>
+    <!--legal:header-->
+    <main id="main" tabindex="-1">
+      <article class="lg-wrap dl">
+        <h1>Parity for Mac and Windows</h1>
+        <p class="dl-lead">The desktop app opens the whole Parity site in its own windows: Verify, Strategies, Research, Terminal, Trade, Academy and Workbench. It keeps you signed in and updates itself.</p>
+        <p class="lg-meta" data-dl-status aria-live="polite">Version <span data-dl-version>n/a</span>, released <span data-dl-date>n/a</span>. <a data-dl-notes href="https://github.com/abasheer-rion/parity/releases">Release notes</a></p>
+
+        <!-- The links always fetch the newest published release (functions/download/latest/[what].ts). -->
+        <ul class="dl-grid" aria-label="Downloads">
+          <li class="dl-card" data-platform="mac-arm64">
+            <h2>Mac with Apple silicon</h2>
+            <p>M1 or later. Disk image (.dmg).</p>
+            <a class="dl-btn" href="/download/latest/mac-arm64">Download for Apple silicon</a>
+            <p class="dl-size" data-dl-size></p>
+          </li>
+          <li class="dl-card" data-platform="mac-intel">
+            <h2>Mac with Intel</h2>
+            <p>Intel processor. Disk image (.dmg).</p>
+            <a class="dl-btn" href="/download/latest/mac-intel">Download for Intel Mac</a>
+            <p class="dl-size" data-dl-size></p>
+          </li>
+          <li class="dl-card" data-platform="windows">
+            <h2>Windows</h2>
+            <p>64-bit installer (.exe).</p>
+            <a class="dl-btn" href="/download/latest/windows">Download for Windows</a>
+            <p class="dl-size" data-dl-size></p>
+          </li>
+        </ul>
+        <p class="dl-which">Not sure which Mac you have? Open the Apple menu, then About This Mac. "Chip" means Apple silicon. "Processor" means Intel.</p>
+
+        <h2 id="requirements">System requirements</h2>
+        <ul>
+          <li><strong>Mac:</strong> macOS 12 Monterey or later.</li>
+          <li><strong>Windows:</strong> Windows 10 or 11, 64-bit.</li>
+          <li>An internet connection for the live site. Without one, the app shows the copy of the site it was built with.</li>
+        </ul>
+
+        <h2 id="signed">Signed and notarized</h2>
+        <p>The Mac app is signed with an Apple Developer ID and notarized by Apple, so it opens without a warning. The Windows installer is signed. Both are signed by Argus Vision, Inc. While the Windows signature is new, Windows may still show "Windows protected your PC". Click More info, then Run anyway.</p>
+
+        <h2 id="updates">Updates</h2>
+        <p>The app checks for a new version 15 seconds after it opens and every 6 hours after that. It downloads the update in the background and asks to restart. You can turn this off in Settings. Pages inside the app are always the live site.</p>
+
+        <h2 id="checksums">Checksums</h2>
+        <p>To check a download, compare its SHA-256 checksum with the one below. On a Mac, run <code>shasum -a 256</code> followed by the file. On Windows, run <code>certutil -hashfile</code> followed by the file and <code>SHA256</code>.</p>
+        <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Checksums">
+          <table>
+            <caption>SHA-256 checksums of the newest version</caption>
+            <thead><tr><th scope="col">File</th><th scope="col">Size</th><th scope="col">SHA-256</th></tr></thead>
+            <tbody data-dl-sums><tr><td colspan="3">Loading the newest version.</td></tr></tbody>
+          </table>
+        </div>
+        <p>Every version, with its files and notes, is on the <a href="https://github.com/abasheer-rion/parity/releases">releases page</a>.</p>
+      </article>
+    </main>
+    <!--legal:footer-->
+  </body>
+</html>

@@ -3,7 +3,8 @@
 // authenticator app, a second step asks for its code.
 import { useEffect, useState } from "react";
 import { explain, supabase } from "../client";
-import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
+import { explainSend, waitSeconds } from "../errors";
+import { EMAIL_GAP_SECONDS, Field, LEAVING, Notice, PasswordField, Submit, TextButton, useCooldown, useSubmit, Who } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
 import { go } from "../nav";
 import { emailLanding } from "../redirect";
@@ -23,6 +24,8 @@ export function SignIn() {
   const [checking, setChecking] = useState(!carry.mfa);
   const form = useSubmit();
   const mail = useSubmit();
+  const cooldown = useCooldown();
+  const left = cooldown.leftFor(email);
 
   // Already signed in (or just back from a provider): carry on.
   useEffect(() => {
@@ -63,11 +66,16 @@ export function SignIn() {
   const sendCode = mail.run(async () => {
     const bad = emailProblem(email);
     if (bad) return bad;
+    if (left) return null;
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: { shouldCreateUser: false, emailRedirectTo: emailLanding(next) },
     });
-    if (error) return explain(error);
+    // One email per address every 30 seconds: count down instead of showing an error.
+    const wait = waitSeconds(error);
+    if (wait) { cooldown.start(wait, email); return null; }
+    if (error) return explainSend(error);
+    cooldown.start(EMAIL_GAP_SECONDS, email);
     setCode("");
     form.setProblem(null);
     setStep("code");
@@ -98,7 +106,7 @@ export function SignIn() {
           <Submit busy={form.busy}>Log in</Submit>
         </form>
         <div className="pa-alt">
-          <TextButton onClick={() => void sendCode()} disabled={mail.busy}>{mail.busy ? "Sending a code" : "Email me a code instead"}</TextButton>
+          <TextButton onClick={() => void sendCode()} disabled={mail.busy || left > 0}>{mail.busy ? "Sending a code" : left ? `Email me a code in ${left}s` : "Email me a code instead"}</TextButton>
         </div>
       </Screen>
     );
@@ -114,7 +122,7 @@ export function SignIn() {
           <Submit busy={form.busy}>Log in</Submit>
         </form>
         <div className="pa-alt">
-          <TextButton onClick={() => void sendCode()} disabled={mail.busy}>{mail.busy ? "Sending" : "Send a new code"}</TextButton>
+          <TextButton onClick={() => void sendCode()} disabled={mail.busy || left > 0}>{mail.busy ? "Sending" : left ? `Send a new code in ${left}s` : "Send a new code"}</TextButton>
           <TextButton onClick={() => { form.setProblem(null); setStep("password"); }}>Use your password</TextButton>
         </div>
       </Screen>

@@ -80,8 +80,8 @@ describe("routes and apps", () => {
   });
 
   it("keeps only outside referrers, and a coarse screen class", () => {
-    expect(referrerHost("https://news.ycombinator.com/item?id=1", "endyland.com")).toBe("news.ycombinator.com");
-    expect(referrerHost("https://trade.endyland.com/", "endyland.com")).toBe("");
+    expect(referrerHost("https://news.ycombinator.com/item?id=1", "paritytrading.app")).toBe("news.ycombinator.com");
+    expect(referrerHost("https://trade.paritytrading.app/", "paritytrading.app")).toBe("");
     expect(deviceOf(390)).toBe("phone");
     expect(deviceOf(800)).toBe("tablet");
     expect(deviceOf(1440)).toBe("desktop");
@@ -237,7 +237,7 @@ describe("boot", () => {
 describe("POST /e", () => {
   const body = JSON.stringify({ app: "site", sid: SID, vid: VID, ev: [{ k: "pageview", r: "/" }] });
   const req = (headers: Record<string, string> = {}, b = body) =>
-    Object.assign(new Request("https://parity.endyland.com/e", { method: "POST", body: b, headers: { "User-Agent": "Mozilla/5.0 Chrome/130", "CF-Connecting-IP": "203.0.113.9", ...headers } }), { cf: { country: "GB" } });
+    Object.assign(new Request("https://paritytrading.app/e", { method: "POST", body: b, headers: { "User-Agent": "Mozilla/5.0 Chrome/130", "CF-Connecting-IP": "203.0.113.9", ...headers } }), { cf: { country: "GB" } });
 
   it("forwards a clean batch with the country, and never the address or user agent", async () => {
     const waits: Promise<unknown>[] = [];

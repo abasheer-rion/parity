@@ -1,0 +1,23 @@
+{
+  "id": "french-election-2017",
+  "name": "Macron and Le Pen go through in France",
+  "date": "2017-04-23",
+  "type": "election",
+  "regions": [
+    "europe"
+  ],
+  "actors": [
+    "france",
+    "eu"
+  ],
+  "severity": 2,
+  "commodities": [],
+  "description": "Emmanuel Macron came first in the first round of France's presidential election, easing fears of a run off between two anti-EU candidates.",
+  "sources": [
+    {
+      "title": "2017 French presidential election",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2017_French_presidential_election"
+    }
+  ]
+}

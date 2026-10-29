@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Button, Dialog, LineChart, Segmented, Select, toast } from "../ui";
 import { loadReport } from "../lib/data";
 import type { Report, StrategyRun } from "../lib/types";
-import { nameOf } from "../lib/strategyMeta";
+import { nameById, nameOf } from "../lib/strategyMeta";
 import { attachStrategy, detachStrategy, type AccountRow } from "../lib/paper/account";
 import { forwardView, parseDraftSpec } from "../lib/paper/forward";
 import type { Stats } from "../lib/paper/stats";
@@ -56,7 +56,7 @@ export function StrategiesView() {
       <AccountBar />
       <section className="vbox" aria-label="Forward test">
         <div className="vh-row">
-          <h2 className="vh">{attached ? account?.strategy_name : "Forward test"}</h2>
+          <h2 className="vh">{attached ? (run ? nameOf(run) : account?.strategy_name) : "Forward test"}</h2>
           {attached && <span className="vtag">{account?.strategy_source === "draft" && !run ? "Draft, waiting" : "Live"}</span>}
           {attached && <span className="vdim">from {account?.strategy_start} · {usd0(Number(account?.strategy_capital))}</span>}
           <span className="vbar-gap" />
@@ -67,7 +67,7 @@ export function StrategiesView() {
         {!attached && <div className="vbox-empty">No strategy attached</div>}
         {attached && error && <div className="vbox-empty">{error}</div>}
         {attached && !report && !error && <div className="vbox-empty">Loading</div>}
-        {attached && report && !run && <div className="vbox-empty">{account?.strategy_source === "draft" ? "Not in the nightly run yet" : `Missing from the latest run: ${account?.strategy_key}`}</div>}
+        {attached && report && !run && <div className="vbox-empty">{account?.strategy_source === "draft" ? "Not in the nightly run yet" : `Missing from the latest run: ${account?.strategy_key ? nameById(account.strategy_key) : "this strategy"}`}</div>}
         {view && (
           <>
             <LineChart label="Backtest and forward test" height={260} format={usd0} series={[

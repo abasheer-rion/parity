@@ -3,9 +3,9 @@
 // arrives within MAX_FIRST_MS and live updates keep coming. Prints one JSON line.
 //   node scripts/live-probe.mjs [origin] [seconds] [symbols]
 // The clock is set against the edge with ping and pong, so lag is block time to this client.
-const ORIGIN = process.argv[2] || "wss://parity.endyland.com";
+const ORIGIN = process.argv[2] || "wss://paritytrading.app";
 const SECS = Number(process.argv[3] || 60);
-const SYMS = (process.argv[4] || "ETH-USDC,CBBTC-USDC,EURC-USDC").split(",");
+const SYMS = (process.argv[4] || "ETH-USD,BTC-USD,BNB-USD").split(",");
 const MAX_FIRST_MS = 5_000;
 const ws = new WebSocket(`${ORIGIN}/live/ws?src=onchain`);
 const t0 = Date.now();

@@ -1,5 +1,5 @@
 // Parity Trade (DEC-0040): the trading workspace as its own full-screen app at /trade/
-// (trade.endyland.com). Its own rail, top bar, settings and keys; a chart grid with an
+// (trade.paritytrading.app). Its own rail, top bar, settings and keys; a chart grid with an
 // order ticket and watchlist beside it and the account dock under it. Everything acts on
 // the demo account with delayed data. One Back button returns to Parity.
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
@@ -21,6 +21,7 @@ import type { Instrument } from "../lib/tradeData";
 import { AlertDialog, AlertsView } from "./AlertsView";
 import { ChartGrid, drawingsTable, findInst, IndicatorDialog } from "./ChartGrid";
 import { DemoProvider, useDemo } from "./demo";
+import { ModeBadge, TradingProvider } from "./trading";
 import { Dock, OrdersView } from "./Dock";
 import { Finder, type Command } from "./Finder";
 import { HOTKEYS, isTyping, MAC, startsSearch } from "./keys";
@@ -189,6 +190,17 @@ function TradeShell() {
     if (mobile) setMtab("ticket");
     setCue({ side, type, at: Date.now(), fire: settings.oneKey && type === "market" });
   }, [view, go, set, mobile, settings.oneKey]);
+  // The empty Positions table's button (blotter.tsx openTicket): open the ticket on a buy, never place it.
+  useEffect(() => {
+    const on = () => {
+      if (view !== "chart") go("chart");
+      set((l) => (l.side.open && l.side.ticket ? l : { ...l, side: { ...l.side, open: true, ticket: true } }));
+      if (mobile) setMtab("ticket");
+      setCue({ side: "buy", type: "market", at: Date.now(), fire: false });
+    };
+    window.addEventListener("parity:trade-order", on);
+    return () => window.removeEventListener("parity:trade-order", on);
+  }, [view, go, set, mobile]);
   const resetLayout = useCallback(() => { const f = freshLayout(settings); setLayoutState(f); writeLayout(f); setLayoutId(null); toast("Layout reset"); }, [settings]);
   const loadLayout = useCallback((id: string) => {
     const row = layouts.rows.find((r) => r.id === id);
@@ -274,7 +286,6 @@ function TradeShell() {
     return () => window.removeEventListener("keydown", onKey);
   }, [finder.open, tool, layout.max, set, go, order, setGrid, toggleSide, toggleBottom, symbol, view, setTf, settings.typeToSearch, saveLayout]);
 
-  const asof = useMemo(() => list.reduce((m, s) => (s.asof > m ? s.asof : m), ""), [list]);
   const focus = useMemo(() => layout.cells.slice(0, layout.grid).map((c) => c.symbol), [layout.cells, layout.grid]);
   const viewLabel = VIEWS.find((v) => v.id === view)?.label ?? "";
   // Live and stock charts do not need the daily export, so a missing export only blocks the daily charts.
@@ -282,11 +293,12 @@ function TradeShell() {
   const noData = view !== "markets" && (insts.status === "missing" || insts.status === "error") && !layout.cells.slice(0, layout.grid).some((c) => c.symbol.startsWith("L:") || c.symbol.startsWith("S:"));
 
   return (
+    <TradingProvider>
     <DemoProvider all={list} focus={focus.includes(symbol) ? focus : [...focus, symbol]}>
       <div className="ptr" data-density={settings.density} data-mobile={mobile || undefined}>
         <SkipLink />
         {isDesktop() && list.length > 0 && <DesktopTicker list={list} />}
-        <header className="tb">
+        <header className="tb" data-desktop-header>
           <button type="button" className="tb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
             <span aria-hidden>‹</span>
             <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />
@@ -325,8 +337,8 @@ function TradeShell() {
           {!mobile && (
             <nav className="rail" aria-label="Trade">
               {VIEWS.map((v, i) => (
-                <a key={v.id} href={`#/${v.id}`} className={`rail-i ${view === v.id ? "on" : ""} ${v.id === "settings" ? "rail-end" : ""}`} aria-current={view === v.id ? "page" : undefined}
-                  title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+                <a key={v.id} href={`#/${v.id}`} className={`ui-rail-i ui-tipped rail-i ${view === v.id ? "on" : ""} ${v.id === "settings" ? "rail-end" : ""}`} aria-current={view === v.id ? "page" : undefined}
+                  data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                   <Icon name={v.icon} size={17} />
                 </a>
               ))}
@@ -353,11 +365,6 @@ function TradeShell() {
           </main>
         </div>
 
-        <footer className="tr-legal">
-          <span>Demo account. Delayed data. Not advice.</span>
-          <span className="tr-legal-r tabular">{asof ? `Data ${asof}` : insts.status === "loading" ? "Loading" : ""}</span>
-        </footer>
-
         {mobile && (
           <nav className="mtabs" aria-label="Trade">
             {([["chart", "Chart", "graph"], ["watch", "Watch", "list"], ["ticket", "Trade", "plus"], ["dock", "Positions", "table"], ["more", "More", "menu"]] as [MTab, string, string][]).map(([t, l, ic]) => {
@@ -380,6 +387,7 @@ function TradeShell() {
         </Dialog>
         <Dialog open={confirm != null} onClose={() => setConfirm(null)} title="Confirm order" width={360}
           footer={<><Button variant="tertiary" onClick={() => setConfirm(null)}>Cancel</Button><Button variant="primary" onClick={() => { confirm?.go(); setConfirm(null); }}>Place</Button></>}>
+          <div className="bt-dialog-badge"><ModeBadge /></div>
           <p className="tabular">{confirm?.text}</p>
         </Dialog>
         <NameDialog open={saving} title="Save layout" initial={layoutName ?? `Layout ${layouts.rows.length + 1}`} onClose={() => setSaving(false)}
@@ -393,6 +401,7 @@ function TradeShell() {
         <FirstRunTour areas={["trade"]} ready={view === "chart" && mtab === "chart" && insts.status !== "loading" && !noData} />
       </div>
     </DemoProvider>
+    </TradingProvider>
   );
 }
 

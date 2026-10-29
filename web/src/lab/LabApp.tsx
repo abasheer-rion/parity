@@ -1,5 +1,5 @@
 // Parity Workbench (DEC-0043): Try settings, What if, Compare, Strategy search and the Edge
-// Lab as one full-screen tool at /lab/ (lab.endyland.com). Its own rail, top bar, settings
+// Lab as one full-screen tool at /lab/ (lab.paritytrading.app). Its own rail, top bar, settings
 // and keys. Each view keeps its state in the address, so Copy link reopens it as it is.
 // Research numbers are shown read only and nothing done here is written to the research
 // side (DEC-0015). One Back button returns to Parity.
@@ -9,6 +9,7 @@
 //   #/compare      Compare: league table, crises and correlation
 //   #/search       Strategy search (research, read only)
 //   #/edges        Edge Lab: the idea checklist and the lessons (research, read only)
+//   #/pairs        Pairs: statistical arbitrage recipes and pair charts (research, read only)
 //   #/settings     Settings
 import { LiveMini } from "../components/LiveMini";
 import { Suspense, useCallback, useEffect, useState } from "react";
@@ -21,7 +22,7 @@ import { date } from "../lib/format";
 import { productUrl } from "../lib/space";
 import type { Report } from "../lib/types";
 import { setStoreUser } from "../lib/userStore";
-import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, Toaster } from "../ui";
+import { Button, Dialog, ErrorBoundary, Icon, IconButton, lazyPage, ListSelect, Toaster } from "../ui";
 import { FirstRunTour } from "../onboarding/FirstRunTour";
 import { TryView } from "./TryView";
 import { KeyTable } from "./KeyTable";
@@ -32,6 +33,7 @@ import "./lab.css";
 // the main file (REF-0024).
 const CompareView = lazyPage(() => import("./CompareView").then((m) => ({ default: m.CompareView })));
 const EdgesView = lazyPage(() => import("./EdgesView").then((m) => ({ default: m.EdgesView })));
+const PairsView = lazyPage(() => import("./PairsView").then((m) => ({ default: m.PairsView })));
 const SearchView = lazyPage(() => import("./SearchView").then((m) => ({ default: m.SearchView })));
 const WhatIfView = lazyPage(() => import("./WhatIfView").then((m) => ({ default: m.WhatIfView })));
 const SettingsView = lazyPage(() => import("./SettingsView").then((m) => ({ default: m.SettingsView })));
@@ -129,7 +131,7 @@ function LabShell() {
       if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || isTyping(e.target)) return;
       if (document.querySelector(".ui-dialog-backdrop, [aria-modal='true']")) return;
       if (e.key === "?") { e.preventDefault(); setKeysOpen(true); return; }
-      if (e.shiftKey && /^Digit[1-7]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
+      if (e.shiftKey && /^Digit[1-8]$/.test(e.code)) { e.preventDefault(); window.location.hash = `#/${VIEWS[Number(e.code.slice(5)) - 1].id}`; return; }
       if (e.shiftKey) return;
       if (e.key === "/") {
         const box = document.querySelector<HTMLInputElement>("[data-lab-find] input, input[data-lab-find]");
@@ -146,20 +148,16 @@ function LabShell() {
   // The picked run follows into the other view that reads one.
   const hrefOf = (id: View) => `#/${id}${batchId && (id === "try" || id === "compare") ? `?run=${encodeURIComponent(batchId)}` : ""}`;
   const runPicker = needsRun && (batches.length > 0 || source === "local") ? (
-    <label className="lb-run" title="Which run the numbers come from">
-      <span className="sr-only">Run</span>
-      <select value={batchId ?? ""} onChange={(e) => {
-        const v = e.target.value || undefined;
+    <span className="lb-run">
+      <ListSelect label="Run" value={batchId ?? ""} options={[["", "Latest run"], ...batches.map((b) => [b.id, `${b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}${date(b.generated_at)}`] as [string, string])]} onChange={(val) => {
+        const v = val || undefined;
         setBatchId(v);
         const q = new URLSearchParams(window.location.hash.split("?")[1] ?? "");
         if (v) q.set("run", v); else q.delete("run");
         const s = q.toString();
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${window.location.hash.split("?")[0]}${s ? `?${s}` : ""}`);
-      }}>
-        <option value="">Latest run</option>
-        {batches.map((b) => <option key={b.id} value={b.id}>{b.kind === "official" ? `${b.run_id ?? "Official"} · ` : ""}{date(b.generated_at)}</option>)}
-      </select>
-    </label>
+      }} />
+    </span>
   ) : null;
 
   const body = missing ? <NotFound heading="h2" address={hash} home="#/" homeLabel="Workbench home" body="There is no Workbench view at this address. The link may be mistyped, or the page may have moved." />
@@ -170,6 +168,7 @@ function LabShell() {
     : view === "whatif" ? <WhatIfView />
     : view === "search" ? <SearchView />
     : view === "edges" ? <EdgesView key={arg ?? ""} focus={arg} />
+    : view === "pairs" ? <PairsView />
     : view === "live" ? <div className="lb-live"><LiveMini height={360} /></div>
     : <SettingsView settings={settings} set={setSettings} />;
 
@@ -177,7 +176,7 @@ function LabShell() {
     <div className="plb" data-density={settings.density} data-mobile={mobile || undefined}>
       <div className="plb-glow" aria-hidden />
       <SkipLink />
-      <header className="lb-top">
+      <header className="lb-top" data-desktop-header>
         <button type="button" className="lb-back" onClick={goBack} title="Back to Parity" aria-label="Back to Parity">
           <span aria-hidden>‹</span>
           <img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={16} height={16} />
@@ -198,8 +197,8 @@ function LabShell() {
         {!mobile && (
           <nav className="lb-rail" aria-label="Workbench">
             {VIEWS.map((v, i) => (
-              <a key={v.id} href={hrefOf(v.id)} className={`lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
-                title={`${v.label} (Shift+${i + 1})`} aria-label={v.label}>
+              <a key={v.id} href={hrefOf(v.id)} className={`ui-rail-i ui-tipped lb-rail-i ${(!missing && view === v.id) ? "on" : ""} ${v.id === "settings" ? "end" : ""}`} aria-current={(!missing && view === v.id) ? "page" : undefined}
+                data-tip={`${v.label} · Shift+${i + 1}`} aria-label={v.label}>
                 <Icon name={v.icon} size={17} />
               </a>
             ))}
@@ -211,11 +210,6 @@ function LabShell() {
           </ErrorBoundary>
         </main>
       </div>
-
-      <footer className="lb-legal">
-        <span>Research and education only. Not investment advice. Backtests do not predict returns.</span>
-        <span className="lb-legal-r">{needsRun && report ? `Run ${date(report.generated_at)}` : ""}</span>
-      </footer>
 
       {mobile && (
         <nav className="lb-tabs" aria-label="Workbench">

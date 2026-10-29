@@ -128,6 +128,7 @@ The profiles CMP-0002 to CMP-0023 list their own sources. The counts come from t
 ## Referenced by
 
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](../decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
+- [DEC-0066: Sim World grows a scenario library, stress tests, a shock composer and live echoes](../decisions/0066-sim-world-grows-a-scenario-library-stress-tests-a-shock-composer-and-live-echoes.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](0002-bloomberg-terminal.md)
 - [CMP-0003: LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](0003-lseg-workspace.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](0004-metatrader-4-and-5.md)

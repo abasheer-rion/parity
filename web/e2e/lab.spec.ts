@@ -11,15 +11,15 @@ async function ready(page: Page, path: string) {
 test.describe("views", () => {
   test("Try: picking a strategy selects it and only it", async ({ page }) => {
     await ready(page, "/lab/#/try");
-    await page.getByRole("button", { name: /^Stock trend, 10-month/ }).click();
-    await expect(page.getByRole("button", { name: /^Stock trend, 10-month/ })).toHaveAttribute("aria-pressed", "true");
-    await expect(page.getByRole("button", { name: /^Currency carry/ })).toHaveAttribute("aria-pressed", "false");
+    await page.getByRole("button", { name: /^Ten-Month Trend/ }).click();
+    await expect(page.getByRole("button", { name: /^Ten-Month Trend/ })).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByRole("button", { name: /^Classic Carry/ })).toHaveAttribute("aria-pressed", "false");
   });
 
   test("Try: the find box narrows the strategies", async ({ page }) => {
     await ready(page, "/lab/#/try");
     await page.getByRole("searchbox", { name: "Find a strategy" }).fill("rsi");
-    await expect(page.getByRole("button", { name: /^Currency carry/ })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /^Classic Carry/ })).toHaveCount(0);
     await expect(page.getByRole("button", { name: /RSI/ }).first()).toBeVisible();
   });
 
@@ -66,11 +66,13 @@ test.describe("views", () => {
 test.describe("keys", () => {
   test.beforeEach(({}, info) => { test.skip(info.project.name === "phone", "keyboard, desktop only"); });
 
-  test("Shift and 1 to 7 reach every view, Settings included", async ({ page }) => {
+  test("Shift and 1 to 8 reach every view, Settings included", async ({ page }) => {
     await ready(page, "/lab/#/try");
     await page.keyboard.press("Shift+Digit6");
-    await expect(page).toHaveURL(/#\/live$/);
+    await expect(page).toHaveURL(/#\/pairs$/);
     await page.keyboard.press("Shift+Digit7");
+    await expect(page).toHaveURL(/#\/live$/);
+    await page.keyboard.press("Shift+Digit8");
     await expect(page).toHaveURL(/#\/settings$/);
     await page.keyboard.press("Shift+Digit3");
     await expect(page).toHaveURL(/#\/compare/);
@@ -81,18 +83,18 @@ test.describe("keys", () => {
     await page.keyboard.press("Shift+Slash");
     const dialog = page.getByRole("dialog", { name: "Keys" });
     await expect(dialog).toBeVisible();
-    await expect(dialog).toContainText("Shift+1 to 7");
+    await expect(dialog).toContainText("Shift+1 to 8");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
   });
 });
 
 test.describe("phone tab bar", () => {
-  test("all seven views fit on one row", async ({ page }, info) => {
+  test("all eight views fit on one row", async ({ page }, info) => {
     test.skip(info.project.name !== "phone", "phone layout");
     await ready(page, "/lab/#/compare");
     const tabs = page.getByRole("navigation", { name: "Workbench" }).getByRole("link");
-    await expect(tabs).toHaveCount(7);
+    await expect(tabs).toHaveCount(8);
     const boxes = await tabs.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()).map((r) => ({ top: Math.round(r.top), bottom: r.bottom, right: r.right })));
     expect(new Set(boxes.map((b) => b.top)).size, "one row").toBe(1);
     const vh = page.viewportSize()!.height;

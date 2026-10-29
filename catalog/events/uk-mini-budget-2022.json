@@ -2,7 +2,7 @@
   "id": "uk-mini-budget-2022",
   "name": "UK mini-budget",
   "date": "2022-09-23",
-  "type": "political_crisis",
+  "type": "rate_shock",
   "regions": [
     "europe"
   ],

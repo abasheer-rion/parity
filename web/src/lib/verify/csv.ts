@@ -72,6 +72,8 @@ export function num(cell: string | undefined, decimalComma = false): number | nu
   let s = cell.trim();
   if (!s) return null;
   let neg = false;
+  // "$(25.00)" (Tradovate, NinjaTrader) and "-$25.00": a leading currency sign goes first.
+  s = s.replace(/^([-−]?)\s*[$€£¥]\s*/, "$1");
   if (/^\(.*\)$/.test(s)) { neg = true; s = s.slice(1, -1); }
   s = s.replace(/[\s '$€£¥%]|USD|EUR|GBP|JPY|USDT/gi, "");
   s = s.replace(/^−/, "-");
@@ -104,7 +106,10 @@ export function parseDate(cell: string | undefined, dayFirst = false): string | 
   let y: number, mo: number, d: number;
   let rest = "";
   let m = s.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})(.*)$/);
+  // Compact forms: 20240103;101500 (Interactive Brokers Flex), 20240103 10:15:00, 20240103.
+  const c = m ? null : s.match(/^(\d{4})(\d{2})(\d{2})(?:[;,T ]+(\d{2}):?(\d{2}):?(\d{2})?)?$/);
   if (m) { y = +m[1]; mo = +m[2]; d = +m[3]; rest = m[4]; }
+  else if (c) { y = +c[1]; mo = +c[2]; d = +c[3]; rest = c[4] ? ` ${c[4]}:${c[5]}:${c[6] ?? "00"}` : ""; }
   else if ((m = s.match(/^(\d{1,2})[-./](\d{1,2})[-./](\d{2,4})(.*)$/))) {
     const a = +m[1], b = +m[2];
     y = +m[3] < 100 ? 2000 + +m[3] : +m[3];

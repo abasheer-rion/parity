@@ -15,6 +15,8 @@ const listeners = new Set<(table: string) => void>();
 
 /** Called once by the app with the signed-in user's id (null in the local preview). */
 export function setStoreUser(id: string | null) { currentUser = id; }
+/** The signed-in user id, or null. Used to seed the What's new order so it holds for the day. */
+export const storeUserId = () => currentUser;
 /** Tests use the in-browser store. */
 export function setLocalStore(on = true) { forceLocal = on; }
 export const isMockStore = () => forceLocal || !currentUser;

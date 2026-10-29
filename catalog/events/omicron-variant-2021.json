@@ -1,0 +1,25 @@
+{
+  "id": "omicron-variant-2021",
+  "name": "WHO names the Omicron variant",
+  "date": "2021-11-26",
+  "type": "pandemic",
+  "regions": [
+    "africa",
+    "global"
+  ],
+  "actors": [
+    "south_africa"
+  ],
+  "severity": 3,
+  "commodities": [
+    "oil"
+  ],
+  "description": "The World Health Organization named Omicron a variant of concern; oil fell about 13% and shares had their worst day in months.",
+  "sources": [
+    {
+      "title": "SARS-CoV-2 Omicron variant",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/SARS-CoV-2_Omicron_variant"
+    }
+  ]
+}

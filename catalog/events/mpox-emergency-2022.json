@@ -1,0 +1,20 @@
+{
+  "id": "mpox-emergency-2022",
+  "name": "WHO declares mpox an emergency",
+  "date": "2022-07-23",
+  "type": "pandemic",
+  "regions": [
+    "global"
+  ],
+  "actors": [],
+  "severity": 1,
+  "commodities": [],
+  "description": "The World Health Organization declared the 2022 mpox outbreak a public health emergency of international concern.",
+  "sources": [
+    {
+      "title": "2022-2023 mpox outbreak",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2022%E2%80%932023_mpox_outbreak"
+    }
+  ]
+}

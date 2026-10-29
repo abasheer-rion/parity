@@ -4,8 +4,10 @@
 // person straight in.
 import { useState } from "react";
 import { explain, requireClient } from "../client";
-import { Field, LEAVING, Notice, PasswordField, Submit, TextButton, useSubmit, Who } from "../fields";
+import { explainSend, waitSeconds } from "../errors";
+import { EMAIL_GAP_SECONDS, Field, LEAVING, Notice, PasswordField, Submit, TextButton, useCooldown, useSubmit, Who } from "../fields";
 import { Screen, SwitchLink, useFlow } from "../flow";
+import { passwordsMatch } from "../PasswordMeter";
 import { emailLanding } from "../redirect";
 import { codeProblem, emailProblem, passwordProblem } from "../rules";
 import { welcomeNew } from "../session";
@@ -16,6 +18,7 @@ export function SignUp() {
   const { next, email, setEmail, carry, show } = useFlow();
   const [step, setStep] = useState<"email" | "password">("email");
   const [password, setPassword] = useState("");
+  const [again, setAgain] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [sentTo, setSentTo] = useState<string | null>(carry.check ?? null);
   const form = useSubmit();
@@ -29,13 +32,14 @@ export function SignUp() {
   const submit = form.run(async () => {
     const bad = passwordProblem(password);
     if (bad) return { field: "password", message: bad };
+    if (!passwordsMatch(password, again)) return { field: "again", message: "Passwords do not match." };
     if (!agreed) return { field: "terms", message: "Please agree to the terms and the privacy policy to continue." };
     const { data, error } = await requireClient().auth.signUp({
       email: email.trim(),
       password,
       options: { emailRedirectTo: emailLanding(next) },
     });
-    if (error) return explain(error);
+    if (error) return explainSend(error);
     track("sign_up", { method: "email" });
     if (data.session) { await welcomeNew(show); return LEAVING; }
     // No session: confirmation is on. Supabase answers the same way for an address that
@@ -52,6 +56,7 @@ export function SignUp() {
         <form className="pa-form" onSubmit={submit} noValidate>
           <input type="email" name="email" autoComplete="username" value={email.trim()} readOnly hidden />
           <PasswordField label="Choose a password" auto="new-password" value={password} onChange={setPassword} rules email={email} autoFocus error={form.errorFor("password")} />
+          <PasswordField label="Confirm password" auto="new-password" name="confirm-password" value={again} onChange={setAgain} match={password} error={form.errorFor("again")} />
           <label className="pa-check">
             <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} required
               aria-invalid={termsError ? true : undefined} aria-describedby={termsError ? "pa-terms-err" : undefined} />
@@ -59,7 +64,7 @@ export function SignUp() {
           </label>
           {termsError && <span className="pa-error" id="pa-terms-err" role="alert">{termsError}</span>}
           <Notice>{form.general}</Notice>
-          <Submit busy={form.busy}>Create account</Submit>
+          <Submit busy={form.busy} disabled={!passwordsMatch(password, again)}>Create account</Submit>
         </form>
       </Screen>
     );
@@ -85,6 +90,8 @@ export function CheckEmail({ email }: { email: string }) {
   const [resent, setResent] = useState(false);
   const form = useSubmit();
   const resend = useSubmit();
+  const cooldown = useCooldown();
+  const left = cooldown.leftFor(email);
 
   const verify = form.run(async () => {
     const bad = codeProblem(code);
@@ -96,9 +103,14 @@ export function CheckEmail({ email }: { email: string }) {
   });
 
   const again = resend.run(async () => {
+    if (left) return null;
     setResent(false);
     const { error } = await requireClient().auth.resend({ type: "signup", email, options: { emailRedirectTo: emailLanding(next) } });
-    if (error) return explain(error);
+    // One email per address every 30 seconds: count down instead of showing an error.
+    const wait = waitSeconds(error);
+    if (wait) { cooldown.start(wait, email); return null; }
+    if (error) return explainSend(error);
+    cooldown.start(EMAIL_GAP_SECONDS, email);
     setResent(true);
   });
 
@@ -112,7 +124,7 @@ export function CheckEmail({ email }: { email: string }) {
         <Submit busy={form.busy}>Confirm email</Submit>
       </form>
       <div className="pa-alt">
-        <TextButton onClick={() => void again()} disabled={resend.busy}>{resend.busy ? "Sending" : "Send the email again"}</TextButton>
+        <TextButton onClick={() => void again()} disabled={resend.busy || left > 0}>{resend.busy ? "Sending" : left ? `Send again in ${left}s` : "Send the email again"}</TextButton>
         <SwitchLink className="pa-text" to="login">Back to log in</SwitchLink>
       </div>
     </Screen>

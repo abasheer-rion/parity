@@ -1,8 +1,9 @@
 // The app frame, laid out like Mercury's: a quiet left sidebar (workspace row, search,
 // a segmented switch between areas, nav with nested children for the active item,
-// bookmarks, the run picker and the account menu) and the page. There is no top bar:
-// on phones a small floating button opens the sidebar (DEC-0021).
-import { useEffect, useState, type ReactNode } from "react";
+// bookmarks, the run picker and the account menu) and the page. On the product side a
+// slim strip at the top right holds the setup ring (DEC-0075); on phones a small
+// floating button opens the sidebar (DEC-0021).
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { SkipLink } from "./SkipLink";
 import { Icon } from "../ui/icons";
 import { Collapse } from "../ui/disclosure";
@@ -11,8 +12,12 @@ import { academyUrl, labUrl, simUrl, SPACE, SPACE_ROOT, tradeUrl } from "../lib/
 import { setPrefs, toggleBookmark, usePrefs } from "../lib/prefs";
 import { CopyLink } from "./CopyLink";
 import { IconButton } from "../ui";
+import { StatusBanner } from "./StatusBanner";
 
-interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string }
+// The setup ring at the top right of the product app (DEC-0075). Loaded after the page.
+const SetupButton = lazy(() => import("../onboarding/SetupButton").then((m) => ({ default: m.SetupButton })));
+
+interface NavItem { href: string; label: string; icon: string; routes: string[]; children?: { href: string; label: string; routes: string[] }[]; external?: string; /** The one item that stands out at the top of the list. */ lead?: boolean }
 
 // Plain names: say what the page does, not what we call it internally. Each item's
 // hover text comes from lib/pages.ts, the same words search and Start here use.
@@ -21,9 +26,10 @@ const START: NavItem = { href: "#/start", label: "Start here", icon: "sparkle", 
 const HOW: NavItem = { href: "#/how", label: "How Parity works", icon: "info", routes: ["how"] };
 const GLOSSARY: NavItem = { href: "#/learn", label: "Glossary", icon: "cap", routes: ["learn"] };
 
+// Verify comes first and stands out (DEC-0079, DEC-0080); everything else stays.
 const PRODUCT: NavItem[] = [
+  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"], lead: true },
   { href: "#/", label: "Home", icon: "home", routes: ["", "home"] },
-  { href: "#/verify", label: "Verify", icon: "checkCircle", routes: ["verify"] },
   { href: "#/strategies", label: "Discover", icon: "chart", routes: ["strategies", "strategy"] },
   { href: "#/watchlist", label: "Watchlist", icon: "bookmark", routes: ["watchlist"] },
   // Try settings, What if and Compare live in Parity Workbench, which opens in a new tab (DEC-0043).
@@ -77,6 +83,7 @@ const RESEARCH: NavItem[] = [
   // Parity Academy is its own full-screen app and opens in a new tab (DEC-0042).
   { href: academyUrl(), label: "Academy", icon: "play", routes: [], external: "Opens Parity Academy in a new tab" },
   { href: "#/private", label: "Private markets data", icon: "database", routes: ["private"] },
+  { href: "#/pairs", label: "Pairs", icon: "link", routes: ["pairs"] },
   { href: "#/competitors", label: "Competitors", icon: "compare", routes: ["competitors"] },
   {
     href: "#/catalog", label: "Algorithm library", icon: "catalog", routes: ["catalog", "algo", "signals", "explore"],
@@ -89,9 +96,12 @@ const RESEARCH: NavItem[] = [
   // Sim World is its own full-screen site and opens in a new tab (DEC-0021).
   { href: simUrl(), label: "Parity Terminal", icon: "compass", routes: ["sim"], external: "Opens Parity Terminal in a new tab" },
   {
-    href: "#/data", label: "Data", icon: "database", routes: ["data", "sources", "latency"],
+    href: "#/registry", label: "Data", icon: "database", routes: ["data", "sources", "latency", "registry"],
     children: [
-      { href: "#/data", label: "Data health", routes: ["data"] },
+      { href: "#/registry", label: "Data catalog", routes: [] },
+      { href: "#/registry/candidates", label: "Candidates", routes: [] },
+      { href: "#/registry/health", label: "Data health", routes: [] },
+      { href: "#/data", label: "This run's data", routes: ["data"] },
       { href: "#/latency", label: "Latency", routes: ["latency"] },
       { href: "#/sources", label: "Sources", routes: ["sources"] },
     ],
@@ -109,6 +119,9 @@ const RESEARCH: NavItem[] = [
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
+    { id: "personalization", label: "Personalization" },
+    { id: "api-keys", label: "API keys" },
+    { id: "trade-profile", label: "Trade profile" },
   ] },
 ];
 
@@ -164,6 +177,8 @@ export function Shell({
     <div className={`frame ${open ? "nav-open" : ""} ${full && prefs.rail ? "railed" : ""}`}>
       <SkipLink />
       <aside className="side" id="side" data-lenis-prevent>
+        {/* The desktop app's window controls sit here (desktop/electron/preload.js); hidden in a browser. */}
+        <div className="desktop-band" data-desktop-header aria-hidden="true" />
         <div className="org">
           <a className="org-button" href="#/">
             <span className="org-mark"><img src="/brand/2026-10-21-starburst/parity-mark.svg" alt="" width={24} height={24} /></span>
@@ -211,7 +226,7 @@ export function Shell({
                   const active = n.routes.includes(route);
                   return (
                     <div key={n.href}>
-                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""}`} aria-expanded={n.children ? active : undefined}
+                      <a href={n.href} title={n.external ?? pageByHref[n.href]?.what ?? n.label} className={`side-item ${active ? "active" : ""} ${n.lead ? "lead" : ""}`} aria-expanded={n.children ? active : undefined}
                         {...(n.external ? { target: "_blank", rel: "noopener" } : {})}>
                         <span className="ico"><Icon name={n.icon} size={14} /></span>
                         <span className="lbl">{n.label}</span>
@@ -265,7 +280,10 @@ export function Shell({
       <div className="scrim" onClick={() => setOpen(false)} />
       <div className="main-col">
         <button className="menu-fab" aria-label="Open menu" aria-controls="side" aria-expanded={open} onClick={() => setOpen(true)}><Icon name="menu" size={18} /></button>
-        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}>{children}</main>
+        {!research && !full && (
+          <div className="app-top">{(route === "" || route === "home") && <Suspense fallback={null}><SetupButton /></Suspense>}</div>
+        )}
+        <main id="main" tabIndex={-1} className={full ? "full" : wide ? "wide" : ""}><StatusBanner />{children}</main>
       </div>
     </div>
   );

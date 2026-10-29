@@ -11,8 +11,9 @@ passes; otherwise it stays a candidate with the first failing reason.
     6. quality      a score from 0 to 1, at least checks.MIN_QUALITY
 
 Candidates for the live feed (new Base pools) skip history: they pass when the licence
-allows a public feed and the pool is still as deep as the bar. Going live in the feed is a
-code change to its pool list; the record says so.
+allows a public feed and the pool is still as deep as the bar. Once enrolled, the daily
+pool-enrol job (registry/feed.py, DEC-0078) adds them to the feed's enrolled list by itself,
+after checking the depth again, at most a few a day.
 
 At most `limit` candidates are tried per cycle, and none more than once a day, so the gate
 never floods a source with requests.
@@ -128,7 +129,7 @@ def gate(con: sqlite3.Connection, rec: dict, now: pd.Timestamp | None = None) ->
                         "CONFLICT(series_id) DO UPDATE SET points = excluded.points, dirty = 1",
                         (rec["id"], json.dumps(checks.preview(data))))
     else:
-        note = "enrolled; reaches the live feed when added to its pool list"
+        note = "enrolled; the daily pool-enrol job adds it to the live feed (DEC-0078)"
     for k, v in fields.items():
         rec[k] = v
     db.put(con, rec)

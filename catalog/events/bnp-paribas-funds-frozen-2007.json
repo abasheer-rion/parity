@@ -1,0 +1,25 @@
+{
+  "id": "bnp-paribas-funds-frozen-2007",
+  "name": "BNP Paribas freezes three funds",
+  "date": "2007-08-09",
+  "type": "financial_crisis",
+  "regions": [
+    "europe",
+    "north_america",
+    "global"
+  ],
+  "actors": [
+    "france",
+    "ecb"
+  ],
+  "severity": 3,
+  "commodities": [],
+  "description": "BNP Paribas froze three funds holding US subprime mortgage bonds, saying it could not value them; the ECB lent 95 billion euros the same day.",
+  "sources": [
+    {
+      "title": "2007-2008 financial crisis",
+      "publisher": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/2007%E2%80%932008_financial_crisis"
+    }
+  ]
+}
