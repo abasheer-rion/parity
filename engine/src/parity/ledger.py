@@ -129,3 +129,8 @@ def first_committed_version(path: Path) -> tuple[str, str] | None:
         return None
     first = shas[-1]
     return first, git("show", f"{first}:{rel}")
+
+
+def committed_at(sha: str) -> str:
+    """Committer timestamp for a commit, as an ISO string."""
+    return git("show", "-s", "--format=%cI", sha)

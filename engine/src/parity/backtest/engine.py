@@ -124,9 +124,16 @@ def asset_returns(panel: pd.DataFrame, instruments: list[str], include_carry: bo
     return rets.fillna(0.0)
 
 
-def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None = None
-        ) -> BacktestResult:
+def run(strategy: Strategy, panel: pd.DataFrame, config: BacktestConfig | None = None, *,
+        _allow_holdout: bool = False) -> BacktestResult:
     config = config or BacktestConfig()
+    if not _allow_holdout:
+        from ..holdout import clamp_config
+        config = clamp_config(config)
+        if config.end is not None:
+            # Do not let strategies or indicators inspect rows from the sealed window,
+            # even when their portfolio is evaluated on an earlier historical slice.
+            panel = panel.loc[:config.end]
     instruments = strategy.instruments()
     target = strategy.weights(panel).reindex(columns=instruments).fillna(0.0)
 
