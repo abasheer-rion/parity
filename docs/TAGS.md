@@ -68,6 +68,7 @@ Oil, gas, metals and their link to currencies.
 - [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
 - [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
 - [DAT-0011: EIA Open Data API v2](datasets/0011-eia.md)
 - [DAT-0024: Nasdaq Data Link (formerly Quandl)](datasets/0024-nasdaq-data-link.md)
 - [DAT-0035: World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md)
@@ -528,6 +529,7 @@ Trend and momentum signals.
 - [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
 - [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
 
 ## news
 
@@ -630,6 +632,7 @@ Other people's code, bots and published results.
 - [ALG-0070: RSI overbought / oversold reversal (30 / 70)](algorithms/0070-rsi-overbought-oversold.md)
 - [ALG-0071: Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md)
 
 ## private-markets
 
@@ -833,6 +836,14 @@ A specific trading idea or its implementation.
 - [ALG-0080: Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md)
 - [ALG-0081: Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md)
 - [ALG-0082: Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md)
+- [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
+- [ALG-0100: Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md)
+- [ALG-0101: Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md)
+- [ALG-0102: VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md)
+- [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md)
+- [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
+- [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md)
+- [ALG-0106: Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md)
 
 ## ui
 

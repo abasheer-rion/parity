@@ -1,0 +1,70 @@
+{
+  "id": "ALG-0105",
+  "slug": "equity-short-term-reversal",
+  "name": "Short-term reversal in stocks (one-month losers beat winners)",
+  "family": "value-mean-reversion",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "reversal",
+    "cross-sectional",
+    "contrarian",
+    "liquidity"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 1990,
+    "authors": "Jegadeesh",
+    "source_title": "Evidence of Predictable Behavior of Security Returns (Journal of Finance 45(3), 881-898)",
+    "source_url": "https://doi.org/10.1111/j.1540-6261.1990.tb05110.x"
+  },
+  "how_it_works": {
+    "simple": "Buy the stocks that fell most last month and sell the ones that rose most; over the next month they tend to swap back.",
+    "analogy": "Like a crowded doorway: people pushed out of the way last month drift back in.",
+    "precise": "Monthly returns of individual stocks are negatively related to the previous month's return (and positively to returns 12 months back). Sorting stocks into deciles on a forecast built from these patterns gives a large spread in next-month returns. The usual explanation is that liquidity providers are paid for absorbing order imbalances."
+  },
+  "rule": "At each month end, rank stocks by the past month's return; buy the bottom decile and sell the top decile for one month.",
+  "data_needed": [
+    "Monthly stock returns (the Kenneth French data library has a free short-term reversal factor)"
+  ],
+  "economic_rationale": "Prices overshoot when traders demand liquidity, and the investors who absorb that demand are paid when prices bounce back.",
+  "why_it_might_fail": "Turnover is close to 100% a month, so trading costs eat much of the profit, especially in small stocks. Part of the effect is bid-ask bounce rather than a tradable return.",
+  "reported_results": [
+    {
+      "source": "Jegadeesh (1990), abstract",
+      "source_url": "https://ideas.repec.org/a/bla/jfinan/v45y1990i3p881-98.html",
+      "period": "1934 to 1987",
+      "market": "US stocks",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "The abstract reports that the difference in abnormal returns between the extreme deciles of stocks sorted on predicted returns was 2.49 percent per month. Before costs. Sorted on a regression forecast, not only last month's return."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet. Later work on whether the profits survive trading costs exists; we have not read it.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "A classic anomaly that many mean-reversion bots trade; a free factor series makes a quick comparison possible."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "The free series is a published factor, not our own sort, so a test would check the factor before costs. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}
