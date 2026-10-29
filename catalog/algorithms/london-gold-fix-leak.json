@@ -1,0 +1,72 @@
+{
+  "id": "ALG-0111",
+  "slug": "london-gold-fix-leak",
+  "name": "Trading the London gold fixing leak",
+  "family": "event-news",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "intraday",
+  "tags": [
+    "gold",
+    "metals",
+    "benchmark-fixing",
+    "intraday",
+    "information-leakage"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2014,
+    "authors": "Caminschi, Heaney",
+    "source_title": "Fixing a Leaky Fixing: Short-Term Market Reactions to the London PM Gold Price Fixing (Journal of Futures Markets 34(11), 1003-1039)",
+    "source_url": "https://doi.org/10.1002/fut.21636"
+  },
+  "how_it_works": {
+    "simple": "The old London afternoon gold price was set by a few banks on a private call. Prices in the futures market started moving in the direction of the result within minutes of the call starting, before it was announced.",
+    "analogy": "Like a sealed-bid auction where the bidders' friends keep placing side bets while the envelopes are still being opened.",
+    "precise": "Using minute data for COMEX gold futures (GC) and the GLD fund from 2007 to 2012, volume and volatility jump right after the PM fixing starts, informed trades in the first four minutes earn significant returns, and early trades predict the fixing's direction, in some cases more than 90% of the time. The published result has no effect."
+  },
+  "rule": "At the start of the London PM fixing (3 pm London), trade gold futures in the direction of the first minutes' price move and exit when the fixing result is published.",
+  "data_needed": [
+    "Minute-level gold futures prices (paid)",
+    "Fixing start and end times"
+  ],
+  "economic_rationale": "Banks on the fixing call knew order imbalances before the public, and that information leaked into exchange prices.",
+  "why_it_might_fail": "The fixing was replaced by an electronic, administered auction (the LBMA Gold Price) in 2015 after manipulation fines, so the leak this exploited should no longer exist. It needed minute-level execution.",
+  "reported_results": [
+    {
+      "source": "Caminschi and Heaney (2014), author repository version, abstract and data section",
+      "source_url": "https://api.research-repository.uwa.edu.au/ws/files/4725264/A0205_use_this.pdf",
+      "period": "2007-01-01 to 2012-12-31",
+      "market": "COMEX gold futures (GC) and GLD",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": true,
+      "verified_on_page": true,
+      "notes": "Abstract: significantly elevated volume and volatility right after the fixing starts; statistically significant return advantages in the four minutes after the start for informed traders; early trades predict the fixing's direction, in some cases above 90%; no effect after the result is published. The paper estimates GC trading costs below 0.15 basis points of notional. No annual return or Sharpe ratio for a strategy."
+    }
+  ],
+  "post_publication_evidence": "The structure it exploited changed: the London gold fixing was replaced in 2015 (not checked by us in a primary source).",
+  "implementations": [],
+  "relevance": {
+    "score": 1,
+    "reason": "Not testable or tradable now, but a documented case of benchmark leakage, useful background for Verify when a log shows trades clustered around fixings."
+  },
+  "testable_with_free_data": false,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Historical only; the mechanism ended in 2015. Added in Amanda's metals batch on 2026-10-25."
+  },
+  "authors": [
+    "amanda"
+  ],
+  "last_reviewed": "2026-10-25"
+}

@@ -68,6 +68,13 @@ Oil, gas, metals and their link to currencies.
 - [ALG-0046: Risk parity (inverse volatility asset allocation)](algorithms/0046-risk-parity.md)
 - [ALG-0051: Combined trend and carry portfolio](algorithms/0051-trend-plus-carry-combined.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
+- [ALG-0107: Gold real price mean reversion (the golden dilemma)](algorithms/0107-gold-real-price-mean-reversion.md)
+- [ALG-0108: Industrial metal prices time the stock market](algorithms/0108-industrial-metals-time-stocks.md)
+- [ALG-0109: Gold autumn effect (September and November)](algorithms/0109-gold-autumn-effect.md)
+- [ALG-0110: Gold as a short-lived safe haven after stock crashes](algorithms/0110-gold-safe-haven-after-crashes.md)
+- [ALG-0111: Trading the London gold fixing leak](algorithms/0111-london-gold-fix-leak.md)
+- [ALG-0112: Gold-silver ratio reversion](algorithms/0112-gold-silver-ratio-reversion.md)
 - [DAT-0011: EIA Open Data API v2](datasets/0011-eia.md)
 - [DAT-0024: Nasdaq Data Link (formerly Quandl)](datasets/0024-nasdaq-data-link.md)
 - [DAT-0035: World Bank Indicators API and Pink Sheet](datasets/0035-world-bank.md)
@@ -528,6 +535,7 @@ Trend and momentum signals.
 - [ALG-0042: Cross-sectional equity momentum (winners minus losers)](algorithms/0042-equity-cross-sectional-momentum.md)
 - [ALG-0043: Managed futures trend following (diversified time-series momentum)](algorithms/0043-managed-futures-trend-following.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
 
 ## news
 
@@ -553,6 +561,7 @@ News, macro releases and event-driven signals.
 - [ALG-0044: EIA weekly natural gas storage report trading](algorithms/0044-natural-gas-storage-report.md)
 - [ALG-0057: Copy trading and paid signal services](algorithms/0057-copy-trading-signal-services.md)
 - [ALG-0066: News straddle (pending orders around NFP and rate decisions)](algorithms/0066-news-straddle-trading.md)
+- [ALG-0111: Trading the London gold fixing leak](algorithms/0111-london-gold-fix-leak.md)
 - [DAT-0012: Finnhub](datasets/0012-finnhub.md)
 - [DAT-0013: Forex Factory weekly calendar export](datasets/0013-forex-factory-calendar.md)
 - [DAT-0016: GDELT Project](datasets/0016-gdelt.md)
@@ -630,6 +639,7 @@ Other people's code, bots and published results.
 - [ALG-0070: RSI overbought / oversold reversal (30 / 70)](algorithms/0070-rsi-overbought-oversold.md)
 - [ALG-0071: Support and resistance / supply and demand zones](algorithms/0071-support-resistance-supply-demand-zones.md)
 - [ALG-0072: Donchian channel / Turtle Traders breakout](algorithms/0072-turtle-donchian-breakout.md)
+- [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md)
 
 ## private-markets
 
@@ -833,6 +843,20 @@ A specific trading idea or its implementation.
 - [ALG-0080: Low-volume reversal in currency pairs](algorithms/0080-fx-low-volume-reversal.md)
 - [ALG-0081: Asymmetric information risk (price impact) currency strategy](algorithms/0081-fx-asymmetric-information-risk.md)
 - [ALG-0082: Complex ridge market timing (virtue of complexity)](algorithms/0082-complex-ml-market-timing.md)
+- [ALG-0099: Crack spread mean reversion (3:2:1 refining margin)](algorithms/0099-crack-spread-mean-reversion.md)
+- [ALG-0100: Covered calls on the S&P 500 (buy-write, BXM)](algorithms/0100-covered-call-buy-write.md)
+- [ALG-0101: Cash-secured put writing on the S&P 500 (PUT index, the wheel)](algorithms/0101-cash-secured-put-writing.md)
+- [ALG-0102: VIX futures basis carry (short VIX in contango)](algorithms/0102-vix-futures-basis-carry.md)
+- [ALG-0103: Opening range breakout on stocks in play (5-minute ORB)](algorithms/0103-opening-range-breakout-stocks-in-play.md)
+- [ALG-0104: Overnight versus intraday momentum (tug of war)](algorithms/0104-overnight-intraday-momentum.md)
+- [ALG-0105: Short-term reversal in stocks (one-month losers beat winners)](algorithms/0105-equity-short-term-reversal.md)
+- [ALG-0106: Gross profitability (quality) premium in stocks](algorithms/0106-gross-profitability.md)
+- [ALG-0107: Gold real price mean reversion (the golden dilemma)](algorithms/0107-gold-real-price-mean-reversion.md)
+- [ALG-0108: Industrial metal prices time the stock market](algorithms/0108-industrial-metals-time-stocks.md)
+- [ALG-0109: Gold autumn effect (September and November)](algorithms/0109-gold-autumn-effect.md)
+- [ALG-0110: Gold as a short-lived safe haven after stock crashes](algorithms/0110-gold-safe-haven-after-crashes.md)
+- [ALG-0111: Trading the London gold fixing leak](algorithms/0111-london-gold-fix-leak.md)
+- [ALG-0112: Gold-silver ratio reversion](algorithms/0112-gold-silver-ratio-reversion.md)
 
 ## ui
 
