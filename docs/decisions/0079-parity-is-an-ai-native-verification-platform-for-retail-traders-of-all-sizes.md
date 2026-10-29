@@ -87,4 +87,6 @@ The tiers in [DEC-0032](0032-parity-verify-as-a-data-and-api-business-with-a-fre
 - [DEC-0080: The front page leads with Verify, three ways in and planned prices](0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
 - [DEC-0082: Verify tools and endpoints for AI apps and programs](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](../research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](../research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 <!-- backlinks:end -->

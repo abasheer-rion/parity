@@ -42579,6 +42579,337 @@
         "source": "manual",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-fa6d5610",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradeRank AI trading leaderboard, October 2026",
+      "venue": "traderank.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.traderank.ai/ai-trading-leaderboard",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f09d16b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "AI Trading Benchmark: LLM Leaderboard for Crypto Trading",
+      "venue": "oakresearch.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://oakresearch.io/en/ai/trading-benchmark",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "ulesov2026",
+      "type": "preprint",
+      "authors": [
+        "Ulesov, Makar",
+        "Smirnov, Vladislav",
+        "Ibrahim, Omar",
+        "Bobovnikov, Arsenii"
+      ],
+      "year": 2026,
+      "title": "Can LLMs Catch a Rigged Backtest? A Clean-Control Calibration Benchmark",
+      "venue": "arXiv preprint",
+      "doi": null,
+      "arxiv": "2609.28090",
+      "url": "https://arxiv.org/abs/2609.28090",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "barton2026",
+      "type": "preprint",
+      "authors": [
+        "Barton, T.J.",
+        "Constantakis, Chris",
+        "Hauseman, Patti",
+        "Mous, Annie",
+        "Hoffman, Alaska",
+        "Bergeron, Brian",
+        "Goodreau, Hunter"
+      ],
+      "year": 2026,
+      "title": "What LLM Trading Agents Actually Do in Production: A Six-Month, Population-Scale Record from Two Fleets",
+      "venue": "arXiv preprint",
+      "doi": null,
+      "arxiv": "2609.05663",
+      "url": "https://arxiv.org/abs/2609.05663",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-82637c93",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Prop Trading Statistics 2026: Pass Rates and Market Data",
+      "venue": "track360.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://track360.io/blog/prop-trading-industry-statistics-2026",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f3b04298",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ESMA communicates supervisory expectations on copy trading services",
+      "venue": "PwC Legal",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://legal.pwc.de/en/news/articles/esma-communicates-supervisory-expectations-on-copy-trading-services",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-28e0e490",
+      "type": "dataset",
+      "authors": [
+        "Chen, Andrew Y.",
+        "Zimmermann, Tom"
+      ],
+      "year": null,
+      "title": "Open Source Asset Pricing",
+      "venue": "openassetpricing.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.openassetpricing.com/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c2280db1",
+      "type": "dataset",
+      "authors": [
+        "Jensen, Theis Ingerslev",
+        "Kelly, Bryan",
+        "Pedersen, Lasse Heje"
+      ],
+      "year": null,
+      "title": "Global Factor Data",
+      "venue": "jkpfactors.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://jkpfactors.com/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "harvey2019",
+      "type": "preprint",
+      "authors": [
+        "Harvey, Campbell R.",
+        "Liu, Yan"
+      ],
+      "year": 2019,
+      "title": "A Census of the Factor Zoo",
+      "venue": "SSRN working paper",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://papers.ssrn.com/abstract=3341728",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e6249d93",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Quantpedia's Research in 2023",
+      "venue": "quantpedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpedia.com/quantpedias-research-in-2023/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "wiecki2016",
+      "type": "preprint",
+      "authors": [
+        "Wiecki, Thomas",
+        "Campbell, Andrew",
+        "Lent, Justin",
+        "Stauth, Jessica"
+      ],
+      "year": 2016,
+      "title": "All that Glitters Is Not Gold: Comparing Backtest and Out-of-Sample Performance on a Large Cohort of Trading Algorithms",
+      "venue": "SSRN working paper",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://papers.ssrn.com/abstract=2745220",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "blocked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-caa68e18",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "pbo: Probability of Backtest Overfitting (R package)",
+      "venue": "CRAN",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cran.r-project.org/package=pbo",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-583d7f70",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Quantpedia, in-sample against out-of-sample analysis of trading strategies",
+      "venue": "quantpedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpedia.com/tag/own-research/page/4/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }

@@ -101,5 +101,7 @@ If the 90-day numbers miss by more than half, we stop and rethink, as set out in
 - [DEC-0039: A front page for Verify, dark glass and scroll scenes](../decisions/0039-a-front-page-for-verify-dark-glass-and-scroll-scenes.md)
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](../decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](../research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](../research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 <!-- backlinks:end -->
