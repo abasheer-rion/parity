@@ -42227,6 +42227,358 @@
         "doi_explicit": false,
         "title_from": "set by hand"
       }
+    },
+    {
+      "key": "url-523bc440",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "Federal Reserve, FOMC statement, 28 October 2026",
+      "venue": "federalreserve.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-3f26428c",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "FOMC statement, 29 April 2026",
+      "venue": "atlantafed.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.atlantafed.org/news-and-events/2026/04/29/fomc-statement",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-062c5897",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "NPR on the June meeting",
+      "venue": "npr.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.npr.org/2026/06/17/nx-s1-5860084/fed-chief-warsh-first-fomc-meeting",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e63b8538",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on the July meeting",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/07/29/fed-rate-decision-july-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-525cd654",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "July press conference transcript",
+      "venue": "federalreserve.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.federalreserve.gov/mediacenter/files/FOMCpresconf20260729.pdf",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-66181ece",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNN on the September hike",
+      "venue": "cnn.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-september",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6dc6be74",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on September CPI",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1b96b022",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "CNBC on September jobs",
+      "venue": "cnbc.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.cnbc.com/2026/10/02/jobs-report-september-2026.html",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-5adf5420",
+      "type": "regulator",
+      "authors": [],
+      "year": 2026,
+      "title": "Treasury daily par yield curve",
+      "venue": "home.treasury.gov",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4e824862",
+      "type": "dataset",
+      "authors": [],
+      "year": 2026,
+      "title": "San Francisco Fed monetary policy surprises",
+      "venue": "frbsf.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.frbsf.org/research-and-insights/data-and-indicators/monetary-policy-surprises/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0e2591ce",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "FatTail futures timeline",
+      "venue": "fattail.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://fattail.ai/warsh-data-vs-fedspeak/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9c0576f",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "Euronews preview",
+      "venue": "euronews.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://euronews.com/2026/10/27/what-to-expect-from-the-fed-as-warsh-weighs-hot-inflation-oil-and-us-midterms",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ada7183b",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "investingLive preview",
+      "venue": "investinglive.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://investinglive.com/central-banks/fomc-preview-a-hawkish-hold-as-markets-watch-for-signals-about-timing-and-extent-of-further-tightening/",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f6b243ed",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kalshi odds",
+      "venue": "news.kalshi.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://news.kalshi.com/p/interest-rate-odds-fed-october-2026",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-97653257",
+      "type": "news",
+      "authors": [],
+      "year": 2026,
+      "title": "straits.live brief",
+      "venue": "straits.live",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://straits.live/briefs/2026-10-28",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f47072f8",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "event-graph/calls/fed_2026-10-28.md",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/abasheer-rion/parity/blob/main/event-graph/calls/fed_2026-10-28.md",
+      "also_at": [],
+      "accessed": "2026-10-28",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
     }
   ]
 }

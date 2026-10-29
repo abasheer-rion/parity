@@ -130,6 +130,8 @@ export function Menu({ trigger, items, placement = "bottom-end" }: { trigger: (o
     const step = e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0;
     if (step) { e.preventDefault(); list[(i + step + list.length) % list.length]?.focus(); }
     if (e.key === "Tab") setOpen(false);
+    // Escape from inside the menu hands focus back to its button, as the menu button pattern asks.
+    if (e.key === "Escape") { setOpen(false); anchor.current?.querySelector<HTMLElement>("[aria-haspopup]")?.focus({ preventScroll: true }); }
   };
   return (
     <div className="ui-menu-anchor" ref={anchor}>

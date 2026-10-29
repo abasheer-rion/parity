@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 30 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 20 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 21 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
 
@@ -30,6 +30,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-28 [LOG-0021: Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md)
 - 2026-10-28 [DEC-0086: New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)
 - 2026-10-28 [DEC-0085: Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md)
 - 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
@@ -37,7 +38,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 - 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
-- 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
 
 ## intent
 
@@ -283,6 +283,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0018 | [Bug sweep across every Parity app](log/2026-10-25-bug-sweep-across-every-parity-app.md) | final | 2026-10-25 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0020 | [Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md) | final | 2026-10-27 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
+| LOG-0021 | [Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md) | final | 2026-10-28 | [process](TAGS.md#process) |
 
 ## algorithm
 
