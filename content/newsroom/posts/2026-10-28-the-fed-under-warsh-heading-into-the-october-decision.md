@@ -1,5 +1,5 @@
 +++
-title = "The Fed under Warsh holds in October, with two votes for a hike"
+title = "The Fed under Warsh holds in October, 10-2"
 dek = "The Fed kept rates at 3.75% to 4.00% on 28 October, 10-2, with Lisa Cook and Beth Hammack voting for a hike. It is Kevin Warsh's fourth meeting as chair. We registered our news-impact engine's calls before the statement."
 slug = "the-fed-under-warsh-heading-into-the-october-decision"
 date = 2026-10-28
