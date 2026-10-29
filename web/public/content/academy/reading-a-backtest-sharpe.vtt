@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:02.992
+Strategy A and strategy B both grow
+
+2
+00:00:02.992 --> 00:00:04.896
+8% a year.
+
+3
+00:00:05.196 --> 00:00:09.023
+Halfway through, the two rides look very different.
+
+4
+00:00:09.323 --> 00:00:10.862
+Both end at $216.
+
+5
+00:00:10.862 --> 00:00:14.688
+B swings twice as far to get there.
+
+6
+00:00:14.988 --> 00:00:17.681
+The Sharpe ratio is return divided by
+
+7
+00:00:17.681 --> 00:00:19.969
+volatility: return per bump.
+
+8
+00:00:20.269 --> 00:00:22.577
+A: 8 over 8 is 1.0.
+
+9
+00:00:22.577 --> 00:00:25.635
+B: 8 over 16 is 0.5.
+
+10
+00:00:25.935 --> 00:00:27.858
+Same gain, half the ride.
+
+11
+00:00:27.858 --> 00:00:33.085
+That is what a higher Sharpe ratio means.

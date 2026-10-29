@@ -22,6 +22,11 @@
 // NSIS updates. A signed and notarized Mac build gets "parity": { "signed": true } in its
 // package.json, which the updater reads. The disk images are signed here and notarized by
 // scripts/notarize-dmg.mjs after the build.
+// PARITY_RELEASE_KIND (set by desktop-release.yml): "pages" when only the offline copy of the
+// site changed since the last release, "app" otherwise. It is written into latest.yml and
+// latest-mac.yml as releaseName, where the updater reads it: a pages-only update installs
+// quietly when Parity quits, an app update also offers "Restart to update" (DEC-0086).
+const releaseKind = process.env.PARITY_RELEASE_KIND === "pages" ? "pages" : "app";
 const signMac = !!process.env.CSC_LINK;
 const notarize = signMac && !!(process.env.APPLE_API_KEY && process.env.APPLE_API_KEY_ID && process.env.APPLE_API_ISSUER);
 const signWin = process.env.PARITY_WIN_SIGN === "1";
@@ -40,6 +45,7 @@ module.exports = {
   files: ["electron/**/*", "assets/icon.png", "assets/tray*.png", "package.json", "!**/*.map"],
   extraResources: [{ from: "build/web", to: "web", filter: ["**/*", "!**/*.map"] }],
   extraMetadata: { parity: { signed: signMac && notarize } },
+  releaseInfo: { releaseName: releaseKind },
   protocols: [{ name: "Parity link", schemes: ["parity"] }],
   // The public update feed (web/src/lib/desktopFeed.ts). The release workflow attaches the
   // files to a GitHub release; publishing that release is what ships it.

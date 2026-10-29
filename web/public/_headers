@@ -5,6 +5,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# The build id a long-open page compares with its own to offer a reload (DEC-0086). Never cached.
+/version.json
+  Cache-Control: no-store
+  X-Robots-Tag: noindex
+
 # Search engines may index the public pages only (DEC-0023): the front page, /legal/,
 # /learn/, /ideas/, /notes/ and the newsroom (/blog/, /news/, /authors/, /tags/, DEC-0057).
 # Sample and draft posts carry their own noindex tag. Everything behind sign-in, the sign-in pages, the sim, trade,
@@ -28,8 +33,6 @@
 /signup/*
   X-Robots-Tag: noindex, nofollow
 /reset/*
-  X-Robots-Tag: noindex, nofollow
-/verify/*
   X-Robots-Tag: noindex, nofollow
 /connect/*
   X-Robots-Tag: noindex, nofollow

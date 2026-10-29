@@ -1,9 +1,9 @@
-// The Motion control for each app's settings page (REF-0023): Match my device, Full or
-// Reduced. The choice is kept in this browser and applies to every Parity app here.
+// The Motion control for each app's settings page (REF-0023): Match my device, Full,
+// Reduced or Off. The choice is kept in this browser and applies to every Parity app here.
 import { Segmented } from "./inputs";
 import { useMotionLevel, useMotionPref, writeMotionPref, type MotionPref } from "./motionPref";
 
-export const MOTION_OPTIONS: [MotionPref, string][] = [["system", "Match my device"], ["full", "Full"], ["reduced", "Reduced"]];
+export const MOTION_OPTIONS: [MotionPref, string][] = [["system", "Match my device"], ["full", "Full"], ["reduced", "Reduced"], ["off", "Off"]];
 
 /** The three-way control on its own, for a settings row an app lays out itself. */
 export function MotionControl({ size = "sm" }: { size?: "sm" | "md" }) {
@@ -16,7 +16,8 @@ export function useMotionHelp(): string {
   const pref = useMotionPref();
   const level = useMotionLevel();
   if (pref === "full") return "Every animation plays, even if your device asks for less motion.";
-  if (pref === "reduced") return "Things fade in and out, but nothing slides, grows or counts.";
+  if (pref === "reduced") return "Things fade in and out, but nothing slides, grows or counts. Lesson videos play when you press play.";
+  if (pref === "off") return "Nothing moves or fades by itself. Lesson videos show a still picture and play only when you press play.";
   return level === "reduced"
     ? "Your device asks for less motion, so things fade but nothing slides. Choose Full to see every animation."
     : "Every animation plays. If your device asks for less motion, things will fade but not slide.";

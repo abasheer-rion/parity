@@ -1,0 +1,65 @@
+{
+ "about": "Rendered lesson films (DEC-0083). Written by `cd web && npm run content -- --reels`; do not edit by hand.",
+ "reels": {
+  "reading-a-backtest-return": {
+   "hash": "9182612cc5e30a22",
+   "seconds": 37.6,
+   "mp4": "/content/academy/reading-a-backtest-return.mp4",
+   "vtt": "/content/academy/reading-a-backtest-return.vtt"
+  },
+  "reading-a-backtest-volatility": {
+   "hash": "8e642a8c0d3479e2",
+   "seconds": 31.5,
+   "mp4": "/content/academy/reading-a-backtest-volatility.mp4",
+   "vtt": "/content/academy/reading-a-backtest-volatility.vtt"
+  },
+  "reading-a-backtest-sharpe": {
+   "hash": "855e29c182828481",
+   "seconds": 33.1,
+   "mp4": "/content/academy/reading-a-backtest-sharpe.mp4",
+   "vtt": "/content/academy/reading-a-backtest-sharpe.vtt"
+  },
+  "reading-a-backtest-drawdown": {
+   "hash": "02265995c2222f56",
+   "seconds": 35.4,
+   "mp4": "/content/academy/reading-a-backtest-drawdown.mp4",
+   "vtt": "/content/academy/reading-a-backtest-drawdown.vtt"
+  },
+  "reading-a-backtest-costs": {
+   "hash": "d8c31d9abb888c5c",
+   "seconds": 43.4,
+   "mp4": "/content/academy/reading-a-backtest-costs.mp4",
+   "vtt": "/content/academy/reading-a-backtest-costs.vtt"
+  },
+  "luck-vs-skill-noise": {
+   "hash": "217884ef5074d7e4",
+   "seconds": 41.3,
+   "mp4": "/content/academy/luck-vs-skill-noise.mp4",
+   "vtt": "/content/academy/luck-vs-skill-noise.vtt"
+  },
+  "luck-vs-skill-multiple-testing": {
+   "hash": "1e2bfdf169427c8e",
+   "seconds": 35.4,
+   "mp4": "/content/academy/luck-vs-skill-multiple-testing.mp4",
+   "vtt": "/content/academy/luck-vs-skill-multiple-testing.vtt"
+  },
+  "luck-vs-skill-deflated-sharpe": {
+   "hash": "bc7a159950aa6b63",
+   "seconds": 39.5,
+   "mp4": "/content/academy/luck-vs-skill-deflated-sharpe.mp4",
+   "vtt": "/content/academy/luck-vs-skill-deflated-sharpe.vtt"
+  },
+  "luck-vs-skill-placebo": {
+   "hash": "be262e74f535861c",
+   "seconds": 36.2,
+   "mp4": "/content/academy/luck-vs-skill-placebo.mp4",
+   "vtt": "/content/academy/luck-vs-skill-placebo.vtt"
+  },
+  "luck-vs-skill-gauntlet": {
+   "hash": "a57c5061b9a44dda",
+   "seconds": 36.2,
+   "mp4": "/content/academy/luck-vs-skill-gauntlet.mp4",
+   "vtt": "/content/academy/luck-vs-skill-gauntlet.vtt"
+  }
+ }
+}

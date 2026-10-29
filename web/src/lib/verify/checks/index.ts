@@ -105,10 +105,14 @@ function monthlyFrom(rs: ReturnSeries | null): number | null {
   return m >= 1 && end > 0 ? (end / rs.equity0) ** (1 / m) - 1 : null;
 }
 
-export interface FileInput { parsed: Parsed; answers: Answers; prices: PriceBook | null; triesDefaulted?: boolean }
+export interface FileInput {
+  parsed: Parsed; answers: Answers; prices: PriceBook | null; triesDefaulted?: boolean;
+  /** Why the daily prices were not loaded (signed out on the public page), in words for card 4. */
+  pricesMissing?: string;
+}
 
 /** Input A: an uploaded trade log or equity curve, checked in the browser. */
-export function checkFile({ parsed, answers, prices, triesDefaulted }: FileInput): Result {
+export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissing }: FileInput): Result {
   const notes: string[] = [];
   const trades = parsed.trades;
   const balance = answers.balance && answers.balance > 0 ? answers.balance : null;
@@ -135,7 +139,7 @@ export function checkFile({ parsed, answers, prices, triesDefaulted }: FileInput
     ? luckCard(rs.returns, basisFor(rs.periodsPerYear), rs.periodsPerYear, answers.tries)
     : trades?.length ? luckCard(pnls, "trade", trades.length / spanYears, answers.tries) : null;
 
-  const fills = trades ? fillChecks(trades, prices) : null;
+  const fills = trades ? fillChecks(trades, prices, pricesMissing) : null;
   const naRow = (id: string, label: string, why: string): CheckRow => ({ id, label, status: "na", detail: `${NA}: ${why}` });
   const card4: CheckRow[] = [
     fills?.fills ?? naRow("fills", "Fills outside the day's range", "an equity curve has no fills."),

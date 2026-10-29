@@ -213,7 +213,7 @@ Cited in: [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms
 
 Bailey, David; López de Prado, Marcos (2012). The Sharpe ratio efficient frontier. *The Journal of Risk 15(2), 3-44*. doi:10.21314/jor.2012.255 <https://doi.org/10.21314/jor.2012.255>. Accessed 2026-10-23. Verification: not checked.
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md).
 
 ### bailey2014
 
@@ -225,7 +225,7 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
 
 ### bailey2016
 
@@ -965,7 +965,7 @@ Getmansky, Mila; Lo, Andrew W.; Makarov, Igor (2004). An econometric model of se
 
 Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
-Cited in: [REF-0004](reference/0004-glossary.md), [REF-0016](reference/0016-parity-verify-mvp-spec.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
 ### giannone2008
 

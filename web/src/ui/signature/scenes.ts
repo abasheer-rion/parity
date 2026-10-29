@@ -32,6 +32,10 @@ export interface RenderOptions {
   captions?: boolean;
   /** A small label at the top of a clip, such as "Parity". */
   brand?: string;
+  /** Leave out the head band (the big number or title), so the plot fills the box (default true). Motion reels draw their own. */
+  head?: boolean;
+  /** Draw the verdict card (default true). Motion reels say the verdict in their own words. */
+  verdict?: boolean;
 }
 
 type Scene = (v: SigVisual, F: Frame) => string;
@@ -770,7 +774,7 @@ export const SCENE_KINDS = Object.keys(SCENES);
 /** Frame options per kind: which bands of the canvas a scene needs. */
 function frameOptions(kind: string, o: RenderOptions): FrameOptions {
   const pillsRoom = kind === "equity" || kind === "underwater" || kind === "heatmap";
-  return { size: o.size, theme: o.theme, pills: pillsRoom, xAxis: kind !== "regimes" && kind !== "scorecard" };
+  return { size: o.size, theme: o.theme, pills: pillsRoom, xAxis: kind !== "regimes" && kind !== "scorecard", head: o.head };
 }
 
 function isClip(vp: Viewport): boolean {
@@ -780,6 +784,7 @@ function isClip(vp: Viewport): boolean {
 /** The SVG markup (no outer <svg>) for a visual at position s. */
 export function renderSignature(v: SigVisual, s: number, o: RenderOptions = {}): string {
   const scene = SCENES[v.kind];
+  if (o.verdict === false) v = { ...v, steps: v.steps.map((st) => (st.verdict === undefined ? st : { ...st, verdict: undefined })) };
   const vp = viewport(o.size);
   const F = frame(s, Math.max(0, v.steps.length - 1), frameOptions(v.kind, o));
   let out = "";
@@ -800,6 +805,37 @@ export function renderSignature(v: SigVisual, s: number, o: RenderOptions = {}):
 export function signatureSvg(v: SigVisual, s: number, o: RenderOptions = {}, label = v.alt): string {
   const vp = viewport(o.size);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${vp.w} ${vp.h}" width="${vp.w}" height="${vp.h}" role="img"><title>${esc(label)}</title>${renderSignature(v, s, o)}</svg>`;
+}
+
+// ------------------------------------------------------------------ values at the line tip
+
+/** The plain series of a visual by index: equity series, split left and right, underwater value and drawdown. */
+export function seriesValues(v: SigVisual, i: number): number[] {
+  const P = v.params ?? {};
+  if (v.kind === "equity") return seriesOf(P)[i]?.values ?? [];
+  if (v.kind === "split") return gappy(obj(i === 1 ? P.right : P.left).values);
+  if (v.kind === "underwater") {
+    const values = gappy(P.values);
+    return i === 1 ? (values.length ? drawdownOf(values) : gappy(P.drawdown)) : values;
+  }
+  return [];
+}
+
+/**
+ * The value a line has reached at position s: the same tip the scene draws, read through the
+ * visual's "to" step setting. Motion reels count their big number with it, so the number
+ * and the line always agree.
+ */
+export function tipAt(v: SigVisual, s: number, i = 0): number {
+  const values = seriesValues(v, i);
+  if (!values.length) return NaN;
+  const F = frame(s, Math.max(0, v.steps.length - 1));
+  const n = v.kind === "equity" ? Math.max(...seriesOf(v.params ?? {}).map((x) => x.values.length)) : values.length;
+  const x = clamp(track(F, v.steps, "to", 1, 0)) * (n - 1);
+  const k = Math.min(values.length - 1, Math.floor(x));
+  const a = values[k], b = values[Math.min(values.length - 1, k + 1)];
+  if (!Number.isFinite(a)) return b;
+  return Number.isFinite(b) ? lerp(a, b, x - k) : a;
 }
 
 // ------------------------------------------------------------------ the data table (text alternative)

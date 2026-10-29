@@ -62,3 +62,7 @@
 :root[data-motion="reduced"] ::before, :root[data-motion="reduced"] ::after {
   animation-duration: var(--dur-instant) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-instant) !important;
 }
+/* Off (DEC-0085): the fades go too. Nothing moves or fades by itself. */
+:root[data-motion-off] *, :root[data-motion-off] ::before, :root[data-motion-off] ::after {
+  animation-duration: var(--dur-instant) !important; animation-iteration-count: 1 !important; transition-duration: var(--dur-instant) !important;
+}

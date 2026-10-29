@@ -7,12 +7,12 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 79 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 82 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
-| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 29 |
+| [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 30 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
 | [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 20 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-10-28 [DEC-0086: New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)
+- 2026-10-28 [DEC-0085: Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md)
 - 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
+- 2026-10-27 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
 - 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
 - 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
 - 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
 - 2026-10-27 [GDE-0007: Writing a new Academy course](guides/0007-writing-a-new-academy-course.md)
-- 2026-10-27 [DEC-0082: Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
-- 2026-10-27 [DEC-0080: The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
-- 2026-10-27 [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 
 ## intent
 
@@ -129,7 +129,10 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0078 | [Enrolled Base pools join the live feed by themselves, a few a day](decisions/0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md) | accepted | 2026-10-27 | [data](TAGS.md#data) |
 | DEC-0079 | [Parity is an AI-native verification platform for retail traders of all sizes](decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0080 | [The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md) | accepted | 2026-10-27 | [ui](TAGS.md#ui) |
+| DEC-0081 | [Verify is a public page with broker imports, embeds and a citable method](decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0082 | [Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0085 | [Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md) | accepted | 2026-10-28 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
+| DEC-0086 | [New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md) | accepted | 2026-10-28 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -226,6 +229,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 | REF-0029 | [Going live with real trading](reference/0029-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| REF-0030 | [Parity Verify methodology](reference/0030-parity-verify-methodology.md) | current | 2026-10-27 | [method](TAGS.md#method) |
 
 ## competitor
 

@@ -72,5 +72,6 @@ This replaces items 6 (the sidebar) and 9 (updates) of [DEC-0041](0041-parity-as
 - [DEC-0060: A getting started checklist and first-run tours, and no bank details until a broker partner](0060-a-getting-started-checklist-and-first-run-tours-and-no-bank-details-until-a-broker-partner.md)
 - [DEC-0062: Desktop builds are signed with Argus Vision certificates](0062-desktop-builds-are-signed-with-argus-vision-certificates.md)
 - [DEC-0072: Public pages are cached up to 3 days, the desktop app stays signed in, and a download page](0072-public-pages-are-cached-up-to-3-days-the-desktop-app-stays-signed-in-and-a-download-page.md)
+- [DEC-0086: New site versions reload in place, and only app changes ask for a restart](0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)
 - [LOG-0019: Work log for 24 and 25 October](../log/2026-10-25-work-log-for-24-and-25-october.md)
 <!-- backlinks:end -->

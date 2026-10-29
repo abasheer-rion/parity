@@ -6,7 +6,7 @@ target-version = "py311"
 select = ["E", "F", "I", "B", "UP"]
 
 [lint.isort]
-known-first-party = ["facts", "funnel", "sources", "yahoo"]
+known-first-party = ["bridge", "facts", "funnel", "sources", "yahoo"]
 
 [lint.per-file-ignores]
 # Research loaders: long lines are SQL statements, regexes and usage text, kept whole so they read as one unit.
