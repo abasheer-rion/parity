@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import itertools
 import math
+from collections.abc import Callable
 from dataclasses import asdict, dataclass
 
 import numpy as np
@@ -37,7 +38,7 @@ TARGET_VOL = 0.15
 PERIODS = (("1999 to 2008", "1999-01-01", "2008-12-31"),
            ("2009 to 2019", "2009-01-01", "2019-12-31"),
            ("2020 on", "2020-01-01", None))
-HOLDOUT_YEARS = 5
+RECENT_YEARS = 5
 MAX_GRID = 12
 
 
@@ -110,7 +111,8 @@ def placebo(res: BacktestResult, cost_bps: float, rng: np.random.Generator,
             "null_median": float(np.nanmedian(null)), "null_p95": float(np.nanpercentile(null, 95))}
 
 
-def sensitivity(strategy: Strategy, panel: pd.DataFrame, cfg: BacktestConfig) -> dict:
+def sensitivity(strategy: Strategy, panel: pd.DataFrame, cfg: BacktestConfig,
+                trial_callback: Callable | None = None) -> dict:
     grid = strategy.param_grid
     if not grid:
         return {"tried": 0, "share_positive": None, "sharpes": []}
@@ -121,6 +123,8 @@ def sensitivity(strategy: Strategy, panel: pd.DataFrame, cfg: BacktestConfig) ->
         params = {**strategy.params(), **dict(zip(keys, values, strict=True))}
         variant = type(strategy)(**params)
         vres = run(variant, panel, cfg)
+        if trial_callback:
+            trial_callback(variant, vres, cfg, "sensitivity")
         ret = vres.returns
         eq = (1 + ret).cumprod().resample("W-FRI").last().dropna()
         rows.append({"params": dict(zip(keys, values, strict=True)),
@@ -140,7 +144,9 @@ def _fmt(v: float | None, kind: str = "num") -> str:
 
 
 def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
-                 cfg: BacktestConfig, n_trials: int, bench_excess: pd.Series | None = None
+                 cfg: BacktestConfig, n_trials: int, bench_excess: pd.Series | None = None,
+                 trial_callback: Callable | None = None,
+                 history_callback: Callable | None = None
                  ) -> dict:
     """Every Sharpe here is on returns above the T-bill (DEC-0009); `bench` is the
     benchmark's total return and `bench_excess` its return above the T-bill."""
@@ -163,7 +169,8 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
     target = float(bench_total.loc[a.index].std() * math.sqrt(252))
     vol_cfg = BacktestConfig(**{**cfg.to_dict(), "target_vol": target,
                                 "max_leverage": 4.0 if strategy.funded else 10.0})
-    rv = run(strategy, panel, vol_cfg).returns
+    vol_res = run(strategy, panel, vol_cfg)
+    rv = vol_res.returns
     av, bv = rv.align(bench_total, join="inner")
     reached = float(av.iloc[252:].std() * math.sqrt(252)) if len(av) > 300 else 0.0
     c_s, c_b = performance.cagr(av), performance.cagr(bv)
@@ -176,15 +183,24 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       f" volatility (target {_fmt(target, 'pct')})",
                       "Yearly return above the market's at the market's own volatility"))
 
-    dsr = performance.deflated_sharpe(a, n_trials)
+    cost = max(cfg.cost_bps, getattr(strategy, "min_cost_bps", 0.0))  # the cost floor
+    cost2 = BacktestConfig(**{**cfg.to_dict(), "cost_bps": cost * 2})
+    cost2_res = run(strategy, panel, cost2)
+    if trial_callback:
+        trial_callback(strategy, vol_res, vol_cfg, "matched_volatility")
+        trial_callback(strategy, cost2_res, cost2, "double_cost")
+    sens = sensitivity(strategy, panel, cfg, trial_callback)
+    history = history_callback() if history_callback else {}
+    dsr_trials = int(history.get("n_trials", n_trials + sens["tried"] + 2))
+    sr_variance = history.get("sr_variance")
+
+    dsr = performance.deflated_sharpe(a, dsr_trials, sr_variance=sr_variance)
     tests.append(Test("A3", "beat", "Not just the best of many tries",
-                      f"We tried {n_trials} ideas. Is this one good even after allowing for "
+                      f"We tried {dsr_trials} ideas. Is this one good even after allowing for "
                       "the fact that one of them was bound to look good by luck?",
                       dsr >= 0.95, _fmt(dsr), "Deflated Sharpe of 0.95 or more"))
 
-    cost = max(cfg.cost_bps, getattr(strategy, "min_cost_bps", 0.0))  # the cost floor
-    cost2 = BacktestConfig(**{**cfg.to_dict(), "cost_bps": cost * 2})
-    s2 = _sharpe(run(strategy, panel, cost2).excess_returns.align(bench, join="inner")[0])
+    s2 = _sharpe(cost2_res.excess_returns.align(bench, join="inner")[0])
     tests.append(Test("A4", "beat", "Survives double trading costs",
                       "If trading costs twice what we guessed, does it still beat the S&P 500?",
                       s2 > sb, f"{_fmt(s2)} vs {_fmt(sb)}",
@@ -204,11 +220,11 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       "just on average?", period_pass, "; ".join(period_rows),
                       "Sharpe above the S&P 500's in every period"))
 
-    hold_start = a.index.max() - pd.DateOffset(years=HOLDOUT_YEARS)
+    hold_start = a.index.max() - pd.DateOffset(years=RECENT_YEARS)
     ha, hb = a.loc[hold_start:], b.loc[hold_start:]
     hs, hbs = _sharpe(ha), _sharpe(hb)
     tests.append(Test("A6", "beat", "Wins on the most recent years",
-                      f"Markets change. Does it beat the S&P 500 over the last {HOLDOUT_YEARS} "
+                      f"Markets change. Does it beat the S&P 500 over the last {RECENT_YEARS} "
                       "years alone?", hs > hbs, f"{_fmt(hs)} vs {_fmt(hbs)}",
                       "Sharpe above the S&P 500's since " + hold_start.date().isoformat()))
 
@@ -230,7 +246,6 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
                       f"beaten by {pl['p_value']:.0%} of {N_PLACEBO} random-date copies",
                       "Beaten by fewer than 5% of random-date copies"))
 
-    sens = sensitivity(strategy, panel, cfg)
     sp = sens["share_positive"]
     tests.append(Test("B3", "real", "Not one lucky setting",
                       "If we nudge its settings a bit, does it still make money? A real effect "
@@ -261,7 +276,7 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
 
     beat = [t for t in tests if t.group == "beat"]
     real = [t for t in tests if t.group == "real"]
-    trials_used = n_trials + sens["tried"] + 3  # matched vol, double cost and the base run
+    trials_used = dsr_trials if history_callback else n_trials + sens["tried"] + 2
     return {
         "verdict": verdict(beat, real),
         "beats_sp500": all(t.passed for t in beat),
@@ -274,7 +289,7 @@ def run_gauntlet(strategy: Strategy, panel: pd.DataFrame, bench: pd.Series,
         "trials_including_gauntlet": trials_used,
         "settings": {"seed": SEED, "bootstrap": N_BOOTSTRAP, "block_days": BLOCK_DAYS,
                      "placebo": N_PLACEBO, "target_vol": TARGET_VOL,
-                     "holdout_years": HOLDOUT_YEARS},
+                     "recent_years": RECENT_YEARS},
     }
 
 
