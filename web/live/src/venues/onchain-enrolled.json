@@ -1,4 +1,20 @@
 {
- "at": null,
- "pools": []
+ "at": "2026-10-30T11:38:03Z",
+ "pools": [
+  {
+   "token": "virtual-protocol",
+   "series": "onchain.0xc200f21efe67c7f41b81a854c26f9cda80593065",
+   "chain": "base",
+   "pool": "0xc200f21efe67c7f41b81a854c26f9cda80593065",
+   "base": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+   "decimals": 18,
+   "quote": "WETH",
+   "dex": "Aerodrome CL200",
+   "fee": 0.003,
+   "liq": 59230,
+   "swaps": null,
+   "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+   "enrolledAt": "2026-10-30T11:38:03Z"
+  }
+ ]
 }
