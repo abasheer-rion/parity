@@ -165,3 +165,15 @@ html.vp-root, html.vp-root body { background: var(--canvas); }
   .vp-tool { padding: var(--space-4); }
   .vp-hero h1 { font-size: var(--fs-2xl); }
 }
+
+/* Strategy code (DEC-0083). */
+.vf-code { font-family: var(--font-mono); font-size: var(--fs-sm); line-height: 1.5; tab-size: 4; white-space: pre; overflow-x: auto; }
+.vf-model { display: flex; flex-direction: column; gap: 10px; }
+.vf-model-connect { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.vf-cannot { border: 1px solid var(--bad); border-radius: var(--radius-md); padding: 12px 14px; background: var(--surface); }
+.vf-cannot p { margin: 0 0 6px; }
+.vf-cannot ul, .vf-left, .vf-rules { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; font-size: var(--fs-sm); line-height: 1.45; }
+.vf-line { color: var(--text-2); margin-right: 8px; font-variant-numeric: var(--num-variant); }
+.vf-cannot code, .vf-left code { font-family: var(--font-mono); font-size: 0.95em; }
+.vf-ran { display: flex; flex-direction: column; gap: 10px; }
+.vf-json { margin: 8px 0 0; padding: 10px 12px; max-height: 18rem; overflow: auto; background: var(--surface-2, var(--surface)); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: var(--fs-xs); line-height: 1.5; }

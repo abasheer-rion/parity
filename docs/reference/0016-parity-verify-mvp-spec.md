@@ -231,6 +231,7 @@ The luck check and minimum record length follow Bailey and Lopez de Prado [@bail
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](../decisions/0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
 - [DEC-0082: Verify tools and endpoints for AI apps and programs](../decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
+- [DEC-0083: Verify runs a strategy from its code on our prices](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](../decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [REF-0025: Parity capacity and load test results](0025-parity-capacity-and-load-test-results.md)

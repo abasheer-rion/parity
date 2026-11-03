@@ -17,7 +17,7 @@
   <p class="lg-meta">Method version <code><!--verify:method-version--></code>. Research only. Not investment advice. A verdict is about the record, not about the future.</p>
 
   <nav class="lg-toc" aria-label="On this page">
-    <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
+    <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#code">Strategy code</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
     <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
     <a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
   </nav>
@@ -27,6 +27,7 @@
     <li><strong>A file.</strong> A trade list or an equity curve as CSV or tab separated text, up to 5 MB and 50,000 rows. It is read and checked in your browser and never sent to our servers. Before the checks run you say whether it is real money, a demo account or a backtest (default: backtest), the starting balance, how many strategies, bots or settings you tried before this one (default: 1), and optionally what was claimed.</li>
     <li><strong>A description of a bot.</strong> A rule-based reader pulls out the claimed win rate, return, drawdown, trade count, take-profit, stop-loss and whether it adds to losers. Only the claim arithmetic and the settings count can be checked. A description cannot show an edge.</li>
     <li><strong>One of our tested strategies.</strong> Its equity curve from our research run, judged at the number of tries our research and search have counted.</li>
+    <li><strong>Strategy code.</strong> TradingView Pine Script, a simple Python strategy, or rules in our rule format (including a description in words that your own AI model turned into rules). We run it ourselves on our daily prices; see <a href="#code">strategy code</a>.</li>
   </ul>
 
   <h2 id="returns">From a record to returns</h2>
@@ -35,6 +36,26 @@
     <li><strong>An equity curve</strong> becomes returns as (value minus money paid in that period) divided by the previous value, minus 1, so deposits are not profit. A return column is used as it is.</li>
     <li><strong>Trades with no starting balance</strong> have no returns. Card 3 then uses each trade's profit, and the largest fall from a high is not measured.</li>
     <li>A series counts as daily when it has at least 180 values a year, weekly from 40, monthly from 10.</li>
+  </ul>
+
+  <h2 id="code">Strategy code</h2>
+  <p>Code is read into one rule format, then run day by day on our daily closing prices. The same code always gives the same rules and the same result.</p>
+  <ul>
+    <li><strong>What is read.</strong> Pine Script versions 4 to 6: inputs, values worked out from the close (moving averages, RSI, MACD, Bollinger bands, highest and lowest, rate of change, standard deviation, crossovers), entries, closes, and exits with a stop, a target, or a loss or profit in ticks. Python: a signal or position column built with pandas (1 long, &minus;1 short, 0 flat), vectorbt entries and exits, or a backtesting.py strategy class.</li>
+    <li><strong>What is refused, by name and line.</strong> Anything the orders depend on that our data cannot support: the day's open, high, low or volume (so average true range, stochastics and trailing stops), other markets or time frames, values that carry over from day to day (<code>:=</code> or loops), orders that wait for a price, and partial closes. Reading a later price, such as a negative shift, is refused as peeking. Nothing is run until every refused part is gone. Drawings, alerts and values no order uses are listed as left out.</li>
+    <li><strong>Fills.</strong> An order fills at the close of the day its rule is true. Pine fills at the next day's open, which for currencies and crypto, traded round the clock, is the same price. Stops and targets are checked against each day's close from the day after entry, since we hold one price a day; a real stop could fill earlier in the day, better or worse. One position at a time, using the whole account (or the share the script sets); an entry on the other side turns the position around.</li>
+    <li><strong>Costs.</strong> Each fill pays the cost below, or the commission the script declares if that is higher. Overnight financing, borrowing to sell short and funding on perpetual futures are not charged.</li>
+  </ul>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Markets and costs"><table>
+    <thead><tr><th>Market</th><th>Cost each way</th><th>Why</th></tr></thead>
+    <tbody>
+        <!--verify:markets-->
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Nearby settings.</strong> Every setting (inputs, and numbers written into an indicator) is also run at half to one and a half times its value: all combinations of 5 values for up to 3 settings, of 3 values for 4 settings, and one setting at a time beyond that. Lengths stay whole numbers.</li>
+    <li><strong>Tries.</strong> The luck check counts the tries you state plus the nearby settings we ran, because finding settings like these usually means trying settings like those.</li>
+    <li>The result then goes through the five cards like any record, with the backtest's trades and its account value each day.</li>
   </ul>
 
   <h2 id="verdict">The verdict</h2>
@@ -102,11 +123,11 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <tbody>
       <tr><td>Fills outside the day's range</td><td>Where we hold the day's high and low: an entry or exit price more than 0.1% outside them</td></tr>
       <tr><td>Fills far from the day's price</td><td>Where we hold one price a day: a fill further from that day's price than 3 times the 1-in-100 daily move of that market, and never less than 1%</td></tr>
-      <tr><td>Perfect timing</td><td>Where we hold the day's high and low, with at least 10 dated entries: more than 30% of entries within 0.05% of the day's best price (the low for buys, the high for sells)</td></tr>
+      <tr><td>Perfect timing</td><td>Where we hold the day's high and low, with at least 10 dated entries: more than 30% of entries within 0.05% of the day's best price (the low for buys, the high for sells). For strategy code: run again with every order filled one day after its signal, the Sharpe ratio falls below half of the original's, when the original is positive</td></tr>
       <tr><td>Too smooth</td><td>Lag-one autocorrelation of returns above 0.3, or, for daily returns, no losing month in more than 24 months with under 3% losing days. Needs at least 30 returns. The measure follows Getmansky, Lo and Makarov (2004)</td></tr>
       <tr><td>Edited history</td><td>At least 10 trades: the record trades most days (median gap between trading days of 3 days or less) but has gaps of more than 30 days. For TradingView exports and plain trade lists, whose numbers run 1, 2, 3, also when at least 90% of the steps are 1 and some numbers are skipped. MetaTrader tickets are shared across a broker's server, so their skips are not checked</td></tr>
       <tr><td>Backtest labelled as real</td><td>You said real money, but the file is a TradingView Strategy Tester export</td></tr>
-      <tr><td>Strategy look-ahead test</td><td>Only for our own strategies: the data is cut at several dates and no earlier position may change</td></tr>
+      <tr><td>Strategy look-ahead test</td><td>For our own strategies: the data is cut at several dates and no earlier position may change. For strategy code: each day's rules see that day's close and earlier ones only, and code that reads later prices is refused before it runs</td></tr>
     </tbody>
   </table></div>
   <p><strong>The one-price-a-day limit.</strong> For major currency pairs, Bitcoin, Ether and the S&amp;P 500 we hold one price a day from free sources, not the day's high and low. So for these the fill check becomes "fills far from the day's price", which catches made-up or misdated prices but not small ones, and perfect timing cannot be checked. A symbol we hold nothing for, or a record checked without our daily price file (for example signed out), gets "cannot be checked from this input". The only request Verify makes after a file is chosen is for that price file.</p>
@@ -118,7 +139,8 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
       <tr><td>Short sample</td><td>Fewer than 100 trades, or less than 12 months (a month is 30.44 days)</td></tr>
       <tr><td>First part against last part</td><td>The Sharpe ratio of the last 30% of the results is below half that of the first 70%, when the first is positive. Needs at least 30 results</td></tr>
       <tr><td>Concentration</td><td>At least 10 trades and an overall profit: the best 5 trades make more than 50% of it</td></tr>
-      <tr><td>Many settings, few trades</td><td>Descriptions only: more than one adjustable setting per 20 trades</td></tr>
+      <tr><td>Many settings, few trades</td><td>Descriptions and strategy code: more than one adjustable setting per 20 trades</td></tr>
+      <tr><td>Settings next to yours</td><td>Strategy code: fewer than half of the nearby settings make money after costs</td></tr>
       <tr><td>Claim against file</td><td>A claimed win rate, monthly return (compounded average) or largest fall differs from the file by more than 5 percentage points</td></tr>
     </tbody>
   </table></div>

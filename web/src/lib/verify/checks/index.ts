@@ -5,12 +5,14 @@ import type { Holdup } from "../../types";
 import { day } from "../csv";
 import { normaliseSymbol, type PriceBook } from "../prices";
 import { daysBetween, drawdowns, fromEquity, fromTrades, type ReturnSeries } from "../returns";
+import { MARKETS } from "../strategy/rules";
 import { FORMAT_LABEL, METHOD_VERSION, type Answers, type Claim, type EquityPoint, type InputKind, type Parsed, type Source, type Trade } from "../types";
 import { claimRows, type ClaimRow } from "./claims";
 import { expectancyCard, type ExpectancyCard } from "./expectancy";
-import { editedCheck, fillChecks, labelCheck, NA, smoothCheck, strategyLookAheadCheck, type CheckRow } from "./lookahead";
+import { delayCheck, editedCheck, fillChecks, labelCheck, NA, smoothCheck, strategyLookAheadCheck, type CheckRow } from "./lookahead";
 import { basisFor, luckCard, type LuckCard } from "./luck";
-import { claimCheck, concentrationCheck, fadeCheck, settingsCheck, shortSampleCheck } from "./overfit";
+import { claimCheck, concentrationCheck, fadeCheck, neighboursCheck, settingsCheck, shortSampleCheck } from "./overfit";
+import type { CodeRun } from "../strategy";
 import { tailCard, type TailCard } from "./tail";
 import { verdict, type Verdict } from "./verdict";
 
@@ -49,6 +51,8 @@ export interface Result {
   notes: string[];
   /** Input C: the gauntlet's own verdict for the strategy. */
   gauntlet?: { verdict: string; passed: number; total: number };
+  /** Code we ran: what was read, how it was run and the nearby settings. */
+  code?: CodeFacts;
   /** Input B: the description, and the closest strategies we have tested. */
   description?: { text: string; claim: Claim; settings: number | null };
   /**
@@ -251,5 +255,93 @@ export function checkDescription(x: DescriptionInput): Result {
     dateFrom: null, dateTo: null, trades: x.trades, dailyReturns: 0, balance: null, assets: [],
     card1: null, card2: null, card3: null, card4, card5, claims, verdict: v, notes: ["This is a check of the description only, not of the bot. Backtesting a described bot is planned but not built yet."],
     description: { text: x.text, claim: x.claim, settings: x.settings },
+  };
+}
+
+/** What a result from code carries besides the five cards. */
+export interface CodeFacts {
+  language: "pine" | "python" | "rules" | "plain";
+  name: string | null;
+  market: string;
+  marketName: string;
+  rules: unknown;
+  /** One-way cost used, and why. */
+  cost: number;
+  costWhy: string;
+  capital: number;
+  /** Tries the person stated, the nearby settings we ran, and their sum used by the luck check. */
+  triesStated: number;
+  triesSweep: number;
+  totalReturn: number;
+  delayedReturn: number;
+  buyHoldReturn: number;
+  sweep: CodeRun["sweep"];
+  ignored: { what: string; line: number; why: string }[];
+  readNotes: string[];
+  priceSource: string;
+}
+
+/**
+ * Code we ran on our prices (DEC-0083): the trades and the account value each day go through
+ * the same five cards, with the luck check at the tries the person stated plus the nearby
+ * settings we ran, a "perfect timing" check from the one-day-later run and a card 5 row for
+ * the nearby settings.
+ */
+export function checkBacktest(x: CodeRun, triesStated: number, triesDefaulted = false): Result {
+  const run = x.run;
+  const notes: string[] = [];
+  const points: EquityPoint[] = [{ date: run.dates[0], equity: run.capital }, ...run.dates.slice(1).map((d, i) => ({ date: d, equity: run.equity[i + 1] }))];
+  const rs = fromEquity(points);
+  notes.push(...rs.warnings, ...run.notes);
+  const trades = run.trades;
+  const balance = run.capital;
+  const pnls = trades.map((t) => t.pnl);
+  const card1 = trades.length ? expectancyCard(pnls, "trade", balance) : null;
+  const dd = drawdowns(rs.equity0, rs.equity, rs.dates);
+  const valueOn = new Map(run.dates.map((d, i) => [d, run.equity[i]] as const));
+  const equityBeforeTrade = trades.map((t) => valueOn.get(day(t.openTime ?? t.closeTime)) ?? balance);
+  // Every trade uses the same share of the account, so sizes never grow after a loss.
+  const sized = trades.map((t) => ({ ...t, size: x.rules.size ?? 1 }));
+  const card2 = card1 ? tailCard({ trades: sized, equityBeforeTrade, avgWin: card1.avgWin, drawdown: dd, daily: { returns: rs.returns, basis: rs.periodsPerYear >= 180 ? "daily" : "period" } }) : null;
+  const tries = Math.max(1, triesStated) + x.sweep.runs - 1;
+  const card3 = rs.returns.length >= 30 ? luckCard(rs.returns, basisFor(rs.periodsPerYear), rs.periodsPerYear, tries) : null;
+  const dateFrom = rs.dates[0] ?? null, dateTo = rs.dates[rs.dates.length - 1] ?? null;
+  const settings = Object.keys(x.rules.inputs).length;
+  const card4: CheckRow[] = [
+    { id: "fills", label: "Fills outside the day's range", status: "na", detail: `${NA}: we placed every fill ourselves, at our own daily closes.` },
+    delayCheck(x.stats.sharpe, x.delayed.sharpe),
+    smoothCheck(rs.dates, rs.returns, rs.periodsPerYear >= 180),
+    { id: "edited", label: "Edited history", status: "na", detail: `${NA}: we ran every day ourselves, so no trade can be missing.` },
+    labelCheck("backtest", false),
+    strategyLookAheadCheck("code"),
+  ];
+  const card5: CheckRow[] = [
+    shortSampleCheck(trades.length, dateFrom, dateTo),
+    fadeCheck(rs.returns),
+    concentrationCheck(trades),
+    settingsCheck(settings, trades.length),
+    neighboursCheck(x.sweep),
+  ];
+  const r = x.read;
+  const marketName = MARKETS.find((m) => m.id === x.rules.market)?.name ?? x.rules.market;
+  notes.push(`Run on our daily closing prices for ${marketName}, ${x.prices.from} to ${x.prices.to}, starting with ${moneyText(balance)}. Each fill paid ${pctText(run.cost, 2)} of the amount traded.`);
+  notes.push(`Buying and holding over the same days returned ${pctText(x.buyHold.totalReturn)}; these rules returned ${pctText(x.stats.totalReturn)}.`);
+  notes.push(...r.notes);
+  const what = `${r.name ? `"${r.name}"` : r.language === "pine" ? "Pine Script strategy" : r.language === "python" ? "Python strategy" : "Rule set"} on ${x.rules.market}`;
+  const money = moneyText;
+  return {
+    source: "code", kind: "backtest", tries, triesDefaulted, methodVersion: METHOD_VERSION, what,
+    dateFrom, dateTo, trades: trades.length, dailyReturns: rs.periodsPerYear >= 180 ? rs.returns.length : 0, balance,
+    assets: assetClasses(trades), card1, card2, card3, card4, card5, claims: [],
+    verdict: verdict({ trades: trades.length, dailyReturns: rs.periodsPerYear >= 180 ? rs.returns.length : 0, card1, card2, card3, card4, card5, contradicted: [], money, pct: pctText }),
+    notes,
+    holdup: holdupForUpload(rs, tries),
+    code: {
+      language: r.language, name: r.name, market: x.rules.market, marketName, rules: x.rules, cost: run.cost,
+      costWhy: run.costFromScript ? "the cost the script declares, which is above ours" : MARKETS.find((m) => m.id === x.rules.market)?.costWhy ?? "",
+      capital: balance, triesStated: Math.max(1, triesStated), triesSweep: x.sweep.runs - 1,
+      totalReturn: x.stats.totalReturn, delayedReturn: x.delayed.totalReturn, buyHoldReturn: x.buyHold.totalReturn,
+      sweep: x.sweep, ignored: r.ignored, readNotes: r.notes, priceSource: x.prices.source,
+    },
   };
 }

@@ -4,7 +4,7 @@
 // The app's Verify page (pages/Verify.tsx) and the public page at /verify/ (DEC-0081) both
 // show this one component. On the public page, signed out, our strategies and our daily
 // prices (both behind sign-in) are left out and the result says what that leaves unchecked.
-import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { hashQuery, setHashQuery, useHashState } from "../../lib/deeplink";
 import { loadReport, loadSearch } from "../../lib/data";
 import { nameOf, searchTextOf, tagsOf } from "../../lib/strategyMeta";
@@ -18,20 +18,21 @@ import { Button, Checkbox, ChoiceCards, Disclosure, EmptyState, Input, SearchInp
 import { Num, PublicLinks, ResultView, pct } from "./Result";
 import "./verify.css";
 import { track } from "../../lib/analytics";
+import { CodeInput } from "./CodeInput";
+import { SignedIn } from "./signedIn";
 
-type Mode = "file" | "describe" | "strategy";
+type Mode = "file" | "code" | "describe" | "strategy";
 const APP_LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
 const PUBLIC_LESSON = "/learn/academy/win-rate-is-not-profit/the-99-percent-bot/";
 const MODES: Choice<Mode>[] = [
   { value: "file", title: "Upload a file", body: "A trade history from your broker or exchange, MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
-  { value: "describe", title: "Describe a bot", body: "Say in your own words what it trades and what it claims.", icon: "quote" },
+  { value: "code", title: "Paste strategy code", body: "Pine Script from TradingView, Python, or rules in words. We run it on our prices.", icon: "flask" },
+  { value: "describe", title: "Check a seller's claim", body: "Say in your own words what a bot trades and what it claims.", icon: "quote" },
   { value: "strategy", title: "Pick a strategy", body: "Check one of the strategies we have already tested.", icon: "catalog" },
 ];
 
 export interface FileMeta { parsed: Parsed; sha256: string; name: string }
 
-/** What a signed-out visitor on the public page cannot load: our research files and daily prices. */
-const SignedIn = createContext(true);
 const useLesson = () => (useContext(PublicLinks) ? PUBLIC_LESSON : APP_LESSON);
 
 export interface CheckerProps {
@@ -48,7 +49,7 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
   // reopens the same check: #/verify?mode=describe&example=1, #/verify?mode=strategy&strategy=fx_carry (DEC-0038).
   const [rawMode, setRawMode] = useHashState("mode", "file");
   const modes = signedIn ? MODES : MODES.filter((m) => m.value !== "strategy");
-  const mode: Mode = rawMode === "describe" || (rawMode === "strategy" && signedIn) ? rawMode : "file";
+  const mode: Mode = rawMode === "describe" || rawMode === "code" || (rawMode === "strategy" && signedIn) ? rawMode : "file";
   const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
   const lesson = useLesson();
@@ -61,6 +62,7 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
       <ChoiceCards<Mode> label="What to check" value={mode} onChange={change} options={modes} />
       <div className="vf-input">
         {mode === "file" && <FileInput onResult={(r, file) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file }); }} />}
+        {mode === "code" && <CodeInput onResult={(r) => { track("verify_run", { mode, format: r.code?.language ?? "" }); setResult({ r, file: null }); }} />}
         {mode === "describe" && <DescribeInput key={exampleRun} onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}
         {mode === "strategy" && <StrategyInput onResult={(r) => { track("verify_run", { mode }); setResult({ r, file: null }); }} />}
       </div>
@@ -72,7 +74,7 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
       ) : (
         <EmptyState title="Nothing checked yet" icon="checkCircle"
           action={<Button variant="accent" icon="play" onClick={tryExample}>Check the example bot</Button>}>
-          Pick one of the {modes.length === 3 ? "three" : "two"} ways above. Or start with our example, a bot that wins 99 trades in 100 and still loses money. <a href={lesson}>Why that happens</a> is in the Academy.
+          Pick one of the {["", "one", "two", "three", "four"][modes.length]} ways above. Or start with our example, a bot that wins 99 trades in 100 and still loses money. <a href={lesson}>Why that happens</a> is in the Academy.
         </EmptyState>
       )}
     </SignedIn.Provider>

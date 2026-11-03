@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1825 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1828 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,7 +11,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 50 |
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 67 |
-| [Software](#software) | 105 |
+| [Software](#software) | 108 |
 | [Web pages](#web-pages) | 1058 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
@@ -3513,6 +3513,12 @@ coinbase/coinbase-advanced-py. (n.d.). *GitHub*. <https://github.com/coinbase/co
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
 
+### url-02f1dd10
+
+pandas.DataFrame.ewm. (2026). *pandas.pydata.org*. <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
+
 ### url-0348b06c
 
 jqx527/Managing-Crash-Risk-in-Currency-Carry-Trades. (n.d.). *GitHub*. <https://github.com/jqx527/Managing-Crash-Risk-in-Currency-Carry-Trades>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3536,6 +3542,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 jesse-ai/jesse. (n.d.). *GitHub*. <https://github.com/jesse-ai/jesse>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/technical-indicator-trading-bots.json](../catalog/algorithms/technical-indicator-trading-bots.json), [ALG-0036](algorithms/0036-technical-indicator-trading-bots.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-1287faa5
+
+Pine Script user manual: Strategies. (2026). *tradingview.com*. <https://www.tradingview.com/pine-script-docs/concepts/strategies/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-12fa1ece
 
@@ -3696,6 +3708,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 rkohli3/TSMOM. (n.d.). *GitHub*. <https://github.com/rkohli3/TSMOM>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md).
+
+### url-546655e8
+
+Backtesting.py documentation. (2026). *kernc.github.io*. <https://kernc.github.io/backtesting.py/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-56a1d432
 
@@ -9201,7 +9219,7 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 
 fee schedule. (n.d.). *binance.com*. <https://www.binance.com/en/fee/schedule>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0014](competitors/0014-binance.md).
+Cited in: [CMP-0014](competitors/0014-binance.md), [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-bae37343
 

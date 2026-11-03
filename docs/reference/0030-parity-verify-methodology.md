@@ -4,17 +4,17 @@ title: Parity Verify methodology
 type: reference
 status: current
 created: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-03
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083]
 ---
 
 # Parity Verify methodology
 
 ## In plain words
 
-This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.0`. Research only. Not investment advice.
+This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.1`. Research only. Not investment advice.
 
 ## Summary
 
@@ -31,6 +31,15 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 - **A file**: a trade list or equity curve, CSV or tab separated, up to 5 MB and 50,000 rows, read and checked in the browser and never sent. Before the checks run the person states real money, demo or backtest (default backtest), the starting balance, the number of things tried before this one (default 1) and, optionally, what was claimed.
 - **A description of a bot**: a rule-based reader pulls out the claims. Only the claim arithmetic and the settings count can be checked.
 - **One of our strategies**: its research equity curve, at the number of tries our research and search have counted.
+- **Strategy code**: Pine Script, a simple Python strategy, or rules in the `parity-rules-1` format (also written from a description by the person's own model), run by us on our daily closes ([DEC-0083](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)).
+
+## Strategy code
+
+- **Read, not run as code.** Pine Script 4 to 6 and Python (pandas signal columns, vectorbt entries and exits, backtesting.py classes) are read into one rule format. The same code gives the same rules. Anything the orders depend on that one close a day cannot support (the day's open, high, low or volume, other markets or time frames, values carried from day to day, orders that wait for a price, trailing stops, partial closes) is refused by name and line, and nothing runs. Reading a later price is refused as peeking. Drawings, alerts and unused values are listed as left out.
+- **Fills** at the close of the day the rule is true; stops and targets are checked against each close from the day after entry. One position at a time with the whole account (or the script's share); an opposite entry turns it around.
+- **Costs** each way: 1 basis point for major currency pairs (1.5 for NZD, 3 for NOK and SEK), 2 for the S&P 500, 0.15% for Bitcoin and Ether, or the script's own commission when higher. Financing, short borrowing and perpetual funding are not charged.
+- **Nearby settings**: each setting, including numbers written into an indicator, at half to one and a half times its value: all combinations of 5 values for up to 3 settings, 3 values for 4 settings, one at a time beyond that. Lengths stay whole.
+- **Tries** for the luck check: the stated tries plus the nearby runs.
 
 ## From a record to returns
 
@@ -90,13 +99,14 @@ Each check is passed, failed or "cannot be checked from this input", never hidde
 | Too smooth | At least 30 returns: lag-one autocorrelation above 0.3, or (daily) no losing month in more than 24 months with under 3% losing days [@getmansky2004] |
 | Edited history | At least 10 trades: median gap at most 3 days but gaps over 30 days; for TradingView and plain lists also skipped trade numbers when 90% of steps are 1 |
 | Backtest labelled as real | Said real money, file is a TradingView Strategy Tester export |
-| Strategy look-ahead test | Our strategies only |
+| Strategy look-ahead test | Our strategies: cut-the-data test. Strategy code: passes, because each day sees only that close and earlier ones and look-ahead code is refused |
+| Perfect timing, for code | Run again with every order a day late, the Sharpe ratio falls below half of a positive original |
 
 We hold one price a day for major currency pairs, Bitcoin, Ether and the S&P 500, so for these the fill check is "far from the day's price" and perfect timing cannot be checked ([DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)). Without the price file, both say they cannot be checked.
 
 ## Card 5: overfitting flags
 
-Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions only, more than one setting per 20 trades. Claim against file: more than 5 points apart on win rate, monthly return or largest fall.
+Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions and strategy code, more than one setting per 20 trades. Settings next to yours, for code: fewer than half of the nearby settings make money after costs. Claim against file: more than 5 points apart on win rate, monthly return or largest fall.
 
 ## Claim arithmetic
 
@@ -118,11 +128,12 @@ Every upload is "Self-reported: Parity checked the numbers in the file, not wher
 
 | Version | From | What changed |
 | --- | --- | --- |
+| verify-1.1 | 2026-11-03 | Strategy code run on our prices; tries include the nearby settings; perfect timing by a one-day-late run and settings next to yours for code; many settings, few trades for code too |
 | verify-1.0 | 2026-10-24 | First version |
 
 ## Cite this
 
-Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.0. paritytrading.app/methodology/
+Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.1. paritytrading.app/methodology/
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
@@ -134,4 +145,5 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.0. pari
 ## Referenced by
 
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
+- [DEC-0083: Verify runs a strategy from its code on our prices](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 <!-- backlinks:end -->

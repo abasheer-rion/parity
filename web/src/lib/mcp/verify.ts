@@ -7,7 +7,8 @@ import type { Report } from "../types";
 import type { SearchDoc } from "../data";
 import { nameOf, searchTextOf, tagsOf } from "../strategyMeta";
 import { tagline } from "../strategyNames";
-import { checkDescription, checkFile, checkStrategy, claimRows, NA, survivesText, type ClaimRow, type Result } from "../verify/checks";
+import { checkBacktest, checkDescription, checkFile, checkStrategy, claimRows, NA, survivesText, type ClaimRow, type Result } from "../verify/checks";
+import { MARKETS, readStrategy, runStrategy as runRulesOnPrices, RulesError, ScriptError, RULES_FORMAT, type Language, type Rules } from "../verify/strategy";
 import { closest, extract, searchVerdict, type Candidate } from "../verify/describe";
 import { priceBook, type PriceBook } from "../verify/prices";
 import type { Claim, EquityPoint, InputKind, Parsed, Trade } from "../verify/types";
@@ -235,9 +236,56 @@ function findRun(report: Report, q: string) {
   throw new ToolError(`No strategy matches "${q}". Call search_strategies for the ids, or send it as description to get the closest strategies we have tested.`);
 }
 
+/** Code or rules, run on our daily prices (DEC-0083). */
+async function runCode(a: Record<string, unknown>, ctx: ToolContext) {
+  const market = str(a.market).trim();
+  if (!market) throw new ToolError(`Give market: the code does not say which market it trades. One of ${MARKETS.map((m) => m.id).join(", ")}.`);
+  let read;
+  try {
+    read = readStrategy({ code: typeof a.code === "string" ? a.code : undefined, rules: a.rules, language: (str(a.language) || "auto") as Language | "auto", market, from: str(a.from) || undefined, to: str(a.to) || undefined });
+  } catch (e) {
+    if (e instanceof ScriptError) throw new ToolError(`The code could not be read. ${e.message}`);
+    if (e instanceof RulesError) throw new ToolError(e.problems.length > 1 ? `The rules have problems: ${e.problems.join(" ")}` : e.message);
+    throw e;
+  }
+  const words = (u: { what: string; line: number; why: string }) => ({ what: u.what, line: u.line || null, why: u.why });
+  const base = { mode: "code", language: read.language, name: read.name };
+  if (!read.rules) {
+    return tidy({
+      ...base, ran: false, verdict: null,
+      sentence: `Not run: ${read.blocking.length} part${read.blocking.length === 1 ? "" : "s"} of the code cannot be turned into rules we can test. Each is listed in cannot_run with its line.`,
+      cannot_run: read.blocking.map(words), left_out: read.ignored.map(words), notes: read.notes, methodology: methodology(ctx), note: NOTE,
+    }) as Record<string, unknown>;
+  }
+  const doc = await ctx.data.json<Parameters<typeof priceBook>[0]>("/data/verify/prices.json").catch(() => null);
+  if (!doc) throw new ToolError("Our daily prices are not published yet, so the code cannot be run.");
+  const capital = typeof a.starting_balance === "number" && a.starting_balance > 0 ? a.starting_balance : undefined;
+  let run;
+  try { run = runRulesOnPrices(read as typeof read & { rules: Rules }, priceBook(doc), capital); } catch (e) {
+    if (e instanceof RulesError) throw new ToolError(e.message);
+    throw e;
+  }
+  const tries = typeof a.tries === "number" && Number.isFinite(a.tries) ? Math.max(1, Math.round(a.tries)) : 1;
+  const r = checkBacktest(run, tries, a.tries == null);
+  const c = r.code!;
+  return {
+    ...base, ran: true,
+    ...fullResult(r, ctx),
+    rules: run.rules,
+    tries_counted: { stated: c.triesStated, nearby_settings: c.triesSweep, total: r.tries },
+    backtest: tidy({
+      market: c.market, from: r.dateFrom, to: r.dateTo, starting_balance: c.capital, cost_each_way: c.cost, cost_why: c.costWhy,
+      total_return: c.totalReturn, total_return_one_day_later: c.delayedReturn, buy_and_hold_return: c.buyHoldReturn, prices: c.priceSource,
+    }),
+    nearby_settings: tidy(c.sweep),
+    left_out: read.ignored.map(words),
+  } as Record<string, unknown>;
+}
+
 async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
+  if (a.code != null || a.rules != null) return runCode(a, ctx);
   const name = str(a.strategy).trim(), text = str(a.description).trim();
-  if (!name && !text) throw new ToolError("Give strategy (an id or name from our tested list, such as fx_carry or \"The Gambit\") or description (a rule set in words).");
+  if (!name && !text) throw new ToolError("Give strategy (an id or name from our tested list, such as fx_carry or \"The Gambit\"), code (Pine Script or Python) with market, rules with market, or description (a rule set in words).");
   const { report, search } = await research(ctx);
   const tries = (search?.trials ?? 0) + report.n_trials;
   if (name) {
@@ -267,7 +315,7 @@ async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
     claim_arithmetic: claimRows(x.claim),
     tries_counted: { research: report.n_trials, search: search?.trials ?? 0, total: tries },
     research_as_of: report.generated_at,
-    could_not_check: [{ check: "This rule set's own results", why: "A described rule set has not been backtested by Parity. These are the closest strategies we have tested. Send the rule set's trade log to verify_trades to check its record." }],
+    could_not_check: [{ check: "This rule set's own results", why: `A description in words is not backtested by Parity. To backtest it, write it as rules (format ${RULES_FORMAT}, see this tool's description) and send rules with market, or send the strategy's Pine Script or Python as code. These are the closest strategies we have tested.` }],
     methodology: methodology(ctx),
     note: NOTE,
   }) as Record<string, unknown>;
@@ -275,18 +323,28 @@ async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
 
 export const verifyStrategy: Tool = {
   name: "verify_strategy",
-  title: "Verify a tested strategy",
+  title: "Verify a strategy",
   description: [
-    "Runs Parity Verify on one of the strategies Parity has tested, using our research numbers and the real number of tries our research and strategy search have counted (thousands), so the luck check is as strict as it should be.",
-    "Send strategy: an id or a name, such as \"fx_carry\" or \"The Gambit\". Returns the verdict, one sentence, the five cards, survives_up_to_tries, the gauntlet result (tests passed of 11), the method version and could_not_check.",
-    "Or send description: a rule set in words, such as \"buys the highest-yielding currency and sells the lowest, rebalanced monthly\". Returns the closest strategies we have tested, each with its verdict and luck check, and an id to verify next. A description is not backtested.",
-    "Use search_strategies to browse the ids. Runs in memory; nothing is stored. A check, not advice.",
+    "Runs Parity Verify on a strategy. Three ways:",
+    "(1) code: TradingView Pine Script (v4 to v6) or a simple Python strategy (pandas signal columns, vectorbt entries and exits, or a backtesting.py Strategy class), with market. Parity reads it into rules, backtests them on its own daily closing prices with retail costs, also runs the nearby settings (each setting at half to one and a half times its value), and returns the verdict, one sentence, the five cards, survives_up_to_tries, the rules it ran, the backtest's returns, the one-day-later return and could_not_check. Parts it cannot run (the day's high, low or volume, other time frames, trailing stops, loops) are listed in cannot_run with their line, and nothing is run; drawings and alerts are listed in left_out.",
+    `(2) rules: the strategy in Parity's rule format (${RULES_FORMAT}), with market. Use this to backtest a strategy someone described in words: write it as rules yourself. Expressions are JSON lists: ["sma", "close", 20], ["crossover", "fast", "slow"], [">", "rsi14", 70], ["and", a, b], ["prev", "close", 1]. Functions: sma, ema, rma, wma, rsi, roc, change, stdev, highest, lowest, cci, macd, macd_signal, macd_hist, bb_upper, bb_lower, crossover, crossunder, cross, abs, max, min, nz, if. Built-ins: close, entry_price, position. Example: {"market": "BTCUSD", "inputs": {"fast": 10, "slow": 30}, "let": {"f": ["sma", "close", "fast"], "s": ["sma", "close", "slow"]}, "long": {"entry": ["crossover", "f", "s"], "exit": ["crossunder", "f", "s"], "stop_loss": 0.05}}.`,
+    "Send tries: how many versions or settings the person tried before this one. The luck check counts those plus the nearby settings Parity ran.",
+    "(3) strategy: an id or name of a strategy Parity has tested, such as \"fx_carry\", checked with every try our research and search have counted. description in words returns the closest strategies we have tested instead (not a backtest).",
+    `Markets: ${MARKETS.map((m) => m.id).join(", ")}, daily closes. Runs in memory; nothing is stored. A check, not advice.`,
   ].join(" "),
   inputSchema: {
     type: "object",
     properties: {
+      code: { type: "string", minLength: 1, maxLength: 60000, description: "Pine Script or Python source of the strategy. Needs market." },
+      language: { type: "string", enum: ["auto", "pine", "python", "rules"], description: "The language of code. Default auto: found from how it looks." },
+      rules: { type: "object", description: `The strategy in Parity's rule format (${RULES_FORMAT}): market, inputs, let, long and short with entry, exit, stop, limit, stop_loss, take_profit. Needs market.` },
+      market: { type: "string", enum: MARKETS.map((m) => m.id), description: "The market to run code or rules on, with our daily closing prices." },
+      tries: { type: "integer", minimum: 1, maximum: 10000000, description: "How many versions or settings were tried before this one, counting this one. Default 1." },
+      starting_balance: { type: "number", minimum: 1, maximum: 1e12, description: "Starting balance for the backtest. Default: the script's own, or 10,000." },
+      from: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "First day to test, YYYY-MM-DD. Default: all our prices." },
+      to: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "Last day to test, YYYY-MM-DD." },
       strategy: { type: "string", minLength: 1, maxLength: 120, description: "An id or name from Parity's tested list, such as fx_carry or The Gambit." },
-      description: { type: "string", minLength: 1, maxLength: 4000, description: "A rule set in words, when it is not one of ours. Returns the closest tested strategies." },
+      description: { type: "string", minLength: 1, maxLength: 4000, description: "A rule set in words. Returns the closest tested strategies; to backtest it, send rules instead." },
       limit: { type: "integer", minimum: 1, maximum: 10, description: "How many close strategies to return for a description (default 3)." },
     },
     additionalProperties: false,

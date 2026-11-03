@@ -11,6 +11,7 @@ import type { KeyRecord, Store } from "../src/lib/api/store";
 import { handleMcp, MODERN, type ServerDeps } from "../src/lib/mcp/server";
 import { byName, TOOLS, type Data, type Db, type ToolContext } from "../src/lib/mcp/tools";
 import { MAX_ROWS } from "../src/lib/mcp/verify";
+import { METHOD_VERSION } from "../src/lib/verify/types";
 
 const ORIGIN = "https://paritytrading.app";
 
@@ -90,7 +91,7 @@ describe("Verify tools on the hosted MCP server", () => {
     for (const k of ["profit_per_trade", "worst_losses", "luck_check", "signs_of_peeking_or_editing", "signs_of_tuning"]) expect(r).toHaveProperty(k);
     expect(r.tries).toBe(12);
     expect(r.tries_defaulted).toBe(false);
-    expect(r.method_version).toBe("verify-1.0");
+    expect(r.method_version).toBe(METHOD_VERSION);
     expect(r).toHaveProperty("survives_up_to_tries");
     expect(String(r.survives)).toMatch(/tries|try|measured/);
     const cannot = r.could_not_check as { check: string; why: string }[];

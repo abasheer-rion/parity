@@ -50,6 +50,7 @@ Each runs in memory. Nothing sent is stored. The old names keep working.
 
 - [DEC-0051: AI apps connect to Parity through a hosted MCP server, and people bring their own model](0051-ai-apps-connect-to-parity-through-a-hosted-mcp-server-and-people-bring-their-own-model.md)
 - [DEC-0071: People make their own API keys for a versioned Parity API](0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md)
+- [DEC-0083: Verify runs a strategy from its code on our prices](0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 - [REF-0027: AI connector directory submissions for Claude, ChatGPT and Gemini](../reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md)
 <!-- backlinks:end -->
