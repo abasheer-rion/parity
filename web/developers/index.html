@@ -26,7 +26,7 @@
     <thead><tr><th>Endpoint</th><th>Scope</th><th>Send</th></tr></thead>
     <tbody>
       <tr><td><code>POST /api/v1/verify/trades</code></td><td>write:verify</td><td>A trade list or an equity curve, how many things were tried, and whether it is real, demo or a backtest</td></tr>
-      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>The id or name of one of our tested strategies, or a rule set in words</td></tr>
+      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>Pine Script or Python code, rules in our format, or the id or name of one of our tested strategies</td></tr>
       <tr><td><code>POST /api/v1/verify/claim</code></td><td>write:verify</td><td>A seller's claim, in their words or as fields such as win rate, take-profit and stop</td></tr>
     </tbody>
   </table></div>
@@ -85,12 +85,13 @@ console.log(result.verdict.id, result.survives_up_to_tries);</code></pre>
 }</code></pre>
 
   <h3 id="verify-strategy">Strategy: <code>POST /api/v1/verify/strategy</code></h3>
-  <p>Send <code>strategy</code>: an id or name from our tested list, such as <code>fx_carry</code> or <code>The Gambit</code>. Verify runs on our research numbers with every try our research and strategy search have counted, and adds the gauntlet result (tests passed of 11). Or send <code>description</code>, a rule set in words, to get the closest strategies we have tested, each with an id to verify next. An unknown name answers 404.</p>
+  <p>Send <code>code</code>, TradingView Pine Script or a simple Python strategy, with <code>market</code> (one of EURUSD, GBPUSD, AUDUSD, NZDUSD, USDJPY, USDCAD, USDCHF, USDNOK, USDSEK, BTCUSD, ETHUSD, SPX). Verify reads it into rules, runs them on our daily closes with retail costs, runs the nearby settings too, and answers with the verdict, the rules it ran, <code>tries_counted</code> (the <code>tries</code> you send plus the nearby settings) and the backtest's returns. Parts it cannot run come back in <code>cannot_run</code> with their line, with <code>"ran": false</code>. To backtest a strategy described in words, write it as <code>rules</code> in our format (see the <code>verify_strategy</code> tool description) and send those with <code>market</code>. How code is read: <a href="/methodology/#code">methodology</a>.</p>
+  <p>Or send <code>strategy</code>: an id or name from our tested list, such as <code>fx_carry</code> or <code>The Gambit</code>. Verify runs on our research numbers with every try our research and strategy search have counted, and adds the gauntlet result (tests passed of 11). Or send <code>description</code>, a rule set in words, to get the closest strategies we have tested, each with an id to verify next. An unknown name answers 404.</p>
   <h4>curl</h4>
 <pre tabindex="0"><code>curl -s https://paritytrading.app/api/v1/verify/strategy \
   -H "Authorization: Bearer $PARITY_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"strategy": "fx_carry"}'</code></pre>
+  -d '{"market": "BTCUSD", "tries": 12, "code": "//@version=5\nstrategy(\"Cross\")\nf = ta.sma(close, 10)\ns = ta.sma(close, 30)\nif ta.crossover(f, s)\n    strategy.entry(\"L\", strategy.long)\nif ta.crossunder(f, s)\n    strategy.close(\"L\")"}'</code></pre>
   <h4>Python</h4>
 <pre tabindex="0"><code>r = requests.post("https://paritytrading.app/api/v1/verify/strategy",
                   headers={"Authorization": f"Bearer {os.environ['PARITY_API_KEY']}"},
@@ -237,7 +238,7 @@ console.log(impossible, needs_more_data, claims.map((c: { id: string }) =&gt; c.
       <tr><td><code>GET /api/v1/news/impact</code></td><td>read:markets</td><td>What markets did after kinds of news. Query: <code>topic</code>, <code>asset</code>, <code>limit</code></td></tr>
       <tr><td><code>GET /api/v1/verify/tests</code></td><td>read:verify</td><td>The checks Verify runs</td></tr>
       <tr><td><code>POST /api/v1/verify/trades</code></td><td>write:verify</td><td>Verify on a trade list or equity curve you send. See <a href="#verify-trades">Trades</a></td></tr>
-      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>Verify on one of our tested strategies, or the closest to a rule set in words. See <a href="#verify-strategy">Strategy</a></td></tr>
+      <tr><td><code>POST /api/v1/verify/strategy</code></td><td>read:verify</td><td>Verify strategy code or rules run on our prices, or one of our tested strategies. See <a href="#verify-strategy">Strategy</a></td></tr>
       <tr><td><code>POST /api/v1/verify/claim</code></td><td>write:verify</td><td>The arithmetic of a seller's claim. See <a href="#verify-claim">Claim</a></td></tr>
       <tr><td><code>POST /api/v1/verify</code></td><td>write:verify</td><td>Old path for <code>/verify/trades</code>, deprecated</td></tr>
       <tr><td><code>POST /api/v1/verify/description</code></td><td>write:verify</td><td>Old path for <code>/verify/claim</code>, deprecated</td></tr>

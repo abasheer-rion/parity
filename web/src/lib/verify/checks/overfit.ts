@@ -75,3 +75,21 @@ export function claimCheck(claim: Claim, file: FileFacts): CheckRow & { contradi
   if (!ok.length) return { id: "claim", label, status: "na", detail: `${NA}: the file cannot show the claimed ${unknown.join(" or ")} without a starting balance.`, contradicted: [] };
   return { id: "claim", label, status: "pass", detail: `${ok.join("; ")}: within 5 points.${unknown.length ? ` The ${unknown.join(" and ")} could not be compared.` : ""}`, contradicted: [] };
 }
+
+export interface SweepFacts { runs: number; profitable: number; rank: number | null; ranges: string[] }
+
+/**
+ * Settings next to yours, for code we ran: each setting at half to one and a half times its
+ * value. Fails when fewer than half of those runs make money after costs: the result then
+ * depends on the exact settings, the mark of rules tuned to the past.
+ */
+export function neighboursCheck(s: SweepFacts | null): CheckRow {
+  const label = "Settings next to yours";
+  if (!s || s.runs < 2) return { id: "sweep", label, status: "na", detail: `${NA}: the rules have no settings to vary.` };
+  const share = `${Math.round(s.profitable * 100)}%`;
+  const where = s.rank != null ? ` Yours rank ${s.rank} of ${s.runs} by Sharpe.` : "";
+  const what = s.ranges.length ? ` We tried ${s.ranges.join(", ")}.` : "";
+  return s.profitable < 0.5
+    ? { id: "sweep", label, status: "fail", detail: `Only ${share} of ${s.runs} nearby settings make money after costs.${where}${what} A result that needs its exact settings is often tuned to the past.` }
+    : { id: "sweep", label, status: "pass", detail: `${share} of ${s.runs} nearby settings make money after costs (half is the line).${where}${what}` };
+}

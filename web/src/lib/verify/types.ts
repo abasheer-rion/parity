@@ -2,7 +2,7 @@
 // in the browser only: a parsed file is never sent anywhere.
 
 /** Bump when a check or a threshold changes, so a badge says which rules judged it. */
-export const METHOD_VERSION = "verify-1.0";
+export const METHOD_VERSION = "verify-1.1";
 
 /**
  * Every method version, newest first, with the date it took effect and what changed. The
@@ -10,11 +10,12 @@ export const METHOD_VERSION = "verify-1.0";
  * METHOD_VERSION changes (a test checks the first row matches it).
  */
 export const METHOD_CHANGELOG: { version: string; date: string; changes: string }[] = [
+  { version: "verify-1.1", date: "2026-11-03", changes: "Strategy code: Pine Script, Python and rules are run on our daily closes with retail costs. The luck check counts the stated tries plus the nearby settings we ran. Two checks for code: \"perfect timing\" compares a run filled one day late, and \"settings next to yours\" fails when fewer than half of the nearby settings make money. \"Many settings, few trades\" now applies to code too." },
   { version: "verify-1.0", date: "2026-10-24", changes: "First version: five verdicts in a fixed order, five check cards, the luck check (deflated Sharpe ratio) with \"survives up to N tries\", claim arithmetic, and fill checks against one price a day." },
 ];
 
 export type InputKind = "real" | "demo" | "backtest";
-export type Source = "file" | "description" | "strategy";
+export type Source = "file" | "description" | "strategy" | "code";
 
 /** One closed trade, after personal columns were dropped. Money is in the account's currency. */
 export interface Trade {

@@ -1,0 +1,11 @@
+//@version=5
+strategy("ATR breakout", overlay=true)
+atrLen = input.int(14)
+atr = ta.atr(atrLen)
+htf = request.security(syminfo.tickerid, "W", close)
+var float trail = na
+trail := close - 2 * atr
+longCondition = close > ta.highest(high, 20)[1] and close > htf
+if longCondition
+    strategy.entry("Long", strategy.long)
+strategy.exit("Trail", "Long", trail_points=100, trail_offset=50)

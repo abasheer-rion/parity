@@ -156,9 +156,23 @@ export function labelCheck(kind: InputKind, backtestExport: boolean): CheckRow {
   return { id: "label", label, status: "pass", detail: backtestExport ? "The file is a TradingView backtest, and it is labelled as one." : "Nothing in the file contradicts how it is labelled." };
 }
 
-/** Our cut-the-data test (DEC-0014): input C only. */
+/** Our cut-the-data test (DEC-0014): our strategies, and code we ran ourselves. */
 export function strategyLookAheadCheck(source: Source): CheckRow {
   const label = "Strategy look-ahead test";
+  if (source === "code") return { id: "cut", label, status: "pass", detail: "We ran the code ourselves: each day's rules see that day's close and earlier ones only. Code that reads later prices, such as a negative shift or request.security with look-ahead, is refused before it runs." };
   if (source !== "strategy") return { id: "cut", label, status: "na", detail: `${NA}: it needs the strategy's code, so it runs only for strategies we tested ourselves.` };
   return { id: "cut", label, status: "pass", detail: "Our test suite cuts the data at several dates and checks that no earlier position changes. Every strategy in our list passes it." };
+}
+
+/**
+ * Perfect timing, for code we ran: the same rules with every order filled one day after its
+ * signal. When the result falls to less than half (by Sharpe), it leans on getting the exact
+ * closing price of the day that gave the signal, which a real order rarely gets.
+ */
+export function delayCheck(sharpe: number | null, delayed: number | null): CheckRow {
+  const label = "Perfect timing";
+  if (sharpe == null || delayed == null) return { id: "timing", label, status: "na", detail: `${NA}: one of the two runs has no ups and downs.` };
+  const s = (v: number) => v.toFixed(2);
+  if (sharpe > 0 && delayed < sharpe / 2) return { id: "timing", label, status: "fail", detail: `Filled one day after each signal, the Sharpe ratio falls from ${s(sharpe)} to ${s(delayed)}, less than half. The result depends on trading at the exact close that gave the signal.` };
+  return { id: "timing", label, status: "pass", detail: `Filled one day after each signal, the Sharpe ratio is ${s(delayed)}, against ${s(sharpe)} at the signal day's close.` };
 }

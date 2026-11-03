@@ -5,9 +5,11 @@ import { createContext, useContext, type ReactNode } from "react";
 import { breakEvenAt, survivesText, VERDICT_TONE, type CheckRow, type Result } from "../../lib/verify/checks";
 import { explain } from "../../lib/verify/explain";
 import { shortDate } from "../../lib/verify/parse";
-import { Badge, KeyValues, MINUS, Panel, Tooltip } from "../../ui";
+import { Badge, Disclosure, KeyValues, MINUS, Panel, Tooltip } from "../../ui";
 import { termById } from "../../lib/glossary";
 import { HoldupSection } from "../../components/holdup/HoldupSection";
+import type { Rules } from "../../lib/verify/strategy";
+import { RulesSummary } from "./CodeInput";
 
 /** On the public badge page (/v/<id>) links go to the public glossary and lessons, not into the app. */
 export const PublicLinks = createContext(false);
@@ -58,7 +60,7 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
         <h2 id="vf-verdict" className="vf-verdict-label">{r.verdict.label}</h2>
         <p className="vf-sentence" data-testid="verdict-sentence">{r.verdict.sentence}</p>
         <ul className="vf-meta">
-          <li>{r.source === "file" ? KIND_TEXT[r.kind] : r.source === "strategy" ? "Backtest from our research" : "A description, not a record"}</li>
+          <li>{r.source === "file" ? KIND_TEXT[r.kind] : r.source === "strategy" ? "Backtest from our research" : r.source === "code" ? "A backtest we ran on our prices" : "A description, not a record"}</li>
           <li>{r.what}</li>
           {r.dateFrom && r.dateTo && <li><Num id="dates">{`${shortDate(r.dateFrom)} to ${shortDate(r.dateTo)}`}</Num></li>}
           {r.trades != null && <li><Num id="trades">{`${int(r.trades)} trades`}</Num></li>}
@@ -70,6 +72,8 @@ export function ResultView({ r, children }: { r: Result; children?: ReactNode })
         {r.notes.map((n) => <p key={n} className="vf-note">{n}</p>)}
         {!pub && <p className="vf-disclaimer">Research and education only. Not investment advice. The verdict describes this record and makes no forecast.</p>}
       </div>
+
+      {r.code && <CodeFactsPanel r={r} />}
 
       {children}
 
@@ -237,5 +241,37 @@ export function BreakEvenChart({ winRate, payoff }: { winRate: number; payoff: n
       </Tooltip>
       <figcaption className="vf-small">{label}</figcaption>
     </figure>
+  );
+}
+
+/** What we ran for strategy code: the market, costs, returns, the tries counted and the rules. */
+function CodeFactsPanel({ r }: { r: Result }) {
+  const c = r.code!;
+  const sw = c.sweep;
+  return (
+    <Panel title="The backtest we ran">
+      <div className="vf-ran">
+        <KeyValues cols={2} items={[
+          ["Market", `${c.marketName} (${c.market})`],
+          ["Starting balance", money(c.capital)],
+          ["Cost each way", `${pct(c.cost, 2)}: ${c.costWhy}`],
+          ["Total return", <Num id="codeReturn">{pct(c.totalReturn)}</Num>],
+          ["Filled one day later", <Num id="codeLate">{pct(c.delayedReturn)}</Num>],
+          ["Buying and holding", <Num id="codeHold">{pct(c.buyHoldReturn)}</Num>],
+          ["Tries counted", <Num id="tries">{`${int(c.triesStated)} stated + ${int(c.triesSweep)} nearby = ${int(r.tries)}`}</Num>],
+          ["Nearby settings that make money", <Num id="codeSweep">{sw.runs > 1 ? `${pct(sw.profitable, 0)} of ${int(sw.runs)}` : "No settings to vary"}</Num>],
+        ]} />
+        <Disclosure summary="The rules we ran">
+          <RulesSummary rules={c.rules as Rules} />
+          <pre className="vf-json" tabIndex={0} aria-label="The rules as JSON">{JSON.stringify(c.rules, null, 2)}</pre>
+        </Disclosure>
+        {c.ignored.length > 0 && (
+          <Disclosure summary={`Left out: ${c.ignored.length} part${c.ignored.length === 1 ? "" : "s"} that do not change the trades`}>
+            <ul className="vf-left">{c.ignored.map((u) => <li key={`${u.what}-${u.line}`}>{u.line ? `Line ${u.line}: ` : ""}<code>{u.what}</code>, {u.why}</li>)}</ul>
+          </Disclosure>
+        )}
+        <p className="vf-small">Prices: {c.priceSource}. Overnight financing, borrowing to sell short and funding on perpetual futures are not charged.</p>
+      </div>
+    </Panel>
   );
 }

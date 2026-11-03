@@ -1,0 +1,12 @@
+//@version=5
+strategy("MACD long and short", overlay=true)
+[macdLine, signalLine, hist] = ta.macd(close, 12, 26, 9)
+[basis, upper, lower] = ta.bb(close, 20, 2.0)
+if ta.crossover(macdLine, signalLine) and close > basis
+    strategy.entry("L", strategy.long)
+if ta.crossunder(macdLine, signalLine) and close < basis
+    strategy.entry("S", strategy.short)
+if strategy.position_size > 0
+    strategy.exit("LX", "L", stop=strategy.position_avg_price * 0.93)
+if strategy.position_size < 0
+    strategy.exit("SX", "S", stop=strategy.position_avg_price * 1.07)

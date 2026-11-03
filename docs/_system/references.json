@@ -33389,7 +33389,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0014-binance.md"
+        "docs/competitors/0014-binance.md",
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
       ],
       "metadata": {
         "source": "repo",
@@ -43003,6 +43004,72 @@
       "note": "Added for DAT-0048",
       "metadata": {
         "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1287faa5",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Pine Script user manual: Strategies",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/pine-script-docs/concepts/strategies/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-546655e8",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Backtesting.py documentation",
+      "venue": "kernc.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://kernc.github.io/backtesting.py/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-02f1dd10",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "pandas.DataFrame.ewm",
+      "venue": "pandas.pydata.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
         "doi_explicit": false
       }
     }

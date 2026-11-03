@@ -11,6 +11,8 @@ const web = (p: string) => resolve(import.meta.dirname, "..", p);
 const FILES: Record<string, string> = {
   "/data/latest.json": web("tests/fixtures/smoke/latest.json"),
   "/data/search.json": web("tests/fixtures/smoke/search.json"),
+  // Verify's daily prices (made-up, tests/fixtures/verify/strategy/make-prices.mjs).
+  "/data/verify/prices.json": web("tests/fixtures/verify/strategy/prices.json"),
 };
 const INLINE: Record<string, unknown> = {
   // The front page's counters (scripts/export_site_data.py writes it at deploy).
