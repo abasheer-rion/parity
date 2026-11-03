@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import asyncio
 import concurrent.futures
+import hashlib
 import json
 import math
 import os
@@ -369,7 +370,8 @@ def look_ahead_check(strat, panel: pd.DataFrame) -> dict:
 
 MCP_SCHEMA = """
 CREATE TABLE IF NOT EXISTS mcp_trials (
-  id TEXT PRIMARY KEY, source TEXT NOT NULL DEFAULT 'mcp', spec TEXT NOT NULL, name TEXT,
+  id TEXT PRIMARY KEY, source TEXT NOT NULL DEFAULT 'mcp', spec TEXT NOT NULL,
+  config TEXT NOT NULL DEFAULT '{}', snapshot TEXT, name TEXT,
   family TEXT, asset TEXT, hypothesis TEXT, cost_bps REAL, start TEXT, years REAL,
   cagr REAL, vol REAL, sharpe REAL, max_dd REAL, turnover REAL, breakeven_bps REAL,
   corr REAL, beats_market INTEGER, sr_daily REAL, n_days INTEGER, skew REAL, kurt REAL,
@@ -392,27 +394,42 @@ class Trials:
         con.execute("PRAGMA journal_mode=WAL")
         con.execute(search.SCHEMA)
         con.execute(MCP_SCHEMA)
+        cols = {r[1] for r in con.execute("PRAGMA table_info(mcp_trials)")}
+        if "config" not in cols:
+            con.execute("ALTER TABLE mcp_trials ADD COLUMN config TEXT NOT NULL DEFAULT '{}'")
+        if "snapshot" not in cols:
+            con.execute("ALTER TABLE mcp_trials ADD COLUMN snapshot TEXT")
         return con
 
-    def record(self, sid: str, spec: dict, d: dict, row: dict, hypothesis: str,
-               cost_bps: float) -> None:
+    @staticmethod
+    def key(spec: dict, config: dict, snapshot: str | None) -> str:
+        payload = json.dumps({"spec": spec, "config": config, "snapshot": snapshot},
+                             sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(payload.encode()).hexdigest()[:24]
+
+    def record(self, spec: dict, config: dict, snapshot: str | None, d: dict, row: dict,
+               hypothesis: str = "") -> str:
         now = datetime.now(UTC).isoformat(timespec="seconds")
+        trial_id = self.key(spec, config, snapshot)
         cols = ["start", "years", "cagr", "vol", "sharpe", "max_dd", "turnover",
                 "breakeven_bps", "corr", "beats_market", "sr_daily", "n_days", "skew",
                 "kurt", "error"]
         vals = [search._clean(row.get(c)) for c in cols]
         with self._con() as con:
-            hit = con.execute("SELECT tries FROM mcp_trials WHERE id=?", (sid,)).fetchone()
+            hit = con.execute("SELECT tries FROM mcp_trials WHERE id=?", (trial_id,)).fetchone()
             if hit:
                 con.execute("UPDATE mcp_trials SET tries=tries+1, last_tried=? WHERE id=?",
-                            (now, sid))
-                return
+                            (now, trial_id))
+                return trial_id
             con.execute(
-                f"INSERT INTO mcp_trials (id, spec, name, family, asset, hypothesis, cost_bps, "
+                f"INSERT INTO mcp_trials (id, spec, config, snapshot, name, family, asset, "
+                f"hypothesis, cost_bps, "
                 f"{', '.join(cols)}, first_tried, last_tried) "
-                f"VALUES ({', '.join('?' * (len(cols) + 9))})",
-                [sid, json.dumps(spec, sort_keys=True), d.get("name"), d.get("family"),
-                 d.get("asset"), hypothesis[:500], cost_bps, *vals, now, now])
+                f"VALUES ({', '.join('?' * (len(cols) + 11))})",
+                [trial_id, json.dumps(spec, sort_keys=True),
+                 json.dumps(config, sort_keys=True), snapshot, d.get("name"), d.get("family"),
+                 d.get("asset"), hypothesis[:500], config.get("cost_bps"), *vals, now, now])
+        return trial_id
 
     def frame(self) -> pd.DataFrame:
         """Every trial that ran, search and assistant together, one row per id, with
@@ -426,7 +443,9 @@ class Trials:
         s["source"] = "search"
         m = m[~m["id"].isin(s["id"])]
         both = pd.concat([s, m], ignore_index=True) if len(m) else s
-        both["deflated"] = search.deflate(both) if len(both) else []
+        counts = self.counts()
+        both["deflated"] = search.deflate(
+            both, counts["search_trials"] + counts["assistant_trials"]) if len(both) else []
         return both
 
     def counts(self) -> dict:
@@ -494,7 +513,8 @@ class ParityTools:
         return self._cache["latest"][1]
 
     def _n_strategies(self) -> int:
-        return sum(1 for c in strategies.available().values() if not c.is_benchmark)
+        """Unique successful trials across the search and assistant tables."""
+        return len(self.trials.frame())
 
     def _strategy(self, name: str, params: dict | None):
         registry = strategies.available()
@@ -589,17 +609,24 @@ class ParityTools:
     def run_backtest(self, name: str, params: dict | None = None, start: str | None = None,
                      end: str | None = None, cost_bps: float = 1.0) -> dict:
         strat = self._strategy(name, params)
-        cfg = BacktestConfig(start=start or "1999-01-04", end=end, cost_bps=float(cost_bps))
+        from .holdout import clamp_config
+        try:
+            cfg = clamp_config(BacktestConfig(start=start or "1999-01-04", end=end,
+                                              cost_bps=float(cost_bps)))
+        except ValueError as exc:
+            raise ToolError(str(exc)) from exc
         panel = self._panel(set(strat.required()) | set(BASE_KEYS))
         bench = self._bench(panel, cfg)
         res = run(strat, panel, cfg)
-        n = self._n_strategies()
+        spec = {"kind": "strategy", "name": name, "params": strat.params()}
+        counted = self._count(spec, res, bench, cfg)
+        counts = self.trials.counts()
+        n = counts["search_trials"] + counts["assistant_trials"]
         m = performance.summary(res.returns, res.gross_returns, res.turnover, bench.returns,
-                                n_trials=n, excess=res.excess_returns,
+                                n_trials=max(n, 1), excess=res.excess_returns,
                                 benchmark_excess=bench.excess_returns)
-        if params:
-            self._count(f"strategy:{name}", {"kind": "strategy", "name": name,
-                                             "params": params}, res, bench, cfg, "")
+        luck = self._luck(counted["trial_id"])
+        m["deflated_sharpe"] = luck["deflated_sharpe"]
         return {"strategy": name, "params": strat.params(), "config": cfg.to_dict(),
                 "metrics": m, "trials_for_deflated_sharpe": n,
                 "yearly": performance.yearly_returns(res.returns),
@@ -612,15 +639,28 @@ class ParityTools:
         strat = self._strategy(name, params)
         if strat.is_benchmark:
             raise ToolError("the benchmark is the bar itself; pick a strategy")
-        cfg = BacktestConfig()
+        from .holdout import clamp_config
+        cfg = clamp_config(BacktestConfig())
         panel = self._panel(set(strat.required()) | set(BASE_KEYS))
         bench = self._bench(panel, cfg)
+        spec = {"kind": "strategy", "name": name, "params": strat.params()}
+        self._count(spec, run(strat, panel, cfg), bench, cfg)
+
+        def save_variant(variant, vres, vcfg, tag):
+            variant_spec = {"kind": "strategy", "name": name,
+                            "params": variant.params()}
+            self._count(variant_spec, vres, bench, vcfg)
+
+        def trial_history():
+            frame = self.trials.frame()
+            counts = self.trials.counts()
+            sharpes = frame["sr_daily"].dropna()
+            return {"n_trials": counts["search_trials"] + counts["assistant_trials"],
+                    "sr_variance": float(sharpes.var()) if len(sharpes) > 1 else None}
+
         g = run_gauntlet(strat, panel, bench.returns, cfg, self._n_strategies(),
-                         bench.excess_returns)
-        if params:
-            self._count(f"strategy:{name}", {"kind": "strategy", "name": name,
-                                             "params": params}, run(strat, panel, cfg),
-                        bench, cfg, "")
+                         bench.excess_returns, trial_callback=save_variant,
+                         history_callback=trial_history)
         sens = g["sensitivity"]
         return {"strategy": name, "params": strat.params(), "verdict": g["verdict"],
                 "beats_sp500": g["beats_sp500"], "passed": f"{g['passed']}/{g['total']}",
@@ -632,7 +672,7 @@ class ParityTools:
                 "trials_including_gauntlet": g["trials_including_gauntlet"]}
 
     # the refine loop -------------------------------------------------------------
-    def _count(self, sid, spec, res, bench, cfg, hypothesis) -> dict:
+    def _count(self, spec, res, bench, cfg, hypothesis: str = "") -> dict:
         """Record one try in mcp_trials and return its row of numbers."""
         d = search.describe(spec) if spec.get("kind") in _NAMED else {
             "name": spec.get("name"), "family": None, "asset": None}
@@ -658,7 +698,9 @@ class ParityTools:
                    "skew": float(stats.skew(ex)), "kurt": float(stats.kurtosis(ex, fisher=False))}
         except ValueError as exc:
             row = {"error": str(exc)}
-        self.trials.record(sid, spec, d, row, hypothesis, cfg.cost_bps)
+        config = cfg.to_dict()
+        snapshot = data_store.coverage(self.s.data_dir).get("snapshot")
+        row["trial_id"] = self.trials.record(spec, config, snapshot, d, row, hypothesis)
         return row
 
     def evaluate_spec(self, spec: dict, cost_bps: float = 1.0, start: str | None = None,
@@ -667,14 +709,19 @@ class ParityTools:
         sid = search.spec_id(spec)
         d = search.describe(spec)
         panel = self._search_panel()
-        cfg = BacktestConfig(start=start or "1999-01-04", end=end, cost_bps=float(cost_bps))
+        from .holdout import clamp_config
+        try:
+            cfg = clamp_config(BacktestConfig(start=start or "1999-01-04", end=end,
+                                              cost_bps=float(cost_bps)))
+        except ValueError as exc:
+            raise ToolError(str(exc)) from exc
         bench = self._bench(panel, cfg)
         strat = search.build(spec)
         missing = [k for k in strat.required() if k not in panel]
         if missing:
             raise ToolError(f"No cached data for {', '.join(missing)}. Run `parity fetch`.")
         res = run(strat, panel, cfg)
-        row = self._count(sid, spec, res, bench, cfg, hypothesis)
+        row = self._count(spec, res, bench, cfg, hypothesis)
         out = {"id": sid, "spec": spec, **d, "config": {"start": cfg.start, "end": cfg.end,
                                                         "cost_bps": cfg.cost_bps}}
         if row.get("error"):
@@ -693,13 +740,20 @@ class ParityTools:
             out["metrics"]["share_of_days_invested"] = invested
             out["yearly"] = performance.yearly_returns(res.returns)
         out["look_ahead"] = look_ahead_check(strat, panel)
-        out["luck_check"] = self._luck(sid)
+        out["luck_check"] = self._luck(row["trial_id"])
         return out
 
     def _luck(self, sid: str) -> dict:
         df = self.trials.frame()
         counts = self.trials.counts()
         hit = df[df["id"] == sid]
+        if not len(hit):
+            with self.trials._con() as con:
+                specs = con.execute("SELECT id, spec FROM mcp_trials").fetchall()
+            match = next((trial_id for trial_id, raw in specs
+                          if search.spec_id(json.loads(raw)) == sid), None)
+            if match:
+                hit = df[df["id"] == match]
         dsr = float(hit["deflated"].iloc[0]) if len(hit) else None
         return {"deflated_sharpe": dsr, "passes": None if dsr is None else dsr >= 0.95,
                 "trials_counted": int(len(df)), **counts,
@@ -1287,7 +1341,8 @@ def build_server(settings: Settings | None = None):
         YYYY-MM-DD (default 1999-01-04 to the latest data). cost_bps is the one-way
         trading cost in basis points (default 1). Returns metrics (Sharpe on returns
         above the T-bill, cagr, max_drawdown, deflated_sharpe, breakeven_cost_bps,
-        correlation with stocks), yearly returns and a monthly equity curve."""
+        correlation with stocks), yearly returns and a monthly equity curve. Research
+        ends at 2026-10-29; later data is reserved for official forward evaluation."""
         args = {"name": name, "params": params, "start": start, "end": end,
                 "cost_bps": cost_bps}
         return await call("run_backtest", args,

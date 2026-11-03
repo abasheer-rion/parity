@@ -1210,7 +1210,8 @@ def run_batch(n: int, seed: int | None = None, con: sqlite3.Connection | None = 
     con = con or connect()
     r = random.Random(seed)
     panel, snap, have = _panel()
-    cfg = BacktestConfig()
+    from .holdout import clamp_config
+    cfg = clamp_config(BacktestConfig())
     bench_res = run(_benchmark(), panel, BacktestConfig(cost_bps=0.0))
     seen = {row[0] for row in con.execute("SELECT id FROM trials")}
     level = widen_level(con)

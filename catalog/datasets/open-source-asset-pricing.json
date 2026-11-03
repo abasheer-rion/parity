@@ -1,0 +1,36 @@
+{
+  "id": "DAT-0048",
+  "slug": "open-source-asset-pricing",
+  "name": "Open Source Asset Pricing",
+  "provider": "Andrew Y. Chen and Tom Zimmermann",
+  "category": "factor-research",
+  "url": "https://www.openassetpricing.com/",
+  "api_docs_url": "https://huggingface.co/datasets/OpenSourceAP/CrossSection",
+  "access": "free-no-key",
+  "rate_limits": "None stated; parquet files from Hugging Face, one file per set of signals or portfolios. Also the openassetpricing Python package and the OpenSourceAP.DownloadR R package.",
+  "history_start": "Varies by signal; the earliest long-short returns start in 1926. Release 2026.10 runs to December 2025, except option-based signals (end 2022) and a few whose source data stopped (governance 2007, patents 2006).",
+  "frequency": [
+    "daily",
+    "monthly"
+  ],
+  "what_it_has": "212 stock return predictors replicated from published papers, plus 114 placebos. For each: monthly long-short portfolio returns built the original paper's way, firm-level signal values (CRSP permno by month) and a signal document with the paper, its publication year, its sample start and end years and the paper's own return and t-statistic.",
+  "simple": "Two economists rebuilt about 200 published stock-picking rules from scratch and posted how each one did, both during the years its paper studied and in the years after it came out.",
+  "point_in_time": false,
+  "license_terms": "Data on Hugging Face are marked CC BY 4.0 (commercial use allowed with credit); cite Chen and Zimmermann (2022), Open Source Cross-Sectional Asset Pricing, Critical Finance Review. The code on GitHub is GPL-2.0. Rebuilding the CRSP-only signals (size, price, short-term reversal) needs a WRDS subscription. https://huggingface.co/datasets/OpenSourceAP/CrossSection",
+  "quality_notes": "Each release rebuilds the full history, so past returns change: 26 of 212 predictors moved materially in 2026.10 (bug fixes, the CRSP v2 switch, IBES revisions), listed in the release notes. Returns are gross of trading costs. Pin the release branch (Data-Release-2026.10) for anything that must be reproduced. US stocks only.",
+  "in_use_by_parity": false,
+  "parity_keys": [],
+  "relevance": {
+    "score": 4,
+    "reason": "The best free source of strategies with a known in-sample record and known later results, so Verify's luck check can be scored on outcomes now (RES-0031)."
+  },
+  "sources": [
+    "https://www.openassetpricing.com/",
+    "https://www.openassetpricing.com/data/",
+    "https://huggingface.co/datasets/OpenSourceAP/CrossSection",
+    "https://huggingface.co/datasets/OpenSourceAP/CrossSection/blob/Data-Release-2026.10/Release%20Notes%202026.10.md",
+    "https://github.com/OpenSourceAP/CrossSection"
+  ],
+  "verified": true,
+  "last_checked": "2026-11-02"
+}

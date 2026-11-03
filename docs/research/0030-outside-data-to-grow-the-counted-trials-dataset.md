@@ -4,7 +4,7 @@ title: Outside data to grow the counted-trials dataset
 type: research
 status: current
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-11-02
 authors: [amanda]
 tags: [data, method, open-source]
 related: [DEC-0032, DEC-0079, INT-0003, RES-0029, DEC-0014, DEC-0015]
@@ -50,7 +50,7 @@ The dataset in [DEC-0032](../decisions/0032-parity-verify-as-a-data-and-api-busi
 
 | Source | What it holds | Later result | Tries | Licence and access | Use |
 | --- | --- | --- | --- | --- | --- |
-| Open Source Asset Pricing (Chen and Zimmermann) [@url-28e0e490; @chen2022] | Signals replicated from the asset pricing literature: 209 from the project plus 3 that need CRSP (price, size, short-term reversal), as packaged on PyPI. Monthly long-short portfolio returns | Returns after each paper's sample ends and after publication, for decay in the style of [@mclean2016]. **Check**: whether the signal documentation gives each paper's sample end and publication year in a column (we believe so; not confirmed today) | The literature's own count; each signal is one published "winner" | No licence stated; the site asks for a citation. CRSP-based signals need WRDS | First choice. One row per signal: in-sample Sharpe, post-publication Sharpe, years since publication |
+| Open Source Asset Pricing (Chen and Zimmermann) [@url-28e0e490; @chen2022] | Signals replicated from the asset pricing literature: 209 from the project plus 3 that need CRSP (price, size, short-term reversal), as packaged on PyPI. Monthly long-short portfolio returns | Returns after each paper's sample ends and after publication, for decay in the style of [@mclean2016]. Confirmed 2026-11-02: the signal documentation has each paper's sample start, sample end and publication year ([RES-0031](0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)) | The literature's own count; each signal is one published "winner" | CC BY 4.0 on Hugging Face (found 2026-11-02; the site itself states no licence); cite the paper. CRSP-based signals need WRDS | First choice. One row per signal: in-sample Sharpe, post-publication Sharpe, years since publication |
 | Jensen, Kelly and Pedersen global factors [@url-c2280db1; @jensen2023] | 153 factors in 13 themes, 93 countries; long-short and theme returns | Out-of-sample and out-of-country replication | 153, grouped into 13 themes, a cleaner "independent tries" count than 153 | **CC BY-NC 4.0**: no commercial use. Code is MIT | Research rows only. Good for testing whether the luck check's verdict carries across countries |
 | Harvey, Liu and Zhu; Harvey and Liu census [@harvey2015; @harvey2019] | A list of published factors: 316, then 382 in the later census | None directly. The paper argues a new factor needs a t-statistic above 3.0 | The headline number: how many things the field has tried | A paper; no maintained dataset found | The `prior_trials` default for any stock-factor claim brought to Verify |
 | Quantpedia [@url-e6249d93] | Over 950 strategy entries by end of 2023, over 730 with out-of-sample backtests | Its own study: median Sharpe 1.180 in-sample, 0.662 out-of-sample (-43.9%) [@url-583d7f70] | One entry per published strategy | Paid; prices not public in our search. Licence needed before any row is copied | Use the published decay as a benchmark only; ask for a data licence later |
@@ -120,4 +120,5 @@ All fetched or searched on 2026-10-29.
 ## Referenced by
 
 - [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 <!-- backlinks:end -->

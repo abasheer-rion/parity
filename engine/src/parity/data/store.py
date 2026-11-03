@@ -24,6 +24,10 @@ def _path(series: catalog.Series, root: Path) -> Path:
     return root / "raw" / series.source / f"{series.code}.parquet"
 
 
+def _initial_release_path(series: catalog.Series, root: Path) -> Path:
+    return root / "raw" / "alfred" / f"{series.code}.parquet"
+
+
 def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dict]:
     """Download each series and overwrite its cache file. Returns a coverage report."""
     keys = keys or list(catalog.CATALOG)
@@ -41,6 +45,19 @@ def refresh(keys: list[str] | None = None, root: Path = DEFAULT_DIR) -> list[dic
             path.parent.mkdir(parents=True, exist_ok=True)
             data.to_frame().to_parquet(path)
             entry.update(_describe(data), ok=True, sha256=content_hash(data))
+            if series.source == "fred":
+                try:
+                    vintages = sources.fetch_fred_initial(series)
+                    pit_path = _initial_release_path(series, root)
+                    pit_path.parent.mkdir(parents=True, exist_ok=True)
+                    vintages.to_parquet(pit_path, index=False)
+                    entry["point_in_time"] = True
+                    entry["point_in_time_sha256"] = vintage_hash(vintages)
+                except sources.MissingKey:
+                    entry["point_in_time"] = False
+                except Exception as exc:
+                    entry["point_in_time"] = False
+                    entry["point_in_time_error"] = f"{type(exc).__name__}: fetch failed"
         except sources.MissingKey as exc:  # a keyed source with no key: skipped, not broken
             entry.update(ok=False, skipped=True, error=str(exc))
         except Exception as exc:  # keep going; one dead source should not stop the run
@@ -108,8 +125,18 @@ def content_hash(data: pd.Series) -> str:
 
 def snapshot_id(report: list[dict]) -> str:
     """One fingerprint for the whole data set: changes if any series changes."""
-    parts = sorted(f"{r['key']}:{r.get('sha256', 'missing')}" for r in report)
+    parts = sorted(f"{r['key']}:{r.get('sha256', 'missing')}:{r.get('point_in_time_sha256', '')}"
+                   for r in report)
     return hashlib.sha256("\n".join(parts).encode()).hexdigest()
+
+
+def vintage_hash(data: pd.DataFrame) -> str:
+    """Fingerprint initial-release values and the dates they became available."""
+    rows = data.sort_values(["available_at", "date"])
+    text = "\n".join(f"{d.date().isoformat()},{a.date().isoformat()},{v:.12g}"
+                     for d, a, v in rows[["date", "available_at", "value"]]
+                     .itertuples(index=False, name=None))
+    return hashlib.sha256(text.encode()).hexdigest()
 
 
 def _describe(data: pd.Series) -> dict:
@@ -146,12 +173,33 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
     """
     frames = {k: load(k, root) for k in keys}
     start = min(s.index.min() for s in frames.values())
-    end = max(s.index.max() for s in frames.values())
+    ends = [s.index.max() for s in frames.values()]
+    for key in keys:
+        spec = catalog.get(key)
+        if spec.source == "fred":
+            path = _initial_release_path(spec, root)
+            if path.exists():
+                available = pd.read_parquet(path, columns=["available_at"])["available_at"]
+                if not available.empty:
+                    ends.append(pd.to_datetime(available).max())
+    end = max(ends)
     index = pd.bdate_range(start, end)
     out = {}
     for key, s in frames.items():
         s = s[~s.index.duplicated(keep="last")].sort_index()
         spec = catalog.get(key)
+        pit_path = _initial_release_path(spec, root) if spec.source == "fred" else None
+        if pit_path is not None and pit_path.exists():
+            vintage = pd.read_parquet(pit_path).sort_values(["available_at", "date"])
+            released = vintage.drop_duplicates("available_at", keep="last")
+            pit_series = pd.Series(released["value"].to_numpy(),
+                                   index=pd.DatetimeIndex(released["available_at"]), name=key)
+            aligned = pit_series.reindex(index.union(pit_series.index)).sort_index()
+            out[key] = aligned.ffill().reindex(index)
+            if key.startswith("rate."):
+                out[REALISED + key] = s.reindex(index.union(s.index)).sort_index().ffill() \
+                    .reindex(index)
+            continue
         lag = spec.published_after
         if lag is not None and key.startswith("rate."):
             out[REALISED + key] = s.reindex(index.union(s.index)).sort_index().ffill() \
@@ -170,6 +218,38 @@ def panel(keys: list[str], root: Path = DEFAULT_DIR, ffill_limit: int = 5) -> pd
         limit = {"M": None, "Q": None, "W": 2 * ffill_limit}.get(spec.frequency, ffill_limit)
         out[key] = aligned.ffill(limit=limit).reindex(index)
     return pd.DataFrame(out, index=index)
+
+
+def missing_point_in_time(keys: list[str], root: Path = DEFAULT_DIR) -> list[str]:
+    """FRED inputs without a cached initial-release history."""
+    return [key for key in keys if catalog.get(key).source == "fred"
+            and not _initial_release_path(catalog.get(key), root).exists()]
+
+
+def snapshot_issues(keys: list[str], root: Path = DEFAULT_DIR) -> list[str]:
+    """Check cached bytes against the recorded fingerprint before an official run."""
+    entries = {row["key"]: row for row in coverage(root).get("series", [])}
+    issues = []
+    for key in keys:
+        spec = catalog.get(key)
+        record = entries.get(key)
+        if record is None:
+            issues.append(f"{key}: missing from coverage record")
+            continue
+        path = _path(spec, root)
+        if not path.exists():
+            issues.append(f"{key}: raw cache file is missing")
+            continue
+        if content_hash(load(key, root)) != record.get("sha256"):
+            issues.append(f"{key}: raw cache does not match coverage fingerprint")
+        if spec.source == "fred":
+            pit_path = _initial_release_path(spec, root)
+            if not pit_path.exists():
+                issues.append(f"{key}: initial-release cache is missing")
+            elif "point_in_time_sha256" not in record or \
+                    vintage_hash(pd.read_parquet(pit_path)) != record["point_in_time_sha256"]:
+                issues.append(f"{key}: initial-release cache does not match coverage fingerprint")
+    return issues
 
 
 def coverage(root: Path = DEFAULT_DIR) -> dict:

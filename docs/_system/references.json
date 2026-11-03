@@ -42910,6 +42910,101 @@
         "source": "repo",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-fbe25501",
+      "type": "dataset",
+      "authors": [
+        "Chen, Andrew Y.",
+        "Zimmermann, Tom"
+      ],
+      "year": 2026,
+      "title": "Open Source Cross-Sectional Asset Pricing, data release 2026.10",
+      "venue": "Hugging Face",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://huggingface.co/datasets/OpenSourceAP/CrossSection",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "docs/research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md"
+      ],
+      "note": "Added for RES-0031. Licence CC BY 4.0 per the dataset card.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a01473b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Open Source Asset Pricing, data page",
+      "venue": "openassetpricing.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.openassetpricing.com/data/",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-591ac0de",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Open Source Asset Pricing release notes 2026.10",
+      "venue": "Hugging Face",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://huggingface.co/datasets/OpenSourceAP/CrossSection/blob/Data-Release-2026.10/Release%20Notes%202026.10.md",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b97759b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OpenSourceAP/CrossSection code",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/OpenSourceAP/CrossSection",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
     }
   ]
 }
