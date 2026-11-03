@@ -61,8 +61,9 @@ Since [DEC-0009](../decisions/0009-excess-returns-financed-leverage-frozen-code.
 ## Known weaknesses of the tests themselves
 
 - **The placebo is harsh on slow strategies.** Carry holds similar positions for years, so a copy shifted by a year still often holds the right currencies. That makes B2 hard to pass for carry even if the effect is real.
-- **The eras overlap with the holdout.** A6 (last five years) sits inside A5's third era. They are not independent checks.
-- **Nothing here is truly out of sample.** We designed the strategies knowing roughly how currency markets behaved since 2000. Only data that arrives after 2026-10-20 is genuinely new.
+- **The eras overlap with the recent-years check.** A6 (last five years) sits inside A5's third era. They are not independent checks.
+- **The historical gauntlet is still in-sample.** We designed strategies knowing how markets behaved over that history. Research entry points now stop at 2026-10-29; data from 2026-10-30 onward is reserved for a separate prospective evaluation. That forward result must not be used to tune a strategy and then still be called a holdout.
+- **Revised macro history can create look-ahead.** Official runs require cached FRED initial-release observations and use their actual release dates. Exploratory runs can fall back to revised current values when no FRED key and initial-release cache are available; those results are not point-in-time safe.
 - **Fixed random seed.** Results are reproducible, but a different seed would move B1 and B2 a little. Borderline passes should be read as borderline.
 
 Definitions of every term are in the [glossary](0004-glossary.md).

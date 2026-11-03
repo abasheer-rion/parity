@@ -3,7 +3,8 @@
 # publishes a GitHub release holding the outputs and the data fingerprint.
 # See docs/decisions/0007-official-results-come-only-from-the-ledger.md.
 #
-# Secrets: PARITY_WRITER_DB_URL (optional, also copies the run to Supabase), FRED_API_KEY (optional)
+# Secrets: FRED_API_KEY (required for point-in-time official data),
+# PARITY_WRITER_DB_URL (optional, also copies the run to Supabase)
 name: Official run
 
 on:
@@ -40,7 +41,12 @@ jobs:
       - name: Fetch data
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-        run: parity fetch --strict
+        run: |
+          if [ -z "$FRED_API_KEY" ]; then
+            echo "FRED_API_KEY is required for point-in-time official runs"
+            exit 1
+          fi
+          parity fetch --strict
       - name: Official run
         id: run
         env:
