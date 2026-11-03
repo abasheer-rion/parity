@@ -43072,6 +43072,138 @@
         "source": "manual",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-2eab3b36",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "agusalex/tax_calculator",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/agusalex/tax_calculator",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-77266c72",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "codecat92/apex-grid-ea",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/codecat92/apex-grid-ea",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec3186c4",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "PopovMP/mt-report-parser",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/PopovMP/mt-report-parser",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00c665b4",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "pineforge-4pass/pineforge-corpus",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/pineforge-4pass/pineforge-corpus",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d7d63252",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Delta-Compute/DeltaCFOAgent",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/Delta-Compute/DeltaCFOAgent",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0b180ad0",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "alpacahq/alpaca-py",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/alpacahq/alpaca-py",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
     }
   ]
 }

@@ -7,7 +7,7 @@ created: 2026-10-27
 updated: 2026-11-03
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081, DEC-0083]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084]
 ---
 
 # Parity Verify methodology
@@ -118,7 +118,7 @@ Short sample: fewer than 100 trades or less than 12 months. First part against l
 
 ## Imports
 
-Fills are paired first in, first out per symbol into round trips. Each closing fill is one trade, so a partial close is its own trade. Profit is the price difference times quantity and contract size minus the fees of both sides, opening fees shared by quantity. Personal columns, and order ids that identify an account, are removed first. The supported exports and the layouts not yet confirmed against an official export are listed on `/verify/` ([DEC-0081](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)).
+Fills are paired first in, first out per symbol into round trips. Each closing fill is one trade, so a partial close is its own trade. Profit is the price difference times quantity and contract size minus the fees of both sides, opening fees shared by quantity. Fees count as each platform means them: Interactive Brokers' negative commissions are costs and positive ones rebates; a platform's own realized profit is used only for a close whose opening is before the file starts, as net of fees (Interactive Brokers) or before them (Binance futures); profit a platform already gives after commission (Myfxbook, NinjaTrader, cTrader net) is not reduced again; fees in a coin we cannot price (BNB) are named and left out. With a rate per row every amount becomes the base currency; several currencies without rates are flagged. A time zone in a cell or a header is turned into UTC; MetaTrader server time and Interactive Brokers' US Eastern time are stated. A skipped row is named with its line and cell. Personal columns, and order ids that identify an account, are removed first. MetaTrader 4 and 5 reports are read as saved (HTML in any language, UTF-16, and Excel), as are TradingView's Excel download and JSON from Alpaca. Each supported file is marked tested on a real export, layout copied from a real export, or unverified ([DEC-0084](../decisions/0084-verify-imports-are-tested-on-real-exports.md)).
 
 ## Trust levels and storage
 
@@ -146,4 +146,5 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.1. pari
 
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
 - [DEC-0083: Verify runs a strategy from its code on our prices](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
+- [DEC-0084: Verify's imports are tested on real exports](../decisions/0084-verify-imports-are-tested-on-real-exports.md)
 <!-- backlinks:end -->
