@@ -2,6 +2,7 @@
 // and news, the glossary, ideas and notes, and the Connect and Verify pages.
 import { resolve } from "node:path";
 import { expect, open, settled, test } from "./fixtures";
+import { METHOD_VERSION } from "../src/lib/verify/types";
 
 test.use({ signedIn: false });
 
@@ -270,6 +271,6 @@ test.describe("connect and verify pages", () => {
     await open(page, "/methodology/");
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.locator("#cite")).toBeVisible();
-    await expect(page.locator("main")).toContainText("verify-1.0");
+    await expect(page.locator("main")).toContainText(METHOD_VERSION);
   });
 });

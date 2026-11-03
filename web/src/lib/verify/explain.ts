@@ -37,6 +37,11 @@ export const EXPLAIN: Record<string, string> = {
   balance: "The starting balance used to turn profits into returns.",
   method: "The version of the rules that judged this record. It changes whenever a check or a line changes.",
   chart: "Your record as a point: its win rate against its payoff ratio. Above the curve makes money, below it loses.",
+  // Strategy code we ran
+  codeReturn: "What the rules made over the whole test, after our costs, as a share of the starting balance.",
+  codeLate: "The same rules with every order filled one day after its signal. A big drop means the result leans on getting the signal day's exact close.",
+  codeHold: "What simply buying on the first day and holding to the last would have made over the same days.",
+  codeSweep: "The settings next to yours, each at half to one and a half times its value: the share of them that make money after costs.",
   // Matches and our own tests
   matchLuck: "The strategy's luck check score in our own research, with all our tries counted.",
   matchSharpe: "The strategy's yearly Sharpe ratio in our own backtest, after costs.",

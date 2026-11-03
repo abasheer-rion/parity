@@ -296,7 +296,7 @@ def test_verify_claim_matches_the_hosted_rules(settings):
         "keeps it there.")
     assert rows["winrate"]["status"] == "needs_more_data"
     assert out["verdict"]["id"] == "not_enough_data"
-    assert out["method_version"] == "verify-1.0"
+    assert out["method_version"] == "verify-1.1"
     bad = call(settings, "verify_claim", {"claim": {"winRate": 0.8, "takeProfit": 0.02,
                                                     "stopLoss": 0.1, "maxDrawdown": 0.05,
                                                     "maxLoss": 0.1}})

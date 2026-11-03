@@ -157,3 +157,29 @@ export async function ask(opts: {
     case "gemini": return gemini(...args);
   }
 }
+
+/**
+ * One question, one answer, no tools: used to turn a strategy described in words into rules
+ * (DEC-0083). The person's own model and key, called from this browser; Parity never sees
+ * either and never pays for it.
+ */
+export async function complete(opts: { provider: ProviderId; key: string; model: string; system: string; prompt: string; origin: string; fetch?: Fetch }): Promise<string> {
+  const f = opts.fetch ?? fetch.bind(globalThis);
+  const { key, model, system, prompt } = opts;
+  if (opts.provider === "anthropic") {
+    const json = await post(f, "https://api.anthropic.com/v1/messages", { "x-api-key": key, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
+      { model, max_tokens: 4000, system, messages: [{ role: "user", content: prompt }] });
+    return ((json.content ?? []) as { type: string; text?: string }[]).filter((b) => b.type === "text").map((b) => b.text ?? "").join("\n");
+  }
+  if (opts.provider === "gemini") {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+    const json = await post(f, url, { "x-goog-api-key": key }, { systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: prompt }] }] });
+    const parts = ((json.candidates as { content?: { parts?: { text?: string }[] } }[] | undefined)?.[0]?.content?.parts ?? []);
+    return parts.map((p) => p.text ?? "").join("");
+  }
+  const base = opts.provider === "openrouter" ? "https://openrouter.ai/api/v1" : "https://api.openai.com/v1";
+  const extra: Record<string, string> = opts.provider === "openrouter" ? { "HTTP-Referer": opts.origin, "X-Title": "Parity" } : {};
+  const json = await post(f, `${base}/chat/completions`, { Authorization: `Bearer ${key}`, ...extra }, { model, messages: [{ role: "system", content: system }, { role: "user", content: prompt }] });
+  const msg = (json.choices as { message?: { content?: unknown } }[] | undefined)?.[0]?.message;
+  return typeof msg?.content === "string" ? msg.content : "";
+}

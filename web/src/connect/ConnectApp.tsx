@@ -16,7 +16,7 @@ const MCP_URL = `${siteDomainOf(window.location.hostname) ? ORIGIN : window.loca
 const PROMPTS = [
   { tool: "verify_trades", ask: "Check these 40 trades with Parity Verify. I tried 12 settings before this one.", back: "returns a verdict, one sentence written from the numbers, the profit per trade, the worst losses, the luck check after 12 tries, and what it could not check." },
   { tool: "verify_claim", ask: "Is a 92% win rate with 5% take-profit and no stop possible?", back: "marks each claim impossible, needs more data or adds up, with the sums: here, losses must average under 57.5% of a position to break even." },
-  { tool: "verify_strategy", ask: "Verify the strategy 'The Gambit'.", back: "returns the verdict on our research numbers with every try we counted, and the tests it passed out of 11." },
+  { tool: "verify_strategy", ask: "Verify this TradingView strategy on Bitcoin. I tried 8 versions of it. [paste the Pine Script]", back: "runs it on Parity's daily prices with real costs and the settings next to yours, and returns the verdict, the luck check after every try, and any line it could not run." },
 ];
 
 interface Grant { id: string; name: string; uri: string; granted: string; write: boolean }
