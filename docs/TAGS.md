@@ -183,6 +183,7 @@ Sources, scrapers, caching and data quality.
 - [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -248,6 +249,7 @@ Sources, scrapers, caching and data quality.
 - [DAT-0045: Bank of Japan what's new](datasets/0045-bank-of-japan-news.md)
 - [DAT-0046: SEC press releases](datasets/0046-sec-press.md)
 - [DAT-0047: CFTC press releases](datasets/0047-cftc-press.md)
+- [DAT-0048: Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md)
 
 ## docs
 
@@ -491,6 +493,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
 - [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -513,6 +516,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
 - [DAT-0021: Kenneth R. French Data Library](datasets/0021-kenneth-french.md)
 - [DAT-0034: Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md)
+- [DAT-0048: Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md)
 
 ## momentum
 
@@ -579,6 +583,7 @@ Other people's code, bots and published results.
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
 - [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [CMP-0010: Webull, a zero-commission broker with pro desktop tools and paper trading](competitors/0010-webull.md)
 - [CMP-0011: OANDA, a long-running forex broker and currency data provider](competitors/0011-oanda.md)
 - [CMP-0012: LMAX, an institutional FX exchange with a broker for professional traders](competitors/0012-lmax.md)
