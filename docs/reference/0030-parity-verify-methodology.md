@@ -120,6 +120,16 @@ Short sample: fewer than 100 trades or less than 12 months. First part against l
 
 Fills are paired first in, first out per symbol into round trips. Each closing fill is one trade, so a partial close is its own trade. Profit is the price difference times quantity and contract size minus the fees of both sides, opening fees shared by quantity. Fees count as each platform means them: Interactive Brokers' negative commissions are costs and positive ones rebates; a platform's own realized profit is used only for a close whose opening is before the file starts, as net of fees (Interactive Brokers) or before them (Binance futures); profit a platform already gives after commission (Myfxbook, NinjaTrader, cTrader net) is not reduced again; fees in a coin we cannot price (BNB) are named and left out. With a rate per row every amount becomes the base currency; several currencies without rates are flagged. A time zone in a cell or a header is turned into UTC; MetaTrader server time and Interactive Brokers' US Eastern time are stated. A skipped row is named with its line and cell. Personal columns, and order ids that identify an account, are removed first. MetaTrader 4 and 5 reports are read as saved (HTML in any language, UTF-16, and Excel), as are TradingView's Excel download and JSON from Alpaca. Each supported file is marked tested on a real export, layout copied from a real export, or unverified ([DEC-0084](../decisions/0084-verify-imports-are-tested-on-real-exports.md)).
 
+## What Verify cannot check yet
+
+- Anything inside the day: one closing price a day means code needing the open, high, low, volume, intraday bars, trailing stops or waiting orders is refused, and "perfect timing" for uploads cannot be checked.
+- Other markets: strategy code runs on 9 currency pairs, Bitcoin, Ether and the S&P 500 only.
+- Some costs: overnight financing and swap, short borrowing and perpetual funding are not charged to strategy code.
+- Some code: values carried from day to day, functions written in the script, other time frames, partial exits and adding to a position are refused by name and line.
+- Words: a description is only as good as the rules the person's own model writes; the rules are shown before they run.
+- Some files: Bybit's layouts are from help pages only and its closed profit's fees are unknown; BNB fees cannot be priced; an Interactive Brokers activity statement in several currencies is not converted; trades opened before a file starts have no known cost.
+- Where a file came from: every upload is self-reported.
+
 ## Trust levels and storage
 
 Every upload is "Self-reported: Parity checked the numbers in the file, not where the file came from." "Broker-connected" needs read-only connections and is not available. The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256; the dataset opt-in stores no user id and month-rounded dates.
