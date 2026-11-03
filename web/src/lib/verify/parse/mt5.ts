@@ -10,7 +10,8 @@
 // first). A partial close is its own trade (REF-0016). Column names are unverified
 // against every broker, so the person can correct the mapping on the page.
 import type { Mapping, Table, Trade } from "../types";
-import { col, compact, reader } from "./common";
+import { SERVER_TIME } from "./mt4";
+import { col, compact, reader, skippedWarning, whyBad } from "./common";
 
 const has = (t: Table, p: RegExp[]) => col(t.headers, p) != null;
 
@@ -46,15 +47,18 @@ export function mapMt5(t: Table): Mapping {
   });
 }
 
-export function buildMt5(t: Table, m: Mapping): { trades: Trade[] } {
-  const r = reader(m);
+export function buildMt5(t: Table, m: Mapping): { trades: Trade[]; balance?: number; warnings: string[]; notes: string[] } {
+  const r = reader(m, t);
   const trades: Trade[] = [];
-  for (const row of t.rows) {
+  const bad: { k: number; why: string }[] = [];
+  let balance: number | undefined;
+  t.rows.forEach((row, k) => {
     const type = (r.text(row, "side") ?? "").toLowerCase();
-    if (type !== "buy" && type !== "sell") continue;
+    if (type === "balance") { const v = r.num(row, "pnl"); if (balance == null && !trades.length && v != null && v > 0) balance = v; return; }
+    if (type !== "buy" && type !== "sell") return;
     const closeTime = r.date(row, "closeTime");
     const profit = r.num(row, "pnl");
-    if (!closeTime || profit == null) continue;
+    if (!closeTime || profit == null) { bad.push({ k, why: whyBad([...(!closeTime ? [["close time", r.cell(row, "closeTime"), "date"]] : []), ...(profit == null ? [["profit", r.cell(row, "pnl"), "number"]] : [])] as [string, string, "date" | "number" | "text"][]) }); return; }
     const costs = (r.num(row, "commission") ?? 0) + (r.num(row, "swap") ?? 0) + (r.num(row, "fees") ?? 0);
     trades.push({
       id: r.text(row, "id"), openTime: r.date(row, "openTime") ?? undefined, closeTime,
@@ -62,8 +66,9 @@ export function buildMt5(t: Table, m: Mapping): { trades: Trade[] } {
       entry: r.num(row, "entry") ?? undefined, exit: r.num(row, "exit") ?? undefined,
       fees: -costs, pnl: profit + costs,
     });
-  }
-  return { trades };
+  });
+  trades.sort((a, b) => (a.closeTime < b.closeTime ? -1 : a.closeTime > b.closeTime ? 1 : 0));
+  return { trades, balance, warnings: skippedWarning(t, bad), notes: [SERVER_TIME] };
 }
 
 // ---------------------------------------------------------------- deals
@@ -100,7 +105,7 @@ export function mapMt5Deals(t: Table): Mapping {
 interface Open { time: string; price: number; left: number; side: "buy" | "sell"; costPerLot: number }
 
 export function buildMt5Deals(t: Table, m: Mapping): { trades: Trade[]; balance?: number; warnings: string[] } {
-  const r = reader(m);
+  const r = reader(m, t);
   const warnings: string[] = [];
   const open = new Map<string, Open[]>();
   const trades: Trade[] = [];

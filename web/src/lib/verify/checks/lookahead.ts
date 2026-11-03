@@ -152,8 +152,8 @@ export function editedCheck(trades: readonly Trade[], sequentialIds: boolean): C
 /** Backtest labelled as real: the person said real money, but the file is a TradingView strategy export. */
 export function labelCheck(kind: InputKind, backtestExport: boolean): CheckRow {
   const label = "Backtest labelled as real";
-  if (kind === "real" && backtestExport) return { id: "label", label, status: "fail", detail: "You said this is real money, but the file is a TradingView Strategy Tester export, which is always a backtest." };
-  return { id: "label", label, status: "pass", detail: backtestExport ? "The file is a TradingView backtest, and it is labelled as one." : "Nothing in the file contradicts how it is labelled." };
+  if (kind === "real" && backtestExport) return { id: "label", label, status: "fail", detail: "You said this is real money, but the file is a Strategy Tester export (TradingView or MetaTrader), which is always a backtest." };
+  return { id: "label", label, status: "pass", detail: backtestExport ? "The file is a Strategy Tester backtest, and it is labelled as one." : "Nothing in the file contradicts how it is labelled." };
 }
 
 /** Our cut-the-data test (DEC-0014): our strategies, and code we ran ourselves. */

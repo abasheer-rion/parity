@@ -1,0 +1,22 @@
+"You can use this transaction report to inform your likely tax obligations. For US customers, Sells, Converts, Rewards Income, Learning Rewards, and Donations are taxable events. For final tax obligations, please consult your tax advisor."
+
+
+
+Transactions
+User,user@example.com,000000000000000000000000
+
+Timestamp,Transaction Type,Asset,Quantity Transacted,Spot Price Currency,Spot Price at Transaction,Subtotal,Total (inclusive of fees),Fees,Notes
+2022-03-02T14:44:13Z,Buy,BTC,0.00105875,EUR,40915.32,43.32,45.11,1.79,Bought 0.00105875 BTC for €45.11 EUR
+2022-03-04T21:47:46Z,Buy,BTC,0.00069829,EUR,36671.04,25.61,27.43,1.82,Bought 0.00069829 BTC for €27.43 EUR
+2022-03-07T20:18:12Z,Buy,BTC,0.00023746,EUR,34923.71,8.29,9.20,0.910000,Bought 0.00023746 BTC for €9.20 EUR
+2022-03-26T03:49:12Z,Buy,BTC,0.00022523,EUR,40409.39,9.10,9.10,0.00,Bought 0.00022523 BTC for €9.10 EUR
+2022-03-28T16:22:57Z,Buy,BTC,0.00100656,EUR,43420.25,43.71,45.52,1.81,Bought 0.00100656 BTC for €45.52 EUR
+2022-04-02T10:42:37Z,Buy,BTC,0.00036582,EUR,42397.90,15.51,17.00,1.49,Bought 0.00036582 BTC for €17.00 EUR
+2022-04-16T06:37:53Z,Sell,BTC,0.00295842,EUR,37182.01,110.00,107.01,2.99,Sold 0.00295842 BTC for €107.01 EUR
+2022-04-22T06:49:54Z,Sell,BTC,0.00057523,EUR,37376.35,21.50,20.01,1.49,Sold 0.00057523 BTC for €20.01 EUR
+2022-02-26T18:27:04Z,Buy,ETH,0.01705436,EUR,2497.44,42.59,44.36,1.77,Bought 0.01705436 ETH for €44.36 EUR
+2022-03-04T21:48:36Z,Buy,ETH,0.0069566,EUR,2432.51,16.92,18.28,1.36,Bought 0.0069566 ETH for €18.28 EUR
+2022-03-07T20:23:58Z,Buy,ETH,0.00160106,EUR,2304.70,3.69,4.60,0.910000,Bought 0.00160106 ETH for €4.60 EUR
+2022-03-08T19:00:16Z,Learning Reward,ETH,0.00155564,EUR,2355.25,3.66,3.66,0.00,Received 0.00155564 ETH from Coinbase as a learning reward
+2022-03-28T16:23:40Z,Buy,ETH,0.00550363,EUR,3061.66,16.85,18.21,1.36,Bought 0.00550363 ETH for €18.21 EUR
+2022-04-10T12:07:03Z,Receive,ETH,0.001,EUR,2998.04,"","","",Received 0.0010 ETH from an external account

@@ -1,0 +1,20 @@
+﻿Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers Ireland Limited
+Statement,Data,BrokerAddress,
+Statement,Data,Title,Activity Summary
+Statement,Data,Period,"March 19, 2026 - April 15, 2026"
+Statement,Data,WhenGenerated,"2026-04-16, 04:19:36 EDT"
+Account Information,Data,Account,U1234567 (Custom Consolidated)
+Account Information,Data,Accounts Included,"U1234567, U1234567-P (Paxos)"
+Account Information,Data,Base Currency,EUR
+Trades,Header,DataDiscriminator,Asset Category,Currency,Account,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,MTM P/L,Code
+Trades,Data,Order,Stocks,EUR,U1234567,QYLD,"2026-04-07, 09:28:34",70,14.15,13.994,-990.5,-3,993.5,0,-10.92,O
+Trades,SubTotal,,Stocks,EUR,QYLD,,,70,,,-990.5,-3,993.5,0,-10.92,
+Trades,Data,Order,Stocks,EUR,U1234567,SAP,"2026-04-07, 09:27:29",6,147.28,145.22,-883.68,-3,886.68,0,-12.36,O
+Trades,Data,Order,Stocks,EUR,U1234567,SAP,"2026-04-14, 02:00:01",-3,144,143.46,432,-3,-443.34,-14.34,1.62,C
+Trades,SubTotal,,Stocks,EUR,SAP,,,3,,,-451.68,-6,443.34,-14.34,-10.74,
+Trades,Total,,Stocks,EUR,,,,,,,-1442.18,-9,1436.84,-14.34,-21.66, 
+Trades,Data,Order,Stocks,USD,U1234567,MSFT,"2026-04-07, 09:31:38",108.0351,370.249993502,372.29,-39999.995073,-1,40000.995073,0,220.3923,FPA;O;P
+Trades,SubTotal,,Stocks,USD,MSFT,,,108.0351,,,-39999.995073,-1,40000.995073,0,220.3923,
+Trades,Total,,Stocks,USD,,,,,,,-39999.995073,-1,40000.995073,0,220.3923, 
+Trades,Total,,Stocks,EUR,,,,,,,-34492.395751399,-0.86231,34493.258061399,0,190.046484213, 
