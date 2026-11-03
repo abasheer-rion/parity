@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1808 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1825 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
 | [Papers](#papers) | 342 |
-| [Preprints and working papers](#preprints-and-working-papers) | 46 |
+| [Preprints and working papers](#preprints-and-working-papers) | 50 |
 | [Books](#books) | 21 |
-| [Datasets](#datasets) | 64 |
-| [Software](#software) | 104 |
-| [Web pages](#web-pages) | 1049 |
+| [Datasets](#datasets) | 67 |
+| [Software](#software) | 105 |
+| [Web pages](#web-pages) | 1058 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
 | [News](#news) | 13 |
@@ -225,13 +225,13 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### bailey2016
 
 Bailey, David; Borwein, Jonathan; López de Prado, Marcos; Zhu, Qiji Jim (2016). The probability of backtest overfitting. *The Journal of Computational Finance*. doi:10.21314/jcf.2016.322 <https://doi.org/10.21314/jcf.2016.322>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### bajgrowicz2012
 
@@ -581,7 +581,7 @@ Chen, Andrew Y.; Zimmermann, Tom (2022). Open Source Cross-Sectional Asset Prici
 
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
-Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### chernenko2022
 
@@ -1047,7 +1047,7 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 
 Harvey, Campbell R.; Liu, Yan; Zhu, Heqing (2015). ... and the Cross-Section of Expected Returns. *Review of Financial Studies 29(1), 5-68*. doi:10.1093/rfs/hhv059 <https://doi.org/10.1093/rfs/hhv059>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### harvey2015a
 
@@ -1243,7 +1243,7 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 
 Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (2023). Is There a Replication Crisis in Finance? *The Journal of Finance 78(5), 2465-2518*. doi:10.1111/jofi.13249 <https://doi.org/10.1111/jofi.13249>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### johansen1991
 
@@ -1637,7 +1637,7 @@ Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn
 
 McLean, R. David; Pontiff, Jeffrey (2016). Does Academic Research Destroy Stock Return Predictability? *The Journal of Finance 71(1), 5-32*. doi:10.1111/jofi.12365 <https://doi.org/10.1111/jofi.12365>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### meese1983
 
@@ -2625,6 +2625,14 @@ Bailey, David H.; López de Prado, Marcos (2019). The Deflated Sharpe Ratio: Cor
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### barton2026
+
+Barton, T.J.; Constantakis, Chris; Hauseman, Patti; Mous, Annie; Hoffman, Alaska; Bergeron, Brian; Goodreau, Hunter (2026). What LLM Trading Agents Actually Do in Production: A Six-Month, Population-Scale Record from Two Fleets. *arXiv preprint*. arXiv:2609.05663 <https://arxiv.org/abs/2609.05663>. <https://arxiv.org/abs/2609.05663>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### baz2015
 
 Baz, Jamil; Granger, Nicolas; Harvey, Campbell R.; Le Roux, Nicolas; Rattray, Sandy (2015). Dissecting Investment Strategies in the Cross Section and Time Series. *SSRN Working Paper 2695101*. doi:10.2139/ssrn.2695101 <https://doi.org/10.2139/ssrn.2695101>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2783,6 +2791,14 @@ Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### harvey2019
+
+Harvey, Campbell R.; Liu, Yan (2019). A Census of the Factor Zoo. *SSRN working paper*. <https://papers.ssrn.com/abstract=3341728>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
+
 ### he2022
 
 He, Songrun; Manela, Asaf; Ross, Omri; von Wachter, Victor (2022). Fundamentals of Perpetual Futures. *arXiv preprint arXiv:2212.06888*. arXiv:2212.06888 <https://arxiv.org/abs/2212.06888>. <https://arxiv.org/abs/2212.06888>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2873,6 +2889,14 @@ Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Tra
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### ulesov2026
+
+Ulesov, Makar; Smirnov, Vladislav; Ibrahim, Omar; Bobovnikov, Arsenii (2026). Can LLMs Catch a Rigged Backtest? A Clean-Control Calibration Benchmark. *arXiv preprint*. arXiv:2609.28090 <https://arxiv.org/abs/2609.28090>. <https://arxiv.org/abs/2609.28090>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-3465fab3
 
 MacKinnon, James G. (2010). Critical Values for Cointegration Tests. *Queen's Economics Department Working Paper 1227*. <https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf>. Accessed 2026-10-26. Verification: not checked.
@@ -2892,6 +2916,14 @@ No title recorded. (n.d.). <https://conference.nber.org/confer/2013/MEs13/Lucca_
 Note: Cited in this repo as: Lucca and Moench (2013 working paper version), pre-FOMC 2pm to 2pm window.
 
 Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+
+### wiecki2016
+
+Wiecki, Thomas; Campbell, Andrew; Lent, Justin; Stauth, Jessica (2016). All that Glitters Is Not Gold: Comparing Backtest and Out-of-Sample Performance on a Large Cohort of Trading Algorithms. *SSRN working paper*. <https://papers.ssrn.com/abstract=2745220>. Accessed 2026-10-29. Verification: blocked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### zhang2025
 
@@ -3100,6 +3132,14 @@ Cited in: [catalog/datasets/jpmaqs-kaggle.json](../catalog/datasets/jpmaqs-kaggl
 Our calculation from Kenneth French data library, US market (Mkt-RF + RF). (n.d.). *mba.tuck.dartmouth.edu*. <https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/dual-momentum.json](../catalog/algorithms/dual-momentum.json), [catalog/algorithms/sp500-buy-and-hold.json](../catalog/algorithms/sp500-buy-and-hold.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0040](algorithms/0040-dual-momentum.md), [ALG-0049](algorithms/0049-sp500-buy-and-hold.md), [ALG-0053](algorithms/0053-value-hml.md).
+
+### url-28e0e490
+
+Chen, Andrew Y.; Zimmermann, Tom (n.d.). Open Source Asset Pricing. *openassetpricing.com*. <https://www.openassetpricing.com/>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### url-30667bf2
 
@@ -3317,6 +3357,14 @@ Our calculation from AQR Time Series Momentum factors dataset (TSMOM^CM). (n.d.)
 
 Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md).
 
+### url-c2280db1
+
+Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (n.d.). Global Factor Data. *jkpfactors.com*. <https://jkpfactors.com/>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-c5b934bb
 
 Our calculation from Kenneth French data library, market excess return. (n.d.). *mba.tuck.dartmouth.edu*. <https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3442,6 +3490,14 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 Interactive Brokers paper trading. (n.d.). *Interactive Brokers*. <https://www.interactivebrokers.com>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md).
+
+### url-fbe25501
+
+Chen, Andrew Y.; Zimmermann, Tom (2026). Open Source Cross-Sectional Asset Pricing, data release 2026.10. *Hugging Face*. <https://huggingface.co/datasets/OpenSourceAP/CrossSection>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for RES-0031. Licence CC BY 4.0 per the dataset card.
+
+Cited in: [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### url-ffa2fc37
 
@@ -3930,6 +3986,14 @@ Cited in: [catalog/algorithms/gradient-boosting-engineered-features.json](../cat
 Chronicle Queue. (n.d.). *github.com*. <https://github.com/OpenHFT/Chronicle-Queue>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-caa68e18
+
+pbo: Probability of Backtest Overfitting (R package). (n.d.). *CRAN*. <https://cran.r-project.org/package=pbo>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### url-cad44701
 
@@ -6475,6 +6539,14 @@ FIX standards. (n.d.). *fixtrading.org*. <https://www.fixtrading.org/standards/>
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-583d7f70
+
+Quantpedia, in-sample against out-of-sample analysis of trading strategies. (n.d.). *quantpedia.com*. <https://quantpedia.com/tag/own-research/page/4/>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-587d126c
 
 eToro Smart Portfolios page. (n.d.). *etoro.com*. <https://www.etoro.com/smartportfolios/>. Accessed 2026-10-24. Verification: not checked.
@@ -6502,6 +6574,14 @@ IBKR colour grouping. (n.d.). *ibkrguides.com*. <https://ibkrguides.com/traderwo
 Note: Linked in this repo as: IBKR colour grouping.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-591ac0de
+
+Open Source Asset Pricing release notes 2026.10. (n.d.). *Hugging Face*. <https://huggingface.co/datasets/OpenSourceAP/CrossSection/blob/Data-Release-2026.10/Release%20Notes%202026.10.md>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
 
 ### url-591c197c
 
@@ -7645,6 +7725,14 @@ No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://api.bls.gov
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
 
+### url-82637c93
+
+Prop Trading Statistics 2026: Pass Rates and Market Data. (n.d.). *track360.io*. <https://track360.io/blog/prop-trading-industry-statistics-2026>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md).
+
 ### url-828393a9
 
 FIX connectivity. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/fix-api/connectivity>. Accessed 2026-10-24. Verification: not checked.
@@ -7920,6 +8008,14 @@ Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-l
 Contract specifications. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.gitbook.io/hyperliquid-docs/trading/contract-specifications>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
+
+### url-8b97759b
+
+OpenSourceAP/CrossSection code. (n.d.). *GitHub*. <https://github.com/OpenSourceAP/CrossSection>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
 
 ### url-8bb819c6
 
@@ -8380,6 +8476,14 @@ Crypto Futures and Options Exchange - Deribit by Coinbase. (n.d.). *deribit.com*
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-a01473b5
+
+Open Source Asset Pricing, data page. (n.d.). *openassetpricing.com*. <https://www.openassetpricing.com/data/>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
 
 ### url-a16db72b
 
@@ -10121,6 +10225,14 @@ App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/meta
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-e6249d93
+
+Quantpedia's Research in 2023. (n.d.). *quantpedia.com*. <https://quantpedia.com/quantpedias-research-in-2023/>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-e62b20e2
 
 OilPriceAPI as an EIA API Alternative - Real-Time Oil Prices | OilPriceAPI Docs. (n.d.). *docs.oilpriceapi.com*. <https://docs.oilpriceapi.com/compare/eia-alternative>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -10383,6 +10495,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/newsapi.json](../catalog/datasets/newsapi.json), [DAT-0025](datasets/0025-newsapi.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f09d16b3
+
+AI Trading Benchmark: LLM Leaderboard for Crypto Trading. (n.d.). *oakresearch.io*. <https://oakresearch.io/en/ai/trading-benchmark>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-f0c9a34c
 
 Market Replay. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader/>. Accessed 2026-10-24. Verification: not checked.
@@ -10454,6 +10574,14 @@ Vercel Security Checkpoint. (n.d.). *quantvps.com*. <https://www.quantvps.com/bl
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-f3b04298
+
+ESMA communicates supervisory expectations on copy trading services. (n.d.). *PwC Legal*. <https://legal.pwc.de/en/news/articles/esma-communicates-supervisory-expectations-on-copy-trading-services>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md).
 
 ### url-f47072f8
 
@@ -10626,6 +10754,14 @@ Cited in: [catalog/events/taper-tantrum-2013.json](../catalog/events/taper-tantr
 RavenPack on NexusFi. (n.d.). *nexusfi.com*. <https://nexusfi.com/d/data-providers/ravenpack/>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-fa6d5610
+
+TradeRank AI trading leaderboard, October 2026. (n.d.). *traderank.ai*. <https://www.traderank.ai/ai-trading-leaderboard>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### url-fa9296bc
 

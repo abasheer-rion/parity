@@ -78,6 +78,7 @@ Other trading products, what their users think of them, and what Parity takes fr
 
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
 - [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0002: Bloomberg Terminal, the data, news and chat desk of professional finance](competitors/0002-bloomberg-terminal.md)
 - [CMP-0003: LSEG Workspace, the Reuters-backed data terminal that replaced Eikon](competitors/0003-lseg-workspace.md)
@@ -181,6 +182,8 @@ Sources, scrapers, caching and data quality.
 - [RES-0022: How trading and market data platforms are built](research/0022-how-trading-and-market-data-platforms-are-built.md)
 - [RES-0027: How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [REF-0001: Architecture](reference/0001-architecture.md)
 - [REF-0003: Data sources](reference/0003-data-sources.md)
 - [REF-0010: FX data sources, licences and resolution](reference/0010-fx-data-sources-licences-and-resolution.md)
@@ -246,6 +249,7 @@ Sources, scrapers, caching and data quality.
 - [DAT-0045: Bank of Japan what's new](datasets/0045-bank-of-japan-news.md)
 - [DAT-0046: SEC press releases](datasets/0046-sec-press.md)
 - [DAT-0047: CFTC press releases](datasets/0047-cftc-press.md)
+- [DAT-0048: Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md)
 
 ## docs
 
@@ -488,6 +492,9 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [RES-0012: Private markets, how they are measured and how individuals get in](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md)
 - [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [GDE-0004: The research routine](guides/0004-the-research-routine.md)
 - [REF-0002: KPIs and how to read them](reference/0002-kpis.md)
 - [REF-0006: The gauntlet](reference/0006-the-gauntlet.md)
@@ -510,6 +517,7 @@ How we avoid fooling ourselves: backtest design, overfitting, statistics.
 - [DAT-0003: AQR Data Sets](datasets/0003-aqr-datasets.md)
 - [DAT-0021: Kenneth R. French Data Library](datasets/0021-kenneth-french.md)
 - [DAT-0034: Verdelhan currency portfolios (Lustig, Roussanov and Verdelhan data)](datasets/0034-verdelhan-currency-portfolios.md)
+- [DAT-0048: Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md)
 
 ## momentum
 
@@ -543,6 +551,7 @@ News, macro releases and event-driven signals.
 - [RES-0010: Paper library: FX and market microstructure](research/0010-paper-library-fx-and-market-microstructure.md)
 - [RES-0011: Where market edges come from and which survive](research/0011-where-market-edges-come-from-and-which-survive.md)
 - [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [REF-0011: Scenario simulator method](reference/0011-scenario-simulator-method.md)
 - [REF-0013: News sources and market impact](reference/0013-news-sources-and-market-impact.md)
 - [ALG-0008: Short the dollar on FOMC announcement days](algorithms/0008-fx-fomc-dollar-announcement.md)
@@ -574,6 +583,8 @@ Other people's code, bots and published results.
 - [RES-0002: Open-source projects and public results](research/0002-open-source-and-public-results.md)
 - [RES-0003: What practitioners say in forums](research/0003-forums-and-practitioners.md)
 - [RES-0005: Zenbot, similar apps and free data APIs](research/0005-zen-apps-and-free-apis.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
+- [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - [CMP-0010: Webull, a zero-commission broker with pro desktop tools and paper trading](competitors/0010-webull.md)
 - [CMP-0011: OANDA, a long-running forex broker and currency data provider](competitors/0011-oanda.md)
 - [CMP-0012: LMAX, an institutional FX exchange with a broker for professional traders](competitors/0012-lmax.md)
@@ -738,6 +749,7 @@ A specific trading idea or its implementation.
 - [RES-0020: Verifying trading claims, market size and competitors](research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [RES-0025: Market research: retail trading and investing, leaders, weaknesses and gaps](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [GDE-0002: Adding or removing a strategy](guides/0002-adding-a-strategy.md)
 - [REF-0007: Ways to build new algorithms, and ways to fool yourself](reference/0007-ways-to-build-new-algorithms.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](competitors/0004-metatrader-4-and-5.md)
