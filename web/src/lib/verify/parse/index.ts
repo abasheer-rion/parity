@@ -99,7 +99,11 @@ export function build(table: Table, format: FormatId, mapping: Mapping, dropped:
  * thinkorswim) are cut down to their trades section first.
  */
 export function parseText(text: string): Parsed {
-  const raw = tradesSection(text) ?? readTable(text);
+  return parseTable(tradesSection(text) ?? readTable(text));
+}
+
+/** parseText for a table already read, such as one account's rows of a batch file. */
+export function parseTable(raw: Table): Parsed {
   const first = dropPersonal(raw);
   const found = detect(first.table);
   if (!found) {

@@ -447,3 +447,9 @@ s3_secret_key = "env(S3_SECRET_KEY)"
 # call with the hook secret and the function checks it, so it takes no user JWT.
 [functions.send-email]
 verify_jwt = false
+
+# Emails contact@paritytrading.app when a firm asks for a pilot (DEC-0087). The business pages
+# call it with the publishable key, which is not a JWT; it checks the origin and can only
+# claim a request made in the last 15 minutes, once.
+[functions.pilot-notify]
+verify_jwt = false

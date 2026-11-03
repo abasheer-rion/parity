@@ -5,7 +5,7 @@ import { byName, TOOLS } from "../mcp/tools";
 import type { Schema } from "../mcp/schema";
 import { SCOPE_TEXT, SCOPES, type Scope } from "./policy";
 
-interface RouteLike { method: string; path: string; scope: Scope; summary: string; deprecated?: boolean }
+interface RouteLike { method: string; path: string; scope: Scope; summary: string; deprecated?: boolean; input?: Schema; description?: string }
 
 const TOOL_FOR: Record<string, string> = {
   "GET /strategies": "search_strategies", "GET /strategies/{id}": "get_strategy", "GET /search/leaderboard": "search_leads",
@@ -33,7 +33,7 @@ export function openApi(site: string, routes: RouteLike[]) {
     const op: Record<string, unknown> = {
       operationId: `${r.method.toLowerCase()}${r.path.replace(/\{(\w+)\}/g, "By_$1").replace(/[^A-Za-z0-9]+(\w)?/g, (_, c: string | undefined) => (c ?? "").toUpperCase())}`,
       summary: r.summary,
-      description: t ? t.description : undefined,
+      description: t ? t.description : r.description,
       ...(r.deprecated ? { deprecated: true } : {}),
       security: [{ bearer: [] }],
       "x-required-scope": r.scope,
@@ -44,7 +44,8 @@ export function openApi(site: string, routes: RouteLike[]) {
         ...(r.method === "POST" ? { 413: problemRef, 415: problemRef } : {}),
       },
     };
-    if (r.method === "POST" && t) op.requestBody = { required: true, content: { "application/json": { schema: t.inputSchema } } };
+    const body = t ? t.inputSchema : r.input;
+    if (r.method === "POST" && body) op.requestBody = { required: true, content: { "application/json": { schema: body } } };
     const key = `/api/v1${r.path}`;
     paths[key] = { ...(paths[key] ?? {}), [r.method.toLowerCase()]: op };
   }

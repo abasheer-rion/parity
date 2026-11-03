@@ -18,7 +18,7 @@
 
   <nav class="lg-toc" aria-label="On this page">
     <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
-    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#imports">Imports</a>
+    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
     <a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
   </nav>
 
@@ -131,6 +131,24 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <li>A grid or martingale bot with no stated maximum loss is flagged "loss is not capped".</li>
     <li>A win rate above 90% with no stated average loss or stop gets "the win rate alone says nothing about profit".</li>
   </ol>
+
+  <h2 id="batch">Batch screen for firms</h2>
+  <p>The batch screen (<a href="/business/screen/">/business/screen/</a> and <code>POST /api/v1/verify/batch</code>) judges many short records at once, such as the accounts in a prop firm's challenge. Method version <code><!--verify:screen-version--></code>. It uses the checks above, but its verdict is one of three, because a challenge lasts weeks and the "short sample" check on card 5 would fail every account.</p>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Batch screen verdicts"><table>
+    <thead><tr><th>Order</th><th>Verdict</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Not enough trades</td><td>Fewer than <!--verify:min-trades--> closed trades</td></tr>
+      <tr><td>2</td><td>Likely luck</td><td>Expectancy at or below zero after fees, a red flag on card 2 (worst loss over <!--verify:wipeout-limit--> average wins, size growing after losses, or a fall of more than <!--verify:drawdown-limit--> from a high), or the luck check below <!--verify:luck-line--></td></tr>
+      <tr><td>3</td><td>Holds up</td><td>None of the above</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>The luck check</strong> is card 3 on each trade's profit, at the account's own tries: the attempts column when the file has one, otherwise 1. One setting multiplies every account's tries by the number of accounts in the batch, the strictest reading of picking the best of a crowd. "Tries survived" is the largest number of tries at which the check stays at or above the line.</li>
+    <li><strong>Passed</strong> comes from the file when it says. Otherwise an account passed when its balance, trade by trade, reached the profit target (default 8%) before the loss limit (default 10%).</li>
+    <li><strong>Firm rules</strong> are reported, not used for the verdict: the best day making more than a set share of the profit (default 30%), fewer than a set number of trading days (default 5), size growing after losses, and the best 5 trades making more than <!--verify:top-five-limit--> of the profit. In a record of a few dozen trades the best 5 can make half the profit even with a real edge, so concentration is shown but is not a reason on its own.</li>
+    <li><strong>The back-test</strong> uses an outcome per account (payout or blow-up). Among accounts with enough trades: the share of "likely luck" that later blew up, the share of blow-ups that were flagged, and the share of payouts that were flagged (false alarms), each with a 95% Wilson interval, and the gap between the blow-up rates of the two verdicts with Newcombe's interval.</li>
+    <li><strong>Where it runs.</strong> On the page, files are read and checked in the browser and never sent. Through the API, a request is checked in memory and nothing is stored.</li>
+  </ul>
 
   <h2 id="imports">Imports</h2>
   <p>Verify reads exports from MetaTrader 4 and 5, TradingView, Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca and any CSV with a close date and a profit. Where an export lists fills, they are paired first in, first out per symbol into round trips: each closing fill is one trade, so a partial close is its own trade, and its profit is the price difference times quantity and contract size, minus the fees of both the opening and closing fills (opening fees shared by quantity). Columns that look personal (account number, name, email, server, login, IP address, and order ids that identify an account) are removed before anything else reads the file. The full list, with the layouts we have not yet confirmed against an official export, is on the <a href="/verify/#supported">Verify page</a>.</p>

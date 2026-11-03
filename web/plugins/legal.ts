@@ -13,6 +13,7 @@ import { MAX_TRIES, LUCK_LINE } from "../src/lib/verify/dsr";
 import { MIN_RETURNS, MIN_TRADES } from "../src/lib/verify/checks/verdict";
 import { DRAWDOWN_LIMIT, WIPEOUT_LIMIT } from "../src/lib/verify/checks/tail";
 import { METHOD_CHANGELOG, METHOD_VERSION } from "../src/lib/verify/types";
+import { SCREEN_VERSION, TOP5_LIMIT } from "../src/lib/screen/score";
 import { fillGuide, isGuide } from "./guides";
 
 export const LEGAL_LINKS: [string, string][] = [
@@ -70,6 +71,8 @@ export const METHOD_VALUES: Record<string, string> = {
   "drawdown-limit": `${Math.round(DRAWDOWN_LIMIT * 100)}%`,
   "luck-line": LUCK_LINE.toFixed(2),
   "max-tries": MAX_TRIES.toLocaleString("en-US"),
+  "screen-version": SCREEN_VERSION,
+  "top-five-limit": `${Math.round(TOP5_LIMIT * 100)}%`,
   changelog: METHOD_CHANGELOG.map((c) => `<tr><td><code>${escHtml(c.version)}</code></td><td>${c.date}</td><td>${escHtml(c.changes)}</td></tr>`).join("\n        "),
 };
 

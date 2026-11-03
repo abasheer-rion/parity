@@ -20,7 +20,7 @@ export function sniffDelimiter(text: string): string {
 }
 
 /** Splits text into rows of cells, honouring double quotes ("" is a quote inside one). */
-export function splitRows(text: string, delim: string): string[][] {
+export function splitRows(text: string, delim: string, maxRows = MAX_ROWS): string[][] {
   const rows: string[][] = [];
   let row: string[] = [], cell = "", q = false;
   for (let i = 0; i < text.length; i++) {
@@ -38,7 +38,7 @@ export function splitRows(text: string, delim: string): string[][] {
       row.push(cell.trim()); cell = "";
       if (row.some((c) => c !== "")) rows.push(row);
       row = [];
-      if (rows.length > MAX_ROWS + 50) throw new ParseError(`The file has more than ${MAX_ROWS.toLocaleString()} rows, the most Verify reads for now.`);
+      if (rows.length > maxRows + 50) throw new ParseError(`The file has more than ${maxRows.toLocaleString()} rows, the most Verify reads for now.`);
     } else cell += ch;
   }
   row.push(cell.trim());
@@ -48,17 +48,20 @@ export function splitRows(text: string, delim: string): string[][] {
 
 const looksLikeHeader = (r: string[]) => r.filter((c) => /[A-Za-z]/.test(c)).length >= 2 && r.filter((c) => c !== "").length >= 2;
 
-/** Reads a file's text into a header row and data rows. The header is the first row with words in it. */
-export function readTable(text: string): Table & { delimiter: string } {
+/**
+ * Reads a file's text into a header row and data rows. The header is the first row with words
+ * in it. maxRows is higher only for the batch screen, which reads many accounts in one file.
+ */
+export function readTable(text: string, maxRows = MAX_ROWS): Table & { delimiter: string } {
   const clean = text.replace(/^﻿/, "");
   if (!clean.trim()) throw new ParseError("The file is empty.");
   const delimiter = sniffDelimiter(clean);
-  const all = splitRows(clean, delimiter);
+  const all = splitRows(clean, delimiter, maxRows);
   const h = all.findIndex((r, i) => i < 15 && looksLikeHeader(r));
   if (h < 0) throw new ParseError("We could not find a header row (a first row with column names) in the first lines of the file.");
   const headers = all[h].map((c) => c.replace(/\s+/g, " ").trim());
   const rows = all.slice(h + 1).map((r) => (r.length < headers.length ? [...r, ...Array(headers.length - r.length).fill("")] : r.slice(0, headers.length)));
-  if (rows.length > MAX_ROWS) throw new ParseError(`The file has ${rows.length.toLocaleString()} rows. Verify reads up to ${MAX_ROWS.toLocaleString()} for now.`);
+  if (rows.length > maxRows) throw new ParseError(`The file has ${rows.length.toLocaleString()} rows. Verify reads up to ${maxRows.toLocaleString()} for now.`);
   return { headers, rows, delimiter };
 }
 

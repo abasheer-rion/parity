@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description and share tags: src/lib/meta.ts. The page for copy-trading platforms (DEC-0087). -->
+    <!--site-kit-->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=optional" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/business/business.css" />
+    <script type="module" src="/src/business/pilot.ts"></script>
+  </head>
+  <body class="bz" data-kind="copy_trading">
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <!--business:corner-->
+    <main id="main" tabindex="-1">
+      <section class="bz-hero" aria-labelledby="hero-h">
+        <div class="wrap">
+          <h1 id="hero-h">Show copiers which leaders have more than a lucky streak.</h1>
+          <p class="bz-lead">Screen every strategy leader on your platform in one batch. Each gets a verdict, holds up, likely luck or not enough trades, with the luck check, the worst fall and how much of the profit came from a few trades.</p>
+          <div class="bz-cta">
+            <a class="btn primary" href="mailto:contact@paritytrading.app?subject=Free%2030-day%20pilot" data-pilot>Start a free 30-day pilot</a>
+            <a class="bz-link" href="/business/prop-firms/sample/">See a sample report</a>
+          </div>
+          <p class="bz-fine">Files are checked in your browser and never sent to us. Research only, not investment advice.</p>
+        </div>
+      </section>
+      <section class="bz-sec" aria-labelledby="why-h">
+        <div class="wrap">
+          <h2 id="why-h">A leaderboard ranks the luckiest first.</h2>
+          <p class="bz-sub">With thousands of leaders, the top of any ranking by return is crowded with records that luck alone would produce. The luck check counts how many tried, so the bar rises with the crowd.</p>
+          <ul class="bz-cards">
+            <li class="bz-card"><h3>Screen every leader</h3><p>One CSV with a leader column, or a zip of trade files. The same five checks as Parity Verify run on each.</p><a class="bz-go" href="/business/screen/">Screen a batch</a></li>
+            <li class="bz-card"><h3>Count the crowd</h3><p>One setting counts every leader in the batch as a try, the strictest reading of a ranking.</p></li>
+            <li class="bz-card"><h3>Score through the API</h3><p><code>POST /api/v1/verify/batch</code> scores up to 500 leaders a request. Nothing sent is stored.</p><a class="bz-go" href="/developers/#verify-batch">Read the API guide</a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="bz-closing" aria-labelledby="close-h">
+        <div class="wrap">
+          <h2 id="close-h">Thirty days, free, on your own records.</h2>
+          <p>We set it up with you on records you already have and show you what the screen finds. You decide after.</p>
+          <div class="bz-cta">
+            <a class="btn primary" href="mailto:contact@paritytrading.app?subject=Free%2030-day%20pilot" data-pilot>Start a free 30-day pilot</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!--business:footer-->
+    <!--business:pilot-->
+  </body>
+</html>

@@ -80,4 +80,5 @@ Changing the pepper later makes every existing key stop working, so treat it as 
 
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [DEC-0082: Verify tools and endpoints for AI apps and programs](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
+- [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 <!-- backlinks:end -->
