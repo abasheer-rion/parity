@@ -107,6 +107,7 @@ Writing each idea by hand ([DEC-0003](0003-strategies-are-plugins.md)) was slow,
 - [EXP-0005: Honest cash and delayed rates, before and after](../experiments/0005-honest-cash-and-delayed-rates-before-and-after.md)
 - [RES-0011: Where market edges come from and which survive](../research/0011-where-market-edges-come-from-and-which-survive.md)
 - [RES-0028: Pairs trading and statistical arbitrage, what the research says](../research/0028-pairs-trading-and-statistical-arbitrage.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](../research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 - [GDE-0006: Connecting AI tools to Parity with MCP](../guides/0006-connecting-ai-tools-to-parity-with-mcp.md)
 - [REF-0003: Data sources](../reference/0003-data-sources.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)

@@ -120,4 +120,5 @@ The registry is one step of the sims service's cycle, already started with `nice
 - [DEC-0071: People make their own API keys for a versioned Parity API](0071-people-make-their-own-api-keys-for-a-versioned-parity-api.md)
 - [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0078: Enrolled Base pools join the live feed by themselves, a few a day](0078-enrolled-base-pools-join-the-live-feed-by-themselves-a-few-a-day.md)
+- [RES-0030: Outside data to grow the counted-trials dataset](../research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 <!-- backlinks:end -->
