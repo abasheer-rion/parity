@@ -1,0 +1,1 @@
+{"retCode": 0, "retMsg": "", "result": {"id": "2208370", "note": "trading", "apiKey": "REDACTED", "readOnly": 0, "secret": "", "permissions": {"ContractTrade": ["Order", "Position"], "Spot": ["SpotTrade"], "Wallet": ["AccountTransfer", "SubMemberTransfer"]}, "userID": 24617703}, "retExtInfo": {}, "time": 1767225600000}

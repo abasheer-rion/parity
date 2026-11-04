@@ -210,21 +210,44 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <li><strong>Some costs.</strong> Overnight financing and swap, borrowing to sell short and funding on perpetual futures are not charged to strategy code.</li>
     <li><strong>Some code.</strong> Values carried from day to day (<code>:=</code>, <code>var</code>, loops), functions written in the script, other time frames (<code>request.security</code>), partial exits and adding to a position are refused by name and line.</li>
     <li><strong>Words.</strong> A description in words is only as good as the rules the person's own model writes from it. Verify shows those rules before running them; it cannot know what the person meant.</li>
-    <li><strong>Some files.</strong> Bybit's layouts are written from help pages only, and whether Bybit's closed profit has fees taken off is not known. A fee paid in BNB cannot be priced. An Interactive Brokers activity statement in several currencies is not converted. Trades opened before a file starts have no known cost.</li>
-    <li><strong>Where a file came from.</strong> Every upload is self-reported: Verify checks the numbers in the file, not that a broker produced it.</li>
+    <li><strong>Some files.</strong> Bybit's spot trade history and its older closed P&amp;L layout are written from help pages only; its closed positions export is copied from a real one. A fee paid in BNB cannot be priced. An Interactive Brokers activity statement in several currencies is not converted. Trades opened before a file starts have no known cost.</li>
+    <li><strong>Where a file came from.</strong> An upload is self-reported: Verify checks the numbers in the file, not that a broker produced it. A broker-connected record shows where its trades came from, but not how many other things were tried (see below).</li>
   </ul>
 
   <h2 id="trust">Trust levels</h2>
+  <p><!--verify:connect-status--></p>
   <ul>
-    <li><strong>Self-reported.</strong> Every upload today. Parity checked the numbers in the file, not where the file came from. The badge says so in those words.</li>
-    <li><strong>Broker-connected.</strong> Planned, through read-only connections to brokers and exchanges. Not available yet.</li>
+    <li><strong>Self-reported.</strong> An uploaded file, strategy code, a description or a claim. Parity checked the numbers in the file, not where the file came from. The badge says so in those words.</li>
+    <li><strong>Broker-connected.</strong> Parity's server read the trades from the broker or exchange itself, through a read-only link, ran the same checks on them as on a file, and signed the result. The badge names the venue, a one-way code for the account (the same code for every record from that account, never the account number) and when the trades were read.</li>
   </ul>
-  <p>A verdict is never a recommendation.</p>
+  <h3>What broker-connected shows</h3>
+  <ul>
+    <li>The trades came from that venue and one account, as the venue reported them when Parity read them, and nobody edited them before the checks ran.</li>
+    <li>Whether it is a live account or the broker's practice (paper) account, as the venue says. The badge says real money or paper account from that, not from the owner.</li>
+    <li>The numbers on the badge are the ones Parity worked out. The server signs them with an Ed25519 key, and a badge shows as broker-connected only when the signature checks out and every number on the badge matches the signed ones. Anyone can check this with the public key at <a href="/api/connect/keys">/api/connect/keys</a>.</li>
+    <li>The badge carries the SHA-256 of the trades file Parity read, which the owner can download and anyone can upload to Verify again.</li>
+  </ul>
+  <h3>What it does not show</h3>
+  <ul>
+    <li><strong>How many other things were tried.</strong> The owner still states the tries, and the luck check depends on them. A broker shows one account; the owner may have other accounts, or other bots, that lost.</li>
+    <li><strong>The starting balance,</strong> when the owner typed one. The badge says when it was stated.</li>
+    <li><strong>Whose account it is,</strong> beyond the fact that the person who published it held a read-only key for it.</li>
+    <li><strong>Anything outside the dates read,</strong> and costs the venue books apart from the fills, such as funding on contracts or fees paid in another coin. Each venue's gaps are listed on the Verify page.</li>
+    <li><strong>That the venue's own records are right,</strong> or anything about the future. A verdict is never a recommendation.</li>
+  </ul>
+  <h3>How the link is kept read-only</h3>
+  <ul>
+    <!--verify:connect-venues-->
+  </ul>
+  <p>A key is used for one read and then dropped. Only if the owner ticks "keep in sync" is it stored, sealed with AES-GCM under a key for that person which is itself sealed with a key only our server holds. It is used only when the owner asks for a new read, can be revoked in Settings at any time, and every read and use is logged for the owner. Reads are limited to 10 an hour and 40 a day per account.</p>
+  <p><strong>Withdrawals stay visible.</strong> A withdrawn broker-connected badge loses its numbers and its proof, but its page still names the venue and the account code, so records from one account cannot be quietly removed.</p>
 
   <h2 id="stored">What is stored</h2>
   <ul>
     <li><strong>Never:</strong> the file, its trades, or the columns that look personal. If you leave the page, nothing remains on our side.</li>
     <li><strong>A badge, only if you publish one</strong> (signed in, up to 20 a day): the verdict, "survives up to N tries", the five cards' numbers, the kind of record, the stated tries, the date range, the trade count, the method version and the file's SHA-256, so anyone with the same file can check it. Withdrawing deletes the numbers and the page then says when it was withdrawn.</li>
+    <li><strong>A broker-connected badge</strong> also stores Parity's signed proof: the venue, the account code, when the trades were read, the dates asked for, and fingerprints of the cards and of the trades file. Never the trades, the account number or the key.</li>
+    <li><strong>Reading from a broker</strong> (signed in): a log row for each read, kept for the account owner, with the venue, the time and the outcome in words. A key is stored only for "keep in sync", sealed, until it is revoked.</li>
     <li><strong>The research dataset, only if you tick its box:</strong> summary numbers, the kind of record, asset classes and stated tries, with dates rounded to the month and no user id, file hash or name.</li>
   </ul>
 

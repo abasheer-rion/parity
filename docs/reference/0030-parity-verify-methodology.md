@@ -7,7 +7,7 @@ created: 2026-10-27
 updated: 2026-11-03
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089, DEC-0090, DEC-0091]
 ---
 
 # Parity Verify methodology
@@ -23,7 +23,7 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 | Verdict order | Not enough data, does not hold up, fragile, could be luck, holds up |
 | Luck check | Deflated Sharpe ratio at the stated tries, pass at 0.95, "survives up to N tries" |
 | Red flags | More than 20 average wins lost to one loss, martingale or grid, fall over 50% |
-| Trust | Self-reported for every upload |
+| Trust | Self-reported for every upload; broker-connected when Parity read the trades from the broker and the signed proof matches |
 | Stored | Nothing unless a badge is published or the dataset box is ticked |
 
 ## Inputs
@@ -138,12 +138,16 @@ Fills are paired first in, first out per symbol into round trips. Each closing f
 - Some costs: overnight financing and swap, short borrowing and perpetual funding are not charged to strategy code.
 - Some code: values carried from day to day, functions written in the script, other time frames, partial exits and adding to a position are refused by name and line.
 - Words: a description is only as good as the rules the person's own model writes; the rules are shown before they run.
-- Some files: Bybit's layouts are from help pages only and its closed profit's fees are unknown; BNB fees cannot be priced; an Interactive Brokers activity statement in several currencies is not converted; trades opened before a file starts have no known cost.
-- Where a file came from: every upload is self-reported.
+- Some files: Bybit's spot trade history and older closed P&L layouts are from help pages only (its closed positions export is copied from a real one); BNB fees cannot be priced; an Interactive Brokers activity statement in several currencies is not converted; trades opened before a file starts have no known cost.
+- Where a file came from: every upload is self-reported. A broker-connected record shows where its trades came from but not how many other things were tried.
 
 ## Trust levels and storage
 
-Every upload is "Self-reported: Parity checked the numbers in the file, not where the file came from." "Broker-connected" needs read-only connections and is not available. The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256; the dataset opt-in stores no user id and month-rounded dates.
+Every upload is "Self-reported: Parity checked the numbers in the file, not where the file came from." A record is "Broker-connected" when Parity's server read the trades from the venue itself through a read-only link ([DEC-0091](../decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)): Interactive Brokers (Flex token), Alpaca (sign-in, no scope), Coinbase, Kraken, Binance and Bybit (keys whose permissions the venue reports as read-only; anything else is refused before a trade is read). Binance.US is not taken: it cannot say what a key may do. The same checks run on the server, and the result is signed with Ed25519; the public key is at `/api/connect/keys`. A badge shows as broker-connected only when the signature checks out and every number on it matches the signed ones, and it names the venue, live or paper (from the venue), a one-way account code and the fetch time.
+
+Broker-connected shows that the trades came from that venue and account and were not edited before the checks. It does not show how many other things were tried (tries are stated by the owner), the starting balance when typed, whose account it is beyond holding a read-only key, anything outside the dates read, or costs the venue books apart from fills.
+
+The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256 (for a broker-connected record, of the trades file Parity read), plus the signed proof; withdrawing deletes the numbers and the proof and keeps the venue and account code. A broker key is used once and dropped unless the owner asks to keep it in sync; then it is sealed with AES-GCM under a per-person key and can be revoked. Every read is logged for the owner. The dataset opt-in stores no user id and month-rounded dates.
 
 ## Method versions
 
@@ -172,4 +176,6 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.2. pari
 - [DEC-0088: Verify reads a seller's claims from their page](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
+- [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](../decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- [LOG-0022: Read-only broker connections built](../log/2026-11-03-read-only-broker-connections-built.md)
 <!-- backlinks:end -->

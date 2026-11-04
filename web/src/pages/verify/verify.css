@@ -180,3 +180,30 @@ html.vp-root, html.vp-root body { background: var(--canvas); }
 .vf-ran { display: flex; flex-direction: column; gap: 10px; }
 .vf-json { margin: 8px 0 0; padding: 10px 12px; max-height: 18rem; overflow: auto; background: var(--surface-2, var(--surface)); border: 1px solid var(--border); border-radius: var(--radius-md); font-family: var(--font-mono); font-size: var(--fs-xs); line-height: 1.5; }
 .vf-help a, .vf-small a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Read from your broker (DEC-0091): the venue's steps, the key fields, and where a result came
+   from. Plain solid surfaces and hairlines, the Invicta accent only on focus and the trust edge. */
+.vc-panel { gap: 18px; }
+.vc-venue { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+.vc-venue .vf-sub { margin: 0; }
+.vc-steps { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 6px; max-width: 75ch; line-height: 1.5; }
+.vc-readonly { margin: 0; font-size: var(--fs-sm); color: var(--text-2); max-width: 75ch; }
+.vc-readonly strong { color: var(--text); }
+.vc-limits summary { cursor: pointer; color: var(--text-2); font-size: var(--fs-sm); }
+.vc-limits summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.vc-limits ul { margin: 8px 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 4px; font-size: var(--fs-sm); color: var(--text-2); max-width: 75ch; }
+.vc-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; }
+.vc-fields .ui-field:has(.vc-secret) { grid-column: 1 / -1; }
+.vc-secret { height: auto; min-height: 112px; resize: vertical; font-family: var(--font-mono); font-size: var(--fs-sm); line-height: 1.5; }
+.vc-range { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.vc-questions > .vf-help { grid-column: 1 / -1; margin-top: -8px; }
+.vc-questions .vf-optin { grid-column: 1 / -1; }
+@media (max-width: 900px) { .vc-fields { grid-template-columns: minmax(0, 1fr); } }
+
+.vc-source { border-left: 4px solid var(--accent); }
+.vc-source p { margin: 0; max-width: 75ch; line-height: 1.5; }
+.vc-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px 20px; margin: 0; }
+.vc-facts div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.vc-facts dt { color: var(--text-2); font-size: var(--fs-sm); }
+.vc-facts dd { margin: 0; overflow-wrap: anywhere; }
+.vc-notes { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 4px; color: var(--text-2); font-size: var(--fs-sm); max-width: 75ch; }

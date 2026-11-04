@@ -4,6 +4,7 @@ import { defineConfig, type Plugin } from "vite";
 import { parityAnalytics } from "./plugins/analytics";
 import { parityBoot } from "./plugins/boot";
 import { parityBusiness } from "./plugins/business";
+import { parityConnect } from "./plugins/connect";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
 import { SAMPLE_DOWNLOAD } from "./src/lib/desktopDownload";
@@ -246,7 +247,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), claimUrlDev(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityBusiness(), parityMeta(), parityOg(), parityVersion()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), claimUrlDev(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityBusiness(), parityMeta(), parityOg(), parityVersion(), parityConnect()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

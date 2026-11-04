@@ -1,0 +1,6 @@
+{"error": [], "result": {"count": 4, "trades": {
+ "THVRQM-33VKH-UCI7BS": {"ordertxid": "OQCLML-BW3P3-BUCMWZ", "postxid": "TKH2SE-M7IF5-CFI7LT", "pair": "XXBTZUSD", "time": 1767607796.8802, "type": "buy", "ordertype": "limit", "price": "30010.00000", "cost": "600.20000", "fee": "0.60000", "vol": "0.02000000", "margin": "0.00000", "misc": "", "trade_id": 40274859, "maker": true},
+ "TCWJEG-FL4SZ-3FKGH6": {"ordertxid": "OQCLML-BW3P3-BUCMW1", "postxid": "TKH2SE-M7IF5-CFI7L1", "pair": "XXBTZUSD", "time": 1767867000.1, "type": "sell", "ordertype": "limit", "price": "31010.00000", "cost": "620.20000", "fee": "0.62000", "vol": "0.02000000", "margin": "0.00000", "misc": "", "trade_id": 40274860, "maker": false},
+ "TZX2WP-XSEOP-FP7WYR": {"ordertxid": "OQCLML-BW3P3-BUCMW2", "postxid": "TKH2SE-M7IF5-CFI7L2", "pair": "XETHZUSD", "time": 1768212000.5, "type": "buy", "ordertype": "market", "price": "2000.00000", "cost": "2000.00000", "fee": "2.00000", "vol": "1.00000000", "margin": "0.00000", "misc": "", "trade_id": 40274861, "maker": false},
+ "TJUW2K-FLX2N-AR2FLU": {"ordertxid": "OQCLML-BW3P3-BUCMW3", "postxid": "TKH2SE-M7IF5-CFI7L3", "pair": "XETHZUSD", "time": 1768384800.5, "type": "sell", "ordertype": "market", "price": "1950.00000", "cost": "1950.00000", "fee": "1.95000", "vol": "1.00000000", "margin": "0.00000", "misc": "", "trade_id": 40274862, "maker": false}
+}}}

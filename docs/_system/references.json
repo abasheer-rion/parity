@@ -43249,6 +43249,424 @@
         "source": "manual",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-a90d5b50",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: send request",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/api-reference/send-request",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-04e24492",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: get statement",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/api-reference/get-statement",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-79a6e62d",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: error codes",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/flex-web-service/error-codes",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec9e6ffe",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca API documentation: using oauth2 and trading api",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/using-oauth2-and-trading-api",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0b3147c5",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca support: usage limit api calls",
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://alpaca.markets/support/usage-limit-api-calls",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b6a9ee4e",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca API documentation: account activities",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/us/docs/account-activities.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-301e4f80",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: get api key permissions",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/data-api/get-api-key-permissions.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4759dcf9",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: api key authentication",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/coinbase-app/authentication-authorization/api-key-authentication.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec8624cb",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: list fills",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-fills.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff1e011c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: get api key info",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api-reference/account-data/get-api-key-info.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-69f39364",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: authentication",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/exchange/guides/rest/authentication.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-663687ee",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: ratelimits",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/exchange/guides/rest/ratelimits.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-43011619",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: get trades history",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api-reference/account-data/get-trades-history.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-360b6e3d",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance developer documentation: api key permission",
+      "venue": "developers.binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.binance.com/docs/wallet/account/api-key-permission",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a25a1dce",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "binance/binance-spot-api-docs: rest api",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8e10fd9b",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance.US API documentation: ",
+      "venue": "docs.binance.us",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.binance.us/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fd48c123",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: apikey info",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/user/apikey-info",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8584fd9c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: execution",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/order/execution",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-acd0e07b",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: rate limit",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/rate-limit",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
     }
   ]
 }

@@ -25,13 +25,17 @@ import { Num, PublicLinks, ResultView, pct } from "./Result";
 import "./verify.css";
 import { track } from "../../lib/analytics";
 import { CodeInput } from "./CodeInput";
+import { ConnectInput } from "./ConnectInput";
+import { ConnectedSource } from "./Connected";
+import { connectionsEnabled, type FetchAnswer } from "../../lib/verify/connect";
 import { SignedIn } from "./signedIn";
 
-type Mode = "file" | "code" | "describe" | "strategy";
+type Mode = "file" | "broker" | "code" | "describe" | "strategy";
 const APP_LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
 const PUBLIC_LESSON = "/learn/academy/win-rate-is-not-profit/the-99-percent-bot/";
 const MODES: Choice<Mode>[] = [
   { value: "file", title: "Upload a file", body: "A trade history from your broker or exchange, MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
+  { value: "broker", title: "Read from your broker", body: "Parity reads the trades itself with a read-only key, so the record is broker-connected.", icon: "link" },
   { value: "code", title: "Paste strategy code", body: "Pine Script from TradingView, Python, or rules in words. We run it on our prices.", icon: "flask" },
   { value: "describe", title: "Check a seller's claim", body: "Paste the address of a seller's page, or their words. Each claim is listed with where it came from.", icon: "quote" },
   { value: "strategy", title: "Pick a strategy", body: "Check one of the strategies we have already tested.", icon: "catalog" },
@@ -42,8 +46,8 @@ export interface FileMeta { parsed: Parsed; sha256: string; name: string }
 const useLesson = () => (useContext(PublicLinks) ? PUBLIC_LESSON : APP_LESSON);
 
 export interface CheckerProps {
-  /** The Share step under a result. */
-  share?: (r: Result, file: FileMeta | null) => ReactNode;
+  /** The Share step under a result. A record read from a broker comes with its signed source. */
+  share?: (r: Result, file: FileMeta | null, connected?: FetchAnswer | null) => ReactNode;
   /** Called with every result shown. */
   onResult?: (r: Result) => void;
   /** False on the public page when nobody is signed in. */
@@ -53,14 +57,18 @@ export interface CheckerProps {
 /** Claims carried from "Check a seller's claim" to a trade file, to check them against it. */
 export interface PendingClaim { claim: Claim; source: ClaimSource }
 
-interface Shown { r: Result; file: FileMeta | null; matches?: Match[]; extra?: ReportExtra; pageText?: string }
+interface Shown { r: Result; file: FileMeta | null; matches?: Match[]; extra?: ReportExtra; pageText?: string; connected?: FetchAnswer }
 
 export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
   // The input kind, the example and the picked strategy are in the address, so a link
   // reopens the same check: #/verify?mode=describe&example=1, #/verify?mode=strategy&strategy=fx_carry (DEC-0038).
   const [rawMode, setRawMode] = useHashState("mode", "file");
-  const modes = signedIn ? MODES : MODES.filter((m) => m.value !== "strategy");
-  const mode: Mode = rawMode === "describe" || rawMode === "code" || (rawMode === "strategy" && signedIn) ? rawMode : "file";
+  // Read-only broker connections (DEC-0091) only when the build turns them on. Back from
+  // Alpaca's sign-in (?connect=alpaca), the broker tab opens to finish the read.
+  const connections = connectionsEnabled();
+  const backFromBroker = connections && typeof window !== "undefined" && /[?&]connect=alpaca\b/.test(window.location.search);
+  const modes = MODES.filter((m) => (m.value !== "strategy" || signedIn) && (m.value !== "broker" || connections));
+  const mode: Mode = backFromBroker ? "broker" : rawMode === "describe" || rawMode === "code" || (rawMode === "strategy" && signedIn) || (rawMode === "broker" && connections) ? rawMode as Mode : "file";
   const [result, setResult] = useState<Shown | null>(null);
   const [pending, setPending] = useState<PendingClaim | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
@@ -110,6 +118,7 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
       <ChoiceCards<Mode> label="What to check" value={mode} onChange={change} options={modes} />
       <div className="vf-input">
         {mode === "file" && <FileInput pending={pending} onClearPending={() => setPending(null)} onResult={(r, file, extra) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file, extra }); }} />}
+        {mode === "broker" && <ConnectInput onResult={(r, connected) => { track("verify_run", { mode, format: connected.source.venue }); setResult({ r, file: null, connected, extra: { prices: "loaded" } }); }} />}
         {mode === "code" && <CodeInput onResult={(r) => { track("verify_run", { mode, format: r.code?.language ?? "" }); setResult({ r, file: null, extra: { prices: "loaded" } }); }} />}
         {mode === "describe" && <ClaimInput key={exampleRun} onResult={async ({ result: r, text }) => {
           track("verify_run", { mode, format: r.claimSource?.url ? "url" : "words" });
@@ -119,6 +128,8 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
         {mode === "strategy" && <StrategyInput onResult={(r) => { track("verify_run", { mode }); setResult({ r, file: null }); }} />}
       </div>
       {result ? (
+        <>
+        {result.connected && <ConnectedSource answer={result.connected} />}
         <ResultView r={result.r} extra={result.extra} signedOut={!signedIn}
           claimsLive={result.r.claimSource ? {
             onAttach: result.r.source === "description" ? () => attach(result.r) : undefined,
@@ -126,12 +137,13 @@ export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
             modelName: key ? providerById(provider).name.split(" (")[0] : null,
           } : undefined}>
           {result.matches && <Matches matches={result.matches} />}
-          {share?.(result.r, result.file)}
+          {share?.(result.r, result.file, result.connected ?? null)}
         </ResultView>
+        </>
       ) : (
         <EmptyState title="Nothing checked yet" icon="checkCircle"
           action={<Button variant="accent" icon="play" onClick={tryExample}>Check the example bot</Button>}>
-          Pick one of the {["", "one", "two", "three", "four"][modes.length]} ways above. Or start with our example, a bot that wins 99 trades in 100 and still loses money. <a href={lesson}>Why that happens</a> is in the Academy.
+          Pick one of the {["", "one", "two", "three", "four", "five"][modes.length]} ways above. Or start with our example, a bot that wins 99 trades in 100 and still loses money. <a href={lesson}>Why that happens</a> is in the Academy.
         </EmptyState>
       )}
     </SignedIn.Provider>

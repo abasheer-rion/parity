@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1836 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1855 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,8 +11,8 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 50 |
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 67 |
-| [Software](#software) | 114 |
-| [Web pages](#web-pages) | 1060 |
+| [Software](#software) | 115 |
+| [Web pages](#web-pages) | 1078 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
 | [News](#news) | 13 |
@@ -3949,6 +3949,12 @@ PacktPublishing/Python-for-Algorithmic-Trading-Cookbook/issues/5. (n.d.). *Nasda
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a25a1dce
+
+binance/binance-spot-api-docs: rest api. (2026). *github.com*. <https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-a3d4a865
 
 QuickFIX/J. (n.d.). *github.com*. <https://github.com/quickfix-j/quickfixj>. Accessed 2026-10-24. Verification: not checked.
@@ -4525,6 +4531,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
 
+### url-04e24492
+
+Interactive Brokers Flex Web Service: get statement. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/api-reference/get-statement>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-04e8250f
 
 custom-mcp-server.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/api/docs/guides/custom-mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
@@ -4694,6 +4706,12 @@ Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-an
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
+
+### url-0b3147c5
+
+Alpaca support: usage limit api calls. (2026). *alpaca.markets*. <https://alpaca.markets/support/usage-limit-api-calls>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-0bf698b7
 
@@ -5583,6 +5601,12 @@ App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id370922777>
 
 Cited in: [CMP-0011](competitors/0011-oanda.md).
 
+### url-301e4f80
+
+Coinbase Developer Platform documentation: get api key permissions. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/data-api/get-api-key-permissions.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-3090dcf7
 
 Hiive to Clarity. (n.d.). *clarity.com*. <https://www.clarity.com/>. Accessed 2026-10-25. Verification: not checked.
@@ -5738,6 +5762,12 @@ Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
 No title recorded. (n.d.). *augment.market*. <https://augment.market/blog>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-360b6e3d
+
+Binance developer documentation: api key permission. (2026). *developers.binance.com*. <https://developers.binance.com/docs/wallet/account/api-key-permission>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-3644b717
 
@@ -6087,6 +6117,12 @@ Colorado Attorney General (n.d.). Colorado Privacy Act, Colorado Attorney Genera
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-43011619
+
+Kraken API documentation: get trades history. (2026). *docs.kraken.com*. <https://docs.kraken.com/api-reference/account-data/get-trades-history.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-431a0bea
 
 fee schedule. (n.d.). *kraken.com*. <https://www.kraken.com/features/fee-schedule>. Accessed 2026-10-24. Verification: not checked.
@@ -6176,6 +6212,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 1998-2002 Argentine great depression. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/argentina-default-2001.json](../catalog/events/argentina-default-2001.json).
+
+### url-4759dcf9
+
+Coinbase Developer Platform documentation: api key authentication. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/coinbase-app/authentication-authorization/api-key-authentication.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-4763ad6c
 
@@ -6987,6 +7029,12 @@ No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/ap
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
+### url-663687ee
+
+Kraken API documentation: ratelimits. (2026). *docs.kraken.com*. <https://docs.kraken.com/exchange/guides/rest/ratelimits.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-668d5b13
 
 MCP authorization, latest. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/latest/basic/authorization>. Accessed 2026-10-25. Verification: not checked.
@@ -7084,6 +7132,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 No title recorded. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api/v2/data/dataflow/BIS/WS_DER_OTC_TOV/1.0/A.U.*.B.5J.A.5J.A.*.TO1.A.A.3.C?format=csv>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [DAT-0038](datasets/0038-bis-triennial-fx.md).
+
+### url-69f39364
+
+Kraken API documentation: authentication. (2026). *docs.kraken.com*. <https://docs.kraken.com/exchange/guides/rest/authentication.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-6a3cde2c
 
@@ -7501,6 +7555,12 @@ Legal Information Institute (n.d.). Lowe v. SEC, 472 U.S. 181 (1985). *law.corne
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-79a6e62d
+
+Interactive Brokers Flex Web Service: error codes. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/flex-web-service/error-codes>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-7a23b016
 
 eToro general risk disclosure page. (n.d.). *etoro.com*. <https://www.etoro.com/customer-service/general-risk-disclosure/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -7885,6 +7945,12 @@ Darwinex for investors. (n.d.). *darwinex.com*. <https://www.darwinex.com/invest
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
 
+### url-8584fd9c
+
+Bybit V5 API documentation: execution. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/order/execution>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-85993aa8
 
 App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id299366785>. Accessed 2026-10-24. Verification: not checked.
@@ -8110,6 +8176,12 @@ Cited in: [CMP-0008](competitors/0008-thinkorswim.md), [RES-0021](research/0021-
 Trading Economics API: API documentation. (n.d.). *Trading Economics*. <https://docs.tradingeconomics.com/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-8e10fd9b
+
+Binance.US API documentation:. (2026). *docs.binance.us*. <https://docs.binance.us/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-8e1b8217
 
@@ -8781,6 +8853,12 @@ Note: Linked in this repo as: forum announcement.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-a90d5b50
+
+Interactive Brokers Flex Web Service: send request. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/api-reference/send-request>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-a940b923
 
 No title recorded. (n.d.). *fintech.global*. <https://fintech.global/2025/12/03/1-in-5-investors-refuse-to-trust-ai-with-money/>. Accessed 2026-10-25. Verification: not checked.
@@ -8886,6 +8964,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https://docs.data.nasdaq.com/>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-acd0e07b
+
+Bybit V5 API documentation: rate limit. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/rate-limit>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-ad566343
 
@@ -9162,6 +9246,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 Realtime limits. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/realtime/limits>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+
+### url-b6a9ee4e
+
+Alpaca API documentation: account activities. (2026). *docs.alpaca.markets*. <https://docs.alpaca.markets/us/docs/account-activities.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-b6cdb784
 
@@ -10455,6 +10545,18 @@ Iraqi invasion of Kuwait. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Ir
 
 Cited in: [catalog/events/iraq-invades-kuwait-1990.json](../catalog/events/iraq-invades-kuwait-1990.json).
 
+### url-ec8624cb
+
+Coinbase Developer Platform documentation: list fills. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-fills.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
+### url-ec9e6ffe
+
+Alpaca API documentation: using oauth2 and trading api. (2026). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/using-oauth2-and-trading-api>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-ecada088
 
 Second Nagorno-Karabakh War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Second_Nagorno-Karabakh_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
@@ -10915,6 +11017,12 @@ IndexNow documentation. (n.d.). *IndexNow*. <https://www.indexnow.org/documentat
 
 Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
+### url-fd48c123
+
+Bybit V5 API documentation: apikey info. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/user/apikey-info>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-fe036392
 
 No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/DAAA>. Accessed 2026-10-22. Verification: not checked.
@@ -10952,6 +11060,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 2014 Gaza War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2014_Gaza_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/gaza-war-2014.json](../catalog/events/gaza-war-2014.json).
+
+### url-ff1e011c
+
+Kraken API documentation: get api key info. (2026). *docs.kraken.com*. <https://docs.kraken.com/api-reference/account-data/get-api-key-info.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-ff5a1dac
 

@@ -81,4 +81,5 @@ Changing the pepper later makes every existing key stop working, so treat it as 
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [DEC-0082: Verify tools and endpoints for AI apps and programs](0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md)
 - [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
+- [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
 <!-- backlinks:end -->

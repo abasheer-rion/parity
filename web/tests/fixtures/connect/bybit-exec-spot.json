@@ -1,0 +1,4 @@
+{"retCode": 0, "retMsg": "OK", "result": {"nextPageCursor": "", "category": "spot", "list": [
+ {"symbol": "ETHUSDT", "orderId": "1001", "side": "Buy", "execFee": "0.001", "feeCurrency": "ETH", "execId": "e1", "execPrice": "2000", "execQty": "1", "execType": "Trade", "execValue": "2000", "execTime": "1767607200000", "isMaker": false},
+ {"symbol": "ETHUSDT", "orderId": "1002", "side": "Sell", "execFee": "2.1", "feeCurrency": "USDT", "execId": "e2", "execPrice": "2100", "execQty": "1", "execType": "Trade", "execValue": "2100", "execTime": "1767780000000", "isMaker": false}
+]}, "retExtInfo": {}, "time": 1767225600000}
