@@ -19,7 +19,7 @@
   <nav class="lg-toc" aria-label="On this page">
     <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#code">Strategy code</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
     <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
-    <a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
+    <a href="#limits">Limits</a><a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
   </nav>
 
   <h2 id="inputs">Inputs</h2>
@@ -173,7 +173,27 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
   </ul>
 
   <h2 id="imports">Imports</h2>
-  <p>Verify reads exports from MetaTrader 4 and 5, TradingView, Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca and any CSV with a close date and a profit. Where an export lists fills, they are paired first in, first out per symbol into round trips: each closing fill is one trade, so a partial close is its own trade, and its profit is the price difference times quantity and contract size, minus the fees of both the opening and closing fills (opening fees shared by quantity). Columns that look personal (account number, name, email, server, login, IP address, and order ids that identify an account) are removed before anything else reads the file. The full list, with the layouts we have not yet confirmed against an official export, is on the <a href="/verify/#supported">Verify page</a>.</p>
+  <p>Verify reads exports from MetaTrader 4 and 5 (reports as saved, in HTML in any language or as the Excel "Open XML" file, and CSV), TradingView (CSV or the Excel download), Myfxbook, Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca and any CSV with a close date and a profit.</p>
+  <ul>
+    <li><strong>Fills to trades.</strong> Where an export lists fills, they are paired first in, first out per symbol into round trips: each closing fill is one trade, so a partial close is its own trade, and its profit is the price difference times quantity and contract size, minus the fees of both the opening and closing fills (opening fees shared by quantity).</li>
+    <li><strong>Fees as each platform means them.</strong> Interactive Brokers writes costs as negative and rebates as positive. A platform's own realized profit is used only for a close whose opening is before the file starts, as already net of fees (Interactive Brokers) or before them (Binance futures). Profit a platform already gives after commission (Myfxbook, NinjaTrader, cTrader's net) is not reduced again. A fee paid in a coin we cannot price, such as BNB, is named and left out.</li>
+    <li><strong>Currencies.</strong> With a rate for each row (Interactive Brokers' rate to base currency), every amount becomes the account's base currency. A file in several currencies without rates says so.</li>
+    <li><strong>Times.</strong> A time zone written in a cell or a header ("UTC", "Date(UTC+1)", "Closing Time (UTC-7)") is turned into UTC. MetaTrader writes the broker's server time and Interactive Brokers US Eastern time; days are counted in those times and the page says so.</li>
+    <li><strong>Rows that cannot be read</strong> are named with their line and cell, for example "Line 3: the close date "2024-13-45" is not a date we can read."</li>
+    <li><strong>Personal data.</strong> Columns that look personal (account number, name, email, server, login, IP address, and order ids that identify an account) are removed before anything else reads the file.</li>
+  </ul>
+  <p>Each supported file is marked as tested on a real export, layout copied from a real export, or unverified layout (written from the platform's help pages). The full list is on the <a href="/verify/#supported">Verify page</a>.</p>
+
+  <h2 id="limits">What Verify cannot check yet</h2>
+  <ul>
+    <li><strong>Anything inside the day.</strong> We hold one closing price a day. Strategy code that needs the day's open, high, low or volume, intraday bars, trailing stops or orders that wait for a price is refused, and for an uploaded file "perfect timing" cannot be checked.</li>
+    <li><strong>Other markets.</strong> Strategy code runs on 9 currency pairs, Bitcoin, Ether and the S&amp;P 500 only. A stock, future or option strategy cannot be run yet.</li>
+    <li><strong>Some costs.</strong> Overnight financing and swap, borrowing to sell short and funding on perpetual futures are not charged to strategy code.</li>
+    <li><strong>Some code.</strong> Values carried from day to day (<code>:=</code>, <code>var</code>, loops), functions written in the script, other time frames (<code>request.security</code>), partial exits and adding to a position are refused by name and line.</li>
+    <li><strong>Words.</strong> A description in words is only as good as the rules the person's own model writes from it. Verify shows those rules before running them; it cannot know what the person meant.</li>
+    <li><strong>Some files.</strong> Bybit's layouts are written from help pages only, and whether Bybit's closed profit has fees taken off is not known. A fee paid in BNB cannot be priced. An Interactive Brokers activity statement in several currencies is not converted. Trades opened before a file starts have no known cost.</li>
+    <li><strong>Where a file came from.</strong> Every upload is self-reported: Verify checks the numbers in the file, not that a broker produced it.</li>
+  </ul>
 
   <h2 id="trust">Trust levels</h2>
   <ul>

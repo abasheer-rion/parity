@@ -6,7 +6,7 @@
 // Each account's rows go through Verify's own readers (REF-0016), so every broker format
 // Verify reads works here too, and personal columns are dropped the same way. Runs in the
 // browser: nothing here sends anything anywhere.
-import { num, ParseError, readTable } from "../verify/csv";
+import { decodeBytes, num, ParseError, readTable } from "../verify/csv";
 import { parseTable, parseText } from "../verify/parse";
 import type { Table } from "../verify/types";
 import type { AccountInput, Outcome } from "./score";
@@ -88,7 +88,8 @@ export interface ReadResult {
   details: boolean;
 }
 
-const decode = (b: Uint8Array) => new TextDecoder("utf-8").decode(b);
+/** UTF-8, UTF-16 (MetaTrader 5 reports) or Windows-1252, as Verify reads a file. */
+const decode = (b: Uint8Array) => decodeBytes(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer);
 const baseName = (name: string) => (name.split("/").pop() ?? name).replace(/\.(csv|tsv|txt)$/i, "");
 
 /** Files out of the upload, with zips opened. */

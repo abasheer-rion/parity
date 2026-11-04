@@ -2,7 +2,7 @@
 // equity curve (a date and an account value or a return). Columns are found by the
 // common names below; the person can pick others on the page.
 import type { EquityPoint, Mapping, Table, Trade } from "../types";
-import { col, compact, dayFirstIn, reader, sideOf } from "./common";
+import { col, compact, dayFirstIn, reader, sideOf, skippedWarning, whyBad } from "./common";
 
 const P = {
   closeTime: [/^close ?time$/, /^closed?( at| on)?$/, /^exit ?(time|date)$/, /^close ?date$/, /^date ?closed$/, /^time ?closed$/, /^close$/],
@@ -39,14 +39,14 @@ export function mapTrades(t: Table): Mapping {
 }
 
 export function buildTrades(t: Table, m: Mapping): { trades: Trade[]; warnings: string[] } {
-  const r = reader(m);
+  const r = reader(m, t);
   const df = dayFirstIn(t.rows, m.closeTime);
   const trades: Trade[] = [];
-  let skipped = 0;
-  for (const row of t.rows) {
+  const bad: { k: number; why: string }[] = [];
+  t.rows.forEach((row, k) => {
     const closeTime = r.date(row, "closeTime", df);
     const pnl = r.num(row, "pnl");
-    if (!closeTime || pnl == null) { skipped++; continue; }
+    if (!closeTime || pnl == null) { bad.push({ k, why: whyBad([...(!closeTime ? [["close date", r.cell(row, "closeTime"), "date"]] : []), ...(pnl == null ? [["profit", r.cell(row, "pnl"), "number"]] : [])] as [string, string, "date" | "number" | "text"][]) }); return; }
     // A fees column is taken off the profit. Leave it unmapped if the profit already includes it.
     const fees = Math.abs(r.num(row, "fees") ?? 0);
     trades.push({
@@ -55,9 +55,9 @@ export function buildTrades(t: Table, m: Mapping): { trades: Trade[]; warnings: 
       size: r.num(row, "size") ?? undefined, entry: r.num(row, "entry") ?? undefined, exit: r.num(row, "exit") ?? undefined,
       fees, pnl: pnl - fees,
     });
-  }
+  });
   trades.sort((a, b) => (a.closeTime < b.closeTime ? -1 : a.closeTime > b.closeTime ? 1 : 0));
-  return { trades, warnings: skipped ? [`${skipped} row${skipped === 1 ? " had" : "s had"} no readable date or profit and ${skipped === 1 ? "was" : "were"} skipped.`] : [] };
+  return { trades, warnings: skippedWarning(t, bad) };
 }
 
 // ---------------------------------------------------------------- equity curves
@@ -76,19 +76,19 @@ export function mapEquity(t: Table): Mapping {
 }
 
 export function buildEquity(t: Table, m: Mapping): { equity: EquityPoint[]; warnings: string[] } {
-  const r = reader(m);
+  const r = reader(m, t);
   const df = dayFirstIn(t.rows, m.date);
   // Returns written with a % sign, or bigger than 1.5 anywhere, are read as percents.
   const retCells = m.ret == null ? [] : t.rows.map((row) => row[m.ret!] ?? "");
   const pctRet = retCells.some((c) => c.includes("%")) || retCells.some((c) => Math.abs(Number(c.replace(/[%,\s]/g, ""))) > 1.5)
     || (m.ret != null && /%|pct|percent/i.test(t.headers[m.ret]));
   const byDay = new Map<string, EquityPoint>();
-  let skipped = 0;
-  for (const row of t.rows) {
+  const bad: { k: number; why: string }[] = [];
+  t.rows.forEach((row, k) => {
     const d = r.date(row, "date", df);
     const equity = r.num(row, "equity");
     const ret = r.num(row, "ret");
-    if (!d || (equity == null && ret == null)) { skipped++; continue; }
+    if (!d || (equity == null && ret == null)) { bad.push({ k, why: whyBad([...(!d ? [["date", r.cell(row, "date"), "date"]] : []), ...(equity == null && ret == null ? [[m.equity != null ? "account value" : "return", r.cell(row, m.equity != null ? "equity" : "ret"), "number"]] : [])] as [string, string, "date" | "number" | "text"][]) }); return; }
     const date = d.slice(0, 10);
     const cash = r.num(row, "cashflow");
     const prev = byDay.get(date);
@@ -99,7 +99,7 @@ export function buildEquity(t: Table, m: Mapping): { equity: EquityPoint[]; warn
       ret: ret == null ? undefined : pctRet ? ret / 100 : ret,
       cashflow: (prev?.cashflow ?? 0) + (cash ?? 0) || undefined,
     });
-  }
+  });
   const equity = [...byDay.values()].sort((a, b) => (a.date < b.date ? -1 : 1));
-  return { equity, warnings: skipped ? [`${skipped} row${skipped === 1 ? " was" : "s were"} skipped: no readable date or value.`] : [] };
+  return { equity, warnings: skippedWarning(t, bad) };
 }

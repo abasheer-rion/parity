@@ -7,6 +7,7 @@ import { LegalLinks } from "../legal/LegalLinks";
 import type { Result } from "../lib/verify/checks";
 import { connectionsEnabled, PROVIDERS } from "../lib/verify/connect";
 import { SUPPORTED } from "../lib/verify/parse";
+import { CHECKED_TEXT } from "../lib/verify/parse/supported";
 import { MAX_BYTES, MAX_ROWS } from "../lib/verify/csv";
 import { METHOD_VERSION } from "../lib/verify/types";
 import { Checker, type FileMeta } from "../pages/verify/Checker";
@@ -61,13 +62,13 @@ export function PublicVerify() {
         <section className="vp-hero" aria-labelledby="vp-h1">
           <h1 id="vp-h1">Verify a trading record</h1>
           <p className="vp-lede">
-            Upload a trade history from your broker or exchange, or describe a bot. Verify reports the profit per trade, the worst
-            loss, whether the result could be luck given how many things were tried, and signs of tuning to past data or of using
-            prices that were not yet known.
+            Upload a trade history from your broker or exchange, paste a strategy's code, or check a seller's claim. Verify reports
+            the profit per trade, the worst loss, whether the result could be luck given how many things were tried, and signs of
+            tuning to past data or of using prices that were not yet known.
           </p>
           <ul className="vp-facts">
             <li><strong>{SUPPORTED.length} file formats</strong><span>From {SUPPORTED.length - 2} brokers, exchanges and platforms, plus any trade list or equity curve.</span></li>
-            <li><strong>Checked in your browser</strong><span>The file is never sent to us. Up to {MAX_BYTES / 1024 / 1024} MB and {MAX_ROWS.toLocaleString("en-US")} rows.</span></li>
+            <li><strong>Checked in your browser</strong><span>The file or code is never sent to us. Up to {MAX_BYTES / 1024 / 1024} MB and {MAX_ROWS.toLocaleString("en-US")} rows.</span></li>
             <li><strong>No sign-in to check</strong><span>An account is needed only to publish a badge or add a result to the research dataset.</span></li>
           </ul>
         </section>
@@ -89,16 +90,17 @@ export function PublicVerify() {
             {SUPPORTED.map((s) => (
               <li key={s.id} className="vp-card">
                 <h3>{s.name}</h3>
-                <p className="vp-card-rows">{ROWS_TEXT[s.rows]}{s.verified ? "" : ". Unverified layout"}</p>
+                <p className="vp-card-rows">{ROWS_TEXT[s.rows]}. {CHECKED_TEXT[s.checked]}</p>
                 <p className="vp-card-how">{s.how}</p>
                 {s.note && <p className="vp-card-note">{s.note}</p>}
               </li>
             ))}
           </ul>
           <p className="vp-text vp-small">
-            Unverified layout means we wrote the reader from the platform's help pages and journal apps' import guides, not from
-            an official export file. {unverified.length} of {SUPPORTED.length} are unverified: {unverified.map((s) => s.name).join("; ")}.
-            If a file is read wrongly, pick the right columns on the page.
+            Tested on a real export means a real file of that kind is in our test suite and the trades read from it are checked.
+            Layout copied from a real export means we saw a real file and copied its columns and number formats into a test with
+            made-up numbers. Unverified layout means we wrote the reader from the platform's help pages only: {unverified.map((s) => s.name).join("; ")}.
+            If a file is read wrongly, pick the right columns on the page, and tell us at contact@paritytrading.app.
           </p>
         </section>
 

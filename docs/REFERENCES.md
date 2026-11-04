@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1828 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1834 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -11,7 +11,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Preprints and working papers](#preprints-and-working-papers) | 50 |
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 67 |
-| [Software](#software) | 108 |
+| [Software](#software) | 114 |
 | [Web pages](#web-pages) | 1058 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
@@ -3507,6 +3507,12 @@ Cited in: [catalog/datasets/bis.json](../catalog/datasets/bis.json), [DAT-0006](
 
 ## Software
 
+### url-00c665b4
+
+pineforge-4pass/pineforge-corpus. (2026). *github.com*. <https://github.com/pineforge-4pass/pineforge-corpus>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
+
 ### url-018a4057
 
 coinbase/coinbase-advanced-py. (n.d.). *GitHub*. <https://github.com/coinbase/coinbase-advanced-py>. Accessed 2026-10-24. Verification: not checked.
@@ -3530,6 +3536,12 @@ Cited in: [catalog/algorithms/fx-carry-volatility-timing.json](../catalog/algori
 QuantConnect/Tutorials/tree/master/04%20Strategy%20Library/20%20Forex%20Carry%20Trade. (n.d.). *GitHub*. <https://github.com/QuantConnect/Tutorials/tree/master/04%20Strategy%20Library/20%20Forex%20Carry%20Trade>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md).
+
+### url-0b180ad0
+
+alpacahq/alpaca-py. (2026). *github.com*. <https://github.com/alpacahq/alpaca-py>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-0ec6f220
 
@@ -3596,6 +3608,12 @@ Cited in: [catalog/algorithms/risk-parity.json](../catalog/algorithms/risk-parit
 QuantConnect/Lean. (n.d.). *GitHub*. <https://github.com/QuantConnect/Lean>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [CMP-0023](competitors/0023-quantconnect.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-2eab3b36
+
+agusalex/tax\_calculator. (2026). *github.com*. <https://github.com/agusalex/tax_calculator>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-2ef0d137
 
@@ -3786,6 +3804,12 @@ Cited in: [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/a
 api-evangelist/imf. (n.d.). *GitHub*. <https://github.com/api-evangelist/imf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-77266c72
+
+codecat92/apex-grid-ea. (2026). *github.com*. <https://github.com/codecat92/apex-grid-ea>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-7a0fda7c
 
@@ -4031,6 +4055,12 @@ DeviaVir/zenbot/tree/unstable/extensions/strategies. (n.d.). *GitHub*. <https://
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-d7d63252
+
+Delta-Compute/DeltaCFOAgent. (2026). *github.com*. <https://github.com/Delta-Compute/DeltaCFOAgent>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
+
 ### url-d8847df0
 
 Anthropic TypeScript SDK. (n.d.). *github.com*. <https://github.com/anthropics/anthropic-sdk-typescript>. Accessed 2026-10-25. Verification: not checked.
@@ -4120,6 +4150,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Hyperliquid node. (n.d.). *github.com*. <https://github.com/hyperliquid-dex/node>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
+
+### url-ec3186c4
+
+PopovMP/mt-report-parser. (2026). *github.com*. <https://github.com/PopovMP/mt-report-parser>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-ee22d42b
 

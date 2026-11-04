@@ -19,16 +19,19 @@ export function sniffDelimiter(text: string): string {
   return cands[0][1] > 0 ? cands[0][0] : ",";
 }
 
-/** Splits text into rows of cells, honouring double quotes ("" is a quote inside one). */
-export function splitRows(text: string, delim: string, maxRows = MAX_ROWS): string[][] {
+/**
+ * Splits text into rows of cells, honouring double quotes ("" is a quote inside one). When
+ * `lines` is given, the file line each row starts on is pushed to it, so a problem can name it.
+ */
+export function splitRows(text: string, delim: string, lines?: number[], maxRows = MAX_ROWS): string[][] {
   const rows: string[][] = [];
-  let row: string[] = [], cell = "", q = false;
+  let row: string[] = [], cell = "", q = false, line = 1, start = 1;
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
     if (q) {
       if (ch === '"') {
         if (text[i + 1] === '"') { cell += '"'; i++; } else q = false;
-      } else cell += ch;
+      } else { if (ch === "\n") line++; cell += ch; }
       continue;
     }
     if (ch === '"' && cell.trim() === "") { q = true; cell = ""; }
@@ -36,13 +39,14 @@ export function splitRows(text: string, delim: string, maxRows = MAX_ROWS): stri
     else if (ch === "\n" || ch === "\r") {
       if (ch === "\r" && text[i + 1] === "\n") i++;
       row.push(cell.trim()); cell = "";
-      if (row.some((c) => c !== "")) rows.push(row);
+      if (row.some((c) => c !== "")) { rows.push(row); lines?.push(start); }
       row = [];
+      line++; start = line;
       if (rows.length > maxRows + 50) throw new ParseError(`The file has more than ${maxRows.toLocaleString()} rows, the most Verify reads for now.`);
     } else cell += ch;
   }
   row.push(cell.trim());
-  if (row.some((c) => c !== "")) rows.push(row);
+  if (row.some((c) => c !== "")) { rows.push(row); lines?.push(start); }
   return rows;
 }
 
@@ -52,17 +56,54 @@ const looksLikeHeader = (r: string[]) => r.filter((c) => /[A-Za-z]/.test(c)).len
  * Reads a file's text into a header row and data rows. The header is the first row with words
  * in it. maxRows is higher only for the batch screen, which reads many accounts in one file.
  */
-export function readTable(text: string, maxRows = MAX_ROWS): Table & { delimiter: string } {
+export function readTable(text: string, maxRows = MAX_ROWS): Table & { delimiter: string; lines: number[] } {
   const clean = text.replace(/^﻿/, "");
   if (!clean.trim()) throw new ParseError("The file is empty.");
   const delimiter = sniffDelimiter(clean);
-  const all = splitRows(clean, delimiter, maxRows);
-  const h = all.findIndex((r, i) => i < 15 && looksLikeHeader(r));
+  const at: number[] = [];
+  const all = splitRows(clean, delimiter, at, maxRows);
+  return { ...tableFromRows(all, at, maxRows), delimiter };
+}
+
+/**
+ * A table from rows of cells (a CSV, a sheet, an HTML table): the header row is found, short
+ * rows are padded and long ones cut to its width. `at` holds each row's line in the file.
+ */
+export function tableFromRows(all: string[][], at: number[] = all.map((_, i) => i + 1), maxRows = MAX_ROWS): Table & { lines: number[] } {
+  // The header is the first row with words in it that is about as wide as the rows below it,
+  // so a title or a "User, name, id" line above the table is not taken for it.
+  const filled = (r: string[]) => r.filter((c) => c !== "").length;
+  const h = all.findIndex((r, i) => {
+    if (i >= 15 || !looksLikeHeader(r)) return false;
+    const below = all.slice(i + 1, i + 11).map(filled).sort((a, b) => a - b);
+    const typical = below.length ? below[Math.floor(below.length / 2)] : 0;
+    return filled(r) >= Math.min(typical, Math.ceil(typical * 0.6));
+  });
   if (h < 0) throw new ParseError("We could not find a header row (a first row with column names) in the first lines of the file.");
   const headers = all[h].map((c) => c.replace(/\s+/g, " ").trim());
+  // A last header cell left empty by a trailing comma (NinjaTrader) is dropped.
+  while (headers.length > 1 && headers[headers.length - 1] === "") headers.pop();
   const rows = all.slice(h + 1).map((r) => (r.length < headers.length ? [...r, ...Array(headers.length - r.length).fill("")] : r.slice(0, headers.length)));
   if (rows.length > maxRows) throw new ParseError(`The file has ${rows.length.toLocaleString()} rows. Verify reads up to ${maxRows.toLocaleString()} for now.`);
-  return { headers, rows, delimiter };
+  return { headers, rows, lines: at.slice(h + 1) };
+}
+
+/**
+ * The text of a file's bytes. UTF-8 by default; UTF-16 when the file starts with its byte
+ * order mark or has a zero in every other byte (MetaTrader 5 writes its reports so).
+ */
+export function decodeBytes(buf: ArrayBuffer): string {
+  const b = new Uint8Array(buf);
+  if (b[0] === 0xff && b[1] === 0xfe) return new TextDecoder("utf-16le").decode(b.subarray(2));
+  if (b[0] === 0xfe && b[1] === 0xff) return new TextDecoder("utf-16be").decode(b.subarray(2));
+  const n = Math.min(b.length, 400);
+  let zeroOdd = 0, zeroEven = 0;
+  for (let i = 0; i < n; i++) if (b[i] === 0) (i % 2 ? zeroOdd++ : zeroEven++);
+  if (n >= 20 && zeroOdd > n / 4 && zeroEven < n / 40) return new TextDecoder("utf-16le").decode(b);
+  if (n >= 20 && zeroEven > n / 4 && zeroOdd < n / 40) return new TextDecoder("utf-16be").decode(b);
+  const utf8 = new TextDecoder("utf-8").decode(b);
+  // Not UTF-8 (old Windows files): read it as Windows-1252 instead.
+  return utf8.includes("\ufffd") ? new TextDecoder("windows-1252").decode(b) : utf8;
 }
 
 /**
@@ -102,9 +143,37 @@ const pad = (n: number) => String(n).padStart(2, "0");
  * unless `dayFirst` is set or the first number is above 12. Dotted short dates
  * (03.04.2024) are day first.
  */
-export function parseDate(cell: string | undefined, dayFirst = false): string | null {
+export function parseDate(cell: string | undefined, dayFirst = false, offsetMinutes?: number): string | null {
   if (!cell) return null;
-  const s = cell.trim().replace(/^"|"$/g, "");
+  let s = cell.trim().replace(/^"|"$/g, "");
+  // A time zone written in the cell wins over one in the header; either way the result is UTC.
+  // Only after a time of day, so a date such as 03-01-2024 is never read as an offset.
+  const z = s.match(/(?<=\d{1,2}:\d{2}(?::\d{2}(?:\.\d+)?)?)(?:\s*(?:Z|UTC|GMT)\s*([+-]\d{1,2}(?::?\d{2})?)?|\s*([+-]\d{2}:?\d{2})|\s+(EST|EDT|CST|CDT|MST|MDT|PST|PDT|CET|CEST|BST))$/i);
+  let off = offsetMinutes;
+  if (z && /\d/.test(s.slice(0, z.index))) {
+    const named: Record<string, number> = { EST: -300, EDT: -240, CST: -360, CDT: -300, MST: -420, MDT: -360, PST: -480, PDT: -420, CET: 60, CEST: 120, BST: 60 };
+    const sign = (t: string) => (t.startsWith("-") ? -1 : 1);
+    const hm = (t: string) => { const m = t.replace(/^[+-]/, "").match(/^(\d{1,2}):?(\d{2})?$/); return m ? sign(t) * (+m[1] * 60 + (m[2] ? +m[2] : 0)) : 0; };
+    off = z[3] ? named[z[3].toUpperCase()] ?? 0 : z[2] ? hm(z[2]) : z[1] ? hm(z[1]) : 0;
+    s = s.slice(0, z.index).trim();
+  }
+  const local = parseLocal(s, dayFirst);
+  if (!local || !off) return local;
+  const ms = Date.parse(`${local}Z`) - off * 60_000;
+  return new Date(ms).toISOString().slice(0, 19);
+}
+
+/** The offset from UTC a header names, in minutes: "Date(UTC)" is 0, "Closing Time (UTC-7)" is -420. Undefined when it names none. */
+export function headerOffset(h: string | undefined): number | undefined {
+  const m = (h ?? "").match(/\b(?:UTC|GMT)\s*([+-]\s*\d{1,2}(?::?\d{2})?)?\b/i);
+  if (!m) return undefined;
+  if (!m[1]) return 0;
+  const t = m[1].replace(/\s/g, "");
+  const p = t.slice(1).match(/^(\d{1,2}):?(\d{2})?$/);
+  return p ? (t[0] === "-" ? -1 : 1) * (+p[1] * 60 + (p[2] ? +p[2] : 0)) : undefined;
+}
+
+function parseLocal(s: string, dayFirst: boolean): string | null {
   if (!s) return null;
   let y: number, mo: number, d: number;
   let rest = "";

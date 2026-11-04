@@ -2,16 +2,18 @@
 // detected from the header row and the rows become trades or an equity curve. The
 // person can pick another format or other columns, and the file is read again from
 // the table (which no longer holds the personal columns). REF-0016, input A.
-import { readTable } from "../csv";
+import { decodeBytes, ParseError, readTable, tableFromRows } from "../csv";
 import { FORMAT_LABEL, type FormatId, type Mapping, type Parsed, type Table, type Trade } from "../types";
 import { dropColumns, dropPersonal } from "./common";
-import { binanceFutures, binanceSpot, bybitFills, bybitPnl, coinbase, kraken } from "./crypto";
+import { binanceFutures, binanceSpot, binanceStatement, bybitFills, bybitPnl, coinbase, coinbaseReport, kraken } from "./crypto";
 import type { BuildOut, FieldDef, FormatDef } from "./format";
 import { buildEquity, buildTrades, detectEquity, detectTrades, mapEquity, mapTrades } from "./generic";
 import { ibkrActivity, ibkrFlex } from "./ibkr";
-import { buildMt4, detectMt4, mapMt4 } from "./mt4";
+import { buildMt4, buildMt4Tester, detectMt4, mapMt4 } from "./mt4";
+import { htmlRows, looksLikeHtml, metaTraderRows, type MetaTraderRead } from "./html";
+import { isZip, readXlsx } from "./xlsx";
 import { buildMt5, buildMt5Deals, detectMt5, detectMt5Deals, mapMt5, mapMt5Deals } from "./mt5";
-import { ctrader, ninjatrader, tradovate } from "./platforms";
+import { ctrader, myfxbook, ninjatrader, tradovate, tradovateOrders, tradovatePositions } from "./platforms";
 import { tradesSection } from "./sections";
 import { alpaca, thinkorswim } from "./stocks";
 import { buildTradingView, detectTradingView, mapTradingView } from "./tradingview";
@@ -41,7 +43,9 @@ const FORMATS: FormatDef[] = [
     { field: "id", label: "Trade number", required: true }, { field: "tvType", label: "Type (entry or exit)", required: true }, { field: "closeTime", label: "Date and time", required: true },
     { field: "pnl", label: "Profit", required: true }, { field: "entry", label: "Price" }, { field: "size", label: "Contracts" }, { field: "symbol", label: "Symbol" },
   ] },
-  ibkrFlex, ibkrActivity, binanceSpot, binanceFutures, bybitFills, bybitPnl, coinbase, kraken, ctrader, ninjatrader, tradovate, thinkorswim, alpaca,
+  { id: "mt4tester", detect: () => 0, map: () => ({}), build: (t) => buildMt4Tester(t), fields: [] },
+  ibkrFlex, ibkrActivity, binanceSpot, binanceFutures, binanceStatement, bybitFills, bybitPnl, coinbase, coinbaseReport, kraken,
+  ctrader, ninjatrader, tradovate, tradovatePositions, tradovateOrders, myfxbook, thinkorswim, alpaca,
   { id: "trades", detect: detectTrades, map: mapTrades, build: buildTrades, fields: [
     { field: "closeTime", label: "Close date", required: true }, { field: "pnl", label: "Profit per trade", required: true }, { field: "openTime", label: "Open date" },
     { field: "symbol", label: "Symbol" }, { field: "side", label: "Side" }, { field: "size", label: "Size" }, { field: "entry", label: "Entry price" },
@@ -84,11 +88,17 @@ export function build(table: Table, format: FormatId, mapping: Mapping, dropped:
     if (first?.equity && first.equity > 0) out.inferredBalance = first.equity;
     return out;
   }
-  const res: { trades: Trade[]; warnings?: string[]; balance?: number } = BY_ID[format].build(table, mapping);
+  const res: { trades: Trade[]; warnings?: string[]; notes?: string[]; balance?: number } = BY_ID[format].build(table, mapping);
   out.trades = res.trades;
   if (res.warnings) out.warnings.push(...res.warnings);
+  if (res.notes?.length) out.notes = res.notes;
   if (res.balance) out.inferredBalance = res.balance;
-  if (!res.trades.length) out.warnings.push("No closed trades could be read with these columns.");
+  if (!res.trades.length) {
+    const fillsFormat = !["mt4", "mt5", "tradingview", "trades", "ctrader", "ninjatrader", "tradovate", "tradovate_positions", "bybit_pnl", "myfxbook"].includes(format);
+    out.warnings.push(fillsFormat && table.rows.length
+      ? "No round trips: none of the fills in the file closes a position that was opened in it. Export a longer period, from before the first purchase."
+      : "No closed trades could be read with these columns.");
+  }
   return out;
 }
 
@@ -99,20 +109,80 @@ export function build(table: Table, format: FormatId, mapping: Mapping, dropped:
  * thinkorswim) are cut down to their trades section first.
  */
 export function parseText(text: string): Parsed {
-  return parseTable(tradesSection(text) ?? readTable(text));
+  const clean = text.replace(/^\uFEFF/, "");
+  if (looksLikeHtml(clean)) return parseHtml(clean);
+  if (/^\s*[[{]/.test(clean)) { const j = jsonTable(clean); if (j) return parseTable(j); }
+  return parseTable(tradesSection(clean) ?? readTable(clean));
 }
 
-/** parseText for a table already read, such as one account's rows of a batch file. */
+/** Exports that are not trade lists, with what to download instead. */
+const NOT_TRADES: { test: (t: Table) => boolean; why: string }[] = [
+  { test: (t) => has(t, /^refid$/) && has(t, /^asset$/) && has(t, /^amount$/) && has(t, /^balance$/), why: "This is a Kraken ledger (ledgers.csv), which lists money moving, not trades. Export History, Trades instead: trades.csv." },
+  { test: (t) => has(t, /^transaction id$/) && has(t, /^type$/) && has(t, /^asset$/) && has(t, /^symbol$/) && !has(t, /^price$/), why: "This is a Binance futures transaction history (funding, fees and realized profit), not trades. Export Orders, Futures, Trade History instead." },
+  { test: (t) => has(t, /^(order|open) ?(time|date)$/) && has(t, /^status$/) && !has(t, /^(fill|filled)/) && has(t, /^(order )?type$/) && !has(t, /profit|p&l|pnl/), why: "This looks like a list of orders, not of fills or closed trades. Export the trade history instead." },
+];
+const has = (t: Table, re: RegExp) => t.headers.some((h) => re.test(h.toLowerCase().replace(/[_]+/g, " ").trim()));
+
+/** Reads a table that has its header: personal columns out, format found, account ids out, rows read. */
 export function parseTable(raw: Table): Parsed {
   const first = dropPersonal(raw);
-  const found = detect(first.table);
+  const refuse = NOT_TRADES.find((x) => x.test(first.table));
+  const found = refuse ? null : detect(first.table);
   if (!found) {
     return { format: "trades", table: first.table, mapping: mapTrades(first.table), dropped: first.dropped, backtestExport: false,
-      warnings: ["We did not recognise this file's columns. Pick the close date and the profit per trade below, or the date and the account value for an equity curve."] };
+      warnings: [refuse?.why ?? "We did not recognise this file's columns. Pick the close date and the profit per trade below, or the date and the account value for an equity curve."] };
   }
   const ids = dropColumns(first.table, BY_ID[found.format].drop ?? []);
   const mapping = ids.dropped.length ? BY_ID[found.format].map(ids.table) : found.mapping;
   return build(ids.table, found.format, mapping, [...first.dropped, ...ids.dropped]);
+}
+
+/** A table that is already known to be MetaTrader's, from a report or a spreadsheet. */
+function parseMetaTrader(mt: MetaTraderRead): Parsed {
+  const p = mt.format === "mt4tester"
+    ? (() => { const res = buildMt4Tester(mt.table); return { format: mt.format, table: mt.table, mapping: {}, dropped: [], trades: res.trades, warnings: res.warnings, notes: res.notes, backtestExport: true, inferredBalance: res.balance } as Parsed; })()
+    : build(mt.table, mt.format, defaultMapping(mt.format, mt.table), []);
+  p.what = mt.what;
+  if (mt.backtest) { p.backtestExport = true; if (mt.format !== "mt4tester") p.notes = [...(p.notes ?? []), "A Strategy Tester report is a backtest: rules run on past prices, not real trading."]; }
+  if (!p.trades?.length && !p.warnings.some((w) => /No closed trades/.test(w))) p.warnings.push("No closed trades could be read from this report.");
+  return p;
+}
+
+function parseHtml(html: string): Parsed {
+  const rows = htmlRows(html);
+  const mt = metaTraderRows(rows);
+  if (mt) return parseMetaTrader(mt);
+  if (!rows.length) throw new ParseError("This is a web page with no table in it. Export the trade history as CSV, or save the platform's report as HTML.");
+  // Another platform's HTML statement (cTrader, say): read its widest table like a CSV.
+  return parseTable(tableFromRows(rows.filter((r) => r.length > 1)));
+}
+
+/** A JSON list of objects (Alpaca's account activities), or an object holding one, as a table. */
+function jsonTable(text: string): Table | null {
+  let v: unknown;
+  try { v = JSON.parse(text); } catch { throw new ParseError("This looks like JSON, but it cannot be read. Check that the file is complete."); }
+  const list = Array.isArray(v) ? v : v && typeof v === "object" ? Object.values(v as Record<string, unknown>).find(Array.isArray) : null;
+  if (!Array.isArray(list) || !list.length || typeof list[0] !== "object") return null;
+  const headers = [...new Set(list.flatMap((o) => (o && typeof o === "object" ? Object.keys(o as object) : [])))];
+  const rows = list.map((o) => headers.map((h) => { const x = (o as Record<string, unknown>)[h]; return x == null ? "" : typeof x === "object" ? JSON.stringify(x) : String(x); }));
+  return { headers, rows, unit: "row" };
+}
+
+/**
+ * The first read of a file's bytes: an Excel workbook (TradingView, cTrader, MetaTrader 5
+ * Open XML), a MetaTrader HTML report (UTF-8 or UTF-16), JSON, or CSV and tab separated text.
+ */
+export async function parseFile(buf: ArrayBuffer): Promise<Parsed> {
+  if (isZip(buf)) {
+    const sheets = await readXlsx(buf);
+    const list = sheets.find((s) => /list of trades/i.test(s.name));
+    if (list) return parseTable({ ...tableFromRows(list.rows), unit: "row" });
+    for (const s of sheets) { const mt = metaTraderRows(s.rows); if (mt) return parseMetaTrader(mt); }
+    const best = [...sheets].sort((a, b) => b.rows.length - a.rows.length)[0];
+    if (!best?.rows.length) throw new ParseError("This Excel file has no rows to read.");
+    return parseTable({ ...tableFromRows(best.rows), unit: "row" });
+  }
+  return parseText(decodeBytes(buf));
 }
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -120,7 +190,7 @@ export const shortDate = (iso: string) => `${+iso.slice(8, 10)} ${MONTHS[+iso.sl
 
 /** "MetaTrader 5 history, 412 closed trades, EURUSD and XAUUSD, 3 Jan 2024 to 18 Oct 2026". */
 export function describeParsed(p: Parsed): string {
-  const parts: string[] = [FORMAT_LABEL[p.format]];
+  const parts: string[] = [p.what ?? FORMAT_LABEL[p.format]];
   if (p.trades) {
     const n = p.trades.length;
     parts.push(`${n.toLocaleString("en-US")} closed trade${n === 1 ? "" : "s"}`);
