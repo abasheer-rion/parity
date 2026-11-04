@@ -1,7 +1,7 @@
 // The Verify report (DEC-0088, DEC-0089), end to end on the built site, signed out: a trade
 // file becomes a report with its pictures and explained numbers; the report travels in a link
 // and opens the same on /verify/report/; "Save as PDF" prints still pictures; the image card
-// downloads as a PNG; and a seller's page
+// downloads as a PNG; two reports sit side by side on /verify/compare/; and a seller's page
 // (the page reader stubbed here) lists each claim with its words and checks it against a file.
 import type { Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
@@ -124,6 +124,29 @@ test.describe("the Verify report", () => {
   });
 });
 
+test.describe("two records side by side", () => {
+  test("two report links open next to each other, with the same numbers in the same rows", async ({ page }) => {
+    await check(page, EDGE, "edge.csv");
+    const a = (await linkOf(page)).split("#r=")[1];
+    await check(page, BOT, "bot.csv");
+    const bVerdict = await page.locator("#vf-verdict").innerText();
+    const b = (await linkOf(page)).split("#r=")[1];
+    await open(page, `/verify/compare/#a=${a}&b=${b}`);
+    await expect(page.getByTestId("compare-sentence")).toContainText("does not rank");
+    const table = page.getByRole("region", { name: "The two records' numbers" });
+    await expect(table.getByRole("row", { name: /^Verdict/ })).toContainText(bVerdict);
+    await expect(table.getByRole("row", { name: /^Largest fall from a high/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Growth over the same days" })).toBeVisible();
+    // A side can be swapped for a file checked right here.
+    await page.getByRole("button", { name: "Use another record" }).last().click();
+    await page.locator(".vf-drop input[type=file]").setInputFiles({ name: "edge.csv", mimeType: "text/csv", buffer: EDGE });
+    await page.getByLabel("Starting balance").fill("20000");
+    await page.getByRole("button", { name: "Check record B" }).click();
+    await expect(page.getByTestId("compare-sentence")).toBeVisible();
+    expect(page.url()).toMatch(/#a=z[^&]+&b=z/);
+  });
+});
+
 test.describe("a seller's claims", () => {
   const PAGE_TEXT = readFileSync(resolve(import.meta.dirname, "../tests/fixtures/verify/pages/post.txt"), "utf8");
 
@@ -169,5 +192,17 @@ test.describe("a seller's claims", () => {
       await expect(page.locator(".rp-claim").first()).toBeVisible();
       await expect(page.locator(".rp-claims")).toContainText("read from the words you pasted");
     });
+  });
+});
+
+test.describe("a batch row", () => {
+  test("an account's name opens its full report in a new tab", async ({ page, context }) => {
+    await open(page, "/business/prop-firms/sample/");
+    const first = page.getByRole("button", { name: /^Open the full Verify report for account / }).first();
+    await expect(first).toBeVisible({ timeout: 30_000 });
+    const [tab] = await Promise.all([context.waitForEvent("page"), first.click()]);
+    await expect(tab.locator("#vf-verdict")).toBeVisible({ timeout: 20_000 });
+    await expect(tab.getByText(/in the batch screen/)).toBeVisible();
+    expect(tab.url()).toMatch(/\/verify\/report\/#r=z/);
   });
 });

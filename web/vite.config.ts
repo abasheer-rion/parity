@@ -226,7 +226,7 @@ function localScenarios(): Plugin {
 //                            /lab/assets/ (lab.paritytrading.app).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
-  "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "verify/report/index", "v/index",
+  "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "verify/report/index", "verify/compare/index", "v/index",
   "connect/index", "connect/claude/index", "connect/chatgpt/index", "connect/gemini/index", "oauth/consent/index", "oauth/openrouter/index",
   "developers/index", "methodology/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
   "download/index",

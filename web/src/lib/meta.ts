@@ -196,6 +196,12 @@ export const PAGES: Record<string, PageMeta> = {
     description: "A Parity Verify report shared by link: the verdict, the numbers behind it, the record's pictures, the inputs used and what could not be checked.",
     path: "/verify/report/", image: "verify", robots: PRIVATE,
   },
+  // Two records side by side (DEC-0089).
+  "verify/compare/index.html": {
+    title: "Compare two trading records · Parity",
+    description: "Put two trading records side by side, such as two bots you are choosing between: verdicts, luck checks, worst falls and what each could not show.",
+    path: "/verify/compare/", image: "verify",
+  },
   // How Verify judges a record, every check and threshold, kept citable (REF-0030).
   "methodology/index.html": {
     title: "Verify methodology · Parity",
