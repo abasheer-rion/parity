@@ -29,6 +29,7 @@ import { ConnectInput } from "./ConnectInput";
 import { ConnectedSource } from "./Connected";
 import { connectionsEnabled, type FetchAnswer } from "../../lib/verify/connect";
 import { SignedIn } from "./signedIn";
+import { fetchCoverage, planFile, RangeFailed, runFills, type Coverage, type RangeOutcome } from "../../lib/verify/range/client";
 
 type Mode = "file" | "broker" | "code" | "describe" | "strategy";
 const APP_LESSON = "#/academy/win-rate-is-not-profit/the-99-percent-bot";
@@ -163,6 +164,22 @@ const KINDS: Choice<InputKind>[] = [
   { value: "backtest", title: "Backtest", body: "Rules run on past prices. Trusted least." },
 ];
 
+async function sessionToken(): Promise<string> {
+  const { requireClient } = await import("../../auth/client");
+  const { data } = await requireClient().auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) throw new RangeFailed("Sign in first.", "signed_out");
+  return token;
+}
+
+/** The report's "What was checked" line for the fill price check. */
+function fillsLine(r: RangeOutcome | null): string | undefined {
+  if (!r) return undefined;
+  if (!r.ran) return r.why === "opted_out" ? "Not checked against market data: you kept every part of the file in this browser" : r.why === "signed_out" ? "Not checked against market data while signed out" : r.why === "nothing" ? undefined : "Not checked against market data: the check could not run";
+  const done = r.answers.filter((a) => a.r !== "none").length;
+  return `${done.toLocaleString("en-US")} of ${r.points.length.toLocaleString("en-US")} fills checked against market data; only their symbol, time and price were sent`;
+}
+
 /** Card 4's words when the daily prices could not be loaded because nobody is signed in. */
 export const SIGNED_OUT_PRICES = "Not checked while signed out: our daily prices load only for signed-in accounts. Sign in and run the check again to compare the fills with them.";
 
@@ -183,6 +200,12 @@ function FileInput({ onResult, pending, onClearPending }: { onResult: (r: Result
   const [claimDd, setClaimDd] = useState(() => fromPct(pending?.claim.maxDrawdown));
   const [claimTotal, setClaimTotal] = useState(() => fromPct(pending?.claim.totalReturn));
   const [noCash, setNoCash] = useState(false);
+  // The fill price check (DEC-0092): on unless the person turns it off, and told before it runs.
+  const [fillCheck, setFillCheck] = useState(true);
+  const [progress, setProgress] = useState<string | null>(null);
+  // Which markets the server can check, so only those fills are ever sent. Asks for nothing in.
+  const [cover, setCover] = useState<Coverage | null>(null);
+  useEffect(() => { if (signedIn && file) void fetchCoverage().then(setCover); }, [signedIn, file]);
   const input = useRef<HTMLInputElement>(null);
 
   const read = async (f: File) => {
@@ -211,6 +234,8 @@ function FileInput({ onResult, pending, onClearPending }: { onResult: (r: Result
   const ready = !!p && !!(p.trades?.length || p.equity?.length);
   const needCash = !!p?.equity && p.mapping.cashflow == null;
   const triesN = Math.min(1_000_000_000, Math.max(1, Math.floor(Number(tries) || 1)));
+  const planned = useMemo(() => (p?.trades?.length ? planFile(p, cover) : null), [p, cover]);
+  const fillCount = planned?.points.length ?? 0;
 
   const run = async () => {
     if (!p || !file) return;
@@ -231,14 +256,35 @@ function FileInput({ onResult, pending, onClearPending }: { onResult: (r: Result
     // Only this price file is ever fetched, and only for a signed-in account: it checks the
     // fills and gives the S&P 500 to compare the record with.
     const prices = signedIn ? await loadPrices() : null;
-    const r = checkFile({ parsed: p, answers, prices: needsPrices ? prices : null, benchmark: benchmarkFrom(prices), pricesMissing: needsPrices && !signedIn ? SIGNED_OUT_PRICES : undefined, triesDefaulted: tries.trim() === "1" || !tries.trim() });
-    onResult(pending ? { ...r, claimSource: pending.source } : r, file, { prices: signedIn ? (prices ? "loaded" : "missing") : "signed_out", fileName: file.name });
+    // The fill price check sends the symbol, time and price of each fill, and nothing else.
+    let ranges: RangeOutcome | null = null;
+    if (planned && !fillCount && Object.keys(planned.uncovered).length) {
+      // Nothing a source covers: say which symbols, without sending anything.
+      ranges = signedIn ? { ran: true, clock: planned.clock, offset: null, points: [], answers: [], unsupported: [], skipped: planned.skipped, uncovered: planned.uncovered } : { ran: false, why: "signed_out" };
+    } else if (planned && fillCount) {
+      if (!signedIn) ranges = { ran: false, why: "signed_out" };
+      else if (!fillCheck) ranges = { ran: false, why: "opted_out" };
+      // Without the server's answer on what it covers, nothing is sent.
+      else if (!cover) ranges = { ran: false, why: "failed", message: "the fill price check could not be reached. Try again in a minute." };
+      else {
+        try {
+          setProgress(`Checking fill prices: 0 of ${fillCount.toLocaleString("en-US")}`);
+          ranges = await runFills(planned, { token: await sessionToken(), onProgress: (done, total) => setProgress(`Checking fill prices: ${done.toLocaleString("en-US")} of ${total.toLocaleString("en-US")}`) });
+        } catch (e) {
+          ranges = e instanceof RangeFailed && e.code === "off" ? { ran: false, why: "off" } : e instanceof RangeFailed && e.code === "signed_out" ? { ran: false, why: "signed_out" } : { ran: false, why: "failed", message: e instanceof Error ? e.message : undefined };
+        }
+        setProgress(null);
+      }
+    }
+    const r = checkFile({ parsed: p, answers, prices: needsPrices ? prices : null, benchmark: benchmarkFrom(prices), pricesMissing: needsPrices && !signedIn ? SIGNED_OUT_PRICES : undefined, triesDefaulted: tries.trim() === "1" || !tries.trim(), ranges });
+    onResult(pending ? { ...r, claimSource: pending.source } : r, file, { prices: signedIn ? (prices ? "loaded" : "missing") : "signed_out", fileName: file.name, fills: fillsLine(ranges) });
+    track("verify_fill_check", { ran: ranges?.ran ? 1 : 0, why: ranges && !ranges.ran ? ranges.why : "" });
     setBusy(false);
   };
 
   return (
     <div className="vf-panel">
-      <p className="vf-privacy">Your file stays in this browser. It is read and checked on your device and is never sent to our servers.</p>
+      <p className="vf-privacy">Your file stays in this browser. It is read and checked on your device and is never sent to our servers. The one exception is the fill price check below, which sends the symbol, time and price of each fill, and only if you leave it on.</p>
       {pending && (
         <div className="vf-pending" role="note">
           <p><strong>Checking against {pending.source.found.length} claim{pending.source.found.length === 1 ? "" : "s"} from {pending.source.url ? hostOf(pending.source.url) : "the words you pasted"}.</strong> Upload the account's trade history: the report sets each claim against it.</p>
@@ -298,8 +344,23 @@ function FileInput({ onResult, pending, onClearPending }: { onResult: (r: Result
               <Input label="Total return, %" type="number" value={claimTotal} onChange={setClaimTotal} placeholder="120" />
             </fieldset>
             {needCash && <Checkbox checked={noCash} onChange={setNoCash} label="There were no deposits or withdrawals in this period (the file has no column for them)." />}
+            {fillCount > 0 && (
+              <div className="vf-fillcheck">
+                {signedIn ? (
+                  <>
+                    <Checkbox checked={fillCheck} onChange={setFillCheck} describedBy="vf-fillcheck-help" label="Check fill prices against market data" />
+                    <p className="vf-help" id="vf-fillcheck-help">
+                      This sends only the symbol, time and price of each fill ({fillCount.toLocaleString("en-US")} {fillCount === 1 ? "fill" : "fills"}) to our server, which checks that each price was traded at that time. Nothing else from the file leaves this browser, and nothing is kept. Untick it to keep everything here; the report then says this check was not run. <a href="/methodology/#fills">How it works</a>
+                    </p>
+                  </>
+                ) : (
+                  <p className="vf-help">Signed out, every part of the file stays in this browser, so fill prices are not checked against market data. <a href={`/login/?next=${encodeURIComponent("/verify/")}`}>Log in</a> to check them: only the symbol, time and price of each fill are sent.</p>
+                )}
+              </div>
+            )}
           </div>
           <Button variant="primary" onClick={() => void run()} disabled={!ready || (needCash && !noCash)} loading={busy}>Check this record</Button>
+          {progress && <p className="vf-small" role="status" aria-live="polite">{progress}</p>}
         </>
       )}
     </div>

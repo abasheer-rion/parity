@@ -24,6 +24,7 @@
 .vf-claim { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; border: 0; padding: 0; margin: 0; }
 .vf-claim legend { margin-bottom: 6px; }
 .vf-questions .ui-check { grid-column: 1 / -1; }
+.vf-fillcheck { grid-column: 1 / -1; display: grid; gap: 6px; }
 .vf-textarea { height: auto; min-height: 104px; resize: vertical; line-height: 1.5; }
 .vf-row { display: flex; gap: 8px; flex-wrap: wrap; }
 .vf-pick { list-style: none; margin: 0; padding: 0; max-height: 26rem; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }

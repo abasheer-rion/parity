@@ -18,7 +18,7 @@
 
   <nav class="lg-toc" aria-label="On this page">
     <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#code">Strategy code</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
-    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#claims-from-a-page">Claims from a page</a><a href="#report">The report</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
+    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#fills">Fill prices</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#claims-from-a-page">Claims from a page</a><a href="#report">The report</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
     <a href="#limits">Limits</a><a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
   </nav>
 
@@ -123,14 +123,40 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <tbody>
       <tr><td>Fills outside the day's range</td><td>Where we hold the day's high and low: an entry or exit price more than 0.1% outside them</td></tr>
       <tr><td>Fills far from the day's price</td><td>Where we hold one price a day: a fill further from that day's price than 3 times the 1-in-100 daily move of that market, and never less than 1%</td></tr>
-      <tr><td>Perfect timing</td><td>Where we hold the day's high and low, with at least 10 dated entries: more than 30% of entries within 0.05% of the day's best price (the low for buys, the high for sells). For strategy code: run again with every order filled one day after its signal, the Sharpe ratio falls below half of the original's, when the original is positive</td></tr>
+      <tr><td>Fill prices against the traded range</td><td>With the fill price check (<a href="#fills">below</a>): <!--verify:fills-fail--> fall outside the range traded at that time on our data source</td></tr>
+      <tr><td>Fills while the market was closed</td><td>With the fill price check: <!--verify:fills-fail--> of the US stock fills are timed on a weekend or a market holiday</td></tr>
+      <tr><td>Perfect timing</td><td>Where we know the day's high and low (from the fill price check, or our daily price file), with at least 10 dated entries: more than 30% of entries within 0.05% of the day's best price (the low for buys, the high for sells). For strategy code: run again with every order filled one day after its signal, the Sharpe ratio falls below half of the original's, when the original is positive</td></tr>
       <tr><td>Too smooth</td><td>Lag-one autocorrelation of returns above 0.3, or, for daily returns, no losing month in more than 24 months with under 3% losing days. Needs at least 30 returns. The measure follows Getmansky, Lo and Makarov (2004)</td></tr>
       <tr><td>Edited history</td><td>At least 10 trades: the record trades most days (median gap between trading days of 3 days or less) but has gaps of more than 30 days. For TradingView exports and plain trade lists, whose numbers run 1, 2, 3, also when at least 90% of the steps are 1 and some numbers are skipped. MetaTrader tickets are shared across a broker's server, so their skips are not checked</td></tr>
       <tr><td>Backtest labelled as real</td><td>You said real money, but the file is a TradingView Strategy Tester export</td></tr>
       <tr><td>Strategy look-ahead test</td><td>For our own strategies: the data is cut at several dates and no earlier position may change. For strategy code: each day's rules see that day's close and earlier ones only, and code that reads later prices is refused before it runs</td></tr>
     </tbody>
   </table></div>
-  <p><strong>The one-price-a-day limit.</strong> For major currency pairs, Bitcoin, Ether and the S&amp;P 500 we hold one price a day from free sources, not the day's high and low. So for these the fill check becomes "fills far from the day's price", which catches made-up or misdated prices but not small ones, and perfect timing cannot be checked. A symbol we hold nothing for, or a record checked without our daily price file (for example signed out), gets "cannot be checked from this input". The only request Verify makes after a file is chosen is for that price file.</p>
+  <p><strong>The one-price-a-day limit.</strong> Our own daily price file holds one price a day for major currency pairs, Bitcoin, Ether and the S&amp;P 500, not the day's high and low. So against that file the fill check becomes "fills far from the day's price", which catches made-up or misdated prices but not small ones. The fill price check below closes most of that gap for US stocks and for crypto with pools on Base. A symbol neither covers, or a record checked without them (for example signed out), gets "cannot be checked from this input".</p>
+
+  <h2 id="fills">Fill prices against market data</h2>
+  <p>A made-up trade history is easiest to spot by its prices: a fill at a price nobody traded at that minute, or on a day the market was shut. Version <code><!--verify:fills-version--></code>.</p>
+  <ul>
+    <li><strong>What leaves your browser, and only if you leave it on.</strong> Before the check runs, the Verify page and the batch screen say that the symbol, the time and the price of each fill will be sent to our server, and nothing else from the file. Untick the box and nothing is sent; card 4 then says the check was not run. It needs a sign-in. Nothing about the fills is kept: the database counts how many fills each person checks a day, not which.</li>
+    <li><strong>What the server does.</strong> For each fill it loads the bars around that time from the source below, finds the lowest and highest price traded in them, widens that by the tolerance, and answers one word per fill: inside, outside, market closed, or not checked and why. The bars are used on our server for this calculation only. They are never shown, never sent to your browser and never passed on, and our cache of them is never read by anyone else.</li>
+    <li><strong>At the day's high or low.</strong> A fill inside the range within <!--verify:fills-edge--> of that day's high or low is counted, and "perfect timing" uses these: more than 30% of at least 10 entries at the day's best price fails it.</li>
+    <li><strong>Market closed.</strong> US stocks do not trade from 8 p.m. Friday to 8 p.m. Sunday, New York time, or on a market holiday (a weekday on which a broad fund has no day bar). Crypto trades every day. A fill in the evening or overnight is not called closed: some brokers trade then. It is checked only if our source had trades then.</li>
+    <li><strong>Time zones.</strong> A file that names its time zone (a header such as "Date(UTC)", or a venue that always writes UTC) is read in it, and Interactive Brokers in New York time. When a file does not say, every time zone from UTC-12 to UTC+14 in half hours is tried, the one that puts the most fills inside a minute bar is used, and an hour either way is allowed for summer time. With fewer than 5 such fills, a fill counts as inside when any time zone puts it inside. A file with dates only is checked against the day's range.</li>
+    <li><strong>Plain words, never an accusation.</strong> The row says "N fills fall outside the traded range on our data source". It fails at <!--verify:fills-fail-->: one or two can come from fills at an average price, late reports or another venue. It counts toward "could be luck" like any failed check on card 4.</li>
+    <li><strong>Broker-connected records</strong> get the same check on our server when we read the trades, with nothing sent from a page. They should pass, so a failure there points at our data, and we watch for it.</li>
+    <li><strong>Limits.</strong> <!--verify:fills-per-request--> fills a request (the page sends the rest after), 50,000 fills and 400 checks a day per person, 30 requests a minute per address, and up to <!--verify:fills-batch--> fills a batch on the batch screen, the same share of each account's.</li>
+  </ul>
+  <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Fill price sources"><table>
+    <thead><tr><th>Source</th><th>Markets</th><th>Bars</th><th>Tolerance</th><th>Day's range, as a fallback</th></tr></thead>
+    <tbody>
+        <!--verify:fills-sources-->
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>US stocks and funds</strong> come from trades on the IEX exchange, through Alpaca. IEX is one exchange with a few percent of the market's trades, so a fill made on another exchange can sit a little outside IEX's own range: hence the wider window and tolerance. Data provided for free by IEX. By accessing or using IEX Historical Data, you agree to the <a href="https://www.iex.io/legal/hist-data-terms">IEX Historical Data Terms of Use</a>. This source is switched on only once Alpaca has had the notice its terms ask for; until then US stock fills say no source covers them.</li>
+    <li><strong>Crypto</strong> comes from the swaps in the pools of our own on-chain price on Base, the only crypto source whose terms allow this use. A pool is another venue than your exchange, priced up to its fee away, so the window is wider and the tolerance 1%. Coins with no pool on Base, pairs not priced in dollars, and files without a time of day or a time zone cannot be checked this way. The free node we read keeps about the last eight weeks of swaps, so older crypto fills are not checked yet. Pools priced in ETH are turned into dollars with ETH's own pools in the same minute.</li>
+    <li><strong>Currencies, futures, options, metals and indexes</strong> are not checked: no free source we read allows this use with highs and lows.</li>
+  </ul>
 
   <h2 id="overfit">Card 5: overfitting flags</h2>
   <div class="lg-table-wrap" tabindex="0" role="region" aria-label="Card 5: overfitting flags"><table>
@@ -188,7 +214,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <li><strong>Passed</strong> comes from the file when it says. Otherwise an account passed when its balance, trade by trade, reached the profit target (default 8%) before the loss limit (default 10%).</li>
     <li><strong>Firm rules</strong> are reported, not used for the verdict: the best day making more than a set share of the profit (default 30%), fewer than a set number of trading days (default 5), size growing after losses, and the best 5 trades making more than <!--verify:top-five-limit--> of the profit. In a record of a few dozen trades the best 5 can make half the profit even with a real edge, so concentration is shown but is not a reason on its own.</li>
     <li><strong>The back-test</strong> uses an outcome per account (payout or blow-up). Among accounts with enough trades: the share of "likely luck" that later blew up, the share of blow-ups that were flagged, and the share of payouts that were flagged (false alarms), each with a 95% Wilson interval, and the gap between the blow-up rates of the two verdicts with Newcombe's interval.</li>
-    <li><strong>Where it runs.</strong> On the page, files are read and checked in the browser and never sent. Through the API, a request is checked in memory and nothing is stored.</li>
+    <li><strong>Where it runs.</strong> On the page, files are read and checked in the browser and never sent, except the fill price check's symbol, time and price of each fill when left on (<a href="#fills">above</a>), which is reported next to each verdict and does not change it. Through the API, a request is checked in memory and nothing is stored.</li>
   </ul>
 
   <h2 id="imports">Imports</h2>
@@ -205,7 +231,8 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
 
   <h2 id="limits">What Verify cannot check yet</h2>
   <ul>
-    <li><strong>Anything inside the day.</strong> We hold one closing price a day. Strategy code that needs the day's open, high, low or volume, intraday bars, trailing stops or orders that wait for a price is refused, and for an uploaded file "perfect timing" cannot be checked.</li>
+    <li><strong>Anything inside the day, for strategy code.</strong> We run code on one closing price a day. Code that needs the day's open, high, low or volume, intraday bars, trailing stops or orders that wait for a price is refused.</li>
+    <li><strong>Fill prices outside our sources.</strong> The fill price check covers US stocks and funds (once switched on) and crypto with pools on Base. Currency pairs, futures, options, metals, indexes and other coins are not checked against market data, so for them "perfect timing" and fills outside the range can still not be checked. Crypto fills need a time of day and a known time zone, and reach back about eight weeks. The check runs on the website only, not through the API or AI apps yet. A fill made at a fair price at the wrong time on the same day can still pass: the check shows a price was possible, not that the trade happened.</li>
     <li><strong>Other markets.</strong> Strategy code runs on 9 currency pairs, Bitcoin, Ether and the S&amp;P 500 only. A stock, future or option strategy cannot be run yet.</li>
     <li><strong>Some costs.</strong> Overnight financing and swap, borrowing to sell short and funding on perpetual futures are not charged to strategy code.</li>
     <li><strong>Some code.</strong> Values carried from day to day (<code>:=</code>, <code>var</code>, loops), functions written in the script, other time frames (<code>request.security</code>), partial exits and adding to a position are refused by name and line.</li>
@@ -245,6 +272,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
   <h2 id="stored">What is stored</h2>
   <ul>
     <li><strong>Never:</strong> the file, its trades, or the columns that look personal. If you leave the page, nothing remains on our side.</li>
+    <li><strong>The fill price check</strong> (signed in, only if left on): the symbol, time and price of each fill are sent for the check and not kept. The database keeps a count of fills and checks per person per day, for the daily limit, for 30 days. Our server keeps the market data it fetched in a cache, never readable by anyone else.</li>
     <li><strong>A badge, only if you publish one</strong> (signed in, up to 20 a day): the verdict, "survives up to N tries", the five cards' numbers, the kind of record, the stated tries, the date range, the trade count, the method version and the file's SHA-256, so anyone with the same file can check it. Withdrawing deletes the numbers and the page then says when it was withdrawn.</li>
     <li><strong>A broker-connected badge</strong> also stores Parity's signed proof: the venue, the account code, when the trades were read, the dates asked for, and fingerprints of the cards and of the trades file. Never the trades, the account number or the key.</li>
     <li><strong>Reading from a broker</strong> (signed in): a log row for each read, kept for the account owner, with the venue, the time and the outcome in words. A key is stored only for "keep in sync", sealed, until it is revoked.</li>

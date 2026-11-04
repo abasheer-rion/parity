@@ -2,6 +2,7 @@
 // spreadsheet or system. Text cells that a spreadsheet would run as a formula are prefixed
 // with an apostrophe.
 import type { AccountResult } from "./score";
+import type { AccountFills } from "./fills";
 import { SCREEN_VERSION } from "./score";
 
 const COLUMNS: [string, (r: AccountResult) => string | number | boolean | null][] = [
@@ -40,8 +41,15 @@ export function cell(v: string | number | boolean | null): string {
   return /[",\n\r]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
 }
 
-export function resultsCsv(results: readonly AccountResult[]): string {
-  const lines = [COLUMNS.map(([h]) => h).join(",")];
-  for (const r of results) lines.push(COLUMNS.map(([, f]) => cell(f(r))).join(","));
+/** With the fill price check (DEC-0092): fills checked, outside the traded range and while the market was closed. */
+export function resultsCsv(results: readonly AccountResult[], fills?: ReadonlyMap<string, AccountFills> | null): string {
+  const extra: [string, (r: AccountResult) => number | null][] = fills ? [
+    ["fills_checked", (r) => fills.get(r.id)?.checked ?? null],
+    ["fills_outside_traded_range", (r) => fills.get(r.id)?.outside ?? null],
+    ["fills_while_market_closed", (r) => fills.get(r.id)?.closed ?? null],
+  ] : [];
+  const cols = [...COLUMNS, ...extra];
+  const lines = [cols.map(([h]) => h).join(",")];
+  for (const r of results) lines.push(cols.map(([, f]) => cell(f(r))).join(","));
   return `${lines.join("\n")}\n`;
 }

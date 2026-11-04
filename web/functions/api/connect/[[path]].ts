@@ -14,11 +14,23 @@ import { handleConnect, type ConnectEnv } from "../../../src/lib/connect/server"
 import { supabaseConnectStore } from "../../../src/lib/connect/store";
 import { priceBook } from "../../../src/lib/verify/prices";
 import { SITE_DOMAIN } from "../../../src/lib/meta";
+import { memoryCache } from "../../../src/lib/verify/range/load";
+import { FILL_SOURCES } from "../../../src/lib/verify/range/registry";
+import { edgeCache, kvCache, layered, serverFills, type FillsEnv } from "../../../src/lib/verify/range/server";
 
-interface Env extends ConnectEnv { ASSETS: { fetch: (input: Request | string) => Promise<Response> } }
+interface Kv { get(k: string): Promise<string | null>; put(k: string, v: string, o?: { expirationTtl?: number }): Promise<void> }
+interface Env extends ConnectEnv, FillsEnv { ASSETS: { fetch: (input: Request | string) => Promise<Response> }; FILL_RANGES?: Kv }
 interface Context { request: Request; env: Env }
 
 const store = supabaseConnectStore();
+const local = memoryCache();
+
+/** The fill price check's cache (DEC-0092): KV when the owner binds one, Cloudflare's cache otherwise. */
+function fillCache(env: Env) {
+  const caches = (globalThis as unknown as { caches?: { default?: Parameters<typeof edgeCache>[0] } }).caches;
+  const edge = caches?.default ? edgeCache(caches.default) : local;
+  return env.FILL_RANGES ? layered(kvCache(env.FILL_RANGES), edge) : edge;
+}
 let flag: { at: number; on: boolean } | null = null;
 
 async function buildFlag(env: Env, base: string): Promise<boolean> {
@@ -41,6 +53,8 @@ export const onRequest = async ({ request, env }: Context): Promise<Response> =>
       const doc = await data.json<Parameters<typeof priceBook>[0]>("/data/verify/prices.json");
       return doc ? priceBook(doc) : null;
     },
+    // The fill price check on the trades read, on this server: nothing leaves a page for it.
+    fills: serverFills({ env, sources: FILL_SOURCES, cache: fillCache(env), fetch: (input, init) => fetch(input, init) }, Date.now),
     siteDomain: SITE_DOMAIN,
     // One JSON line per request: route, venue, status, time, request count. Never a credential.
     log: (line) => console.log(JSON.stringify(line)),

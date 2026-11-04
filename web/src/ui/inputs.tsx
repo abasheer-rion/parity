@@ -91,10 +91,10 @@ export function Toggle({ on, onChange, label }: { on: boolean; onChange: (v: boo
   return <button role="switch" aria-checked={on} aria-label={label} className={`ui-toggle ${on ? "on" : ""}`} onClick={() => onChange(!on)}><i /></button>;
 }
 
-export function Checkbox({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label: ReactNode }) {
+export function Checkbox({ checked, onChange, label, describedBy }: { checked: boolean; onChange: (v: boolean) => void; label: ReactNode; describedBy?: string }) {
   return (
     <label className="ui-check">
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} aria-describedby={describedBy} />
       <span className="ui-check-box" aria-hidden><Icon name="check" size={11} /></span>
       <span>{label}</span>
     </label>

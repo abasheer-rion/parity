@@ -1,7 +1,9 @@
 // The batch screen at /business/screen/ (DEC-0087). A firm drops one file of many challenge
 // accounts (a long CSV with an account column, a zip of per-account trade files, or several
 // files) and, optionally, a details file with balances, attempts, passes and outcomes. All of
-// it is read and screened in this browser: nothing is sent anywhere.
+// it is read and screened in this browser. The one exception, only with the firm's leave and
+// a sign-in, is the fill price check (DEC-0092): the symbol, time and price of each fill go to
+// our server, which says which fall outside the range traded at that time.
 import { useEffect, useRef, useState, type DragEvent } from "react";
 import { backtest, type Backtest } from "../lib/screen/backtest";
 import { readBatch, type FileIn, type ReadResult } from "../lib/screen/read";
@@ -9,8 +11,21 @@ import { SAMPLE_FILES } from "../lib/screen/sample";
 import { DEFAULT_OPTIONS, screenBatch, summarise, type AccountResult, type ScreenOptions, type Summary } from "../lib/screen/score";
 import { Report } from "./Report";
 import { accountReportUrl, openAccountReport } from "./accountReport";
+import { MAX_BATCH_FILLS, screenFills, type AccountFills } from "../lib/screen/fills";
+import { RangeFailed } from "../lib/verify/range/client";
 
-interface Done { results: AccountResult[]; summary: Summary; backtest: Backtest | null; read: ReadResult; file: string }
+interface Done { results: AccountResult[]; summary: Summary; backtest: Backtest | null; read: ReadResult; file: string; fills: Map<string, AccountFills> | null; fillsNote: string | null; fillsWhy: "opted_out" | "signed_out" | "failed" | null }
+
+/** The signed-in person's session token, or null. Loaded only when the fill price check runs. */
+async function sessionToken(): Promise<string | null> {
+  try {
+    const { requireClient } = await import("../auth/client");
+    const { data } = await requireClient().auth.getSession();
+    return data.session?.access_token ?? null;
+  } catch {
+    return null;
+  }
+}
 
 const toIn = async (f: File): Promise<FileIn> => ({ name: f.name, bytes: new Uint8Array(await f.arrayBuffer()) });
 const MAX_UPLOAD = 200 * 1024 * 1024;
@@ -34,6 +49,7 @@ export function ScreenApp() {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<Done | null>(null);
+  const [fillCheck, setFillCheck] = useState(true);
   const reportRef = useRef<HTMLDivElement>(null);
   // When a report appears, move focus to it so keyboard and screen reader users land on it.
   useEffect(() => { if (done) reportRef.current?.focus(); }, [done]);
@@ -50,7 +66,22 @@ export function ScreenApp() {
       const read = await readBatch(inputs, det);
       if (!read.accounts.length) { setError(`No account could be read. ${read.skipped[0]?.why ?? ""}`); setBusy(null); return; }
       const results = await screenBatch(read.accounts, opts, (k, total) => setBusy(`Screening ${k.toLocaleString("en-US")} of ${total.toLocaleString("en-US")} accounts.`));
-      setDone({ results, summary: summarise(results, opts), backtest: backtest(results), read, file: name });
+      // The fill price check, only when ticked and signed in: symbol, time and price of each fill.
+      let fills: Map<string, AccountFills> | null = null, fillsNote: string | null = null;
+      let fillsWhy: Done["fillsWhy"] = null;
+      if (fillCheck) {
+        const token = await sessionToken();
+        if (!token) { fillsNote = "Fill prices were not checked: sign in to check them against market data."; fillsWhy = "signed_out"; }
+        else {
+          try {
+            fills = await screenFills(read.accounts, { token, onProgress: (d, t) => setBusy(`Checking fill prices: ${d.toLocaleString("en-US")} of ${t.toLocaleString("en-US")}.`) });
+          } catch (e) {
+            fillsNote = `Fill prices were not checked: ${e instanceof RangeFailed ? e.message : "the check could not be reached."}`;
+            fillsWhy = "failed";
+          }
+        }
+      } else { fillsNote = "Fill prices were not checked: you kept every part of the files in this browser."; fillsWhy = "opted_out"; }
+      setDone({ results, summary: summarise(results, opts), backtest: backtest(results), read, file: name, fills, fillsNote, fillsWhy });
       setBusy(null);
     } catch (e) {
       setBusy(null);
@@ -92,7 +123,7 @@ export function ScreenApp() {
           One verdict per account, holds up, likely luck or not enough trades, with the numbers behind it, a firm summary and, if you add outcomes, a
           back-test of the screen itself.
         </p>
-        <p className="bz-lead"><strong>Your files never leave this computer.</strong> This page reads and checks them in your browser. Nothing is uploaded to Parity, and closing the tab clears it.</p>
+        <p className="bz-lead"><strong>Your files never leave this computer.</strong> This page reads and checks them in your browser. Nothing is uploaded to Parity, and closing the tab clears it. The one exception is the fill price check in step 4, which sends the symbol, time and price of each fill, and only if you leave it on.</p>
 
         <div className="bz-panel">
           <h2>1. Trade files</h2>
@@ -127,6 +158,12 @@ export function ScreenApp() {
           <label className="bz-check"><input type="checkbox" checked={opts.countBatchAsTries} onChange={(e) => set("countBatchAsTries")(e.target.checked)} /><span>Count every account in the batch as a try. The strictest reading: it asks whether each result beats the luckiest of all of them.</span></label>
         </div>
 
+        <div className="bz-panel">
+          <h2>4. Fill prices <span className="bz-ci">(signed in)</span></h2>
+          <label className="bz-check"><input type="checkbox" checked={fillCheck} onChange={(e) => setFillCheck(e.target.checked)} aria-describedby="bz-fills-h" /><span>Check fill prices against market data</span></label>
+          <p id="bz-fills-h">This sends only the symbol, time and price of each fill to our server, which checks that each price was traded at that time, and nothing else from the files. Nothing is kept. Up to {MAX_BATCH_FILLS.toLocaleString("en-US")} fills a batch, the same share of each account's. It needs a sign-in; untick it to keep everything in this browser. It is reported next to each verdict and does not change it.</p>
+        </div>
+
         <div className="bz-row">
           <button type="button" className="btn primary" onClick={() => void runFiles()} disabled={!!busy}>Screen the accounts</button>
           <button type="button" className="btn" onClick={() => void runSample()} disabled={!!busy}>Try the synthetic sample</button>
@@ -147,10 +184,10 @@ export function ScreenApp() {
               </ul>
             </section>
           ) : null}
-          <Report results={done.results} summary={done.summary} backtest={done.backtest} file={done.file}
+          <Report results={done.results} summary={done.summary} backtest={done.backtest} file={done.file} fills={done.fills} fillsNote={done.fillsNote}
             onOpen={(id) => {
               const a = done.read.accounts.find((x) => x.id === id), row = done.results.find((x) => x.id === id);
-              if (a && row) openAccountReport(() => accountReportUrl(a, row, opts.startingBalance, done.summary.version));
+              if (a && row) openAccountReport(() => accountReportUrl(a, row, opts.startingBalance, done.summary.version, done.fills?.get(id)?.outcome ?? (done.fillsWhy ? { ran: false, why: done.fillsWhy } : null)));
             }} />
         </div>
       ) : null}

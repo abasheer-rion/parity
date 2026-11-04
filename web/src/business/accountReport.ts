@@ -5,9 +5,11 @@ import { checkFile } from "../lib/verify/checks";
 import { encodeReport } from "../lib/verify/report/link";
 import { reportFrom } from "../lib/verify/report/model";
 import type { AccountInput, AccountResult } from "../lib/screen/score";
+import type { RangeOutcome } from "../lib/verify/range/client";
 
-export async function accountReportUrl(a: AccountInput, row: AccountResult, defaultBalance: number, method: string): Promise<string> {
+export async function accountReportUrl(a: AccountInput, row: AccountResult, defaultBalance: number, method: string, ranges?: RangeOutcome | null): Promise<string> {
   const r = checkFile({
+    ranges,
     parsed: { format: "trades", table: { headers: [], rows: [] }, mapping: {}, dropped: [], trades: a.trades, warnings: [], backtestExport: false },
     answers: { kind: "real", balance: a.balance && a.balance > 0 ? a.balance : defaultBalance, tries: Math.max(1, a.tries ?? 1), claim: {}, noCashflows: true },
     prices: null, triesDefaulted: a.tries == null,

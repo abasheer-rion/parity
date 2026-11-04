@@ -95,9 +95,11 @@ describe("the page reads a file in the browser (test 8 in jsdom)", () => {
     await screen.findByText(/Trade list, 6 closed trades/);
     fireEvent.click(screen.getByRole("button", { name: "Check this record" }));
     await screen.findByText("Not enough data", undefined, { timeout: 8000 });
-    // Only our own price file may be asked for, and it carries nothing from the upload.
+    // Only our own price file and the fill price check's question of what it covers (DEC-0092)
+    // may be asked for, and neither carries anything from the upload. With no answer to that
+    // question, no fill is sent.
     for (const call of fetchSpy.mock.calls) {
-      expect(String(call[0])).toMatch(/\/verify\/prices\.json$/);
+      expect(String(call[0])).toMatch(/\/verify\/prices\.json$|^\/api\/verify\/fills$/);
       expect(call[1]?.body).toBeUndefined();
     }
   }, 20_000);

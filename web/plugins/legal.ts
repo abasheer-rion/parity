@@ -17,6 +17,10 @@ import { SCREEN_VERSION, TOP5_LIMIT } from "../src/lib/screen/score";
 import { MARKETS } from "../src/lib/verify/strategy/rules";
 import { VENUE_LIST, VENUES } from "../src/lib/connect/venues";
 import { fillGuide, isGuide } from "./guides";
+import { SOURCE_INFO } from "../src/lib/verify/range/info";
+import { FAIL_MIN, FAIL_SHARE } from "../src/lib/verify/range/rows";
+import { EDGE, LIMITS, RANGE_VERSION } from "../src/lib/verify/range/types";
+import { MAX_BATCH_FILLS } from "../src/lib/screen/fills";
 
 export const LEGAL_LINKS: [string, string][] = [
   ["/legal/privacy/", "Privacy"],
@@ -86,6 +90,16 @@ export const METHOD_VALUES: Record<string, string> = {
     ...VENUE_LIST.map((v) => `<li><strong>${escHtml(v.name)}.</strong> ${escHtml(v.readOnly)}</li>`),
     `<li><strong>${escHtml(VENUES.binance_us.name)}.</strong> ${escHtml(VENUES.binance_us.readOnly)}</li>`,
   ].join("\n    "),
+  "fills-version": RANGE_VERSION,
+  "fills-fail": `more than ${Math.round(FAIL_SHARE * 100)} in 100 of the fills checked, and at least ${FAIL_MIN}`,
+  "fills-edge": `${(EDGE * 100).toFixed(2)}%`,
+  "fills-per-request": LIMITS.fills.toLocaleString("en-US"),
+  "fills-batch": MAX_BATCH_FILLS.toLocaleString("en-US"),
+  "fills-sources": Object.values(SOURCE_INFO).map((x) => {
+    const mins = Math.round(x.window / 60_000);
+    const day = x.exactTime ? "Not used: a pool has no day bars here" : `${(x.tolDay * 100).toFixed(1)}%, in the regular session only when nothing traded in the window`;
+    return `<tr><td>${escHtml(x.name)}</td><td>${x.market === "stock" ? "US stocks and funds" : "Crypto"}</td><td>${x.exactTime ? "Each swap" : "One minute"}, ${mins} minutes either side of the fill</td><td>${(x.tolBar * 100).toFixed(1)}%${x.tick ? ", at least a cent" : ""}</td><td>${day}</td></tr>`;
+  }).join("\n        "),
   changelog: METHOD_CHANGELOG.map((c) => `<tr><td><code>${escHtml(c.version)}</code></td><td>${c.date}</td><td>${escHtml(c.changes)}</td></tr>`).join("\n        "),
 };
 

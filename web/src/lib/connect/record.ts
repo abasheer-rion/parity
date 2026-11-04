@@ -5,6 +5,8 @@
 // who may publish it as a badge.
 import { pairFills, splitPair, type Fill } from "../verify/parse/fills";
 import { checkFile, type Result } from "../verify/checks";
+import { clockOf } from "../verify/range/clock";
+import { planFills, type Planned, type RangeOutcome } from "../verify/range/client";
 import type { PriceBook } from "../verify/prices";
 import { publicCards, type PublicCards } from "../verify/publish";
 import type { Parsed, Trade } from "../verify/types";
@@ -61,6 +63,11 @@ export interface RecordInput {
   seed: Uint8Array;
   prices: PriceBook | null;
   now: number;
+  /**
+   * The fill price check (DEC-0092), run here on the server: nothing comes from a page. On
+   * trades read from the broker it should pass, so it doubles as a test of our data.
+   */
+  fillCheck?: (plan: Planned) => Promise<RangeOutcome>;
 }
 
 export interface ConnectedRecord {
@@ -99,7 +106,12 @@ export async function buildRecord(x: RecordInput): Promise<ConnectedRecord> {
     what: `${name} trades, read by Parity through a read-only connection`,
   };
   const kind = v.env === "live" ? "real" : "demo";
-  const result = checkFile({ parsed, prices: x.prices, triesDefaulted: x.tries === 1, answers: { kind, balance: x.balance, tries: x.tries, claim: {} } });
+  let ranges: RangeOutcome | null = null;
+  if (x.fillCheck) {
+    const plan = planFills(trades, v.sameAs, clockOf(parsed));
+    ranges = plan.points.length ? await x.fillCheck(plan).catch((): RangeOutcome => ({ ran: false, why: "failed", message: "the fill price check could not run during this read." })) : { ran: false, why: "nothing" };
+  }
+  const result = checkFile({ parsed, prices: x.prices, triesDefaulted: x.tries === 1, answers: { kind, balance: x.balance, tries: x.tries, claim: {} }, ranges });
   result.notes = [...notes, ...result.notes];
   // Round trip through JSON so the signed hash is of exactly what the database will hold.
   const cards = JSON.parse(JSON.stringify(publicCards(result))) as PublicCards;
