@@ -102,6 +102,11 @@ describe("the fixed patterns on sample pages", () => {
     expect(htmlToText(page("mql5-signal.html")).scripted).toBe(false);
   });
 
+  it("does not read a length of time or a count out of running text", () => {
+    const found = extractClaims("Reliability 105 weeks 53 subscribers. Subscription lets you copy trades within 1 month.");
+    expect(found.filter((f) => f.field === "months")).toEqual([]);
+  });
+
   it("gives the same claims every time", () => {
     const t = textOf("mql5-signal.html");
     expect(extractClaims(t)).toEqual(extractClaims(t));

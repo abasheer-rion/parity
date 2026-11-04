@@ -82,6 +82,7 @@ export async function handleClaimUrl(request: Request, deps: ClaimUrlDeps): Prom
   const notes: string[] = [];
   if (page.scripted) notes.push("This page fills in its numbers with scripts after it opens, so they were not in what we read. Copy the numbers from the page and paste them, or upload the account's trade history.");
   if (page.truncated) notes.push("The page is longer than 2 MB; we read the first 2 MB.");
+  else if (!found.length && !page.scripted) notes.push("No claims were found in this page's words. Some pages fill in their numbers with scripts after they open, which we do not run. Copy the numbers from the page and paste them, or upload the account's trade history.");
   deps.log?.({ msg: "claim url", host, result: "ok", claims: found.length, bytes: page.bytes, ms });
   const answer: ClaimUrlAnswer = {
     ok: true, url: page.url, final_url: page.finalUrl, title: page.title, read_at: page.fetchedAt, found, claim: claimFrom(found), notes,

@@ -129,9 +129,14 @@ async function readCapped(res: Response, max: number): Promise<{ bytes: Uint8Arr
 
 /** The charset from the header, or from a <meta> in the first 2 KB, else UTF-8. */
 function decode(bytes: Uint8Array, contentType: string): string {
-  const head = new TextDecoder("latin1").decode(bytes.slice(0, 2048));
+  // Only ASCII matters for finding a <meta charset>, so read the first 2 KB byte by byte
+  // (some runtimes, such as Workers, decode UTF-8 only).
+  const head = String.fromCharCode(...bytes.slice(0, 2048));
   const label = contentType.match(/charset=["']?([\w-]+)/i)?.[1] ?? head.match(/<meta[^>]+charset=["']?([\w-]+)/i)?.[1] ?? "utf-8";
-  try { return new TextDecoder(label.toLowerCase()).decode(bytes); } catch { return new TextDecoder("utf-8").decode(bytes); }
+  try { return new TextDecoder(label.toLowerCase()).decode(bytes); } catch { /* a charset this runtime cannot decode */ }
+  // Latin-1 by hand where the runtime has no decoder for it; anything else as UTF-8.
+  if (/^(iso-8859-1|latin1|windows-1252|cp1252|us-ascii)$/i.test(label)) { let s = ""; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000)); return s; }
+  return new TextDecoder("utf-8").decode(bytes);
 }
 
 // ------------------------------------------------------------------ robots.txt

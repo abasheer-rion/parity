@@ -117,8 +117,11 @@ function labelPct(field: ClaimField, labels: string[], name: string, not?: RegEx
   return { field, re, value: (m) => pctOf(m[1]), shown: (m) => `${m[1].trim()}%`, rule: `Next to the label "${name}"`, not, before };
 }
 
-function labelNum(field: ClaimField, labels: string[], name: string, opts: { not?: RegExp; before?: RegExp; scale?: number } = {}): Pattern {
-  const re = new RegExp(`${START}(?:${lbl(labels)})${AFTER}(${NUM})(?!\\s?%|[.,]?\\d)`, "gi");
+/** A colon between label and value, for labels that also appear in running text ("105 weeks 53"). */
+const AFTER_STRICT = String.raw`[ \t]*[:=][ \t]*(?:\n[ \t]*)?`;
+
+function labelNum(field: ClaimField, labels: string[], name: string, opts: { not?: RegExp; before?: RegExp; scale?: number; strict?: boolean } = {}): Pattern {
+  const re = new RegExp(`${START}(?:${lbl(labels)})${opts.strict ? AFTER_STRICT : AFTER}(${NUM})(?!\\s?%|[.,]?\\d)`, "gi");
   return { field, re, value: (m) => { const v = parseNumber(m[1]); return v == null ? null : v * (opts.scale ?? 1); }, shown: (m) => m[1].trim(), rule: `Next to the label "${name}"`, not: opts.not, before: opts.before };
 }
 
@@ -152,7 +155,7 @@ export const PATTERNS: Pattern[] = [
   labelNum("tradesPerMonth", ["trades per week", "trades a week", "trades/week"], "Trades per week", { scale: 52 / 12 }),
   labelNum("profitFactor", ["profit factor", "pf"], "Profit factor"),
   labelNum("sharpe", ["sharpe ratio", "sharpe"], "Sharpe ratio"),
-  labelNum("months", ["weeks"], "Weeks", { scale: 7 / 30.44 }),
+  labelNum("months", ["weeks"], "Weeks", { scale: 7 / 30.44, strict: true }),
   labelNum("pips", ["total pips", "pips"], "Pips"),
   {
     field: "startDate",
@@ -207,7 +210,7 @@ export const PATTERNS: Pattern[] = [
   },
   {
     field: "trades",
-    re: new RegExp(`(?:over|across|from|in|after|more than|than)\\s+(${NUM})\\s+(?:closed\\s+|real\\s+|live\\s+|total\\s+)?trades\\b|(${NUM})\\s+(?:closed\\s+|total\\s+|live\\s+|real\\s+)?trades\\s+(?:total|in total|so far|taken|closed|tested|and counting)\\b|(?:closed|completed|its|their|our)\\s+(${NUM})(?:st|nd|rd|th)\\s+trade\\b`, "gi"),
+    re: new RegExp(`\\b(?:over|across|from|in|after|more than|than)\\s+(${NUM})\\s+(?:closed\\s+|real\\s+|live\\s+|total\\s+)?trades\\b|(${NUM})\\s+(?:closed\\s+|total\\s+|live\\s+|real\\s+)?trades\\s+(?:total|in total|so far|taken|closed|tested|and counting)\\b|(?:closed|completed|its|their|our)\\s+(${NUM})(?:st|nd|rd|th)\\s+trade\\b`, "gi"),
     value: (m) => parseNumber(firstGroup(m)), shown: (m) => firstGroup(m).trim(), rule: "A number of trades in a sentence",
   },
   {
@@ -218,7 +221,7 @@ export const PATTERNS: Pattern[] = [
   },
   {
     field: "months",
-    re: new RegExp(`(?:for|over|in|past|last|after)\\s+(?:the\\s+)?(?:past\\s+|last\\s+)?(${NUM})\\s*(months?|years?)\\b`, "gi"),
+    re: new RegExp(`\\b(?:for|over|in|past|last|after)\\s+(?:the\\s+)?(?:past\\s+|last\\s+)?(${NUM})\\s*(months?|years?)\\b`, "gi"),
     value: (m) => { const v = parseNumber(m[1]); return v == null || v <= 0 ? null : m[2].toLowerCase().startsWith("year") ? v * 12 : v; },
     shown: (m) => `${m[1].trim()} ${m[2].toLowerCase()}`, rule: "A length of time",
   },
