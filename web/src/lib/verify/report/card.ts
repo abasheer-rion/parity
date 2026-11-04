@@ -8,6 +8,7 @@ import { RAW } from "../../../ui/tokens.gen";
 import { survivesText } from "../checks/verdict";
 import { VERDICT_COLOR } from "../badge";
 import type { ReportData } from "./model";
+import { count } from "../words";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const PAD = 80;
@@ -38,7 +39,7 @@ export function reportCardSvg(d: ReportData, logoSvg: string, fontCss = ""): str
   const left = W - PAD * 2 - 360;
   const verdict = wrap(d.verdict.label, 96, W - PAD * 2, 1, true);
   const survives = d.c3 ? survivesText(d.c3.survives) : d.source === "description" ? "A claim, not a record" : "Luck check not measured";
-  const parts = [d.what, d.trades != null ? `${d.trades.toLocaleString("en-US")} trades` : null, d.dateFrom && d.dateTo ? `${d.dateFrom.slice(0, 7)} to ${d.dateTo.slice(0, 7)}` : null].filter(Boolean) as string[];
+  const parts = [d.what, d.trades != null ? count(d.trades, "trade") : null, d.dateFrom && d.dateTo ? `${d.dateFrom.slice(0, 7)} to ${d.dateTo.slice(0, 7)}` : null].filter(Boolean) as string[];
   const detail = wrap(parts.join(" · "), 26, left, 1);
   const sentence = wrap(d.verdict.sentence, 22, left, 2);
   const body = [

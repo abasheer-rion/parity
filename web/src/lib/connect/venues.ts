@@ -208,3 +208,20 @@ export const VENUES: Record<VenueId, VenueInfo> = {
 
 /** The venues offered on the page. */
 export const VENUE_LIST: VenueInfo[] = Object.values(VENUES).filter((v) => v.available);
+
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * What is wrong with a date range for a venue, in words, or null when it can be read. The
+ * page checks this before the key leaves it, and the server checks it again (server.ts).
+ */
+export function rangeProblem(from: string, to: string, venue: VenueId, now: number = Date.now()): string | null {
+  if (!DAY.test(from) || !DAY.test(to) || Number.isNaN(Date.parse(from)) || Number.isNaN(Date.parse(to))) return "Pick a start and an end date.";
+  if (from > to) return "The start date is after the end date.";
+  if (from < "2000-01-01") return "Pick a start date in 2000 or later.";
+  if (to > new Date(now).toISOString().slice(0, 10)) return "The end date is in the future.";
+  const days = (Date.parse(to) - Date.parse(from)) / 86_400_000 + 1;
+  const v = VENUES[venue];
+  if (days > v.maxDays) return `${v.name} can be read at most ${v.maxDays.toLocaleString("en-US")} days at a time. Pick a shorter range.`;
+  return null;
+}

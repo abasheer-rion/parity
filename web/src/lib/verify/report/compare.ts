@@ -3,6 +3,7 @@
 // which to choose: Parity does not rank records by return (DEC-0079). Pure functions.
 import { survivesText } from "../checks/verdict";
 import type { ReportData } from "./model";
+import { count } from "../words";
 
 export interface CompareRow {
   /** An explanation id (explain.ts) for the numbers, or null for words. */
@@ -38,7 +39,7 @@ export function compareRows(a: ReportData, b: ReportData): CompareRow[] {
   add("profitFactor", "Profit factor", (d) => dec(d.c1?.profitFactor));
   add("totalReturn", "Total return", (d) => (d.facts?.totalReturn == null ? "n/a" : `${d.facts.totalReturn >= 0 ? "+" : ""}${pct(d.facts.totalReturn)}`));
   add("maxDrawdown", "Largest fall from a high", (d) => (d.c2?.maxDrawdown == null ? "n/a" : pct(-d.c2.maxDrawdown)), lower(b.c2?.maxDrawdown, a.c2?.maxDrawdown));
-  add("underwater", "Longest time under water", (d) => (d.c2?.longestUnderwaterDays == null ? "n/a" : `${int(d.c2.longestUnderwaterDays)} days`), lower(b.c2?.longestUnderwaterDays, a.c2?.longestUnderwaterDays));
+  add("underwater", "Longest time under water", (d) => (d.c2?.longestUnderwaterDays == null ? "n/a" : count(d.c2.longestUnderwaterDays, "day")), lower(b.c2?.longestUnderwaterDays, a.c2?.longestUnderwaterDays));
   add("winsWipedOut", "Wins wiped out by the worst loss", (d) => dec(d.c2?.winsWipedOut, 1), lower(b.c2?.winsWipedOut, a.c2?.winsWipedOut));
   add("sharpeAnnual", "Sharpe a year", (d) => dec(d.c3?.sharpeAnnual));
   add(null, "Checks failed", (d) => { const f = failed(d); return f.length ? `${f.length}: ${f.join(", ")}` : "None"; }, lower(failed(b).length, failed(a).length));
@@ -49,10 +50,10 @@ export function compareRows(a: ReportData, b: ReportData): CompareRow[] {
 
 /** One plain sentence about the two verdicts, without choosing between them. */
 export function compareSentence(a: ReportData, b: ReportData, names = ["A", "B"]): string {
-  const one = (d: ReportData, n: string) => `${n} ${d.verdict.label.toLowerCase()}${d.c3 ? ` (${survivesText(d.c3.survives).toLowerCase()})` : ""}`;
+  const one = (d: ReportData, n: string) => `${n}: ${d.verdict.label}${d.c3 ? `, luck check ${survivesText(d.c3.survives).toLowerCase()}` : ""}`;
   const same = a.verdict.id === b.verdict.id;
   const methods = a.method === b.method ? "" : ` They were checked by different method versions (${a.method} and ${b.method}).`;
-  return `${one(a, names[0])}; ${one(b, names[1])}.${same ? " Both get the same verdict, so the numbers below are where they differ." : ""}${methods} Parity does not rank records or say which to choose.`;
+  return `${one(a, names[0])}. ${one(b, names[1])}.${same ? " Both get the same verdict, so the numbers below are where they differ." : ""}${methods} Parity does not rank records or say which to choose.`;
 }
 
 /**

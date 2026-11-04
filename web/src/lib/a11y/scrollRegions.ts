@@ -2,7 +2,7 @@
 // keyboard, or its hidden part cannot be read without a mouse (WCAG 2.1.1). This watches the
 // page and, for each such box that has nothing focusable inside, makes the box itself a
 // named, focusable region; arrow keys then scroll it. Boxes that fit lose it again.
-const BOXES = ".table-wrap, pre, .cx-copy > code, .term-stats, .term-meta, [data-scroll-region]";
+const BOXES = ".table-wrap, .lg-table-wrap, pre, .cx-copy > code, .term-stats, .term-meta, [data-scroll-region]";
 // Lists keep their own meaning: they only become focusable, without a region role over them.
 const KEEP_ROLE = new Set(["DL", "UL", "OL", "TABLE"]);
 const FOCUSABLE = "a[href], button, input, select, textarea, [tabindex]:not([tabindex='-1'])";

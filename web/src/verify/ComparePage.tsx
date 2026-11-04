@@ -4,16 +4,17 @@
 // browser never sends, so a comparison can be shared without Parity storing anything.
 import { useEffect, useId, useMemo, useState } from "react";
 import { useSession } from "../auth/session";
-import { benchmarkFrom, checkFile } from "../lib/verify/checks";
+import { checkUpload } from "../lib/verify/checks/upload";
 import { ParseError, MAX_BYTES } from "../lib/verify/csv";
 import { describeParsed, parseFile } from "../lib/verify/parse";
 import { loadPrices } from "../lib/verify/prices";
 import { compareRows, compareSentence, overlap } from "../lib/verify/report/compare";
 import { decodeReport, encodeReport, LinkError } from "../lib/verify/report/link";
 import { reportFrom, type ReportData } from "../lib/verify/report/model";
+import { axisLabels } from "../lib/verify/report/visuals";
 import type { InputKind, Parsed } from "../lib/verify/types";
 import { VERDICT_TONE } from "../lib/verify/checks/verdict";
-import { Button, Input, Select, toast } from "../ui";
+import { Button, Checkbox, Input, Select, toast } from "../ui";
 import { SignatureFrame, SignaturePlayer, type SigVisual } from "../ui/signature";
 import { Num, PublicLinks } from "../pages/verify/Num";
 import { Printing, usePrinting, usePrintingNow } from "../pages/verify/report/print";
@@ -46,7 +47,10 @@ function Picker({ side, onPick }: { side: Side; onPick: (d: ReportData) => void 
   const [balance, setBalance] = useState("");
   const [tries, setTries] = useState("1");
   const [kind, setKind] = useState<InputKind>("backtest");
+  const [noCash, setNoCash] = useState(false);
   const [busy, setBusy] = useState(false);
+  // An equity curve with no deposits column: the person says there were none, as on the Verify page.
+  const needCash = !!parsed?.p.equity && parsed.p.mapping.cashflow == null;
 
   const fromLink = async () => {
     setError(null);
@@ -55,7 +59,7 @@ function Picker({ side, onPick }: { side: Side; onPick: (d: ReportData) => void 
     try { onPick(await decodeReport(code)); } catch (e) { setError(e instanceof LinkError ? e.message : "That link could not be read."); }
   };
   const read = async (f: File) => {
-    setError(null); setParsed(null);
+    setError(null); setParsed(null); setNoCash(false);
     if (f.size > MAX_BYTES) { setError("The file is larger than 5 MB, the most Verify reads."); return; }
     try {
       const p = await parseFile(await f.arrayBuffer());
@@ -70,8 +74,8 @@ function Picker({ side, onPick }: { side: Side; onPick: (d: ReportData) => void 
     try {
       const prices = session ? await loadPrices() : null;
       const t = Math.max(1, Math.floor(Number(tries) || 1));
-      const r = checkFile({ parsed: parsed.p, prices: null, benchmark: benchmarkFrom(prices), triesDefaulted: t === 1,
-        answers: { kind, balance: Number(balance) > 0 ? Number(balance) : null, tries: t, claim: {}, noCashflows: true } });
+      const r = checkUpload({ parsed: parsed.p, prices, signedIn: !!session, triesDefaulted: t === 1,
+        answers: { kind, balance: Number(balance) > 0 ? Number(balance) : null, tries: t, claim: {}, noCashflows: noCash } });
       onPick(reportFrom(r, { prices: session ? (prices ? "loaded" : "missing") : "signed_out", fileName: parsed.name }));
     } finally { setBusy(false); }
   };
@@ -97,7 +101,8 @@ function Picker({ side, onPick }: { side: Side; onPick: (d: ReportData) => void 
           <label className="ui-field"><span className="ui-field-label">Money</span>
             <Select<InputKind> label="Money" value={kind} onChange={setKind} options={[["real", "Real money"], ["demo", "Demo account"], ["backtest", "Backtest"]]} />
           </label>
-          <div className="vf-row"><Button variant="primary" onClick={() => void check()} loading={busy}>Check record {NAME[side]}</Button></div>
+          {needCash && <Checkbox checked={noCash} onChange={setNoCash} label="There were no deposits or withdrawals in this period (the file has no column for them)." />}
+          <div className="vf-row"><Button variant="primary" onClick={() => void check()} loading={busy} disabled={needCash && !noCash}>Check record {NAME[side]}</Button></div>
         </div>
       )}
       {error && <p className="vf-error" role="alert">{error}</p>}
@@ -171,7 +176,7 @@ export function ComparePage() {
     return {
       kind: "equity",
       alt: `Growth of 1 dollar in records A and B over the ${o.dates.length > 1 ? `days they share, ${o.dates[0]} to ${o.dates[o.dates.length - 1]}` : "same days"}. A ended at ${ea.toFixed(2)}, B at ${eb.toFixed(2)}.`,
-      params: { fmt: "x", labels: o.dates.map((d) => d.slice(0, 7)), series: [{ label: "A", values: o.a }, { label: "B", values: o.b, tone: "alt" }], headline: { label: "A, growth of 1 dollar" } },
+      params: { fmt: "x", labels: axisLabels(o.dates), series: [{ label: "A", values: o.a }, { label: "B", values: o.b, tone: "alt" }], headline: { label: "A, growth of 1 dollar" } },
       steps: [
         { caption: `1 dollar in each, from ${o.dates[0]}, the first day both records cover.`, to: 0.35 },
         { caption: "Both records over the days they share.", to: 1, verdict: `A ${ea.toFixed(2)}x, B ${eb.toFixed(2)}x over the same days.`, tone: "accent" },
@@ -223,7 +228,7 @@ export function ComparePage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="vf-small">Red marks the side with the deeper fall, the longer time under water, the weaker luck check or more failed checks. Returns are shown, never ranked.</p>
+                <p className="vf-small">Red marks the side with the deeper fall, the longer time under water, more wins wiped out by its worst loss, the weaker luck check or more failed checks. Returns are shown, never ranked.</p>
               </section>
               <section className="rp-card" aria-labelledby="cp-growth-h">
                 <h2 id="cp-growth-h" className="rp-h2">Growth over the same days</h2>

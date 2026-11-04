@@ -4,6 +4,7 @@
 import { NA, survivesText, type ClaimRow, type ClaimSource, type CheckRow, type ExpectancyCard, type LuckCard, type RecordFacts, type Result, type TailCard, type Verdict } from "../checks";
 import type { InputKind, Source } from "../types";
 import type { Curve, Groups, Spread } from "./series";
+import { count } from "../words";
 
 export const REPORT_VERSION = 1;
 
@@ -163,5 +164,5 @@ export function keyNumbers(d: ReportData): KeyNumber[] {
 /** One plain sentence for a social card or a page title: the verdict and how many tries it survives. */
 export function shareLine(d: ReportData): string {
   const s = d.c3 ? ` ${survivesText(d.c3.survives)}.` : "";
-  return `${d.verdict.label}.${s} ${d.what}${d.trades != null ? `, ${int(d.trades)} trades` : ""}. Parity Verify, method ${d.method}.`;
+  return `${d.verdict.label}.${s} ${d.what}${d.trades != null ? `, ${count(d.trades, "trade")}` : ""}. Parity Verify, method ${d.method}.`;
 }

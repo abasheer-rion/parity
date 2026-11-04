@@ -14,7 +14,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 30 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 22 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 23 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 82 |
 | [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 48 |
 
@@ -30,6 +30,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-11-04 [LOG-0023: Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md)
 - 2026-11-03 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
 - 2026-11-03 [LOG-0022: Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md)
 - 2026-11-03 [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
@@ -37,7 +38,6 @@ and the tag list is in [TAGS.md](TAGS.md).
 - 2026-11-03 [DEC-0089: Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - 2026-11-03 [DEC-0088: Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - 2026-11-03 [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
-- 2026-11-03 [DEC-0084: Verify's imports are tested on real exports](decisions/0084-verify-imports-are-tested-on-real-exports.md)
 
 ## intent
 
@@ -295,6 +295,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0020 | [Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md) | final | 2026-10-27 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | LOG-0021 | [Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md) | final | 2026-10-28 | [process](TAGS.md#process) |
 | LOG-0022 | [Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md) | final | 2026-11-03 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
+| LOG-0023 | [Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md) | final | 2026-11-04 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## algorithm
 
