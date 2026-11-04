@@ -46,5 +46,6 @@ Anyone can now check a trading record at `/verify/` without signing in. The file
 - [DEC-0088: Verify reads a seller's claims from their page](0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
 <!-- backlinks:end -->

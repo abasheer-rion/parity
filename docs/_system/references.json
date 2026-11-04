@@ -21996,7 +21996,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
-        "docs/reference/0019-latency-budget-and-target-architecture.md"
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "repo",
@@ -22476,7 +22477,8 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "repo",
@@ -39395,7 +39397,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-26",
       "used_in": [
-        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "note": "Read for DEC-0063 (public low-latency feed terms).",
       "metadata": {
@@ -39442,7 +39445,8 @@
       "verification_checked": "2026-10-26",
       "used_in": [
         "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "note": "Read for DEC-0063 (public low-latency feed terms).",
       "metadata": {
@@ -43662,6 +43666,138 @@
       "verification_checked": null,
       "used_in": [
         "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52115a81",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca customer agreement",
+      "venue": "Alpaca",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aae2961c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "IEX historical data terms of use",
+      "venue": "IEX",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.iex.io/legal/hist-data-terms",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89ecfc73",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance Vision dataset terms of use",
+      "venue": "Binance",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://data.binance.vision/Binance_Vision-Terms_of_Use.pdf",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c706258a",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit terms of service",
+      "venue": "Bybit",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bybit.com/en/legal/terms-of-service/terms-of-service",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6fae220f",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "OKX API agreement",
+      "venue": "OKX",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.okx.com/en-us/help/okx-api-agreement",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9789392",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Tenderly terms of service",
+      "venue": "Tenderly",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://tenderly.co/terms-of-service",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "manual",

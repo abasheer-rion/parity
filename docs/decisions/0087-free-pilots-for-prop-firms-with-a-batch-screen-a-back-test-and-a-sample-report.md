@@ -53,4 +53,5 @@ On 3 November 2026 the owner decided to chase free pilots with prop firms. This 
 ## Referenced by
 
 - [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 <!-- backlinks:end -->

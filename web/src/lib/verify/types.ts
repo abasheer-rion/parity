@@ -29,6 +29,8 @@ export interface Trade {
   side?: "buy" | "sell";
   size?: number;
   entry?: number;
+  /** True when the entry is the average of opening fills at different prices, so no fill was at it. */
+  entryMixed?: boolean;
   exit?: number;
   /** Commission, swap and fees, as a cost (negative when a swap paid the account). */
   fees: number;

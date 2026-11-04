@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1855 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1861 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 67 |
 | [Software](#software) | 115 |
-| [Web pages](#web-pages) | 1078 |
+| [Web pages](#web-pages) | 1084 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
 | [News](#news) | 13 |
@@ -4213,7 +4213,7 @@ Alpaca Terms and Conditions. (2026). *alpaca.markets*. <https://files.alpaca.mar
 
 Note: Read for DEC-0063 (public low-latency feed terms).
 
-Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
 
 ### base-run-a-node
 
@@ -4253,7 +4253,7 @@ PublicNode terms of service. (2026). *publicnode.com*. <https://www.publicnode.c
 
 Note: Read for DEC-0063 (public low-latency feed terms).
 
-Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### pyth-dev-forum-pyth-network-t-863
 
@@ -4699,7 +4699,7 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 
 Kraken global terms of service. (2026). *Kraken*. <https://www.kraken.com/legal/global-terms>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-0b1f9975
 
@@ -6451,6 +6451,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/aqr-datasets.json](../catalog/datasets/aqr-datasets.json), [DAT-0003](datasets/0003-aqr-datasets.md).
 
+### url-52115a81
+
+Alpaca customer agreement. (2026). *Alpaca*. <https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-521aa37d
 
 2016 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2016_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -7303,6 +7309,12 @@ MetaTrader 4 home. (n.d.). *metatrader4.com*. <https://www.metatrader4.com/en>. 
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-6fae220f
+
+OKX API agreement. (2026). *OKX*. <https://www.okx.com/en-us/help/okx-api-agreement>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-7000c4fb
 
 Top USD/CAD Correlations Every Forex Trader Should Know - PriceActionNinja. (n.d.). *priceactionninja.com*. <https://priceactionninja.com/top-usd-cad-correlations-every-forex-trader-should-know/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -8072,6 +8084,12 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 Virginia General Assembly (n.d.). Va. Code 59.1-575 and following. *law.lis.virginia.gov*. <https://law.lis.virginia.gov/vacodefull/title59.1/chapter53/>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-89ecfc73
+
+Binance Vision dataset terms of use. (2026). *Binance*. <https://data.binance.vision/Binance_Vision-Terms_of_Use.pdf>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
 
 ### url-89fbee0d
 
@@ -8933,6 +8951,12 @@ No title recorded. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/l
 
 Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-aae2961c
+
+IEX historical data terms of use. (2026). *IEX*. <https://www.iex.io/legal/hist-data-terms>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-ab44c543
 
 terms of trade as trading signals. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/research/terms-of-trade-as-trading-signals/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -9577,6 +9601,12 @@ ECB copyright. (n.d.). *ecb.europa.eu*. <https://www.ecb.europa.eu/services/usin
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-c706258a
+
+Bybit terms of service. (2026). *Bybit*. <https://www.bybit.com/en/legal/terms-of-service/terms-of-service>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-c7460e97
 
 Natural Gas Data - U.S. Energy Information Administration (EIA). (n.d.). *eia.gov*. <https://www.eia.gov/naturalgas/data.php>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -10085,6 +10115,12 @@ Gold-i MatrixNET. (n.d.). *gold-i.com*. <http://www.gold-i.com/matrix-net>. Acce
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-d9789392
+
+Tenderly terms of service. (2026). *Tenderly*. <https://tenderly.co/terms-of-service>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-d98cc7cf
 
 Trade Ideas. (n.d.). *trade-ideas.com*. <https://www.trade-ideas.com/pricing/>. Accessed 2026-10-25. Verification: not checked.
@@ -10517,7 +10553,7 @@ Cited in: [catalog/events/bear-stearns-rescue-2008.json](../catalog/events/bear-
 
 Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-ebc97b6b
 
