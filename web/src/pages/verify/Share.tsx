@@ -74,20 +74,23 @@ export function SharePanel({ r, file, connected = null, db = realDb }: { r: Resu
       let id = "";
       for (let n = 0; n < 3 && !id; n++) {
         const candidate = newBadgeId();
-        const base = badgeRecord(r, { id: candidate, name: name || "My record", sha256 });
+        const base = badgeRecord(r, { id: candidate, name: name.trim() || "My record", sha256 });
         const row = connected ? { ...base, cards: connected.record.cards, attestation: connected.record.attestation } : base;
         const { error: e } = await client.from("verify_badges").insert(row);
         if (!e) id = candidate;
         else if (e.code !== "23505") throw e; // 23505: that id is taken; pick another
       }
       if (!id) throw new Error("no id");
-      setPublished({ id, created_at: new Date().toISOString(), withdrawn_at: null, name, input_kind: r.kind, stated_tries: r.tries,
+      setPublished({ id, created_at: new Date().toISOString(), withdrawn_at: null, name: name.trim(), input_kind: r.kind, stated_tries: r.tries,
         date_from: r.dateFrom, date_to: r.dateTo, trade_count: r.trades, verdict: r.verdict.id, survives_tries: r.card3?.survives ?? null,
         cards: null, method_version: r.methodVersion, file_sha256: sha256,
         attestation: connected?.record.attestation ?? null, broker_venue: connected?.source.venue ?? null,
         broker_account: connected?.source.account ?? null, broker_fetched_at: connected?.source.fetchedAt ?? null });
-      if (dataset && !contributed) await contribute();
       toast("Badge published");
+      // The badge is out whatever happens next; a failed dataset row is said under it, not lost.
+      if (dataset && !contributed) {
+        try { await contribute(); } catch (e) { setError(`The badge is published, but this result was not added to the research dataset. ${explainError(e as { message?: string; code?: string })}`); }
+      }
     } catch (e) {
       setError(explainError(e as { message?: string; code?: string }));
     } finally {
@@ -140,6 +143,7 @@ export function SharePanel({ r, file, connected = null, db = realDb }: { r: Resu
           <h3 className="vf-sub">Show it elsewhere</h3>
           <Embeds badge={published} origin={origin} host={host} trust={trust} />
           {contributed && <p className="vf-small">Also added to the research dataset, without your name.</p>}
+          {error && <p className="vf-error" role="alert">{error}</p>}
         </div>
       )}
       <MyBadges refreshKey={published?.id ?? ""} db={db} />

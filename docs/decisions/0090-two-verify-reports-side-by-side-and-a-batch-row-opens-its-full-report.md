@@ -37,4 +37,5 @@ Every check now ends in one report that travels in a link ([DEC-0089](0089-every
 ## Referenced by
 
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
+- [LOG-0023: Verify QA sweep on production](../log/2026-11-04-verify-qa-sweep-on-production.md)
 <!-- backlinks:end -->

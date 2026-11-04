@@ -51,7 +51,8 @@ export function fmtOf(name: unknown): Fmt {
     case "pct1": return pct(1);
     case "pctSigned": return pctSigned(0);
     case "pctSigned1": return pctSigned(1);
-    case "x": return (v) => `${v.toFixed(Math.abs(v) >= 10 ? 0 : 1)}x`;
+    // Two decimals under 3x, so a curve that moves a few percent does not label every tick "1.0x".
+    case "x": return (v) => `${v.toFixed(Math.abs(v) >= 10 ? 0 : Math.abs(v) >= 3 ? 1 : 2)}x`;
     case "num": return unit("");
     case "num2": return (v) => v.toFixed(2);
     case "pct": return pct(0);

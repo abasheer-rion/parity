@@ -108,6 +108,9 @@
     --text-2: var(--palette-grey-500); --muted: var(--palette-grey-500); --color-border: var(--palette-grey-300); --color-border-strong: var(--palette-grey-300); --border: var(--palette-grey-300);
     --color-glow: transparent; color: var(--palette-black);
   }
+  /* The public page prints the report only: not the page's introduction, the list of
+     supported files or the sections under it (they made a one-page report ten pages). */
+  .vp-page:has(.vf-result) :is(.vp-hero, .vp-section) { display: none !important; }
   .rp-actions, .sg-controls, .sg-scrub, .vp-corner nav, .skip, .vp-tool > :not(.vf-result), .vf-share, .vf-matches .vf-row, .ui-toaster, .rp-claim-actions, .vb-share { display: none !important; }
   .rp-card, .rp .mcard, .rp-key, .rp-claim, .rp-hero { break-inside: avoid; box-shadow: none !important; background: var(--palette-white) !important; }
   .rp-grid, .rp-pair { grid-template-columns: minmax(0, 1fr); }
