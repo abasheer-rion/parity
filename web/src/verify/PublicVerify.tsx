@@ -5,7 +5,7 @@
 import { useSession } from "../auth/session";
 import { LegalLinks } from "../legal/LegalLinks";
 import type { Result } from "../lib/verify/checks";
-import { connectionsEnabled, PROVIDERS } from "../lib/verify/connect";
+import { connectionsEnabled, PROVIDERS, type FetchAnswer } from "../lib/verify/connect";
 import { SUPPORTED } from "../lib/verify/parse";
 import { CHECKED_TEXT } from "../lib/verify/parse/supported";
 import { MAX_BYTES, MAX_ROWS } from "../lib/verify/csv";
@@ -44,8 +44,8 @@ function SignInToShare({ r }: { r: Result }) {
 export function PublicVerify() {
   const { loading, session } = useSession();
   const signedIn = !!session;
-  const share = (r: Result, file: FileMeta | null) => (signedIn
-    ? <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />
+  const share = (r: Result, file: FileMeta | null, connected?: FetchAnswer | null) => (signedIn
+    ? <SharePanel key={`${file?.sha256 ?? connected?.record.attestation.slice(-16) ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} connected={connected} />
     : <SignInToShare r={r} />);
   const unverified = SUPPORTED.filter((s) => !s.verified);
   return (
@@ -104,12 +104,22 @@ export function PublicVerify() {
           </p>
         </section>
 
-        {!connectionsEnabled() && (
+        {connectionsEnabled() ? (
+          <section className="vp-section" aria-labelledby="vp-connect-h">
+            <h2 id="vp-connect-h">Self-reported or broker-connected</h2>
+            <p className="vp-text">
+              An uploaded file is self-reported: Verify checks the numbers in the file, not where the file came from. With a
+              read-only link to {PROVIDERS.map((p) => p.name).join(", ").replace(/, ([^,]*)$/, " or $1")}, Parity reads the trades from
+              the venue itself, and the record and its badge are marked broker-connected, with the venue, a one-way code for the
+              account and when we read it. The <a href="/methodology/#trust">methodology</a> says what that does and does not prove.
+            </p>
+          </section>
+        ) : (
           <section className="vp-section" aria-labelledby="vp-connect-h">
             <h2 id="vp-connect-h">Read-only connections: coming later</h2>
             <p className="vp-text">
               A read-only link to {PROVIDERS.map((p) => p.name).join(", ").replace(/, ([^,]*)$/, " and $1")} would let a record be marked
-              Broker-connected instead of Self-reported. It is not built. Every upload today is self-reported: Verify checks the
+              Broker-connected instead of Self-reported. It is not switched on yet. Every upload today is self-reported: Verify checks the
               numbers in the file, not where the file came from.
             </p>
           </section>

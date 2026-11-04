@@ -152,6 +152,7 @@ Rethinking means narrowing to the segment that did respond (for example, prop-fi
 - [DEC-0079: Parity is an AI-native verification platform for retail traders of all sizes](0079-parity-is-an-ai-native-verification-platform-for-retail-traders-of-all-sizes.md)
 - [DEC-0080: The front page leads with Verify, three ways in and planned prices](0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md)
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
+- [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
 - [RES-0020: Verifying trading claims, market size and competitors](../research/0020-verifying-trading-claims-market-size-and-competitors.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](../research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)

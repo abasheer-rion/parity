@@ -4,32 +4,32 @@
 import { abs, OG_CARDS, ogImage, PRIVATE, type PageMeta } from "../meta";
 import { ASSET_LABEL, FAMILY_LABEL, nameById, tagsById } from "../strategyMeta";
 import { tagline } from "../strategyNames";
-import { KIND_WORDS, survivesWords, TRUST_LINE, VERDICT_COLOR, VERDICT_WORDS, type PublicBadge } from "../verify/badge";
+import { kindWords, SELF_REPORTED, survivesWords, trustLine, VERDICT_COLOR, VERDICT_WORDS, type PublicBadge } from "../verify/badge";
+import type { Trust } from "../connect/attest";
 import type { BadgeCard } from "./card";
 import { RAW } from "../../ui/tokens.gen";
 
 export const isStrategyId = (s: string) => /^[a-z0-9_]{1,64}$/.test(s);
 
 /** The share card for a badge. A missing or withdrawn badge never shows an old verdict. */
-export function badgeCard(b: PublicBadge | null, id: string): BadgeCard {
+export function badgeCard(b: PublicBadge | null, id: string, trust: Trust = SELF_REPORTED): BadgeCard {
   const grey = RAW["color-text-muted"];
   if (!b) return { id, verdict: "No such record", color: grey, survives: "Check the link", detail: "This Verify link does not match a record." };
   if (b.withdrawn_at || !b.verdict) {
     return { id, verdict: "Withdrawn", color: grey, survives: "Withdrawn by its owner", detail: `on ${b.withdrawn_at?.slice(0, 10) ?? "an earlier date"}` };
   }
-  const kind = b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record";
-  const parts = [kind];
+  const parts = [kindWords(b, trust)];
   if (b.trade_count != null) parts.push(`${b.trade_count.toLocaleString("en-US")} trades`);
   if (b.date_from && b.date_to) parts.push(`${b.date_from.slice(0, 10)} to ${b.date_to.slice(0, 10)}`);
-  return { id, verdict: VERDICT_WORDS[b.verdict], color: VERDICT_COLOR[b.verdict], survives: survivesWords(b.survives_tries), detail: parts.join(" · "), note: TRUST_LINE };
+  return { id, verdict: VERDICT_WORDS[b.verdict], color: VERDICT_COLOR[b.verdict], survives: survivesWords(b.survives_tries), detail: parts.join(" · "), note: trustLine(trust) };
 }
 
 /** The head tags for /v/<id>. */
-export function badgeMeta(b: PublicBadge | null, id: string): PageMeta {
-  const c = badgeCard(b, id);
+export function badgeMeta(b: PublicBadge | null, id: string, trust: Trust = SELF_REPORTED): PageMeta {
+  const c = badgeCard(b, id, trust);
   const live = !!c.note;
   const title = live ? `${c.verdict}: ${c.survives.toLowerCase()} · Parity Verify` : `${c.verdict} · Parity Verify`;
-  const description = live ? `${c.detail}. ${TRUST_LINE}` : OG_CARDS.badge.sub;
+  const description = live ? `${c.detail}. ${c.note}` : OG_CARDS.badge.sub;
   return {
     title, description, path: `/v/${id}`, image: abs(`/og/badge/${id}.png`), robots: PRIVATE,
     imageAlt: live ? `Parity Verify: ${c.verdict}. ${c.survives}.` : `Parity Verify: ${c.verdict}.`,

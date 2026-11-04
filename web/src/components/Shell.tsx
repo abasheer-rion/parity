@@ -116,11 +116,13 @@ const RESEARCH: NavItem[] = [
 // change something. The older sections (reading, shortcuts, runs, team, about) are kept
 // in pages/SettingsHidden.tsx and can come back by adding them here.
 // Parity is dark only (DEC-0021), so there is no Appearance section any more.
+// Broker connections (DEC-0091) only when the build turns connections on.
 export const SETTINGS_SECTIONS = [
   { group: "Settings", items: [
     { id: "account", label: "Account" },
     { id: "personalization", label: "Personalization" },
     { id: "api-keys", label: "API keys" },
+    ...(import.meta.env?.VITE_VERIFY_CONNECTIONS === "on" ? [{ id: "broker-connections", label: "Broker connections" }] : []),
     { id: "trade-profile", label: "Trade profile" },
   ] },
 ];
