@@ -6,6 +6,7 @@
 // counted per person and logged.
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { connectCall, connectStatus, ConnectFailed, VENUE_LIST, VENUES, type ConnectStatus, type FetchAnswer, type VenueId } from "../../lib/verify/connect";
+import { rangeProblem } from "../../lib/connect/venues";
 import type { Result } from "../../lib/verify/checks";
 import { Button, Checkbox, ChoiceCards, Field, Input, type Choice } from "../../ui";
 import { SignedIn } from "./signedIn";
@@ -111,6 +112,12 @@ export function ConnectInput({ onResult }: { onResult: (r: Result, connected: Fe
     ...info.fields.filter((f) => f.id !== "symbols" && !(fields[f.id] ?? "").trim()).map((f) => f.label),
     ...(info.fields.some((f) => f.id === "symbols") && !o.symbols.trim() ? ["Markets to read"] : []),
   ], [info, fields, o.symbols]);
+  // The dates are checked here too, so a key is never sent for a range the venue cannot read.
+  const badRange = rangeProblem(o.from, o.to, venue);
+  const tries = Number(o.tries);
+  const badTries = o.tries.trim() !== "" && (!Number.isInteger(tries) || tries < 1 || tries > 10_000_000) ? "Tries must be a whole number from 1 to 10,000,000." : null;
+  const badBalance = o.balance.trim() !== "" && !(Number(o.balance) > 0 && Number(o.balance) <= 1e12) ? "The starting balance must be a positive number, or left empty." : null;
+  const problems = [badRange, badTries, badBalance].filter((x): x is string => !!x);
 
   if (!signedIn) {
     return (
@@ -193,10 +200,11 @@ export function ConnectInput({ onResult }: { onResult: (r: Result, connected: Fe
       {error && <p className="vf-error" role="alert">{error}</p>}
       <div className="vf-row">
         {venue === "alpaca"
-          ? <Button variant="primary" onClick={() => void startAlpaca()} loading={busy} disabled={!setUp || !(status && status.alpaca) || busy}>Continue to Alpaca</Button>
-          : <Button variant="primary" onClick={() => void send(venue, fields, o)} loading={busy} disabled={!setUp || missing.length > 0 || busy}>Read trades and check</Button>}
+          ? <Button variant="primary" onClick={() => void startAlpaca()} loading={busy} disabled={!setUp || !(status && status.alpaca) || problems.length > 0 || busy}>Continue to Alpaca</Button>
+          : <Button variant="primary" onClick={() => void send(venue, fields, o)} loading={busy} disabled={!setUp || missing.length > 0 || problems.length > 0 || busy}>Read trades and check</Button>}
         {venue === "alpaca" && status && setUp && !status.alpaca && <span className="vf-help">Signing in with Alpaca is not set up on this server yet.</span>}
         {venue !== "alpaca" && missing.length > 0 && <span className="vf-help">Still to fill in: {missing.join(", ")}.</span>}
+        {problems.map((p) => <span key={p} className="vf-warn" role="status">{p}</span>)}
       </div>
     </div>
   );

@@ -5,18 +5,28 @@ import { deflatedSharpeFrom, LUCK_LINE, MAX_TRIES } from "../dsr";
 import type { SigStep, SigVisual } from "../../../ui/signature";
 import type { ReportData } from "./model";
 import type { GroupFamily } from "./series";
+import { count } from "../words";
 
 const r4 = (v: number) => Math.round(v * 1e4) / 1e4;
 const x2 = (v: number) => `${v.toFixed(Math.abs(v) >= 10 ? 0 : 2)}x`;
 const pctT = (v: number, d = 1) => `${(v * 100).toFixed(d)}%`;
 const money = (v: number) => `${v < 0 ? "-" : ""}${Math.abs(v) >= 1000 ? Math.round(Math.abs(v)).toLocaleString("en-US") : Math.abs(v).toFixed(2)}`;
+/**
+ * Labels for a chart's dates: the month for a long record, the day for one shorter than
+ * about three months, so a record of a few weeks does not read "2024-01" under every tick.
+ */
+export function axisLabels(dates: readonly string[]): string[] {
+  const a = Date.parse(dates[0] ?? ""), b = Date.parse(dates[dates.length - 1] ?? "");
+  const short = Number.isFinite(a) && Number.isFinite(b) && b - a < 92 * 86_400_000;
+  return dates.map((x) => (short ? x.slice(0, 10) : x.slice(0, 7)));
+}
 const compact = (n: number) => (n >= 1e9 ? `${Math.round(n / 1e9)}bn` : n >= 1e6 ? `${Math.round(n / 1e6)}m` : n >= 1e3 ? `${Math.round(n / 1e3)}k` : String(Math.round(n)));
 
 /** The record's value over time, next to the benchmark when there is one. */
 export function growthVisual(d: ReportData): SigVisual | null {
   const c = d.curve;
   if (!c || c.dates.length < 2) return null;
-  const labels = c.dates.map((x) => x.slice(0, 7));
+  const labels = axisLabels(c.dates);
   const growth = c.unit === "growth";
   const hasBench = growth && !!c.bench && c.bench.some((v) => v != null) && !!c.benchName;
   const end = c.values[c.values.length - 1];
@@ -56,12 +66,12 @@ export function underwaterVisual(d: ReportData): SigVisual | null {
   return {
     kind: "underwater",
     alt: `How far the record stood below its last high, from ${c.dates[0]} to ${c.dates[c.dates.length - 1]}. The deepest fall was ${pctT(exact != null ? -exact : worst)}${worst < 0 ? `, around ${c.dates[worstAt]}` : ""}.`,
-    params: { values: c.values.map(r4), labels: c.dates.map((x) => x.slice(0, 7)), fmt: "x" },
+    params: { values: c.values.map(r4), labels: axisLabels(c.dates), fmt: "x" },
     steps: [
       { caption: "The red area is how far it stood below its last high.", to: 1 },
       {
         caption: worst < 0 ? `The deepest fall: ${pctT(exact != null ? -exact : worst)}.` : "It never fell below a high.", to: 1, worst: true,
-        verdict: worst < 0 ? `${pctT(exact != null ? -exact : worst)} at worst${d.c2?.longestUnderwaterDays != null ? `, ${d.c2.longestUnderwaterDays.toLocaleString("en-US")} days at most below a high` : ""}.` : "No fall from a high.",
+        verdict: worst < 0 ? `${pctT(exact != null ? -exact : worst)} at worst${d.c2?.longestUnderwaterDays != null ? `, ${count(d.c2.longestUnderwaterDays, "day")} at most below a high` : ""}.` : "No fall from a high.",
         tone: worst < -0.5 ? "neg" : worst < 0 ? "warn" : "pos",
       },
     ],

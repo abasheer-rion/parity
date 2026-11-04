@@ -61,4 +61,5 @@ Every button, field, table and panel on Parity now meets the WCAG 2.2 AA accessi
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
+- [LOG-0023: Verify QA sweep on production](../log/2026-11-04-verify-qa-sweep-on-production.md)
 <!-- backlinks:end -->

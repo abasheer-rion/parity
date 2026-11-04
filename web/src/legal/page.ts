@@ -1,6 +1,9 @@
 // Script for the plain HTML legal pages: the cookie notice, and marking the current page
 // in the footer. The pages read and work without it.
 import "./notice";
+// Wide tables and long code lines on these pages (the API guide) scroll sideways: make them
+// reachable with the keyboard (WCAG 2.1.1).
+import "../lib/a11y/scrollRegions";
 
 const here = window.location.pathname.replace(/\/?$/, "/");
 document.querySelectorAll<HTMLAnchorElement>(".lg-legal a").forEach((a) => {

@@ -87,4 +87,5 @@ None of these was created or set by us.
 - [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
 - [LOG-0022: Read-only broker connections built](../log/2026-11-03-read-only-broker-connections-built.md)
+- [LOG-0023: Verify QA sweep on production](../log/2026-11-04-verify-qa-sweep-on-production.md)
 <!-- backlinks:end -->

@@ -8,6 +8,7 @@ import type { Trust } from "../connect/attest";
 import { VENUES } from "../connect/venues";
 import type { VenueId } from "../connect/types";
 import { RAW } from "../../ui/tokens.gen";
+import { count } from "./words";
 
 export type VerdictKey = "holds_up" | "could_be_luck" | "fragile" | "does_not_hold_up" | "not_enough_data";
 
@@ -92,7 +93,7 @@ export function survivesWords(n: number | null): string {
 export function socialLine(b: Pick<PublicBadge, "id" | "verdict" | "survives_tries" | "input_kind" | "trade_count">, host: string, trust: Trust = SELF_REPORTED): string {
   const parts = [`Parity Verify: ${b.verdict ? VERDICT_WORDS[b.verdict] : "Withdrawn"}.`, `${survivesWords(b.survives_tries)}.`];
   const kind = trust.level === "broker_connected" ? `${kindWords(b, trust)} from ${venueName(trust.venue)}` : kindWords(b, trust);
-  parts.push(`${kind}${b.trade_count != null ? `, ${b.trade_count.toLocaleString("en-US")} trades` : ""}.`);
+  parts.push(`${kind}${b.trade_count != null ? `, ${count(b.trade_count, "trade")}` : ""}.`);
   parts.push(`${host}/v/${b.id}`);
   return parts.join(" ");
 }
@@ -129,7 +130,7 @@ export function badgeSvg(b: PublicBadge | null, trust: Trust = SELF_REPORTED): s
   const verdict = !b ? "No such badge" : live ? VERDICT_WORDS[b.verdict!] : "Withdrawn by its owner";
   const color = live ? VERDICT_COLOR[b!.verdict!] : RAW["color-text-muted"];
   const line2 = !b ? "Check the link" : live
-    ? `${survivesWords(b.survives_tries)}${b.trade_count != null ? ` · ${b.trade_count.toLocaleString("en-US")} trades` : ""}`
+    ? `${survivesWords(b.survives_tries)}${b.trade_count != null ? ` · ${count(b.trade_count, "trade")}` : ""}`
     : `on ${b.withdrawn_at!.slice(0, 10)}`;
   const connected = trust.level === "broker_connected";
   const label = `Parity Verify: ${verdict}. ${line2}. ${live ? trustLine(trust) : ""}`.trim();
@@ -160,7 +161,7 @@ export function badgeCardHtml(b: PublicBadge | null, id: string, origin: string,
   const verdict = !b ? "No such record" : live ? VERDICT_WORDS[b.verdict!] : "Withdrawn by its owner";
   const color = live ? VERDICT_COLOR[b!.verdict!] : RAW["color-text-muted"];
   const lines = !b ? ["Check the link."] : live
-    ? [`${survivesWords(b.survives_tries)}.`, [b.trade_count != null ? `${b.trade_count.toLocaleString("en-US")} trades` : "", b.input_kind ? kindWords(b, trust) : ""].filter(Boolean).join(", ") + "."]
+    ? [`${survivesWords(b.survives_tries)}.`, [b.trade_count != null ? count(b.trade_count, "trade") : "", b.input_kind ? kindWords(b, trust) : ""].filter(Boolean).join(", ") + "."]
     : [`On ${b.withdrawn_at!.slice(0, 10)}.`];
   const link = `${origin}/v/${esc(id)}`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Parity Verify: ${esc(verdict)}</title>

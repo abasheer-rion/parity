@@ -47,4 +47,5 @@ Verify's result was five cards ([DEC-0081](0081-verify-is-a-public-page-with-bro
 
 - [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
+- [LOG-0023: Verify QA sweep on production](../log/2026-11-04-verify-qa-sweep-on-production.md)
 <!-- backlinks:end -->

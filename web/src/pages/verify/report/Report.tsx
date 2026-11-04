@@ -17,6 +17,7 @@ import { ClaimsSection, type ClaimsLive } from "./Claims";
 import { dec, int, money, pct } from "./format";
 import { Printing, usePrinting } from "./print";
 import "./report.css";
+import { count } from "../../../lib/verify/words";
 
 const LESSON = { app: "#/academy/win-rate-is-not-profit/the-99-percent-bot", pub: "/learn/academy/win-rate-is-not-profit/the-99-percent-bot/" };
 
@@ -81,7 +82,7 @@ export function Report({ data: d, result, shared = false, linkable = true, signe
             <li>{d.source === "file" ? KIND_TEXT[d.kind] : SOURCE_TEXT[d.source]}</li>
             {d.source !== "description" && <li>{d.what}</li>}
             {d.dateFrom && d.dateTo && <li><Num id="dates">{`${shortDate(d.dateFrom)} to ${shortDate(d.dateTo)}`}</Num></li>}
-            {d.trades != null && <li><Num id="trades">{`${int(d.trades)} trades`}</Num></li>}
+            {d.trades != null && <li><Num id="trades">{count(d.trades, "trade")}</Num></li>}
             {d.source !== "description" && <li><Num id="tries">{`${int(d.tries)} ${d.tries === 1 ? "try" : "tries"}`}</Num></li>}
             <li><Num id="method">{`Method ${d.method}`}</Num></li>
           </ul>
@@ -141,7 +142,7 @@ export function Report({ data: d, result, shared = false, linkable = true, signe
                     ["Worst day", <Num id="worstDayPct">{pct(d.c2.worstDayPct, 2)}</Num>],
                     ["Wins wiped out by the worst loss", <Num id="winsWipedOut">{dec(d.c2.winsWipedOut, 1)}</Num>],
                     [<Term id="drawdown">Largest fall from a high</Term>, <Num id="maxDrawdown">{pct(d.c2.maxDrawdown)}</Num>],
-                    ["Longest time under water", <Num id="underwater">{d.c2.longestUnderwaterDays == null ? "n/a" : `${int(d.c2.longestUnderwaterDays)} days`}</Num>],
+                    ["Longest time under water", <Num id="underwater">{d.c2.longestUnderwaterDays == null ? "n/a" : count(d.c2.longestUnderwaterDays, "day")}</Num>],
                     ["Expected shortfall (5%)", <Num id="es5">{pct(d.c2.es5, 2)}</Num>],
                     [`Skew (${d.c2.skewBasis === "trade" ? "per trade" : d.c2.skewBasis === "daily" ? "daily" : "per period"})`, <Num id="skew">{dec(d.c2.skew)}</Num>],
                   ]} />

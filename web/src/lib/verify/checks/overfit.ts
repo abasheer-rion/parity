@@ -5,6 +5,7 @@ import { daysBetween } from "../returns";
 import { sharpe } from "../stats";
 import type { Claim, Trade } from "../types";
 import { NA, type CheckRow } from "./lookahead";
+import { count } from "../words";
 
 const pp = (v: number) => `${(v * 100).toFixed(1)}%`;
 
@@ -14,10 +15,10 @@ export function shortSampleCheck(trades: number | null, firstDate: string | null
   if (!firstDate) return { id: "short", label, status: "na", detail: `${NA}: there are no dates.` };
   const fewTrades = trades != null && trades < 100;
   if (fewTrades || months < 12) {
-    const why = [fewTrades ? `${trades} trades (100 is the line)` : "", months < 12 ? `${months.toFixed(1)} months (12 is the line)` : ""].filter(Boolean).join(" and ");
+    const why = [fewTrades ? `${count(trades ?? 0, "trade")} (100 is the line)` : "", months < 12 ? `${months.toFixed(1)} months (12 is the line)` : ""].filter(Boolean).join(" and ");
     return { id: "short", label, status: "fail", detail: `Only ${why}. A short record can look good by chance.` };
   }
-  return { id: "short", label, status: "pass", detail: `${trades != null ? `${trades.toLocaleString("en-US")} trades over ` : ""}${months.toFixed(0)} months.` };
+  return { id: "short", label, status: "pass", detail: `${trades != null ? `${count(trades, "trade")} over ` : ""}${months.toFixed(0)} months.` };
 }
 
 /** Sharpe in the last 30% of the record below half the Sharpe of the first 70%. */
@@ -49,8 +50,8 @@ export function settingsCheck(settings: number | null, trades: number | null): C
   const label = "Many settings, few trades";
   if (settings == null || trades == null) return { id: "settings", label, status: "na", detail: `${NA}: it needs a description with its rules and a number of trades.` };
   return settings > trades / 20
-    ? { id: "settings", label, status: "fail", detail: `${settings} adjustable settings for ${trades} trades: more than one setting per 20 trades, so the rules can be fitted to almost any past data.` }
-    : { id: "settings", label, status: "pass", detail: `${settings} adjustable settings for ${trades} trades (one per 20 trades is the line).` };
+    ? { id: "settings", label, status: "fail", detail: `${count(settings, "adjustable setting")} for ${count(trades ?? 0, "trade")}: more than one setting per 20 trades, so the rules can be fitted to almost any past data.` }
+    : { id: "settings", label, status: "pass", detail: `${count(settings, "adjustable setting")} for ${count(trades ?? 0, "trade")} (one per 20 trades is the line).` };
 }
 
 export interface FileFacts { winRate: number | null; monthlyReturn: number | null; maxDrawdown: number | null; totalReturn?: number | null; months?: number | null }
