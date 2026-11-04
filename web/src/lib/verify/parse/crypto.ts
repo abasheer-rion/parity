@@ -18,6 +18,13 @@
 //     Timestamp (UTC) or Transaction Time(UTC+0). Fills.
 //   Bybit, Closed P&L: Contracts, Closing Direction, Qty, Entry Price, Exit Price,
 //     Closed P&L, Trade Time(UTC+0). Closed trades; the profit is taken as Bybit gives it.
+//     Written from help pages; no real export with these columns was found (DEC-0088).
+//   Bybit, closed positions (Unified Trading Account, what Bybit exports today): Market,
+//     Quantity, Direction (Long or Short), avgEntryPrice, avgExitPrice, Realized P&L, Opening
+//     Fee, Closing Fee, Funding Fee, two fee cells as JSON, Open Time, Open Duration, Close Time,
+//     times written "08:02 2026-11-02" in UTC, zero sometimes "0E-8". Realized P&L is after
+//     the opening, closing and funding fees: Bybit's help centre says so, and a real export's
+//     columns add up that way. Layout copied from a real export we could see but not publish.
 //   Coinbase fills (Coinbase Pro's fills.csv): portfolio, trade id, product (BTC-USD), side,
 //     created at, size, size unit, price, fee, total, price/fee/total unit. Fills; spot.
 //   Coinbase transaction report, what Coinbase gives today: a few lines of preamble, then
@@ -185,6 +192,46 @@ export const bybitPnl: FormatDef = {
     }
     trades.sort((a, b) => (a.closeTime < b.closeTime ? -1 : a.closeTime > b.closeTime ? 1 : 0));
     return { trades, warnings: skipped ? [`${skipped} row${skipped === 1 ? " had" : "s had"} no readable time or profit and ${skipped === 1 ? "was" : "were"} skipped.`] : [] };
+  },
+  fields: TRADE_FIELDS,
+  drop: IDS,
+};
+
+export const bybitClosed: FormatDef = {
+  id: "bybit_closed",
+  detect: (t) => {
+    const s = score(t, [[4, [/^realized p&l$/, /^realized pnl$/]], [2, [/^avgentryprice$/, /^avg\.? entry price$/]], [2, [/^avgexitprice$/, /^avg\.? exit price$/]], [1, [/^opening fee$/]], [1, [/^closing fee$/]], [1, [/^close time/]]]);
+    return s >= 9 ? s + 2 : 0;
+  },
+  map: (t) => {
+    const h = t.headers;
+    return compact({
+      closeTime: col(h, [/^close time/]), openTime: col(h, [/^open time/]), symbol: col(h, [/^market$/, /^contracts?$/, /^symbol$/]),
+      side: col(h, [/^direction$/]), size: col(h, [/^quantity$/, /^qty$/]), entry: col(h, [/^avgentryprice$/, /^avg\.? entry price$/]),
+      exit: col(h, [/^avgexitprice$/, /^avg\.? exit price$/]), pnl: col(h, [/^realized p&l$/, /^realized pnl$/]),
+    });
+  },
+  build: (t, m) => {
+    const r = reader(m, t);
+    const fees = [/^opening fee$/, /^closing fee$/, /^funding fee$/].map((re) => col(t.headers, [re]));
+    const skipped: { k: number; why: string }[] = [];
+    const trades: Trade[] = [];
+    t.rows.forEach((row, k) => {
+      const closeTime = r.date(row, "closeTime");
+      const pnl = r.loose(row, "pnl");
+      if (!closeTime || pnl == null) {
+        skipped.push({ k, why: whyBad([...(!closeTime ? [["close time", r.cell(row, "closeTime"), "date"] as [string, string, "date"]] : []), ...(pnl == null ? [["realized profit", r.cell(row, "pnl"), "number"] as [string, string, "number"]] : [])]) });
+        return;
+      }
+      // Direction is the position's: Long was bought first, Short was sold first.
+      const d = (r.text(row, "side") ?? "").toLowerCase();
+      const side: "buy" | "sell" | undefined = d.startsWith("long") ? "buy" : d.startsWith("short") ? "sell" : undefined;
+      const cost = fees.reduce<number>((sum, i) => sum + (i == null ? 0 : num(row[i]) ?? 0), 0);
+      trades.push({ openTime: r.date(row, "openTime") ?? undefined, closeTime, symbol: r.text(row, "symbol")?.toUpperCase(), side, size: r.loose(row, "size") ?? undefined,
+        entry: r.loose(row, "entry") ?? undefined, exit: r.loose(row, "exit") ?? undefined, fees: Math.round(cost * 1e8) / 1e8, pnl });
+    });
+    trades.sort((a, b) => (a.closeTime < b.closeTime ? -1 : a.closeTime > b.closeTime ? 1 : 0));
+    return { trades, warnings: skippedWarning(t, skipped), notes: ["Bybit writes these times in UTC. The realized profit is used as Bybit gives it, after opening, closing and funding fees."] };
   },
   fields: TRADE_FIELDS,
   drop: IDS,

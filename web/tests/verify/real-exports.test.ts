@@ -212,6 +212,27 @@ describe("crypto exchanges", () => {
     expect(p.dropped).toEqual(expect.arrayContaining(["Uid", "Trade Id", "Order Id"]));
   });
 
+  it("Bybit closed positions (Unified Trading Account): time-first dates, Long and Short, profit after every fee", async () => {
+    const p = await read("layout/bybit-closed-positions.csv");
+    expect(p.format).toBe("bybit_closed");
+    expect(p.trades!.map((t) => t.pnl)).toEqual([93.34, -106.235, -6.75725]);
+    expect(p.trades!.map((t) => [t.openTime, t.closeTime, t.side])).toEqual([
+      ["2026-01-05T09:15:00", "2026-01-05T10:21:00", "buy"],
+      ["2026-01-06T14:00:00", "2026-01-07T16:30:00", "sell"],
+      ["2026-01-08T08:00:00", "2026-01-08T11:00:00", "buy"],
+    ]);
+    // Opening, closing and funding fees (funding received counts as a negative cost).
+    expect(p.trades!.map((t) => t.fees)).toEqual([6.66, 6.235, 1.75725]);
+    // The realized profit is the price difference less those fees, as Bybit's help centre says.
+    for (const t of p.trades!) expect(Math.round(((t.exit! - t.entry!) * t.size! * (t.side === "sell" ? -1 : 1) - t.fees) * 1e6) / 1e6).toBe(t.pnl);
+  });
+
+  it("Bybit's transaction log is refused with what to export instead", () => {
+    const p = parseText("Currency,Contract,Type,Direction,Quantity,Position,Filled Price,Funding,Fee Paid,Cash Flow,Change,Wallet Balance,Action,Time\nUSDT,BTCUSDT,TRADE,BUY,0.1,0.1,60000,0,-3.3,0,-3.3,996.7,OPEN,2026-01-05 09:15:00\n");
+    expect(p.trades).toBeUndefined();
+    expect(p.warnings[0]).toMatch(/^This is Bybit's transaction log/);
+  });
+
   it("Binance account statement: rows of one trade are put back together", async () => {
     const p = await read("real/binance-statement-fingather-2022.csv");
     expect(p.format).toBe("binance_statement");

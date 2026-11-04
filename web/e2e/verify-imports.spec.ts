@@ -36,6 +36,7 @@ const FILES: [string, string, string | null][] = [
   ["real/tradovate-positionhistory-tradetally-2026.csv", "Tradovate position history, 5 closed trades", "Not enough data"],
   ["layout/binance-futures.csv", "Binance futures trade history, 2 closed trades", "Not enough data"],
   ["layout/binance-spot-pair.csv", "Binance spot trade history, 2 closed trades", "Not enough data"],
+  ["layout/bybit-closed-positions.csv", "Bybit closed positions, 3 closed trades", "Not enough data"],
   ["layout/ibkr-flex-wrapped.csv", "Interactive Brokers Flex trades, 1 closed trade", "Not enough data"],
   ["layout/kraken-trades-2026.csv", "Kraken trades, 1 closed trade", "Not enough data"],
   ["layout/thinkorswim-spreads-futures.csv", "thinkorswim trade history, 3 closed trades", "Not enough data"],
