@@ -34,14 +34,28 @@ test.describe("front page", () => {
     await expect(nav.getByRole("link", { name: "Connect AI" })).toHaveAttribute("href", "/connect/");
   });
 
-  test("three ways in, pricing that is not on sale and a business contact", async ({ page }) => {
+  test("three ways in, pricing that is not on sale and the pilot for businesses", async ({ page }) => {
     await open(page, "/");
     const ways = page.getByRole("region", { name: "Three ways in." });
     await expect(ways.getByRole("link", { name: /Open Verify/ })).toHaveAttribute("href", "/verify/");
     await expect(ways.getByRole("link", { name: /Read the API docs/ })).toHaveAttribute("href", "/developers/");
     await expect(ways.getByRole("link", { name: /Connect your AI/ })).toHaveAttribute("href", "/connect/");
     await expect(page.getByRole("region", { name: "Checking is free today." })).toContainText("Paid plans are not on sale yet");
-    await expect(page.getByRole("link", { name: "Email contact@paritytrading.app" })).toHaveAttribute("href", /^mailto:contact@paritytrading\.app\?subject=/);
+    const biz = page.locator("#business");
+    await expect(biz.getByRole("link", { name: "Start a free 30-day pilot" })).toHaveAttribute("href", "/business/prop-firms/#pilot");
+    await expect(biz.getByRole("link", { name: /For prop firms/ })).toHaveAttribute("href", "/business/prop-firms/");
+  });
+
+  test("the prop firm page opens the pilot form and checks it before sending", async ({ page }) => {
+    await open(page, "/business/prop-firms/");
+    await page.getByRole("link", { name: "Start a free 30-day pilot" }).first().click();
+    const dialog = page.getByRole("dialog", { name: "Start a free 30-day pilot" });
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole("button", { name: "Send request" }).click();
+    await expect(dialog.getByText("Enter the firm's name.")).toBeVisible();
+    await expect(dialog.getByLabel("Firm")).toBeFocused();
+    await dialog.getByRole("button", { name: "Close" }).click();
+    await expect(dialog).toBeHidden();
   });
 
   test("Log in and Sign up in the corner nav open their forms", async ({ page }) => {

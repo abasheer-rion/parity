@@ -10,6 +10,7 @@ import { check, type Schema } from "../mcp/schema";
 import { originAllowed } from "../mcp/auth";
 import { liveSources } from "../live/sources";
 import { METHOD_VERSION } from "../verify/types";
+import { BATCH_LIMITS, batchSchema, BatchError, runBatch } from "../screen/api";
 import { bearer, constantTimeEqual, hashKey, MIN_PEPPER, wellFormed } from "./keys";
 import { ipAllowed, LIMITS, MinuteLimiter, SCOPE_TEXT, type Scope } from "./policy";
 import { StoreError, type KeyRecord, type LogLine, type Store } from "./store";
@@ -62,6 +63,11 @@ interface Route {
   summary: string;
   /** An old path kept so callers do not break; the spec marks it deprecated. */
   deprecated?: boolean;
+  /** A larger body limit than MAX_BODY, for the batch screen. */
+  maxBody?: number;
+  /** The body's schema and a description, for a route that is not an MCP tool (the spec reads them). */
+  input?: Schema;
+  description?: string;
   run(args: { params: Record<string, string>; query: URLSearchParams; body: unknown }, ctx: ToolContext): Promise<unknown>;
 }
 
@@ -132,6 +138,25 @@ export const ROUTES: Route[] = [
   { method: "POST", path: "/verify/trades", scope: "write:verify", summary: "Verify a trade list or an equity curve", run: viaBody("verify_trades") },
   { method: "POST", path: "/verify/strategy", scope: "read:verify", summary: "Verify one of Parity's tested strategies, or find the closest to a described rule set", run: viaBody("verify_strategy") },
   { method: "POST", path: "/verify/claim", scope: "write:verify", summary: "Check the arithmetic of a seller's claim", run: viaBody("verify_claim") },
+  {
+    method: "POST", path: "/verify/batch", scope: "write:verify", summary: "Screen a batch of challenge accounts (prop firms and platforms)",
+    maxBody: BATCH_LIMITS.bytes, input: batchSchema,
+    description: [
+      "Screens many accounts at once (DEC-0087): per account a verdict (holds_up, likely_luck or not_enough), the numbers behind it and one line saying why; a summary of how many passers look like luck and which firm rules would have caught them; and, when outcomes are sent, a back-test of the screen with 95% intervals.",
+      `At most ${BATCH_LIMITS.accounts} accounts and ${BATCH_LIMITS.trades.toLocaleString("en-US")} trades a request, bodies up to 5 MB. Runs in memory; nothing sent is stored.`,
+    ].join(" "),
+    async run({ body }, ctx) {
+      if (!body || typeof body !== "object" || Array.isArray(body)) throw new ToolError("Send a JSON object as the body.");
+      const bad = check(body, batchSchema, "body");
+      if (bad) throw new ToolError(bad);
+      try {
+        return runBatch(body as Record<string, unknown>, `${ctx.origin}/methodology/#batch`);
+      } catch (e) {
+        if (e instanceof BatchError) throw new ToolError(e.message);
+        throw e;
+      }
+    },
+  },
   { method: "POST", path: "/verify", scope: "write:verify", summary: "Old name for POST /verify/trades", deprecated: true, run: viaBody("verify_record") },
   { method: "POST", path: "/verify/description", scope: "write:verify", summary: "Old name for POST /verify/claim", deprecated: true, run: viaBody("verify_description") },
 ];
@@ -279,9 +304,10 @@ export async function handleApi(request: Request, deps: ApiDeps): Promise<Respon
   let body: unknown = undefined;
   if (route.method === "POST") {
     if (!(request.headers.get("Content-Type") ?? "").toLowerCase().startsWith("application/json")) return P(415, "media-type", "Send JSON", "Set 'Content-Type: application/json'.");
-    if (Number(request.headers.get("Content-Length") ?? 0) > MAX_BODY) return P(413, "too-large", "Body too large", `At most ${MAX_BODY} bytes.`);
+    const limit = route.maxBody ?? MAX_BODY;
+    if (Number(request.headers.get("Content-Length") ?? 0) > limit) return P(413, "too-large", "Body too large", `At most ${limit} bytes.`);
     const text = await request.text();
-    if (text.length > MAX_BODY) return P(413, "too-large", "Body too large", `At most ${MAX_BODY} bytes.`);
+    if (text.length > limit) return P(413, "too-large", "Body too large", `At most ${limit} bytes.`);
     try { body = JSON.parse(text); } catch { return P(400, "bad-json", "Body is not JSON"); }
   }
 

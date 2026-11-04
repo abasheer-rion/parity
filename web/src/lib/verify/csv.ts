@@ -23,7 +23,7 @@ export function sniffDelimiter(text: string): string {
  * Splits text into rows of cells, honouring double quotes ("" is a quote inside one). When
  * `lines` is given, the file line each row starts on is pushed to it, so a problem can name it.
  */
-export function splitRows(text: string, delim: string, lines?: number[]): string[][] {
+export function splitRows(text: string, delim: string, lines?: number[], maxRows = MAX_ROWS): string[][] {
   const rows: string[][] = [];
   let row: string[] = [], cell = "", q = false, line = 1, start = 1;
   for (let i = 0; i < text.length; i++) {
@@ -42,7 +42,7 @@ export function splitRows(text: string, delim: string, lines?: number[]): string
       if (row.some((c) => c !== "")) { rows.push(row); lines?.push(start); }
       row = [];
       line++; start = line;
-      if (rows.length > MAX_ROWS + 50) throw new ParseError(`The file has more than ${MAX_ROWS.toLocaleString()} rows, the most Verify reads for now.`);
+      if (rows.length > maxRows + 50) throw new ParseError(`The file has more than ${maxRows.toLocaleString()} rows, the most Verify reads for now.`);
     } else cell += ch;
   }
   row.push(cell.trim());
@@ -52,21 +52,24 @@ export function splitRows(text: string, delim: string, lines?: number[]): string
 
 const looksLikeHeader = (r: string[]) => r.filter((c) => /[A-Za-z]/.test(c)).length >= 2 && r.filter((c) => c !== "").length >= 2;
 
-/** Reads a file's text into a header row and data rows. The header is the first row with words in it. */
-export function readTable(text: string): Table & { delimiter: string; lines: number[] } {
+/**
+ * Reads a file's text into a header row and data rows. The header is the first row with words
+ * in it. maxRows is higher only for the batch screen, which reads many accounts in one file.
+ */
+export function readTable(text: string, maxRows = MAX_ROWS): Table & { delimiter: string; lines: number[] } {
   const clean = text.replace(/^﻿/, "");
   if (!clean.trim()) throw new ParseError("The file is empty.");
   const delimiter = sniffDelimiter(clean);
   const at: number[] = [];
-  const all = splitRows(clean, delimiter, at);
-  return { ...tableFromRows(all, at), delimiter };
+  const all = splitRows(clean, delimiter, at, maxRows);
+  return { ...tableFromRows(all, at, maxRows), delimiter };
 }
 
 /**
  * A table from rows of cells (a CSV, a sheet, an HTML table): the header row is found, short
  * rows are padded and long ones cut to its width. `at` holds each row's line in the file.
  */
-export function tableFromRows(all: string[][], at: number[] = all.map((_, i) => i + 1)): Table & { lines: number[] } {
+export function tableFromRows(all: string[][], at: number[] = all.map((_, i) => i + 1), maxRows = MAX_ROWS): Table & { lines: number[] } {
   // The header is the first row with words in it that is about as wide as the rows below it,
   // so a title or a "User, name, id" line above the table is not taken for it.
   const filled = (r: string[]) => r.filter((c) => c !== "").length;
@@ -81,7 +84,7 @@ export function tableFromRows(all: string[][], at: number[] = all.map((_, i) => 
   // A last header cell left empty by a trailing comma (NinjaTrader) is dropped.
   while (headers.length > 1 && headers[headers.length - 1] === "") headers.pop();
   const rows = all.slice(h + 1).map((r) => (r.length < headers.length ? [...r, ...Array(headers.length - r.length).fill("")] : r.slice(0, headers.length)));
-  if (rows.length > MAX_ROWS) throw new ParseError(`The file has ${rows.length.toLocaleString()} rows. Verify reads up to ${MAX_ROWS.toLocaleString()} for now.`);
+  if (rows.length > maxRows) throw new ParseError(`The file has ${rows.length.toLocaleString()} rows. Verify reads up to ${maxRows.toLocaleString()} for now.`);
   return { headers, rows, lines: at.slice(h + 1) };
 }
 

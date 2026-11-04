@@ -42,5 +42,6 @@ Anyone can now check a trading record at `/verify/` without signing in. The file
 
 - [DEC-0083: Verify runs a strategy from its code on our prices](0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - [DEC-0084: Verify's imports are tested on real exports](0084-verify-imports-are-tested-on-real-exports.md)
+- [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
 <!-- backlinks:end -->

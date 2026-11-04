@@ -247,7 +247,7 @@ describe("Verify endpoints on /api/v1", () => {
     expect(((await long.json()) as { detail: string }).detail).toContain("at most 4000 characters");
   });
 
-  it("documents the three endpoints in OpenAPI and marks the old ones deprecated", async () => {
+  it("documents the endpoints in OpenAPI and marks the old ones deprecated", async () => {
     const { deps } = await key([]);
     const spec = (await (await handleApi(new Request(`${ORIGIN}/api/v1/openapi.json`), deps)).json()) as { paths: Record<string, Record<string, { requestBody?: unknown; deprecated?: boolean; "x-required-scope": string }>> };
     for (const p of ["/verify/trades", "/verify/strategy", "/verify/claim"]) {
@@ -258,6 +258,6 @@ describe("Verify endpoints on /api/v1", () => {
     expect(spec.paths["/api/v1/verify"].post.deprecated).toBe(true);
     expect(spec.paths["/api/v1/verify/description"].post.deprecated).toBe(true);
     expect(spec.paths["/api/v1/verify/strategy"].post["x-required-scope"]).toBe("read:verify");
-    expect(ROUTES.filter((r) => r.path.startsWith("/verify")).length).toBe(6);
+    expect(ROUTES.filter((r) => r.path.startsWith("/verify")).length).toBe(7); // with /verify/batch (DEC-0087)
   });
 });

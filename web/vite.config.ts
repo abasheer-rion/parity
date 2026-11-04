@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { parityAnalytics } from "./plugins/analytics";
 import { parityBoot } from "./plugins/boot";
+import { parityBusiness } from "./plugins/business";
 import { parityDocs } from "./plugins/docs";
 import { parityLegal } from "./plugins/legal";
 import { SAMPLE_DOWNLOAD } from "./src/lib/desktopDownload";
@@ -206,6 +207,8 @@ const SITE_PAGES = [
   "connect/index", "connect/claude/index", "connect/chatgpt/index", "connect/gemini/index", "oauth/consent/index", "oauth/openrouter/index",
   "developers/index", "methodology/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
   "download/index",
+  // The pages for firms and the batch screen (DEC-0087).
+  "business/prop-firms/index", "business/prop-firms/sample/index", "business/copy-trading/index", "business/bot-marketplaces/index", "business/screen/index",
 ];
 const here = (p: string) => resolve(import.meta.dirname, p);
 // Libraries that change rarely get their own files, so a deploy that only changes Parity's
@@ -220,7 +223,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityMeta(), parityOg(), parityVersion()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityBusiness(), parityMeta(), parityOg(), parityVersion()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

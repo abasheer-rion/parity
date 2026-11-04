@@ -156,6 +156,33 @@ console.log(impossible, needs_more_data, claims.map((c: { id: string }) =&gt; c.
   "could_not_check": [{"check": "Whether the claimed results happened", "why": "A claim is not a record. Send the trade list or equity curve to verify_trades to check it."}],
   "method_version": "verify-1.0"
 }</code></pre>
+  <h3 id="verify-batch">Batch: <code>POST /api/v1/verify/batch</code></h3>
+  <p>For prop firms, copy-trading platforms and marketplaces: screen many accounts in one request (scope <code>write:verify</code>). Send <code>accounts</code>, each with an <code>id</code> and <code>trades</code> (as for <code>/verify/trades</code>), and any of <code>starting_balance</code>, <code>tries</code> (challenge attempts, counting this one), <code>passed</code> and <code>outcome</code> (<code>payout</code> or <code>blowup</code>). <code>options</code> sets the default balance, <code>profit_target</code>, <code>max_loss</code>, <code>consistency_limit</code>, <code>min_days</code> and <code>count_batch_as_tries</code>. Each account comes back <code>holds_up</code>, <code>likely_luck</code> or <code>not_enough</code> with its numbers and one line saying why, plus a summary and, when outcomes are sent, a back-test of the screen with 95% intervals. At most 500 accounts and 50,000 trades a request, bodies up to 5 MB: send larger batches in pages. Nothing sent is stored. The same screen runs in the browser at <a href="/business/screen/">/business/screen/</a>; how it judges: <a href="/methodology/#batch">methodology</a>.</p>
+  <h4>curl</h4>
+<pre tabindex="0"><code>curl -s https://paritytrading.app/api/v1/verify/batch \
+  -H "Authorization: Bearer $PARITY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @batch.json
+# batch.json: {"accounts": [{"id": "acct-1001", "starting_balance": 25000, "tries": 1, "passed": true,
+#   "outcome": "payout", "trades": [{"close_time": "2026-07-07T09:41:00", "pnl": 120.5, "size": 0.2}, ...]}, ...],
+#   "options": {"profit_target": 0.08, "max_loss": 0.1}}</code></pre>
+  <h4>Answer (trimmed)</h4>
+<pre tabindex="0"><code>{
+  "method_version": "screen-1.0",
+  "accounts": [
+    {"id": "acct-1001", "verdict": "holds_up", "label": "Holds up",
+     "reason": "Makes 45.16 a trade over 46 trades. Luck check 0.99 after 1 try, survives up to 2 tries, best 5 trades made 65% of the profit.",
+     "trades": 46, "trading_days": 10, "luck_check": 0.9941, "survives_up_to_tries": 2, "max_drawdown": 0.0094,
+     "best_5_trades_share": 0.6513, "best_day_share": 0.1932, "size_grows_after_losses": false, "firm_rules_hit": ["concentration"]},
+    {"id": "acct-1002", "verdict": "likely_luck", "label": "Likely luck",
+     "reason": "Luck check 0.89 after 3 tries, below 0.95.", "trades": 32, "tries": 3, "luck_check": 0.8868, "firm_rules_hit": []}
+  ],
+  "summary": {"accounts": 2, "passers": 2, "passers_by_verdict": {"holds_up": 1, "likely_luck": 1, "not_enough": 0},
+              "lucky_passers_no_firm_rule_catches": 1},
+  "backtest": {"judged_with_outcome": 2, "table": {"likely_luck_blew_up": 1, "likely_luck_paid_out": 0, "holds_up_blew_up": 0, "holds_up_paid_out": 1},
+               "hit_rate": {"value": 1, "low": 0.2065, "high": 1}, "small_sample": true},
+  "stored": false
+}</code></pre>
   <p class="lg-meta">The old paths still work: <code>POST /api/v1/verify</code> answers as <code>/verify/trades</code> and <code>POST /api/v1/verify/description</code> as <code>/verify/claim</code>. The OpenAPI file marks them deprecated.</p>
 
   <h2 id="start">Start in three steps</h2>

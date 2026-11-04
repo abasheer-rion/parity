@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 84 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 85 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 23 |
@@ -31,13 +31,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-11-03 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
+- 2026-11-03 [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 - 2026-11-03 [DEC-0084: Verify's imports are tested on real exports](decisions/0084-verify-imports-are-tested-on-real-exports.md)
 - 2026-11-03 [DEC-0083: Verify runs a strategy from its code on our prices](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - 2026-11-02 [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
 - 2026-11-02 [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 - 2026-11-02 [DAT-0048: Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md)
 - 2026-10-29 [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
-- 2026-10-28 [LOG-0021: Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md)
 
 ## intent
 
@@ -135,6 +135,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0084 | [Verify's imports are tested on real exports](decisions/0084-verify-imports-are-tested-on-real-exports.md) | accepted | 2026-11-03 | [data](TAGS.md#data), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0085 | [Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md) | accepted | 2026-10-28 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0086 | [New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md) | accepted | 2026-10-28 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0087 | [Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md) | accepted | 2026-11-03 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 
 ## hypothesis
 
