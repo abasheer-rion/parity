@@ -54,6 +54,8 @@ export interface ReportExtra {
   checkedOn?: string;
   /** What the person's daily prices did, for the inputs list. */
   prices?: "loaded" | "signed_out" | "not_needed" | "missing";
+  /** The fill price check, in words (DEC-0092). */
+  fills?: string;
   fileName?: string | null;
   screen?: ReportData["screen"];
   /** True on a published badge's page. */
@@ -92,6 +94,7 @@ export function inputsOf(r: Result, x: ReportExtra = {}): { label: string; value
   if (r.claimSource) add("Claims", `${r.claimSource.found.length} read from ${r.claimSource.url ? hostOf(r.claimSource.url) : "the words you pasted"}${r.claimSource.readAt ? ` on ${r.claimSource.readAt.slice(0, 10)}` : ""}`);
   const prices = x.prices === "loaded" ? "Our daily closes for currencies, Bitcoin, Ether and the S&P 500" : x.prices === "signed_out" ? "Not loaded: our daily prices load for signed-in accounts only" : null;
   add("Prices", prices);
+  add("Fill prices", x.fills);
   add("Compared with", r.benchmark ? `${r.benchmark}, daily` : r.source === "description" ? null : "No market series");
   add("Method", `${r.methodVersion}, checked on ${x.checkedOn ?? today()}`);
   add("Trust", r.source === "file" ? "Self-reported: Parity checked the numbers in the file, not where the file came from" : r.source === "code" ? "We ran the rules ourselves on our prices" : r.source === "strategy" ? "Our own research run" : "Words only: a claim is not a record");

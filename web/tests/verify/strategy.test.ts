@@ -285,7 +285,7 @@ describe("a strategy from code goes through the five cards", () => {
     expect(r.tries).toBe(3 + 24);
     expect(r.code!.triesSweep).toBe(24);
     expect(r.card3!.tries).toBe(27);
-    expect(r.card4.map((c) => c.id)).toEqual(["fills", "timing", "smooth", "edited", "label", "cut"]);
+    expect(r.card4.map((c) => c.id)).toEqual(["fills", "range", "session", "timing", "smooth", "edited", "label", "cut"]);
     expect(r.card4.find((c) => c.id === "cut")!.status).toBe("pass");
     expect(r.card5.map((c) => c.id)).toEqual(["short", "fade", "conc", "settings", "sweep"]);
     expect(r.card5.find((c) => c.id === "settings")!.status).not.toBe("na");

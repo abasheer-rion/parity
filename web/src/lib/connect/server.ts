@@ -21,6 +21,7 @@ import type { PriceBook } from "../verify/prices";
 import { jwks, oldKeys, publicKeyOf, seedFrom, type PublicKey } from "./attest";
 import { fromB64url, fromUtf8, hkdf, hmac, randomBytes, sameText, sha256Hex, toB64url, utf8 } from "./bytes";
 import { buildRecord } from "./record";
+import type { Planned, RangeOutcome } from "../verify/range/client";
 import type { ConnectStore } from "./store";
 import { ConnectError, isoDay, isVenue, type Connector, type Range, type VenueCtx, type VenueId } from "./types";
 import { vaultFrom } from "./vault";
@@ -58,6 +59,8 @@ export interface ConnectDeps {
   /** fetch for the venues; tests pass recorded answers. */
   venueFetch: typeof fetch;
   prices(): Promise<PriceBook | null>;
+  /** The fill price check on what was read (DEC-0092). Absent: not run. */
+  fills?: (plan: Planned) => Promise<RangeOutcome>;
   siteDomain: string;
   now?: () => number;
   sleep?: (ms: number) => Promise<void>;
@@ -282,7 +285,11 @@ export async function handleConnect(request: Request, deps: ConnectDeps): Promis
         const creds = connector.credentials(raw);
         await connector.check(creds, ctx);
         const read = await connector.read(creds, range, ctx, { symbols: opts.symbols });
-        const record = await buildRecord({ venue: read, venueId: venue, range, tries: opts.tries, balance: opts.balance, userId: caller.userId, seed, prices: await deps.prices().catch(() => null), now: now() });
+        const record = await buildRecord({ venue: read, venueId: venue, range, tries: opts.tries, balance: opts.balance, userId: caller.userId, seed, prices: await deps.prices().catch(() => null), now: now(), fillCheck: deps.fills });
+        // Trades read from the broker should all sit inside the traded range: any that do not
+        // point at our data or tolerances, so they are counted in the log.
+        const rangeRow = record.result.card4.find((c) => c.id === "range");
+        line.fills = rangeRow?.status ?? "not_run";
         let kept: string | null = connection;
         if (keep && vault) {
           const id = crypto.randomUUID();

@@ -1,7 +1,9 @@
 // REF-0016 acceptance test 8, "nothing leaves": opens Verify in a real browser (the app's
 // page and the public checker at /verify/), uploads a
 // synthetic trade log, runs the checks and fails if any request made after the upload
-// carries a body or any piece of the file. Run against the dev server:
+// carries a body or any piece of the file. The fill price check (DEC-0092) may send the symbol,
+// time and price of fills a source covers; this file's currency pairs are covered by none, so
+// at most its coverage question (a GET with no body) goes out. Run against the dev server:
 //
 //   VITE_AUTH_BYPASS=1 npx vite --port 5199 --host 127.0.0.1   (in another terminal)
 //   VERIFY_BASE=http://127.0.0.1:5199 node scripts/verify-network.mjs

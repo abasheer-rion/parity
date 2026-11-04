@@ -18,7 +18,8 @@ import { MIN_TRADES } from "../verify/checks/verdict";
 import { day } from "../verify/csv";
 import { LUCK_LINE } from "../verify/dsr";
 import { daysBetween, drawdowns } from "../verify/returns";
-import type { Trade } from "../verify/types";
+import type { FormatId, Trade } from "../verify/types";
+import type { Clock } from "../verify/range/types";
 
 /** Bump when a rule or a threshold changes, so a report says which rules judged it. */
 export const SCREEN_VERSION = "screen-1.0";
@@ -58,6 +59,9 @@ export const DEFAULT_OPTIONS: ScreenOptions = {
 export interface AccountInput {
   id: string;
   trades: Trade[];
+  /** The file's format and clock, for the fill price check (DEC-0092). */
+  format?: FormatId;
+  clock?: Clock;
   /** Starting balance from the file, when it has one. */
   balance?: number | null;
   /** Challenge attempts or other tries behind this record, counting this one. */

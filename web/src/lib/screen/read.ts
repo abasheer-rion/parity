@@ -9,6 +9,7 @@
 import { decodeBytes, num, ParseError, readTable } from "../verify/csv";
 import { parseTable, parseText } from "../verify/parse";
 import type { Table } from "../verify/types";
+import { clockOf } from "../verify/range/clock";
 import type { AccountInput, Outcome } from "./score";
 import { isZip, readZip } from "./unzip";
 
@@ -187,7 +188,7 @@ export async function readBatch(files: readonly FileIn[], detailsFile?: FileIn |
     }
     const m = meta.get(id) ?? {};
     accounts.push({
-      id, trades: list,
+      id, trades: list, format: p.format, clock: clockOf(p),
       balance: m.balance ?? p.inferredBalance ?? null,
       tries: m.tries ?? null, passed: m.passed ?? null, outcome: m.outcome ?? null,
     });

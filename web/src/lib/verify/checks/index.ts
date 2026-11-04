@@ -16,6 +16,8 @@ import { basisFor, luckCard, type LuckCard } from "./luck";
 import { claimCheck, concentrationCheck, fadeCheck, neighboursCheck, settingsCheck, shortSampleCheck } from "./overfit";
 import type { CodeRun } from "../strategy";
 import { tailCard, type TailCard } from "./tail";
+import type { RangeOutcome } from "../range/client";
+import { notRunRows, RANGE_LABEL, rangeRows, SESSION_LABEL } from "../range/rows";
 import { verdict, type Verdict } from "./verdict";
 
 export * from "./claims";
@@ -220,10 +222,12 @@ export interface FileInput {
   pricesMissing?: string;
   /** A market to compare with in the report (the S&P 500 from our daily prices, signed in). */
   benchmark?: Benchmark | null;
+  /** The fill price check's answers (DEC-0092), or why it did not run. Absent: not run here. */
+  ranges?: RangeOutcome | null;
 }
 
 /** Input A: an uploaded trade log or equity curve, checked in the browser. */
-export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissing, benchmark }: FileInput): Result {
+export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissing, benchmark, ranges }: FileInput): Result {
   const notes: string[] = [];
   const trades = parsed.trades;
   const balance = answers.balance && answers.balance > 0 ? answers.balance : null;
@@ -252,9 +256,14 @@ export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissi
 
   const fills = trades ? fillChecks(trades, prices, pricesMissing) : null;
   const naRow = (id: string, label: string, why: string): CheckRow => ({ id, label, status: "na", detail: `${NA}: ${why}` });
+  // The fill price check against market data, when it ran; otherwise why it did not.
+  const fromRanges = trades && ranges?.ran ? rangeRows(ranges, trades) : null;
+  const [rangeNa, sessionNa] = trades ? notRunRows(ranges && !ranges.ran ? ranges : null) : [naRow("range", RANGE_LABEL, "an equity curve has no fills."), naRow("session", SESSION_LABEL, "an equity curve has no fills.")];
   const card4: CheckRow[] = [
     fills?.fills ?? naRow("fills", "Fills outside the day's range", "an equity curve has no fills."),
-    fills?.timing ?? naRow("timing", "Perfect timing", "an equity curve has no entries."),
+    fromRanges?.range ?? rangeNa,
+    fromRanges?.session ?? sessionNa,
+    fromRanges?.timing ?? fills?.timing ?? naRow("timing", "Perfect timing", "an equity curve has no entries."),
     rs ? smoothCheck(rs.dates, rs.returns, rs.periodsPerYear >= 180) : naRow("smooth", "Too smooth", "it needs returns, so a starting balance."),
     trades ? editedCheck(trades, parsed.format === "tradingview" || parsed.format === "trades") : naRow("edited", "Edited history", "an equity curve has no trade list."),
     labelCheck(answers.kind, parsed.backtestExport),
@@ -313,6 +322,8 @@ export function checkStrategy(x: StrategyInput): Result {
   const dateFrom = rs.dates[0] ?? null, dateTo = rs.dates[rs.dates.length - 1] ?? null;
   const card4 = [
     na("fills", "Fills outside the day's range", "a strategy's backtest has positions, not fills."),
+    na("range", RANGE_LABEL, "a strategy's backtest has positions, not fills."),
+    na("session", SESSION_LABEL, "a strategy's backtest has positions, not fills."),
     na("timing", "Perfect timing", "a strategy's backtest has positions, not fills."),
     smoothCheck(rs.dates, rs.returns, false),
     na("edited", "Edited history", "a strategy's backtest has no trade list. Every run we make is kept."),
@@ -347,7 +358,7 @@ export interface DescriptionInput { text: string; claim: Claim; settings: number
 export function checkDescription(x: DescriptionInput): Result {
   const claims = claimRows(x.claim);
   const na = (id: string, label: string): CheckRow => ({ id, label, status: "na", detail: `${NA}: a description has no trades or prices.` });
-  const card4 = [na("fills", "Fills outside the day's range"), na("timing", "Perfect timing"), na("smooth", "Too smooth"), na("edited", "Edited history"),
+  const card4 = [na("fills", "Fills outside the day's range"), na("range", RANGE_LABEL), na("session", SESSION_LABEL), na("timing", "Perfect timing"), na("smooth", "Too smooth"), na("edited", "Edited history"),
     { id: "label", label: "Backtest labelled as real", status: "na" as const, detail: `${NA}: there is no file.` }, strategyLookAheadCheck("description")];
   const card5 = [
     { id: "short", label: "Short sample", status: "na" as const, detail: `${NA}: a description has no record.` },
@@ -424,6 +435,8 @@ export function checkBacktest(x: CodeRun, triesStated: number, triesDefaulted = 
   const settings = Object.keys(x.rules.inputs).length;
   const card4: CheckRow[] = [
     { id: "fills", label: "Fills outside the day's range", status: "na", detail: `${NA}: we placed every fill ourselves, at our own daily closes.` },
+    { id: "range", label: RANGE_LABEL, status: "na", detail: `${NA}: we placed every fill ourselves, at our own daily closes.` },
+    { id: "session", label: SESSION_LABEL, status: "na", detail: `${NA}: we placed every fill ourselves, on days the market traded.` },
     delayCheck(x.stats.sharpe, x.delayed.sharpe),
     smoothCheck(rs.dates, rs.returns, rs.periodsPerYear >= 180),
     { id: "edited", label: "Edited history", status: "na", detail: `${NA}: we ran every day ourselves, so no trade can be missing.` },

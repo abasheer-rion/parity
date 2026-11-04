@@ -5,6 +5,7 @@
 import { useMemo, useState } from "react";
 import type { Backtest, Rate } from "../lib/screen/backtest";
 import { resultsCsv } from "../lib/screen/export";
+import type { AccountFills } from "../lib/screen/fills";
 import { SCREEN_LABEL, VERDICT_ORDER, type AccountResult, type ScreenVerdict, type Summary } from "../lib/screen/score";
 import { LUCK_LINE } from "../lib/verify/dsr";
 
@@ -72,7 +73,16 @@ function BacktestPanel({ bt }: { bt: Backtest }) {
   );
 }
 
-export function Report({ results, summary, backtest, file, onOpen }: { results: AccountResult[]; summary: Summary; backtest: Backtest | null; file: string; onOpen?: (id: string) => void }) {
+/** One account's fill price check, in a few words. */
+function fillsCell(f: AccountFills | undefined): string {
+  if (!f) return "Not run";
+  if (!f.checked && !f.closed) return "Not checked";
+  const bits = [f.outside ? `${n(f.outside)} outside` : `${n(f.checked)} inside`];
+  if (f.closed) bits.push(`${n(f.closed)} while closed`);
+  return bits.join(", ");
+}
+
+export function Report({ results, summary, backtest, file, onOpen, fills, fillsNote }: { results: AccountResult[]; summary: Summary; backtest: Backtest | null; file: string; onOpen?: (id: string) => void; fills?: ReadonlyMap<string, AccountFills> | null; fillsNote?: string | null }) {
   const [show, setShow] = useState<"all" | ScreenVerdict | "passers">("all");
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: "id", desc: false });
   const rows = useMemo(() => {
@@ -100,6 +110,7 @@ export function Report({ results, summary, backtest, file, onOpen }: { results: 
           <Kpi value={n(s.passersByVerdict.not_enough)} label="passers had fewer than 30 trades: too few to tell" />
         </ul>
         <p className="bz-small">All accounts: {VERDICT_ORDER.map((v) => `${n(s.counts[v])} ${SCREEN_LABEL[v].toLowerCase()}`).join(", ")}.</p>
+        <FillsSummary fills={fills} note={fillsNote} />
       </section>
 
       <section className="bz-panel" aria-labelledby="rules-h">
@@ -142,7 +153,7 @@ export function Report({ results, summary, backtest, file, onOpen }: { results: 
             </select>
           </div>
           <div className="bz-btn-row">
-            <button type="button" className="btn" onClick={() => download(`${file.replace(/\.[a-z0-9]+$/i, "")}-screen.csv`, resultsCsv(results))}>Download CSV</button>
+            <button type="button" className="btn" onClick={() => download(`${file.replace(/\.[a-z0-9]+$/i, "")}-screen.csv`, resultsCsv(results, fills))}>Download CSV</button>
             <button type="button" className="btn" onClick={() => window.print()}>Print or save as PDF</button>
           </div>
         </div>
@@ -160,6 +171,7 @@ export function Report({ results, summary, backtest, file, onOpen }: { results: 
                 ))}
                 <th scope="col">Passed</th>
                 <th scope="col">Outcome</th>
+                {fills ? <th scope="col">Fill prices</th> : null}
                 <th scope="col">Why</th>
               </tr>
             </thead>
@@ -177,6 +189,7 @@ export function Report({ results, summary, backtest, file, onOpen }: { results: 
                   <td className="n">{share(r.bestDayShare)}</td>
                   <td>{r.passed == null ? "n/a" : r.passed ? "Yes" : "No"}</td>
                   <td>{r.outcome === "payout" ? "Payout" : r.outcome === "blowup" ? "Blew up" : ""}</td>
+                  {fills ? <td>{fillsCell(fills.get(r.id))}</td> : null}
                   <td className="why">{r.reason}{r.sizeGrowth ? " Size grew after losses." : ""}</td>
                 </tr>
               ))}
@@ -187,5 +200,20 @@ export function Report({ results, summary, backtest, file, onOpen }: { results: 
         <p className="bz-small">Default starting balance {money(s.options.startingBalance)} for accounts without one. Research only, not investment advice. A verdict is about the record, not about the trader's future.</p>
       </section>
     </div>
+  );
+}
+
+/** The batch's fill price check (DEC-0092): how many accounts have fills outside the traded range. */
+function FillsSummary({ fills, note }: { fills?: ReadonlyMap<string, AccountFills> | null; note?: string | null }) {
+  if (!fills) return note ? <p className="bz-small">{note}</p> : null;
+  const all = [...fills.values()];
+  const checked = all.reduce((t, f) => t + f.checked, 0), outside = all.reduce((t, f) => t + f.outside, 0), closed = all.reduce((t, f) => t + f.closed, 0);
+  const accountsOut = all.filter((f) => f.outside >= 2 && f.outside / Math.max(1, f.checked) > 0.02).length;
+  const sampled = all.some((f) => f.sent < f.total);
+  return (
+    <p className="bz-small">
+      Fill prices: {n(checked)} fills checked against market data. {n(outside)} fall outside the traded range on our data source{closed ? `, and ${n(closed)} are timed while the market was closed` : ""}. {n(accountsOut)} {accountsOut === 1 ? "account has" : "accounts have"} more than 2 in 100 outside.
+      {sampled ? " The batch was larger than 10,000 fills, so the same share of each account's fills was checked." : ""} {note ?? ""}
+    </p>
   );
 }

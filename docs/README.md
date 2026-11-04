@@ -30,9 +30,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
+- 2026-11-04 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
 - 2026-11-04 [LOG-0023: Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md)
 - 2026-11-04 [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
-- 2026-11-03 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
 - 2026-11-03 [LOG-0022: Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md)
 - 2026-11-03 [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
 - 2026-11-03 [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
@@ -240,7 +240,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 | REF-0029 | [Going live with real trading](reference/0029-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
-| REF-0030 | [Parity Verify methodology](reference/0030-parity-verify-methodology.md) | current | 2026-11-03 | [method](TAGS.md#method) |
+| REF-0030 | [Parity Verify methodology](reference/0030-parity-verify-methodology.md) | current | 2026-11-04 | [method](TAGS.md#method) |
 
 ## competitor
 

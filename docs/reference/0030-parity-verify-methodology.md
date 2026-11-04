@@ -4,17 +4,17 @@ title: Parity Verify methodology
 type: reference
 status: current
 created: 2026-10-27
-updated: 2026-11-03
+updated: 2026-11-04
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089, DEC-0090, DEC-0091]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089, DEC-0090, DEC-0091, DEC-0092]
 ---
 
 # Parity Verify methodology
 
 ## In plain words
 
-This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.2`. Research only. Not investment advice.
+This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.3`. Research only. Not investment advice.
 
 ## Summary
 
@@ -24,6 +24,7 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 | Luck check | Deflated Sharpe ratio at the stated tries, pass at 0.95, "survives up to N tries" |
 | Red flags | More than 20 average wins lost to one loss, martingale or grid, fall over 50% |
 | Trust | Self-reported for every upload; broker-connected when Parity read the trades from the broker and the signed proof matches |
+| Fill prices | With leave, symbol, time and price of each fill checked on our server against the range traded then ([DEC-0092](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)) |
 | Stored | Nothing unless a badge is published or the dataset box is ticked |
 
 ## Inputs
@@ -96,14 +97,27 @@ Each check is passed, failed or "cannot be checked from this input", never hidde
 | --- | --- |
 | Fills outside the day's range | With the day's high and low: a fill more than 0.1% outside them |
 | Fills far from the day's price | With one price a day: further from it than 3 times that market's 1-in-100 daily move, at least 1% |
-| Perfect timing | With highs and lows and at least 10 dated entries: more than 30% within 0.05% of the day's best price |
+| Fill prices against the traded range | With the fill price check: more than 2 in 100 checked fills, and at least 2, outside the range traded at that time on our data source |
+| Fills while the market was closed | With the fill price check: the same share of US stock fills timed on a weekend or a market holiday |
+| Perfect timing | With highs and lows (from the fill price check or the price file) and at least 10 dated entries: more than 30% within 0.05% of the day's best price |
 | Too smooth | At least 30 returns: lag-one autocorrelation above 0.3, or (daily) no losing month in more than 24 months with under 3% losing days [@getmansky2004] |
 | Edited history | At least 10 trades: median gap at most 3 days but gaps over 30 days; for TradingView and plain lists also skipped trade numbers when 90% of steps are 1 |
 | Backtest labelled as real | Said real money, file is a TradingView Strategy Tester export |
 | Strategy look-ahead test | Our strategies: cut-the-data test. Strategy code: passes, because each day sees only that close and earlier ones and look-ahead code is refused |
 | Perfect timing, for code | Run again with every order a day late, the Sharpe ratio falls below half of a positive original |
 
-We hold one price a day for major currency pairs, Bitcoin, Ether and the S&P 500, so for these the fill check is "far from the day's price" and perfect timing cannot be checked ([DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)). Without the price file, both say they cannot be checked.
+Our price file holds one price a day for major currency pairs, Bitcoin, Ether and the S&P 500, so against it the fill check is "far from the day's price"; the fill price check below covers the rest it can ([DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)). Without the price file, both say they cannot be checked.
+
+## Fill prices against market data
+
+[DEC-0092](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), method `fills-1.0`.
+
+- **What leaves the browser.** Only with the box left ticked and signed in: the symbol, time and price of each fill a source covers, and nothing else. The page asks first which markets and coins are covered. Unticked or signed out, nothing is sent and the rows say "Not run". Nothing about the fills is stored.
+- **Sources.** US stocks and funds: IEX exchange trades through Alpaca, one-minute bars 5 minutes either side, 0.5% (at least a cent), the day's range at 1% in the regular session when IEX had no trade; switched on only after Alpaca has had the notice its terms ask for. Crypto: swaps in our on-chain pools on Base, 10 minutes either side, 1%, about the last eight weeks. Exchanges' candles and every free currency source were read and refused this use.
+- **Answers.** Inside, outside, market closed (US stocks from 8 p.m. Friday to 8 p.m. Sunday New York time, and holidays), or not checked and why. Within 0.05% of the day's high or low is counted for perfect timing.
+- **Time zones.** As the file says; Interactive Brokers in New York time; otherwise the zone from UTC-12 to UTC+14 that fits most fills, an hour either way; fewer than 5 fills, inside at any zone counts.
+- **Fails** at more than 2 in 100 checked fills, and at least 2. Wording: "N fills fall outside the traded range on our data source".
+- **Limits.** 1,000 fills a request, 50,000 fills and 400 checks a day per person, 10,000 fills a batch. Broker-connected records are checked on our server as a self-test. Not in the API or AI apps yet.
 
 ## Card 5: overfitting flags
 
@@ -133,7 +147,8 @@ Fills are paired first in, first out per symbol into round trips. Each closing f
 
 ## What Verify cannot check yet
 
-- Anything inside the day: one closing price a day means code needing the open, high, low, volume, intraday bars, trailing stops or waiting orders is refused, and "perfect timing" for uploads cannot be checked.
+- Anything inside the day, for strategy code: code needing the open, high, low, volume, intraday bars, trailing stops or waiting orders is refused.
+- Fill prices outside our sources: currencies, futures, options, metals, indexes and coins without a Base pool are not checked against market data; crypto reaches back about eight weeks and needs a time of day and zone; US stocks wait for Alpaca's notice; a fair price at the wrong minute of the same day can still pass.
 - Other markets: strategy code runs on 9 currency pairs, Bitcoin, Ether and the S&P 500 only.
 - Some costs: overnight financing and swap, short borrowing and perpetual funding are not charged to strategy code.
 - Some code: values carried from day to day, functions written in the script, other time frames, partial exits and adding to a position are refused by name and line.
@@ -147,19 +162,20 @@ Every upload is "Self-reported: Parity checked the numbers in the file, not wher
 
 Broker-connected shows that the trades came from that venue and account and were not edited before the checks. It does not show how many other things were tried (tries are stated by the owner), the starting balance when typed, whose account it is beyond holding a read-only key, anything outside the dates read, or costs the venue books apart from fills.
 
-The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256 (for a broker-connected record, of the trades file Parity read), plus the signed proof; withdrawing deletes the numbers and the proof and keeps the venue and account code. A broker key is used once and dropped unless the owner asks to keep it in sync; then it is sealed with AES-GCM under a per-person key and can be revoked. Every read is logged for the owner. The dataset opt-in stores no user id and month-rounded dates.
+The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256 (for a broker-connected record, of the trades file Parity read), plus the signed proof; withdrawing deletes the numbers and the proof and keeps the venue and account code. A broker key is used once and dropped unless the owner asks to keep it in sync; then it is sealed with AES-GCM under a per-person key and can be revoked. Every read is logged for the owner. The dataset opt-in stores no user id and month-rounded dates. The fill price check stores no fill; the database counts fills and checks per person per day, for 30 days.
 
 ## Method versions
 
 | Version | From | What changed |
 | --- | --- | --- |
+| verify-1.3 | 2026-11-04 | Fill prices against market data: two card 4 rows, and perfect timing from the day's real low and high when known |
 | verify-1.2 | 2026-11-03 | Claims read from a seller's page or words; claim against file also compares the total return |
 | verify-1.1 | 2026-11-03 | Strategy code run on our prices; tries include the nearby settings; perfect timing by a one-day-late run and settings next to yours for code; many settings, few trades for code too |
 | verify-1.0 | 2026-10-24 | First version |
 
 ## Cite this
 
-Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.2. paritytrading.app/methodology/
+Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.3. paritytrading.app/methodology/
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
