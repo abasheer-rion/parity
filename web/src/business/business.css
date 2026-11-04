@@ -176,3 +176,7 @@ button.btn:disabled { opacity: .55; cursor: default; }
   .bz-table thead th { position: static; background: none; }
   .bz-table tr { break-inside: avoid; }
 }
+
+/* An account's name in the table opens its full Verify report (DEC-0089). */
+.bz-open { padding: 0; border: 0; background: none; font: inherit; color: var(--color-accent-text); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; text-align: left; }
+.bz-open:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-xs); }

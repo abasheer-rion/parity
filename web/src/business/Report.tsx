@@ -72,7 +72,7 @@ function BacktestPanel({ bt }: { bt: Backtest }) {
   );
 }
 
-export function Report({ results, summary, backtest, file }: { results: AccountResult[]; summary: Summary; backtest: Backtest | null; file: string }) {
+export function Report({ results, summary, backtest, file, onOpen }: { results: AccountResult[]; summary: Summary; backtest: Backtest | null; file: string; onOpen?: (id: string) => void }) {
   const [show, setShow] = useState<"all" | ScreenVerdict | "passers">("all");
   const [sort, setSort] = useState<{ key: SortKey; desc: boolean }>({ key: "id", desc: false });
   const rows = useMemo(() => {
@@ -166,7 +166,7 @@ export function Report({ results, summary, backtest, file }: { results: AccountR
             <tbody>
               {rows.map((r) => (
                 <tr key={r.id}>
-                  <th scope="row">{r.id}</th>
+                  <th scope="row">{onOpen ? <button type="button" className="bz-open" onClick={() => onOpen(r.id)} aria-label={`Open the full Verify report for account ${r.id}`}>{r.id}</button> : r.id}</th>
                   <td><Verdict v={r.verdict} /></td>
                   <td className="n">{n(r.trades)}</td>
                   <td className="n">{pct(r.returnPct, 1)}</td>
@@ -183,6 +183,7 @@ export function Report({ results, summary, backtest, file }: { results: AccountR
             </tbody>
           </table>
         </div>
+        {onOpen && <p className="bz-small">Select an account's name for its full Verify report: the pictures, all five checks and what could not be checked, built in this browser and opened in a new tab. Its verdict can differ from the screen's, because Verify asks more of a short record.</p>}
         <p className="bz-small">Default starting balance {money(s.options.startingBalance)} for accounts without one. Research only, not investment advice. A verdict is about the record, not about the trader's future.</p>
       </section>
     </div>

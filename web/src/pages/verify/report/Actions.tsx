@@ -59,6 +59,7 @@ export function ReportActions({ data, print, mode = "live" }: { data: ReportData
         {mode === "shared" && <Button variant="primary" icon="link" onClick={() => { void navigator.clipboard?.writeText(window.location.href).then(() => toast("Link copied.")).catch(() => toast("Copy the address from the address bar.")); }}>Copy this link</Button>}
         <Button icon="download" onClick={print}>Save as PDF</Button>
         <Button icon="sparkle" onClick={() => void card()} loading={busy === "card"}>Image for a post</Button>
+        <Button icon="compare" href={code ? `/verify/compare/#a=${code}` : undefined} target="_blank" rel="noopener" disabled={!code}>Compare with another record</Button>
       </div>
       {link && (
         <div className="rp-link">

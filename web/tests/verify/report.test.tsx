@@ -1,5 +1,5 @@
 // The Verify report (DEC-0089): the shape every check becomes, the link that carries it,
-// its pictures, its image card and the page that draws it.
+// its pictures, its image card, the side-by-side comparison, and the page that draws it.
 // Everything runs on made-up records (fixtures.ts); nothing is sent anywhere.
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
@@ -15,6 +15,7 @@ import { extractClaims } from "../../src/lib/verify/claims/extract";
 import { deflatedSharpeFrom } from "../../src/lib/verify/dsr";
 import { parseText } from "../../src/lib/verify/parse";
 import { reportCardSvg } from "../../src/lib/verify/report/card";
+import { compareRows, compareSentence, overlap } from "../../src/lib/verify/report/compare";
 import { decodeReport, encodeReport, LinkError, sanitizeReport } from "../../src/lib/verify/report/link";
 import { cannotCheck, keyNumbers, pictureGaps, reportFrom, type ReportData } from "../../src/lib/verify/report/model";
 import { thin, tradeSpread } from "../../src/lib/verify/report/series";
@@ -179,6 +180,30 @@ describe("the image card", () => {
     expect(svg).toContain(d.method);
     expect(svg).toMatch(/Survives|Luck check/);
     expect(svg).not.toMatch(/<script|NaN/);
+  });
+});
+
+describe("two records side by side", () => {
+  const a = reportFrom(file(honestEdge(), 10_000));
+  const b = reportFrom(file(martingaleLog(), 10_000));
+
+  it("puts the same numbers in the same rows and never says which to choose", () => {
+    const rows = compareRows(a, b);
+    expect(rows[0]).toMatchObject({ label: "Verdict", a: a.verdict.label, b: b.verdict.label });
+    expect(rows.map((r) => r.label)).toEqual(expect.arrayContaining(["Luck check", "Largest fall from a high", "Checks failed", "Could not be checked"]));
+    // Returns are shown but never marked better or worse.
+    for (const r of rows.filter((x) => ["Profit per trade (or period)", "Total return", "Win rate"].includes(x.label))) expect(r.worse).toBeNull();
+    const s = compareSentence(a, b);
+    expect(s).toContain("does not rank");
+    expect(s).not.toMatch(/better|best|choose [AB]/i);
+  });
+
+  it("lines the two growth curves up on the days they share", () => {
+    const o = overlap(a, reportFrom(file(honestEdge(), 20_000)));
+    expect(o).not.toBeNull();
+    expect(o!.a[0]).toBe(1);
+    expect(o!.b[0]).toBe(1);
+    expect(overlap(a, reportFrom(file(bot99(), null)))).toBeNull();
   });
 });
 

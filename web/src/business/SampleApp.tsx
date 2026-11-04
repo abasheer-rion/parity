@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { backtest, type Backtest } from "../lib/screen/backtest";
 import { readBatch } from "../lib/screen/read";
 import { SAMPLE_FILES } from "../lib/screen/sample";
-import { DEFAULT_OPTIONS, screenBatch, summarise, type AccountResult, type Summary } from "../lib/screen/score";
+import { DEFAULT_OPTIONS, screenBatch, summarise, type AccountInput, type AccountResult, type Summary } from "../lib/screen/score";
 import { Report } from "./Report";
+import { accountReportUrl, openAccountReport } from "./accountReport";
 
 const GENERATOR = "https://github.com/abasheer-rion/parity/blob/main/web/src/lib/screen/simulate.ts";
 
 export function SampleApp() {
-  const [state, setState] = useState<{ results: AccountResult[]; summary: Summary; backtest: Backtest | null } | null>(null);
+  const [state, setState] = useState<{ results: AccountResult[]; summary: Summary; backtest: Backtest | null; accounts: AccountInput[] } | null>(null);
   const [status, setStatus] = useState("Loading the sample and screening it in your browser.");
   useEffect(() => {
     let live = true;
@@ -22,7 +23,7 @@ export function SampleApp() {
         if (!t.ok || !d.ok) throw new Error("The sample files could not be loaded.");
         const read = await readBatch([{ name: "trades.csv", bytes: new Uint8Array(await t.arrayBuffer()) }], { name: "details.csv", bytes: new Uint8Array(await d.arrayBuffer()) });
         const results = await screenBatch(read.accounts, DEFAULT_OPTIONS, (k, n) => live && setStatus(`Screening ${k} of ${n} accounts in your browser.`));
-        if (live) { setState({ results, summary: summarise(results), backtest: backtest(results) }); setStatus(""); }
+        if (live) { setState({ results, summary: summarise(results), backtest: backtest(results), accounts: read.accounts }); setStatus(""); }
       } catch (e) {
         if (live) setStatus(e instanceof Error ? e.message : String(e));
       }
@@ -41,7 +42,11 @@ export function SampleApp() {
         <a className="bz-link" href="/business/screen/">Screen your own batch</a>
       </div>
       <p className="bz-progress" role="status" aria-live="polite">{status}</p>
-      {state ? <Report results={state.results} summary={state.summary} backtest={state.backtest} file="synthetic-sample.csv" /> : null}
+      {state ? <Report results={state.results} summary={state.summary} backtest={state.backtest} file="synthetic-sample.csv"
+        onOpen={(id) => {
+          const a = state.accounts.find((x) => x.id === id), row = state.results.find((x) => x.id === id);
+          if (a && row) openAccountReport(() => accountReportUrl(a, row, DEFAULT_OPTIONS.startingBalance, state.summary.version));
+        }} /> : null}
     </>
   );
 }

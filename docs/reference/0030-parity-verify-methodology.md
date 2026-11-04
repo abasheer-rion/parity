@@ -125,7 +125,7 @@ Short sample: fewer than 100 trades or less than 12 months. First part against l
 
 ## The report
 
-Every check ends in one report ([DEC-0089](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)): growth (against the S&P 500's daily closes when our prices are loaded), the luck check at 1 to 1 billion tries, the spread of the Sharpe ratio over 1,000 reshuffles in 21-day blocks or of profit per trade over 1,000 seeded draws of the trades (at least 200 for very long lists), falls from a high, and returns by kind of market, year, market and side. A shared report travels after the "#" of its link and is not stored or vouched for.
+Every check ends in one report ([DEC-0089](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)): growth (against the S&P 500's daily closes when our prices are loaded), the luck check at 1 to 1 billion tries, the spread of the Sharpe ratio over 1,000 reshuffles in 21-day blocks or of profit per trade over 1,000 seeded draws of the trades (at least 200 for very long lists), falls from a high, and returns by kind of market, year, market and side. A shared report travels after the "#" of its link and is not stored or vouched for. Two reports can be compared side by side, never ranked ([DEC-0090](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)).
 
 ## Imports
 
@@ -171,4 +171,5 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.2. pari
 - [DEC-0084: Verify's imports are tested on real exports](../decisions/0084-verify-imports-are-tested-on-real-exports.md)
 - [DEC-0088: Verify reads a seller's claims from their page](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
+- [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 <!-- backlinks:end -->

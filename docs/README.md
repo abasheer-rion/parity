@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 87 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 88 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 23 |
@@ -31,13 +31,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-11-03 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
+- 2026-11-03 [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 - 2026-11-03 [DEC-0089: Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - 2026-11-03 [DEC-0088: Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - 2026-11-03 [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 - 2026-11-03 [DEC-0084: Verify's imports are tested on real exports](decisions/0084-verify-imports-are-tested-on-real-exports.md)
 - 2026-11-03 [DEC-0083: Verify runs a strategy from its code on our prices](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - 2026-11-02 [RES-0031: Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)
-- 2026-11-02 [RES-0030: Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 
 ## intent
 
@@ -138,6 +138,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0087 | [Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md) | accepted | 2026-11-03 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | DEC-0088 | [Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0089 | [Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0090 | [Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

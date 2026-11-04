@@ -8,6 +8,7 @@ import { readBatch, type FileIn, type ReadResult } from "../lib/screen/read";
 import { SAMPLE_FILES } from "../lib/screen/sample";
 import { DEFAULT_OPTIONS, screenBatch, summarise, type AccountResult, type ScreenOptions, type Summary } from "../lib/screen/score";
 import { Report } from "./Report";
+import { accountReportUrl, openAccountReport } from "./accountReport";
 
 interface Done { results: AccountResult[]; summary: Summary; backtest: Backtest | null; read: ReadResult; file: string }
 
@@ -146,7 +147,11 @@ export function ScreenApp() {
               </ul>
             </section>
           ) : null}
-          <Report results={done.results} summary={done.summary} backtest={done.backtest} file={done.file} />
+          <Report results={done.results} summary={done.summary} backtest={done.backtest} file={done.file}
+            onOpen={(id) => {
+              const a = done.read.accounts.find((x) => x.id === id), row = done.results.find((x) => x.id === id);
+              if (a && row) openAccountReport(() => accountReportUrl(a, row, opts.startingBalance, done.summary.version));
+            }} />
         </div>
       ) : null}
     </>
