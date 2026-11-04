@@ -1,7 +1,9 @@
 // Running every check on a record and putting the result together: the verdict, the five
 // cards, the claim arithmetic and what the record was. Pure functions, no React.
-import { holdup as holdupOf } from "../../holdup";
+import { holdup as holdupOf, returnsFromEquity, type Series } from "../../holdup";
 import type { Holdup } from "../../types";
+import type { FoundClaim } from "../claims/extract";
+import { growthCurve, moneyCurve, tradeGroups, tradeSpread, yearGroups, type Curve, type GroupFamily, type Groups, type Spread } from "../report/series";
 import { day } from "../csv";
 import { normaliseSymbol, type PriceBook } from "../prices";
 import { daysBetween, drawdowns, fromEquity, fromTrades, type ReturnSeries } from "../returns";
@@ -60,16 +62,119 @@ export interface Result {
    * one of our strategies, the research run's own numbers. Never kept on a public badge.
    */
   holdup?: Holdup | null;
+  /** The report's pictures (DEC-0088): the record's value over time, its spread under reshuffling, where it made and lost money. */
+  curve?: Curve | null;
+  spread?: Spread | null;
+  groups?: Groups | null;
+  /** Totals the claim comparison and the report use. */
+  facts?: RecordFacts;
+  /** The market series the record was compared with, when there was one. */
+  benchmark?: string | null;
+  /** Claims read from a seller's page or words, when this record was checked against them. */
+  claimSource?: ClaimSource;
 }
 
-/** The "how it holds up" numbers for an uploaded record: daily returns only, nothing to compare against. */
-export function holdupForUpload(rs: ReturnSeries | null, tries: number): Holdup | null {
+/** Totals of a record, null where the input cannot give them. */
+export interface RecordFacts {
+  /** Growth over the whole record, as a fraction. Needs returns. */
+  totalReturn: number | null;
+  monthlyReturn: number | null;
+  /** Compound return a year. Needs returns over at least a month. */
+  yearlyReturn: number | null;
+}
+
+/** Where a claim came from: a page we read, or words the person pasted. */
+export interface ClaimSource {
+  url: string | null;
+  title: string | null;
+  /** When the page was read, ISO time. */
+  readAt: string | null;
+  found: FoundClaim[];
+}
+
+/** A market series to compare a record with, as daily returns. */
+export interface Benchmark { name: string; returns: Series }
+
+/** Daily returns of one of our price series (the S&P 500 for the report's comparison). */
+export function benchmarkFrom(prices: PriceBook | null, symbol = "SPX", name = "S&P 500"): Benchmark | null {
+  const s = prices?.[symbol];
+  if (!s || s.days.size < 60) return null;
+  const pts = [...s.days.entries()].sort(([a], [b]) => (a < b ? -1 : 1)).map(([d, [lo, hi]]) => [d, (lo + hi) / 2] as [string, number]);
+  return { name, returns: returnsFromEquity(pts) };
+}
+
+/** The "how it holds up" numbers for an uploaded record, against a benchmark when there is one. */
+export function holdupForUpload(rs: ReturnSeries | null, tries: number, bench?: Benchmark | null): Holdup | null {
   if (!rs || rs.periodsPerYear < 180 || rs.returns.length < 30) return null;
   const why = "upload";
   return holdupOf({
     returns: { dates: rs.dates, values: rs.returns }, nTrials: tries,
-    names: { strategy: "your record" }, reasons: { benchmark: why, stocks: why, bonds: why, rates: why },
+    benchmark: bench?.returns ?? null, stocks: bench?.returns ?? null,
+    names: { strategy: "your record", ...(bench ? { benchmark: bench.name, stocks: bench.name } : {}) },
+    reasons: bench ? { bonds: why, rates: why } : { benchmark: why, stocks: why, bonds: why, rates: why },
   });
+}
+
+const r6 = (v: number) => Math.round(v * 1e6) / 1e6;
+
+/** The report's pictures from what a check has: "how it holds up" when there are daily returns, else the record itself. */
+function pictures(h: Holdup | null | undefined, rs: ReturnSeries | null, trades: readonly Trade[] | undefined, benchName: string | null): { curve: Curve | null; spread: Spread | null; groups: Groups | null } {
+  let curve: Curve | null = null;
+  if (h && h.equity_vs_benchmark.dates.length > 1) {
+    const e = h.equity_vs_benchmark;
+    const idx = e.strategy.map((v, i) => (v == null ? -1 : i)).filter((i) => i >= 0);
+    curve = {
+      unit: "growth", dates: idx.map((i) => e.dates[i]), values: idx.map((i) => r6(e.strategy[i]!)),
+      bench: e.benchmark && h.sources.benchmark.available ? idx.map((i) => (e.benchmark![i] == null ? null : r6(e.benchmark![i]!))) : null,
+      benchName: h.sources.benchmark.available ? benchName : null,
+    };
+  } else if (rs && rs.dates.length > 1) curve = growthCurve(rs.dates, rs.equity0, rs.equity);
+  else if (trades?.length) curve = moneyCurve(trades);
+
+  let spread: Spread | null = null;
+  const bs = h?.bootstrap;
+  if (bs && bs.histogram.counts.length && bs.histogram.edges.every((x) => x != null)) {
+    spread = {
+      what: "sharpe", n: bs.n, block: bs.block_days, edges: bs.histogram.edges as number[], counts: bs.histogram.counts,
+      point: bs.sharpe.point, ci95: bs.sharpe.ci95 && bs.sharpe.ci95[0] != null && bs.sharpe.ci95[1] != null ? [bs.sharpe.ci95[0], bs.sharpe.ci95[1]] : null,
+      ci80: bs.sharpe.ci80 && bs.sharpe.ci80[0] != null && bs.sharpe.ci80[1] != null ? [bs.sharpe.ci80[0], bs.sharpe.ci80[1]] : null,
+      above: bs.prob_sharpe_above_zero,
+    };
+  } else if (trades && trades.length >= 10) spread = tradeSpread(trades.map((t) => t.pnl));
+
+  const families: GroupFamily[] = [];
+  for (const f of h?.regimes ?? []) {
+    if (!f.available || !f.items.length || f.family === "decades") continue;
+    families.push({
+      family: f.family, unit: "return",
+      title: f.family === "volatility" ? "Calm and volatile markets" : f.family === "crises" ? "Stock market crises" : "Rates rising and falling",
+      items: f.items.map((i) => ({
+        label: i.label.replace(/ (crash|crisis|bear market)$/i, ""),
+        value: (f.family === "crises" ? i.strategy_total : i.strategy_ann) ?? 0,
+        bench: f.family === "crises" ? i.benchmark_total : i.benchmark_ann,
+      })),
+    });
+  }
+  let years = rs && rs.dates.length > 1 ? yearGroups(rs.dates, rs.returns) : null;
+  // A long research run has too many years for one picture: its decades instead.
+  if (years && years.items.length > 15) {
+    const dec = h?.regimes.find((f) => f.family === "decades" && f.available && f.items.length);
+    years = dec
+      ? { family: "decades", title: "Each decade", unit: "return", items: dec.items.map((i) => ({ label: i.label, value: i.strategy_ann ?? 0, bench: i.benchmark_ann })) }
+      : { ...years, title: "The last 15 years", items: years.items.slice(-15) };
+  }
+  if (years) families.push(years);
+  const byTrade = trades?.length ? tradeGroups(trades) : null;
+  for (const f of byTrade?.families ?? []) if (!(years && f.family === "years")) families.push(f);
+  return { curve, spread, groups: families.length ? { families } : null };
+}
+
+function factsOf(rs: ReturnSeries | null): RecordFacts {
+  if (!rs || !rs.dates.length || !(rs.equity0 > 0)) return { totalReturn: null, monthlyReturn: null, yearlyReturn: null };
+  const end = rs.equity[rs.equity.length - 1];
+  const total = end / rs.equity0 - 1;
+  const days = daysBetween(rs.dates[0], rs.dates[rs.dates.length - 1]);
+  return { totalReturn: total, monthlyReturn: monthlyFrom(rs), yearlyReturn: days >= 30 && end > 0 ? (end / rs.equity0) ** (365.25 / days) - 1 : null };
 }
 
 export const moneyText = (v: number) => {
@@ -113,10 +218,12 @@ export interface FileInput {
   parsed: Parsed; answers: Answers; prices: PriceBook | null; triesDefaulted?: boolean;
   /** Why the daily prices were not loaded (signed out on the public page), in words for card 4. */
   pricesMissing?: string;
+  /** A market to compare with in the report (the S&P 500 from our daily prices, signed in). */
+  benchmark?: Benchmark | null;
 }
 
 /** Input A: an uploaded trade log or equity curve, checked in the browser. */
-export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissing }: FileInput): Result {
+export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissing, benchmark }: FileInput): Result {
   const notes: string[] = [];
   const trades = parsed.trades;
   const balance = answers.balance && answers.balance > 0 ? answers.balance : null;
@@ -153,10 +260,13 @@ export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissi
     labelCheck(answers.kind, parsed.backtestExport),
     strategyLookAheadCheck("file"),
   ];
+  const facts = factsOf(rs);
   const claim = claimCheck(answers.claim, {
     winRate: trades?.length ? card1?.winRate ?? null : null,
-    monthlyReturn: monthlyFrom(rs),
+    monthlyReturn: facts.monthlyReturn,
     maxDrawdown: dd?.maxDrawdown ?? null,
+    totalReturn: facts.totalReturn,
+    months: dateFrom && dateTo ? months(dateFrom, dateTo) : null,
   });
   const card5: CheckRow[] = [
     shortSampleCheck(trades ? trades.length : null, dateFrom, dateTo),
@@ -168,13 +278,16 @@ export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissi
   if (parsed.backtestExport) notes.push(`This is a ${parsed.format === "tradingview" ? "TradingView" : "MetaTrader Strategy Tester"} backtest. It shows what the rules would have done on past prices. No real trades were made.`);
   const money = card1?.basis === "trade" ? moneyText : (v: number) => pctText(v, 2);
   const dailyReturns = rs && rs.periodsPerYear >= 180 ? rs.returns.length : 0;
+  const holdup = holdupForUpload(rs, answers.tries, benchmark);
   return {
     source: "file", kind: answers.kind, tries: answers.tries, triesDefaulted: !!triesDefaulted, methodVersion: METHOD_VERSION,
     what: parsed.what ?? FORMAT_LABEL[parsed.format], dateFrom, dateTo, trades: trades ? trades.length : null, dailyReturns, balance,
     assets: assetClasses(trades), card1, card2, card3, card4, card5, claims: claimRows(answers.claim),
     verdict: verdict({ trades: trades ? trades.length : null, dailyReturns, card1, card2, card3, card4, card5, contradicted: claim.contradicted, money, pct: pctText }),
     notes,
-    holdup: holdupForUpload(rs, answers.tries),
+    holdup,
+    ...pictures(holdup, rs, trades, benchmark?.name ?? null),
+    facts, benchmark: holdup?.sources.benchmark.available ? benchmark?.name ?? null : null,
   };
 }
 
@@ -223,6 +336,8 @@ export function checkStrategy(x: StrategyInput): Result {
     notes: [`Built from the strategy's equity curve in our research run (${basisFor(rs.periodsPerYear)} values), with the ${x.tries.toLocaleString("en-US")} tries our research and search have counted.`],
     gauntlet: x.gauntlet ?? undefined,
     holdup: x.holdup ?? null,
+    ...pictures(x.holdup, rs, undefined, "US stock market"),
+    facts: factsOf(rs), benchmark: x.holdup?.sources.benchmark.available ? "US stock market" : null,
   };
 }
 
@@ -287,7 +402,7 @@ export interface CodeFacts {
  * settings we ran, a "perfect timing" check from the one-day-later run and a card 5 row for
  * the nearby settings.
  */
-export function checkBacktest(x: CodeRun, triesStated: number, triesDefaulted = false): Result {
+export function checkBacktest(x: CodeRun, triesStated: number, triesDefaulted = false, benchmark?: Benchmark | null): Result {
   const run = x.run;
   const notes: string[] = [];
   const points: EquityPoint[] = [{ date: run.dates[0], equity: run.capital }, ...run.dates.slice(1).map((d, i) => ({ date: d, equity: run.equity[i + 1] }))];
@@ -329,13 +444,16 @@ export function checkBacktest(x: CodeRun, triesStated: number, triesDefaulted = 
   notes.push(...r.notes);
   const what = `${r.name ? `"${r.name}"` : r.language === "pine" ? "Pine Script strategy" : r.language === "python" ? "Python strategy" : "Rule set"} on ${x.rules.market}`;
   const money = moneyText;
+  const holdup = holdupForUpload(rs, tries, benchmark);
   return {
     source: "code", kind: "backtest", tries, triesDefaulted, methodVersion: METHOD_VERSION, what,
     dateFrom, dateTo, trades: trades.length, dailyReturns: rs.periodsPerYear >= 180 ? rs.returns.length : 0, balance,
     assets: assetClasses(trades), card1, card2, card3, card4, card5, claims: [],
     verdict: verdict({ trades: trades.length, dailyReturns: rs.periodsPerYear >= 180 ? rs.returns.length : 0, card1, card2, card3, card4, card5, contradicted: [], money, pct: pctText }),
     notes,
-    holdup: holdupForUpload(rs, tries),
+    holdup,
+    ...pictures(holdup, rs, trades, benchmark?.name ?? null),
+    facts: factsOf(rs), benchmark: holdup?.sources.benchmark.available ? benchmark?.name ?? null : null,
     code: {
       language: r.language, name: r.name, market: x.rules.market, marketName, rules: x.rules, cost: run.cost,
       costWhy: run.costFromScript ? "the cost the script declares, which is above ours" : MARKETS.find((m) => m.id === x.rules.market)?.costWhy ?? "",

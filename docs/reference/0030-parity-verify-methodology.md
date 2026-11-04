@@ -7,14 +7,14 @@ created: 2026-10-27
 updated: 2026-11-03
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089]
 ---
 
 # Parity Verify methodology
 
 ## In plain words
 
-This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.1`. Research only. Not investment advice.
+This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.2`. Research only. Not investment advice.
 
 ## Summary
 
@@ -31,6 +31,7 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 - **A file**: a trade list or equity curve, CSV or tab separated, up to 5 MB and 50,000 rows, read and checked in the browser and never sent. Before the checks run the person states real money, demo or backtest (default backtest), the starting balance, the number of things tried before this one (default 1) and, optionally, what was claimed.
 - **A description of a bot**: a rule-based reader pulls out the claims. Only the claim arithmetic and the settings count can be checked.
 - **One of our strategies**: its research equity curve, at the number of tries our research and search have counted.
+- **A seller's page or words**: the claims on a public page, read by our server under its robots.txt with no login, or in words pasted, each with the words it came from ([DEC-0088](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)).
 - **Strategy code**: Pine Script, a simple Python strategy, or rules in the `parity-rules-1` format (also written from a description by the person's own model), run by us on our daily closes ([DEC-0083](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)).
 
 ## Strategy code
@@ -106,7 +107,7 @@ We hold one price a day for major currency pairs, Bitcoin, Ether and the S&P 500
 
 ## Card 5: overfitting flags
 
-Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions and strategy code, more than one setting per 20 trades. Settings next to yours, for code: fewer than half of the nearby settings make money after costs. Claim against file: more than 5 points apart on win rate, monthly return or largest fall.
+Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions and strategy code, more than one setting per 20 trades. Settings next to yours, for code: fewer than half of the nearby settings make money after costs. Claim against file: more than 5 points apart on win rate, monthly return or largest fall; or, on total return, more than 5 points and more than a tenth apart, unless the claim names a length of time more than a quarter away from the record's.
 
 ## Claim arithmetic
 
@@ -115,6 +116,16 @@ Short sample: fewer than 100 trades or less than 12 months. First part against l
 3. Over 10% a month for more than 12 months is shown compounded to a year, next to about 10% for the S&P 500.
 4. Grid or martingale with no stated maximum loss: "loss is not capped".
 5. Win rate above 90% with no average loss or stop: "the win rate alone says nothing about profit".
+
+## Claims from a seller's page
+
+- **Reading.** The page is fetched once as `ParityVerify/1.0`, after its robots.txt allows it [RFC 9309](https://www.rfc-editor.org/rfc/rfc9309): our group if named, else "*", longest rule first, allow on a tie. No cookies or login; at most 3 redirects, each checked again; the first 2 MB; 8 seconds; http or https on ports 80 and 443; no IP addresses or local names. A login wall or a bot check is reported. X refuses all automatic readers, so its posts are pasted. Nothing is kept.
+- **Finding.** Fixed patterns read labelled values and sentences: total, monthly and yearly return, win rate, largest fall, trades, trades a month, length of time, start date, profit factor, take-profit, stop, grid and martingale. A label beats a sentence; of several drawdowns the largest is used. A person's own model can add claims, each quoting words on the page.
+- **Against a record.** Win rate, monthly return, largest fall and total return use the claim-against-file lines and can change the verdict. Trades (within a tenth), profit factor, start date (within a month), length of time and yearly return are shown only. Pips and a site's Sharpe ratio are not compared.
+
+## The report
+
+Every check ends in one report ([DEC-0089](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)): growth (against the S&P 500's daily closes when our prices are loaded), the luck check at 1 to 1 billion tries, the spread of the Sharpe ratio over 1,000 reshuffles in 21-day blocks or of profit per trade over 1,000 seeded draws of the trades (at least 200 for very long lists), falls from a high, and returns by kind of market, year, market and side. A shared report travels after the "#" of its link and is not stored or vouched for.
 
 ## Imports
 
@@ -138,12 +149,13 @@ Every upload is "Self-reported: Parity checked the numbers in the file, not wher
 
 | Version | From | What changed |
 | --- | --- | --- |
+| verify-1.2 | 2026-11-03 | Claims read from a seller's page or words; claim against file also compares the total return |
 | verify-1.1 | 2026-11-03 | Strategy code run on our prices; tries include the nearby settings; perfect timing by a one-day-late run and settings next to yours for code; many settings, few trades for code too |
 | verify-1.0 | 2026-10-24 | First version |
 
 ## Cite this
 
-Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.1. paritytrading.app/methodology/
+Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.2. paritytrading.app/methodology/
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
@@ -157,4 +169,6 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.1. pari
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
 - [DEC-0083: Verify runs a strategy from its code on our prices](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - [DEC-0084: Verify's imports are tested on real exports](../decisions/0084-verify-imports-are-tested-on-real-exports.md)
+- [DEC-0088: Verify reads a seller's claims from their page](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
+- [DEC-0089: Every Verify check ends in one report that can be shared and printed](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 <!-- backlinks:end -->

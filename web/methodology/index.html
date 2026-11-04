@@ -18,7 +18,7 @@
 
   <nav class="lg-toc" aria-label="On this page">
     <a href="#inputs">Inputs</a><a href="#returns">Returns</a><a href="#code">Strategy code</a><a href="#verdict">Verdict</a><a href="#expectancy">Card 1</a><a href="#tail">Card 2</a>
-    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
+    <a href="#luck">Card 3</a><a href="#lookahead">Card 4</a><a href="#overfit">Card 5</a><a href="#claims">Claims</a><a href="#claims-from-a-page">Claims from a page</a><a href="#report">The report</a><a href="#batch">Batch screen</a><a href="#imports">Imports</a>
     <a href="#limits">Limits</a><a href="#trust">Trust</a><a href="#stored">Storage</a><a href="#changelog">Changelog</a><a href="#cite">Cite this</a><a href="#references">References</a>
   </nav>
 
@@ -141,7 +141,7 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
       <tr><td>Concentration</td><td>At least 10 trades and an overall profit: the best 5 trades make more than 50% of it</td></tr>
       <tr><td>Many settings, few trades</td><td>Descriptions and strategy code: more than one adjustable setting per 20 trades</td></tr>
       <tr><td>Settings next to yours</td><td>Strategy code: fewer than half of the nearby settings make money after costs</td></tr>
-      <tr><td>Claim against file</td><td>A claimed win rate, monthly return (compounded average) or largest fall differs from the file by more than 5 percentage points</td></tr>
+      <tr><td>Claim against file</td><td>A claimed win rate, monthly return (compounded average) or largest fall differs from the file by more than 5 percentage points; or a claimed total return differs by more than 5 points and more than a tenth, when any length of time the claim names is within a quarter of the file's</td></tr>
     </tbody>
   </table></div>
 
@@ -153,6 +153,25 @@ V   = (1 + SR&sup2;/2) / (T &minus; 1)</code></pre>
     <li>A grid or martingale bot with no stated maximum loss is flagged "loss is not capped".</li>
     <li>A win rate above 90% with no stated average loss or stop gets "the win rate alone says nothing about profit".</li>
   </ol>
+
+  <h2 id="claims-from-a-page">Claims from a seller's page</h2>
+  <p>A seller's page address or words can be checked on <a href="/verify/">/verify/</a>, with <code>verify_claim</code> and with <code>POST /api/v1/verify/claim</code>.</p>
+  <ul>
+    <li><strong>Reading the page.</strong> Our server opens a public page once, as <code>ParityVerify/1.0</code>, after reading the site's robots.txt (RFC 9309: our own group if named, otherwise "*"; the longest rule wins). It sends no cookies and no login, follows at most 3 redirects, each checked again, reads the first 2 MB and stops after 8 seconds. It never opens an IP address, a local name or a port other than 80 and 443. A page behind a login or a check for automatic visitors is reported, not worked round. X asks every automatic reader to stay out, so posts are pasted, not fetched. Nothing is kept.</li>
+    <li><strong>Finding the claims.</strong> Fixed patterns read labelled values on statistics pages ("Growth: 212.48%", "Profit Trades: 481 (68.52%)") and claims in sentences ("92% win rate", "+340% in 12 months"): total, monthly and yearly return, win rate, largest fall, number of trades, trades a month, how long it ran, start date, profit factor, take-profit, stop, grid and martingale. Each claim keeps the words it came from. A label beats a sentence; of several drawdowns the largest is used, the reading kindest to the seller. Negations ("No martingale, no grid") are respected; forecasts, risk per trade, leverage and fees are not claims.</li>
+    <li><strong>The person's own model</strong>, when they connect one, can add claims; each must quote words that are on the page, or it is left out.</li>
+    <li><strong>Against a record.</strong> Win rate, monthly return, largest fall and total return use the "Claim against file" lines above and can change the verdict. Number of trades (within a tenth), profit factor, start date, length of time and yearly return are shown and never change it. Pips and a site's own Sharpe ratio are not compared.</li>
+  </ul>
+
+  <h2 id="report">The report</h2>
+  <p>Every check ends in one report: the verdict in a sentence, the numbers that decided it, the claims, five pictures, the five checks, what was checked and what could not be. The pictures:</p>
+  <ul>
+    <li><strong>Growth</strong>: growth of 1 dollar (profit so far in money without a starting balance), next to the S&amp;P 500's daily closes when our prices are loaded, which needs a signed-in account. Thinned to at most 240 points, keeping each stretch's lowest and highest.</li>
+    <li><strong>Could it be luck, after every try</strong>: the luck check (card 3) at 1 to 1 billion tries, with the tries counted marked and the stretch above 0.95 shaded.</li>
+    <li><strong>How sure is the result</strong>: with daily returns, the Sharpe ratio across 1,000 reshuffles in 21-day blocks; for a trade list, profit per trade across 1,000 draws of the trades with replacement (at least 200 for very long lists), seeded so it never changes. The 95% range is marked.</li>
+    <li><strong>Falls from a high</strong> and <strong>where it wins and loses</strong>: calm and volatile markets and the named crises (with the S&amp;P 500), each year, each market and long against short.</li>
+  </ul>
+  <p>A report can be shared as a link. The report travels after the "#" of the address, which browsers never send, so Parity stores nothing and cannot vouch that a shared link was not changed; the page says so. Saving as PDF prints the same report with still pictures.</p>
 
   <h2 id="batch">Batch screen for firms</h2>
   <p>The batch screen (<a href="/business/screen/">/business/screen/</a> and <code>POST /api/v1/verify/batch</code>) judges many short records at once, such as the accounts in a prop firm's challenge. Method version <code><!--verify:screen-version--></code>. It uses the checks above, but its verdict is one of three, because a challenge lasts weeks and the "short sample" check on card 5 would fail every account.</p>

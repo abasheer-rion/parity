@@ -61,7 +61,7 @@ function logo(svg: string, x: number, y: number, height: number): string {
   return `<svg x="${x}" y="${y}" width="${width}" height="${height}" viewBox="${box}">${inner}</svg>`;
 }
 
-function frame(body: string, logoSvg: string, foot: string, accent?: string): string {
+export function frame(body: string, logoSvg: string, foot: string, accent?: string): string {
   const grid: string[] = [];
   for (let x = 60; x < W; x += 60) grid.push(`M${x} 0V${H}`);
   for (let y = 60; y < H; y += 60) grid.push(`M0 ${y}H${W}`);

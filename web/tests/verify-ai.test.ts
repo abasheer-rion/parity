@@ -159,6 +159,41 @@ describe("Verify tools on the hosted MCP server", () => {
     expect((monthly.claims as { text: string }[])[0].text).toContain("$79,497");
   });
 
+  it("verify_claim reads a seller's page from its url, with the words for each claim (DEC-0088)", async () => {
+    const seen: string[] = [];
+    const fakeFetch = (async (input: RequestInfo | URL) => {
+      const u = String(input);
+      seen.push(u);
+      if (u.endsWith("/robots.txt")) return new Response("User-agent: *\nDisallow: /private", { headers: { "content-type": "text/plain" } });
+      return new Response("<html><head><title>Gold bot</title></head><body><p>92% win rate, +340% in 12 months, no stop loss.</p><p>Take profit 5%</p></body></html>", { headers: { "content-type": "text/html" } });
+    }) as typeof fetch;
+    const c = { ...ctx, fetch: fakeFetch };
+    const r = await byName("verify_claim").run({ url: "https://bots.example.com/gold" }, c) as Record<string, unknown>;
+    expect(seen).toEqual(["https://bots.example.com/robots.txt", "https://bots.example.com/gold"]);
+    expect((r.page as { title: string }).title).toBe("Gold bot");
+    expect((r.claim_used as { winRate: number; totalReturn: number }).winRate).toBe(0.92);
+    expect((r.claim_used as { totalReturn: number }).totalReturn).toBe(3.4);
+    const found = r.claims_found as { field: string; words: string; from: string }[];
+    expect(found.find((f) => f.field === "winRate")).toMatchObject({ from: "page" });
+    expect(found.find((f) => f.field === "winRate")!.words).toContain("92% win rate");
+    expect((r.against_record as { status: string }[]).every((x) => x.status === "needs_record" || x.status === "not_compared")).toBe(true);
+    // The no-stop rule fires on the page's words.
+    expect((r.claims as { id: string }[]).map((x) => x.id)).toContain("breakeven");
+    // robots.txt says no: nothing is fetched and the answer says why.
+    await expect(byName("verify_claim").run({ url: "https://bots.example.com/private/x" }, c)).rejects.toThrow(/robots\.txt/);
+    await expect(byName("verify_claim").run({ url: "https://x.com/someone/status/1" }, c)).rejects.toThrow(/X does not allow/);
+    expect(byName("verify_claim").annotations.openWorldHint).toBe(true);
+  });
+
+  it("verify_claim checks each claim against a record sent with it", async () => {
+    const r = await run1("verify_claim", { text: "Win rate 90%, total return 2% so far", record: { kind: "real", starting_balance: 10_000, trades: TRADES } });
+    const against = r.against_record as { field: string; status: string; changes_verdict: boolean }[];
+    expect(against.find((x) => x.field === "winRate")).toMatchObject({ status: "differs", changes_verdict: true });
+    expect((r.verdict as { id: string }).id).toBe("does_not_hold_up");
+    expect((r.record as { trades: number }).trades).toBe(TRADES.length);
+    expect(r.could_not_check).toEqual([]);
+  });
+
   it("verify_description still answers a description with no numbers", async () => {
     const r = await run1("verify_description", { text: "A trend bot on gold" });
     expect((r.verdict as { id: string }).id).toBe("not_enough_data");

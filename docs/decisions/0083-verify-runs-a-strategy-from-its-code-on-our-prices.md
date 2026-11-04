@@ -47,5 +47,6 @@ On 3 November 2026 the owner asked for "the actual product": a real trader shoul
 ## Referenced by
 
 - [DEC-0084: Verify's imports are tested on real exports](0084-verify-imports-are-tested-on-real-exports.md)
+- [DEC-0088: Verify reads a seller's claims from their page](0088-verify-reads-a-seller-s-claims-from-their-page.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)
 <!-- backlinks:end -->

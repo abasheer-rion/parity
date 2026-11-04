@@ -3,7 +3,7 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1834 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1836 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
@@ -12,7 +12,7 @@ Every outside source this project relies on: papers, books, datasets, code, web 
 | [Books](#books) | 21 |
 | [Datasets](#datasets) | 67 |
 | [Software](#software) | 114 |
-| [Web pages](#web-pages) | 1058 |
+| [Web pages](#web-pages) | 1060 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
 | [News](#news) | 13 |
@@ -9393,6 +9393,12 @@ App Store customer review feed, Collective2 app. (n.d.). *itunes.apple.com*. <ht
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
 
+### url-c2019c86
+
+X robots.txt. (2026). *x.com*. <https://x.com/robots.txt>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0088](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md).
+
 ### url-c23b7529
 
 About LMAX Group. (n.d.). *lmax.com*. <https://www.lmax.com/about/>. Accessed 2026-10-24. Verification: not checked.
@@ -9616,6 +9622,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Gemini CLI MCP servers. (n.d.). *geminicli.com*. <https://geminicli.com/docs/tools/mcp-server/>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-cb22e73a
+
+Robots Exclusion Protocol (RFC 9309). (2022). *rfc-editor.org*. <https://www.rfc-editor.org/rfc/rfc9309>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0088](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md), [REF-0030](reference/0030-parity-verify-methodology.md).
 
 ### url-cb6d397b
 

@@ -1,0 +1,4 @@
+My gold bot just closed its 500th trade.
+71% win rate, PF 2.3, max DD 11.2%.
+Started Jan 2024 with $10k, account now $27.4k (+174%).
+No grid, no martingale. Stop-loss at 1.5% on every trade.

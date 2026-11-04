@@ -31,6 +31,10 @@ export const EXPLAIN: Record<string, string> = {
   sharpeAnnual: "The Sharpe ratio scaled to a year, with a zero risk-free rate.",
   observations: "How many returns (or trades) the luck check used.",
   monthsMore: "How many more months of the same results the record would need to pass the luck check at the stated tries.",
+  // The report (DEC-0089)
+  totalReturn: "How much the account grew over the whole record, after fees, as a share of where it started.",
+  claimed: "The number as the seller's page or words state it. Rates are compared in percentage points.",
+  recordShows: "The same number worked out from the record you gave, by the method on the methodology page.",
   // Meta
   trades: "Closed trades read from the file, after open and cancelled orders were left out.",
   dates: "The first and last day in the record.",
