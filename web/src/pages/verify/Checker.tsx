@@ -11,7 +11,7 @@ import { nameOf, searchTextOf, tagsOf } from "../../lib/strategyMeta";
 import { checkDescription, checkFile, checkStrategy, type Result } from "../../lib/verify/checks";
 import { MAX_BYTES, ParseError } from "../../lib/verify/csv";
 import { closest, extract, searchVerdict, type Candidate, type Match } from "../../lib/verify/describe";
-import { build, defaultMapping, describeParsed, FIELDS, parseText } from "../../lib/verify/parse";
+import { build, defaultMapping, describeParsed, FIELDS, parseFile } from "../../lib/verify/parse";
 import { loadPrices } from "../../lib/verify/prices";
 import { FORMAT_LABEL, type Answers, type FormatId, type InputKind, type Parsed } from "../../lib/verify/types";
 import { Button, Checkbox, ChoiceCards, Disclosure, EmptyState, Input, SearchInput, Select, SkeletonTable, useResource, type Choice } from "../../ui";
@@ -116,17 +116,17 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
   const read = async (f: File) => {
     setError(null); setFile(null);
     if (f.size > MAX_BYTES) { setError("The file is larger than 5 MB, the most Verify reads for now."); return; }
-    if (!/\.(csv|txt|tsv)$/i.test(f.name) && f.type && !/text|csv/.test(f.type)) { setError("Verify reads .csv and .txt files (with commas or tabs)."); return; }
+    if (!/\.(csv|txt|tsv|htm|html|xlsx|json)$/i.test(f.name) && f.type && !/text|csv|html|json|spreadsheet/.test(f.type)) { setError("Verify reads CSV and text files, MetaTrader HTML reports, Excel files (.xlsx) and JSON."); return; }
     try {
-      // The bytes are hashed for the badge and read as text once; only the parsed rows,
-      // without personal columns, are kept. Nothing is sent anywhere.
+      // The bytes are hashed for the badge and read once; only the parsed rows, without
+      // personal columns, are kept. Nothing is sent anywhere.
       const buf = await f.arrayBuffer();
-      const [hash, parsed] = [await sha256(buf), parseText(new TextDecoder().decode(buf))];
+      const [hash, parsed] = [await sha256(buf), await parseFile(buf)];
       setFile({ parsed, sha256: hash, name: f.name });
       setBalance(parsed.inferredBalance ? String(parsed.inferredBalance) : "");
       if (parsed.backtestExport) setKind("backtest");
     } catch (e) {
-      setError(e instanceof ParseError ? e.message : "We could not read this file. Is it a CSV export?");
+      setError(e instanceof ParseError ? e.message : "We could not read this file. Is it a CSV, HTML, Excel or JSON export of a trade history?");
     }
   };
 
@@ -166,10 +166,10 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
       <label className={`vf-drop ${drag ? "is-drag" : ""}`}
         onDragOver={(e) => { e.preventDefault(); setDrag(true); }} onDragLeave={() => setDrag(false)}
         onDrop={(e) => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files?.[0]; if (f) void read(f); }}>
-        <input ref={input} type="file" accept=".csv,.txt,.tsv,text/csv,text/plain" className="sr-only"
+        <input ref={input} type="file" accept=".csv,.txt,.tsv,.htm,.html,.xlsx,.json,text/csv,text/plain,text/html,application/json" className="sr-only"
           onChange={(e) => { const f = e.target.files?.[0]; if (f) void read(f); e.target.value = ""; }} />
         <strong>{file ? file.name : "Drop a CSV here, or choose a file"}</strong>
-        <span>Trade history from Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca or MetaTrader 4 and 5, a TradingView list of trades, any trade list with a close date and a profit, or an equity curve. Up to 5 MB and 50,000 rows.</span>
+        <span>Trade history from Interactive Brokers, Binance, Bybit, Coinbase, Kraken, cTrader, NinjaTrader, Tradovate, thinkorswim, Alpaca or Myfxbook, a MetaTrader 4 or 5 report (HTML or Excel), a TradingView list of trades (CSV or Excel), any trade list with a close date and a profit, or an equity curve. Up to 5 MB and 50,000 rows.</span>
       </label>
       {error && <p className="vf-error" role="alert">{error}</p>}
 
@@ -178,6 +178,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
           <p className="vf-found" aria-live="polite"><strong>Found:</strong> {describeParsed(p)}</p>
           {p.dropped.length > 0 && <p className="vf-small">We removed {p.dropped.length} column{p.dropped.length === 1 ? "" : "s"} that look personal before reading anything else: {p.dropped.join(", ")}.</p>}
           {p.warnings.map((w) => <p key={w} className="vf-warn">{w}</p>)}
+          {p.notes?.map((n) => <p key={n} className="vf-small">{n}</p>)}
           <Disclosure summary="Check the format and columns we picked" defaultOpen={!ready}>
             <div className="vf-map">
               <label className="ui-field"><span className="ui-field-label">Format</span>

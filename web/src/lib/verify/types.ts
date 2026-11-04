@@ -42,6 +42,7 @@ export type FormatId =
   | "mt4" | "mt5" | "mt5deals" | "tradingview"
   | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "coinbase" | "kraken"
   | "ctrader" | "ninjatrader" | "tradovate" | "tos" | "alpaca"
+  | "binance_statement" | "coinbase_tx" | "myfxbook" | "mt4tester" | "tradovate_positions" | "tradovate_orders"
   | "trades" | "equity";
 
 export const FORMAT_LABEL: Record<FormatId, string> = {
@@ -62,6 +63,12 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
   tradovate: "Tradovate performance",
   tos: "thinkorswim trade history",
   alpaca: "Alpaca activities",
+  binance_statement: "Binance account statement",
+  coinbase_tx: "Coinbase transaction report",
+  myfxbook: "Myfxbook trade history",
+  mt4tester: "MetaTrader 4 Strategy Tester report",
+  tradovate_positions: "Tradovate position history",
+  tradovate_orders: "Tradovate orders",
   trades: "Trade list",
   equity: "Equity curve",
 };
@@ -70,12 +77,16 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
 export type Field =
   | "id" | "openTime" | "closeTime" | "symbol" | "side" | "size" | "entry" | "exit" | "commission" | "swap" | "fees" | "pnl"
   | "date" | "equity" | "ret" | "cashflow" | "direction" | "tvType" | "position"
-  | "value" | "multiplier" | "realized" | "feeCurrency" | "rowType" | "expiry" | "strike" | "assetType";
+  | "value" | "multiplier" | "realized" | "feeCurrency" | "rowType" | "expiry" | "strike" | "assetType"
+  | "fxRate" | "currency" | "tax" | "balance";
 
 export type Mapping = Partial<Record<Field, number>>;
 
-/** A table read from a CSV file, after personal columns were removed. */
-export interface Table { headers: string[]; rows: string[][] }
+/**
+ * A table read from a file, after personal columns were removed. `lines` holds where each
+ * row is in the file (a CSV line, or a sheet or HTML table row), so a problem can name it.
+ */
+export interface Table { headers: string[]; rows: string[][]; lines?: number[]; unit?: "line" | "row" }
 
 export interface Parsed {
   format: FormatId;
@@ -86,8 +97,12 @@ export interface Parsed {
   trades?: Trade[];
   equity?: EquityPoint[];
   warnings: string[];
-  /** True for a TradingView Strategy Tester export: a backtest, not real trading. */
+  /** How the file was read, in words, for information: "times are the broker's server time". */
+  notes?: string[];
+  /** True for a Strategy Tester export (TradingView, MetaTrader): a backtest, not real trading. */
   backtestExport: boolean;
+  /** What the file is, in words, when it says more than the format's label ("MetaTrader 5 Strategy Tester report"). */
+  what?: string;
   /** First equity value or balance found in the file, if any. */
   inferredBalance?: number;
 }

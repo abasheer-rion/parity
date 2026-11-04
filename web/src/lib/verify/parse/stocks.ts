@@ -1,19 +1,21 @@
-// US stock brokers that list fills. Both are unverified layouts: written from the brokers'
-// documentation and journal apps' import guides, not checked against an official export.
+// US stock brokers that list fills. Checked against real exports (supported.ts):
 //
 //   thinkorswim (Schwab), Account Statement, "Account Trade History" section (sections.ts):
-//     (blank), Exec Time ("1/3/24 10:15:00"), Spread, Side, Qty ("+100"), Pos Effect, Symbol,
-//     Exp, Strike, Type (STOCK, CALL, PUT, FUTURE), Price, Net Price, Order Type. Options
-//     count 100 shares a contract. Futures are left out: the statement has no contract size.
-//     Fees are listed in the statement's cash section, not with the trades, so they are not
-//     taken off.
-//   Alpaca, account activities, as the API names them: id, activity_type, transaction_time,
-//     type, price, qty, side (buy, sell, sell_short), symbol, leaves_qty, order_id, cum_qty,
-//     order_status. Only FILL rows are trades. Alpaca charges no commission; regulatory fees
-//     are separate FEE activities and are not taken off.
+//     (blank), Exec Time ("7/1/26 07:53:29"), Spread, Side, Qty ("+100", "-2"), Pos Effect,
+//     Symbol, Exp, Strike, Type (STOCK, ETF, CALL, PUT, FUTURE), Price, Net Price, Order Type.
+//     The later legs of a spread leave the time blank and take the one above. Options count
+//     100 shares a contract; futures ("/ESM19") use the contract size from futures.ts, and an
+//     unknown contract is left out. Fees are listed in the statement's cash section, not with
+//     the trades, so they are not taken off.
+//   Alpaca, account activities, as the API returns them (a JSON list, or the same fields as a
+//     CSV): id, activity_type, transaction_time ("2022-03-04T18:54:20.903569Z"), type (fill,
+//     partial_fill), price, qty, side (buy, sell, sell_short), symbol, leaves_qty, order_id,
+//     cum_qty, order_status. Only FILL rows are trades. Alpaca charges no commission;
+//     regulatory fees are separate FEE activities and are not taken off.
 import { col, compact } from "./common";
 import { pairFills, readFills } from "./fills";
 import { FILL_FIELDS, score, type FormatDef } from "./format";
+import { pointValue } from "./futures";
 
 export const thinkorswim: FormatDef = {
   id: "tos",
@@ -29,13 +31,15 @@ export const thinkorswim: FormatDef = {
     });
   },
   build: (t, m) => {
+    const sym = (row: string[]) => (m.symbol == null ? "" : row[m.symbol] ?? "");
     const { fills, warnings } = readFills(t, m, {
-      skip: (_r, text) => (/^FUTURE/i.test(text("assetType") ?? "") ? "futures need a contract size, which the statement does not give" : null),
-      multiplier: (_r, text) => (/^(CALL|PUT)$/i.test(text("assetType") ?? "") ? 100 : 1),
+      inheritTime: true,
+      skip: (row, text) => (/^FUTURE/i.test(text("assetType") ?? "") && pointValue(sym(row)) == null ? "they are futures whose contract size we do not know" : null),
+      multiplier: (row, text) => { const k = (text("assetType") ?? "").toUpperCase(); return k === "CALL" || k === "PUT" ? 100 : k.startsWith("FUTURE") ? pointValue(sym(row)) : 1; },
       fullSymbol: (_r, text) => {
         const s = text("symbol");
         const type = (text("assetType") ?? "").toUpperCase();
-        return s && (type === "CALL" || type === "PUT") ? `${s} ${text("expiry") ?? ""} ${text("strike") ?? ""} ${type}`.replace(/\s+/g, " ") : s;
+        return s && (type === "CALL" || type === "PUT") ? `${s} ${text("expiry") ?? ""} ${text("strike") ?? ""} ${type}`.replace(/\s+/g, " ") : s?.replace(/^\//, "");
       },
     });
     const res = pairFills(fills, { allowShort: true });

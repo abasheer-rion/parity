@@ -1,0 +1,8 @@
+"User_ID","UTC_Time","Account","Operation","Coin","Change","Remark"
+"00000000","2025-11-15 21:22:48","Spot","Deposit","EUR","10.00000000",""
+"00000000","2025-11-15 21:25:35","Spot","Deposit","EUR","400.00000000",""
+"00000000","2025-11-15 21:30:35","Spot","Buy Crypto With Fiat","EUR","-400.00000000","Via CashBalance - Wallet/N53105861616360230133211557"
+"00000000","2025-11-15 21:30:40","Spot","Buy Crypto With Fiat","BTC","0.00486539","Via CashBalance - Wallet/N53105861616360230133211557"
+"00000000","2025-11-21 08:17:10","Spot","Deposit","EUR","400.00000000",""
+"00000000","2025-11-21 08:19:45","Spot","Buy Crypto With Fiat","EUR","-400.00000000","Via CashBalance - Wallet/N53105861616360230133211557"
+"00000000","2025-11-21 08:19:50","Spot","Buy Crypto With Fiat","BTC","0.00546378","Via CashBalance - Wallet/N53105861616360230133211557"

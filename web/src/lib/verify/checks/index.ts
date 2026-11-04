@@ -165,12 +165,12 @@ export function checkFile({ parsed, answers, prices, triesDefaulted, pricesMissi
     settingsCheck(null, null),
     claim,
   ];
-  if (parsed.backtestExport) notes.push("This is a TradingView backtest. It shows what the rules would have done on past prices. No real trades were made.");
+  if (parsed.backtestExport) notes.push(`This is a ${parsed.format === "tradingview" ? "TradingView" : "MetaTrader Strategy Tester"} backtest. It shows what the rules would have done on past prices. No real trades were made.`);
   const money = card1?.basis === "trade" ? moneyText : (v: number) => pctText(v, 2);
   const dailyReturns = rs && rs.periodsPerYear >= 180 ? rs.returns.length : 0;
   return {
     source: "file", kind: answers.kind, tries: answers.tries, triesDefaulted: !!triesDefaulted, methodVersion: METHOD_VERSION,
-    what: FORMAT_LABEL[parsed.format], dateFrom, dateTo, trades: trades ? trades.length : null, dailyReturns, balance,
+    what: parsed.what ?? FORMAT_LABEL[parsed.format], dateFrom, dateTo, trades: trades ? trades.length : null, dailyReturns, balance,
     assets: assetClasses(trades), card1, card2, card3, card4, card5, claims: claimRows(answers.claim),
     verdict: verdict({ trades: trades ? trades.length : null, dailyReturns, card1, card2, card3, card4, card5, contradicted: claim.contradicted, money, pct: pctText }),
     notes,

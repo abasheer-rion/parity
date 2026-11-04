@@ -64,14 +64,14 @@ describe("fills are paired into round trips", () => {
     expect(p.warnings).toEqual(["1 closing fill has no opening fill in the file. Their profit is the exchange's own realized profit, less the fee."]);
   });
 
-  it("thinkorswim: only the trade history section is read, options count 100 shares, futures are left out", () => {
+  it("thinkorswim: only the trade history section is read, options count 100 shares, futures use the contract size", () => {
     const text = fx("thinkorswim.csv");
     const p = parseText(text);
     expect(p.format).toBe("tos");
     expect(pnls(p.trades)).toEqual([10, -5, 50]);
     expect(p.trades![2].symbol).toBe("AAPL 19 JAN 24 190 CALL");
     expect(p.warnings).toEqual([
-      "1 row was skipped: futures need a contract size, which the statement does not give.",
+      "1 position was still open at the end of the file and is left out.",
       "thinkorswim lists fees apart from the trades, so they are not taken off the profit.",
     ]);
     expect(JSON.stringify(p)).not.toContain("123456789");
@@ -83,7 +83,7 @@ describe("fills are paired into round trips", () => {
     expect(pnls(p.trades)).toEqual([10, -5, 5]);
     expect(p.trades!.map(shape)).toEqual(ROUND_TRIPS);
     expect(p.dropped).toEqual(expect.arrayContaining(["id", "order_id"]));
-    expect(p.warnings).toEqual(["1 row was skipped: they are not fills (fees, dividends, transfers)."]);
+    expect(p.warnings).toEqual(["1 row was left out: they are not fills (fees, dividends, transfers)."]);
   });
 });
 
@@ -180,7 +180,8 @@ describe("the supported files list", () => {
   it("names every format the parser reads, and marks unconfirmed layouts", () => {
     const ids = new Set(SUPPORTED.map((s) => s.id));
     for (const id of Object.keys(FORMAT_LABEL)) expect(ids.has(id as FormatId), id).toBe(true);
-    const unverified = SUPPORTED.filter((s) => !s.verified).map((s) => s.id);
-    expect(unverified).toEqual(expect.arrayContaining(["ibkr", "binance_spot", "binance_futures", "bybit", "coinbase", "kraken", "ctrader", "ninjatrader", "tradovate", "tos", "alpaca"]));
+    // Only layouts written from help pages are unverified; every other one has a real export or its layout in the tests.
+    expect(SUPPORTED.filter((s) => !s.verified).map((s) => s.id).sort()).toEqual(["bybit", "bybit_pnl"]);
+    for (const s of SUPPORTED) expect(s.verified, s.id).toBe(s.checked !== "docs");
   });
 });
