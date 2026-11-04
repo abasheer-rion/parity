@@ -93,6 +93,7 @@ The tiers in [DEC-0032](0032-parity-verify-as-a-data-and-api-business-with-a-fre
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 - [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](../research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [RES-0030: Outside data to grow the counted-trials dataset](../research/0030-outside-data-to-grow-the-counted-trials-dataset.md)
 - [RES-0031: Do published stock signals that pass the luck check keep working](../research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md)

@@ -55,9 +55,11 @@ export function pairFills(fills: readonly Fill[], opt: PairOptions): { trades: T
       const lotDir = lots[0].dir;
       const first = lots[0];
       let matched = 0, openValue = 0, openPrice = 0, openFee = 0;
+      const prices = new Set<number>();
       while (left > EPS && lots.length) {
         const o = lots[0];
         const take = Math.min(o.qty, left);
+        prices.add(o.price);
         matched += take; openValue += take * o.unit; openPrice += take * o.price; openFee += take * o.feeUnit;
         o.qty -= take; left -= take;
         if (o.qty <= EPS * Math.max(1, take)) lots.shift();
@@ -67,6 +69,7 @@ export function pairFills(fills: readonly Fill[], opt: PairOptions): { trades: T
       trades.push({
         openTime: first.time, closeTime: f.time, symbol: f.symbol, side: lotDir > 0 ? "buy" : "sell",
         size: round(matched), entry: round(openPrice / matched), exit: f.price, fees: round(fees), pnl: round(gross - fees),
+        ...(prices.size > 1 ? { entryMixed: true } : {}),
       });
     }
     if (left <= EPS) continue;

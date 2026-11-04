@@ -101,6 +101,7 @@ The opt-in box is never ticked for the person, says the data may be sold in aggr
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
 - [DEC-0083: Verify runs a strategy from its code on our prices](0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
 - [DEC-0084: Verify's imports are tested on real exports](0084-verify-imports-are-tested-on-real-exports.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 - [REF-0030: Parity Verify methodology](../reference/0030-parity-verify-methodology.md)

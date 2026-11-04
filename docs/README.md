@@ -7,7 +7,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 89 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 90 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
 | [research](#research) | Reading notes, surveys of papers, code and forums. | 23 |
@@ -31,13 +31,13 @@ and the tag list is in [TAGS.md](TAGS.md).
 ## Recently updated
 
 - 2026-11-04 [LOG-0023: Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md)
+- 2026-11-04 [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - 2026-11-03 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
 - 2026-11-03 [LOG-0022: Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md)
 - 2026-11-03 [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
 - 2026-11-03 [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 - 2026-11-03 [DEC-0089: Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - 2026-11-03 [DEC-0088: Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
-- 2026-11-03 [DEC-0087: Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md)
 
 ## intent
 
@@ -140,6 +140,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0089 | [Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0090 | [Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0091 | [Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md) | accepted | 2026-11-03 | [infra](TAGS.md#infra), [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0092 | [Verify checks fill prices against market data, sending only symbol, time and price](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md) | accepted | 2026-11-04 | [data](TAGS.md#data), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## hypothesis
 

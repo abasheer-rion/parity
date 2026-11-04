@@ -149,6 +149,7 @@ The "New products and hype terms" entries in the glossary cite these:
 - [DEC-0063: The public sees live prices from our own on-chain feed](../decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md)
 - [DEC-0065: The Parity price combines every pool the way Pyth combines publishers](../decisions/0065-the-parity-price-combines-every-pool-the-way-pyth-combines-publishers.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](../decisions/0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [RES-0026: Laws and rules that apply to Parity now and later](../research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md)
 - [RES-0027: How Pyth works and what we may take from it](../research/0027-how-pyth-works-and-what-we-may-take-from-it.md)
 - [REF-0003: Data sources](0003-data-sources.md)

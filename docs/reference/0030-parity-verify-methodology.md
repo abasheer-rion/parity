@@ -177,5 +177,6 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.2. pari
 - [DEC-0089: Every Verify check ends in one report that can be shared and printed](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
 - [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](../decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
 - [LOG-0022: Read-only broker connections built](../log/2026-11-03-read-only-broker-connections-built.md)
 <!-- backlinks:end -->
