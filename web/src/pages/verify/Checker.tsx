@@ -8,13 +8,19 @@ import { useContext, useEffect, useMemo, useRef, useState, type ReactNode } from
 import { hashQuery, setHashQuery, useHashState } from "../../lib/deeplink";
 import { loadReport, loadSearch } from "../../lib/data";
 import { nameOf, searchTextOf, tagsOf } from "../../lib/strategyMeta";
-import { checkDescription, checkFile, checkStrategy, type Result } from "../../lib/verify/checks";
+import { benchmarkFrom, checkDescription, checkFile, checkStrategy, type ClaimSource, type Result } from "../../lib/verify/checks";
 import { MAX_BYTES, ParseError } from "../../lib/verify/csv";
 import { closest, extract, searchVerdict, type Candidate, type Match } from "../../lib/verify/describe";
 import { build, defaultMapping, describeParsed, FIELDS, parseFile } from "../../lib/verify/parse";
 import { loadPrices } from "../../lib/verify/prices";
-import { FORMAT_LABEL, type Answers, type FormatId, type InputKind, type Parsed } from "../../lib/verify/types";
-import { Button, Checkbox, ChoiceCards, Disclosure, EmptyState, Input, SearchInput, Select, SkeletonTable, useResource, type Choice } from "../../ui";
+import { FORMAT_LABEL, type Answers, type Claim, type FormatId, type InputKind, type Parsed } from "../../lib/verify/types";
+import { mergeFound, modelPrompt, readModelAnswer } from "../../lib/verify/claims/model";
+import { complete, ProviderError } from "../../assistant/chat";
+import { providerById, readKey, readModel, readProvider } from "../../assistant/keys";
+import type { ReportExtra } from "../../lib/verify/report/model";
+import { ClaimInput, claimOf } from "./ClaimInput";
+import { Button, Checkbox, ChoiceCards, Disclosure, EmptyState, Input, SearchInput, Select, SkeletonTable, TextButton, useResource, type Choice } from "../../ui";
+import { hostOf } from "../../lib/verify/report/model";
 import { Num, PublicLinks, ResultView, pct } from "./Result";
 import "./verify.css";
 import { track } from "../../lib/analytics";
@@ -27,7 +33,7 @@ const PUBLIC_LESSON = "/learn/academy/win-rate-is-not-profit/the-99-percent-bot/
 const MODES: Choice<Mode>[] = [
   { value: "file", title: "Upload a file", body: "A trade history from your broker or exchange, MetaTrader, TradingView or a spreadsheet.", icon: "upload" },
   { value: "code", title: "Paste strategy code", body: "Pine Script from TradingView, Python, or rules in words. We run it on our prices.", icon: "flask" },
-  { value: "describe", title: "Check a seller's claim", body: "Say in your own words what a bot trades and what it claims.", icon: "quote" },
+  { value: "describe", title: "Check a seller's claim", body: "Paste the address of a seller's page, or their words. Each claim is listed with where it came from.", icon: "quote" },
   { value: "strategy", title: "Pick a strategy", body: "Check one of the strategies we have already tested.", icon: "catalog" },
 ];
 
@@ -44,30 +50,81 @@ export interface CheckerProps {
   signedIn?: boolean;
 }
 
+/** Claims carried from "Check a seller's claim" to a trade file, to check them against it. */
+export interface PendingClaim { claim: Claim; source: ClaimSource }
+
+interface Shown { r: Result; file: FileMeta | null; matches?: Match[]; extra?: ReportExtra; pageText?: string }
+
 export function Checker({ share, onResult, signedIn = true }: CheckerProps) {
   // The input kind, the example and the picked strategy are in the address, so a link
   // reopens the same check: #/verify?mode=describe&example=1, #/verify?mode=strategy&strategy=fx_carry (DEC-0038).
   const [rawMode, setRawMode] = useHashState("mode", "file");
   const modes = signedIn ? MODES : MODES.filter((m) => m.value !== "strategy");
   const mode: Mode = rawMode === "describe" || rawMode === "code" || (rawMode === "strategy" && signedIn) ? rawMode : "file";
-  const [result, setResult] = useState<{ r: Result; file: FileMeta | null; matches?: Match[] } | null>(null);
+  const [result, setResult] = useState<Shown | null>(null);
+  const [pending, setPending] = useState<PendingClaim | null>(null);
   const change = (m: Mode) => { setHashQuery({ example: null, strategy: null }); setRawMode(m); setResult(null); };
   const lesson = useLesson();
-  // The empty state's one button: check the example bot (remounts Describe so it runs it).
+  // The empty state's one button: check the example bot (remounts the claim input so it runs it).
   const [exampleRun, setExampleRun] = useState(0);
+  const top = useRef<HTMLDivElement>(null);
   const tryExample = () => { setHashQuery({ example: "1", strategy: null }); setRawMode("describe"); setResult(null); setExampleRun((n) => n + 1); track("verify_example", {}); };
   useEffect(() => { if (result) onResult?.(result.r); }, [result, onResult]);
+
+  // A seller's claims, checked against a trade file next.
+  const attach = (r: Result) => {
+    if (!r.claimSource || !r.description) return;
+    setPending({ claim: r.description.claim, source: r.claimSource });
+    setHashQuery({ example: null, strategy: null });
+    setRawMode("file");
+    setResult(null);
+    top.current?.scrollIntoView({ block: "start" });
+  };
+  // The person's own model reads the page for claims the patterns missed (DEC-0051, DEC-0088).
+  const provider = readProvider();
+  const key = readKey(provider);
+  const askModel = async (shown: Shown) => {
+    const text = shown.pageText ?? "";
+    const prompt = modelPrompt(text);
+    let reply: string;
+    try {
+      reply = await complete({ provider, key: key!, model: readModel(provider), system: prompt.system, prompt: prompt.prompt, origin: window.location.origin });
+    } catch (e) {
+      throw new Error(e instanceof ProviderError ? e.message : "Your model could not be reached. Check the key in Settings and try again.");
+    }
+    const got = readModelAnswer(reply, text);
+    const src = shown.r.claimSource!;
+    const found = mergeFound(src.found, got.found);
+    const added = found.length - src.found.length;
+    if (added) {
+      const { claim, settings, trades } = claimOf(found, text, !!src.url);
+      const d = checkDescription({ text: shown.r.description?.text ?? "", claim, settings, trades });
+      setResult({ ...shown, r: { ...d, claimSource: { ...src, found } } });
+    }
+    return { added, dropped: got.dropped };
+  };
+
   return (
     <SignedIn.Provider value={signedIn}>
+      <div ref={top} />
       <ChoiceCards<Mode> label="What to check" value={mode} onChange={change} options={modes} />
       <div className="vf-input">
-        {mode === "file" && <FileInput onResult={(r, file) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file }); }} />}
-        {mode === "code" && <CodeInput onResult={(r) => { track("verify_run", { mode, format: r.code?.language ?? "" }); setResult({ r, file: null }); }} />}
-        {mode === "describe" && <DescribeInput key={exampleRun} onResult={(r, matches) => { track("verify_run", { mode }); setResult({ r, file: null, matches }); }} />}
+        {mode === "file" && <FileInput pending={pending} onClearPending={() => setPending(null)} onResult={(r, file, extra) => { track("verify_run", { mode, format: file?.parsed.format ?? "" }); setResult({ r, file, extra }); }} />}
+        {mode === "code" && <CodeInput onResult={(r) => { track("verify_run", { mode, format: r.code?.language ?? "" }); setResult({ r, file: null, extra: { prices: "loaded" } }); }} />}
+        {mode === "describe" && <ClaimInput key={exampleRun} onResult={async ({ result: r, text }) => {
+          track("verify_run", { mode, format: r.claimSource?.url ? "url" : "words" });
+          const matches = signedIn && !r.claimSource?.url ? closest(extract(text), await candidates()) : [];
+          setResult({ r, file: null, matches, pageText: text });
+        }} />}
         {mode === "strategy" && <StrategyInput onResult={(r) => { track("verify_run", { mode }); setResult({ r, file: null }); }} />}
       </div>
       {result ? (
-        <ResultView r={result.r}>
+        <ResultView r={result.r} extra={result.extra} signedOut={!signedIn}
+          claimsLive={result.r.claimSource ? {
+            onAttach: result.r.source === "description" ? () => attach(result.r) : undefined,
+            onModel: key && result.pageText ? () => askModel(result) : undefined,
+            modelName: key ? providerById(provider).name.split(" (")[0] : null,
+          } : undefined}>
           {result.matches && <Matches matches={result.matches} />}
           {share?.(result.r, result.file)}
         </ResultView>
@@ -97,7 +154,7 @@ const KINDS: Choice<InputKind>[] = [
 /** Card 4's words when the daily prices could not be loaded because nobody is signed in. */
 export const SIGNED_OUT_PRICES = "Not checked while signed out: our daily prices load only for signed-in accounts. Sign in and run the check again to compare the fills with them.";
 
-function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void }) {
+function FileInput({ onResult, pending, onClearPending }: { onResult: (r: Result, file: FileMeta, extra: ReportExtra) => void; pending: PendingClaim | null; onClearPending: () => void }) {
   const signedIn = useContext(SignedIn);
   const lesson = useLesson();
   const [file, setFile] = useState<FileMeta | null>(null);
@@ -107,9 +164,12 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
   const [kind, setKind] = useState<InputKind>("backtest");
   const [balance, setBalance] = useState("");
   const [tries, setTries] = useState("1");
-  const [claimWin, setClaimWin] = useState("");
-  const [claimMonthly, setClaimMonthly] = useState("");
-  const [claimDd, setClaimDd] = useState("");
+  // A claim carried over from "Check a seller's claim" fills these in; any can be changed.
+  const fromPct = (v: number | undefined) => (v == null ? "" : String(Number((v * 100).toFixed(2))));
+  const [claimWin, setClaimWin] = useState(() => fromPct(pending?.claim.winRate));
+  const [claimMonthly, setClaimMonthly] = useState(() => fromPct(pending?.claim.monthlyReturn));
+  const [claimDd, setClaimDd] = useState(() => fromPct(pending?.claim.maxDrawdown));
+  const [claimTotal, setClaimTotal] = useState(() => fromPct(pending?.claim.totalReturn));
   const [noCash, setNoCash] = useState(false);
   const input = useRef<HTMLInputElement>(null);
 
@@ -147,22 +207,32 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
       kind, tries: triesN,
       balance: Number(balance) > 0 ? Number(balance) : null,
       claim: {
+        ...(pending?.claim ?? {}),
         winRate: claimWin ? Number(claimWin) / 100 : undefined,
         monthlyReturn: claimMonthly ? Number(claimMonthly) / 100 : undefined,
         maxDrawdown: claimDd ? Math.abs(Number(claimDd)) / 100 : undefined,
+        totalReturn: claimTotal ? Number(claimTotal) / 100 : undefined,
       },
       noCashflows: noCash,
     };
     const needsPrices = !!p.trades?.some((t) => t.symbol && (t.entry != null || t.exit != null));
-    // Only this public price file is ever fetched, and only for a signed-in account.
-    const prices = needsPrices && signedIn ? await loadPrices() : null;
-    onResult(checkFile({ parsed: p, answers, prices, pricesMissing: needsPrices && !signedIn ? SIGNED_OUT_PRICES : undefined, triesDefaulted: tries.trim() === "1" || !tries.trim() }), file);
+    // Only this price file is ever fetched, and only for a signed-in account: it checks the
+    // fills and gives the S&P 500 to compare the record with.
+    const prices = signedIn ? await loadPrices() : null;
+    const r = checkFile({ parsed: p, answers, prices: needsPrices ? prices : null, benchmark: benchmarkFrom(prices), pricesMissing: needsPrices && !signedIn ? SIGNED_OUT_PRICES : undefined, triesDefaulted: tries.trim() === "1" || !tries.trim() });
+    onResult(pending ? { ...r, claimSource: pending.source } : r, file, { prices: signedIn ? (prices ? "loaded" : "missing") : "signed_out", fileName: file.name });
     setBusy(false);
   };
 
   return (
     <div className="vf-panel">
       <p className="vf-privacy">Your file stays in this browser. It is read and checked on your device and is never sent to our servers.</p>
+      {pending && (
+        <div className="vf-pending" role="note">
+          <p><strong>Checking against {pending.source.found.length} claim{pending.source.found.length === 1 ? "" : "s"} from {pending.source.url ? hostOf(pending.source.url) : "the words you pasted"}.</strong> Upload the account's trade history: the report sets each claim against it.</p>
+          <TextButton tone="muted" onClick={onClearPending}>Leave the claims out</TextButton>
+        </div>
+      )}
       <label className={`vf-drop ${drag ? "is-drag" : ""}`}
         onDragOver={(e) => { e.preventDefault(); setDrag(true); }} onDragLeave={() => setDrag(false)}
         onDrop={(e) => { e.preventDefault(); setDrag(false); const f = e.dataTransfer.files?.[0]; if (f) void read(f); }}>
@@ -213,6 +283,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
               <Input label="Win rate, %" type="number" value={claimWin} onChange={setClaimWin} placeholder="92" />
               <Input label="Monthly return, %" type="number" value={claimMonthly} onChange={setClaimMonthly} placeholder="8" />
               <Input label="Largest fall, %" type="number" value={claimDd} onChange={setClaimDd} placeholder="15" />
+              <Input label="Total return, %" type="number" value={claimTotal} onChange={setClaimTotal} placeholder="120" />
             </fieldset>
             {needCash && <Checkbox checked={noCash} onChange={setNoCash} label="There were no deposits or withdrawals in this period (the file has no column for them)." />}
           </div>
@@ -225,7 +296,7 @@ function FileInput({ onResult }: { onResult: (r: Result, file: FileMeta) => void
 
 // ---------------------------------------------------------------- B: a description
 
-const EXAMPLE = "Buys Bitcoin when RSI goes under 30 and sells at 5% profit, no stop loss, 50 trades a month, claims 92% win rate.";
+// ---------------------------------------------------------------- B: the closest tested strategies to words
 
 async function candidates(): Promise<Candidate[]> {
   const [report, search] = await Promise.all([loadReport().catch(() => null), loadSearch().catch(() => null)]);
@@ -240,36 +311,6 @@ async function candidates(): Promise<Candidate[]> {
     out.push({ id: s.id, name: s.name, line: s.line, family: s.family, asset: s.asset, style: s.style, from: "search", verdict: searchVerdict(s.deflated), deflated: s.deflated, sharpe: s.sharpe });
   }
   return out;
-}
-
-function DescribeInput({ onResult }: { onResult: (r: Result, matches: Match[]) => void }) {
-  const signedIn = useContext(SignedIn);
-  const [text, setTextRaw] = useState(() => (hashQuery().get("example") === "1" ? EXAMPLE : ""));
-  const setText = (t: string) => { setTextRaw(t); setHashQuery({ example: t === EXAMPLE ? "1" : null }); };
-  const [busy, setBusy] = useState(false);
-  const run = async (input = text) => {
-    const x = extract(input);
-    setBusy(true);
-    const matches = signedIn ? closest(x, await candidates()) : [];
-    onResult(checkDescription({ text: input, claim: x.claim, settings: x.settings || null, trades: x.trades }), matches);
-    setBusy(false);
-  };
-  // A link to the example checks it straight away.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { if (hashQuery().get("example") === "1") void run(EXAMPLE); }, []);
-  return (
-    <div className="vf-panel">
-      <label className="ui-field">
-        <span className="ui-field-label">Describe the bot in your own words: what it trades, when it buys and sells, and what it claims</span>
-        <textarea className="ui-input vf-textarea" value={text} onChange={(e) => setText(e.target.value)} placeholder={EXAMPLE} rows={4} maxLength={2000} />
-      </label>
-      <p className="vf-help">Verify checks the description only. It shows claims that fail on arithmetic and the closest strategies we have tested.</p>
-      <div className="vf-row">
-        <Button variant="primary" onClick={() => void run()} disabled={text.trim().length < 10} loading={busy}>Check this description</Button>
-        <Button variant="tertiary" onClick={() => setText(EXAMPLE)}>Use the example</Button>
-      </div>
-    </div>
-  );
 }
 
 function Matches({ matches }: { matches: Match[] }) {

@@ -189,6 +189,13 @@ export const PAGES: Record<string, PageMeta> = {
     description: "Check a trade history from your broker or exchange for profit per trade, worst loss, luck and look-ahead. Checked in your browser, never sent. No sign-in.",
     path: "/verify/", image: "verify", ld: [verifyAppLd()],
   },
+  // A Verify report shared by link (DEC-0089): the report is in the address after "#", so
+  // the page itself holds nothing to index.
+  "verify/report/index.html": {
+    title: "A Verify report · Parity",
+    description: "A Parity Verify report shared by link: the verdict, the numbers behind it, the record's pictures, the inputs used and what could not be checked.",
+    path: "/verify/report/", image: "verify", robots: PRIVATE,
+  },
   // How Verify judges a record, every check and threshold, kept citable (REF-0030).
   "methodology/index.html": {
     title: "Verify methodology · Parity",

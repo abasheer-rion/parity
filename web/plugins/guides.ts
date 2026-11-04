@@ -33,7 +33,7 @@ function nav(path: string): string {
 const TOOLS: [string, string][] = [
   ["verify_trades", "Verify a trade list or equity curve: a verdict, one sentence, five cards and how many tries it survives. Nothing is saved."],
   ["verify_strategy", "Verify a strategy from its Pine Script or Python code, or from rules, run on Parity's daily prices with real costs; or one of Parity's tested strategies."],
-  ["verify_claim", "Check a seller's claim, such as a win rate with a take-profit and no stop, and say which numbers cannot hold."],
+  ["verify_claim", "Check a seller's claim from their page's address or their words: each claim with the words it came from, which numbers cannot hold, and, with the record, which ones it backs."],
   ["search_strategies", "Find strategies Parity has tested against the S&P 500, with each one's verdict from the 11 tests."],
   ["get_strategy", "Full results for one strategy: its settings, the 11 tests, yearly returns and its equity curve."],
   ["search_leads", "The best variations from Parity's always-on strategy search, with the luck check."],

@@ -132,7 +132,7 @@ function Live({ b }: { b: PublicBadge }) {
         </label>
       </div>
       <PublicLinks.Provider value={true}>
-        <ResultView r={r} />
+        <ResultView r={r} linkable={false} extra={{ badge: true, checkedOn: b.created_at?.slice(0, 10) }} />
       </PublicLinks.Provider>
       <details className="vb-share">
         <summary>Embed or share this record</summary>

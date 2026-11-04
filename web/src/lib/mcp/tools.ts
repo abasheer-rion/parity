@@ -27,7 +27,11 @@ export interface Db {
   rpc<T>(fn: string, args: Record<string, unknown>): Promise<T>;
 }
 
-export interface ToolContext { caller: McpCaller; data: Data; db: Db; origin: string; now: Date }
+export interface ToolContext {
+  caller: McpCaller; data: Data; db: Db; origin: string; now: Date;
+  /** For the one tool that reads a public page (verify_claim with url); the platform's fetch when left out. */
+  fetch?: typeof fetch;
+}
 
 export interface Tool {
   name: string;

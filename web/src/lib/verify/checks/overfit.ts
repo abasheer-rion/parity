@@ -53,25 +53,40 @@ export function settingsCheck(settings: number | null, trades: number | null): C
     : { id: "settings", label, status: "pass", detail: `${settings} adjustable settings for ${trades} trades (one per 20 trades is the line).` };
 }
 
-export interface FileFacts { winRate: number | null; monthlyReturn: number | null; maxDrawdown: number | null }
+export interface FileFacts { winRate: number | null; monthlyReturn: number | null; maxDrawdown: number | null; totalReturn?: number | null; months?: number | null }
 
-/** The claimed win rate, monthly return or drawdown is more than 5 percentage points from the file. */
+/** A total return claimed for a stated length of time can only be compared with a record of about that length (within a quarter). */
+export function samePeriod(claimMonths: number | undefined, fileMonths: number | null | undefined): boolean {
+  return claimMonths == null || fileMonths == null || Math.abs(fileMonths - claimMonths) <= 0.25 * claimMonths;
+}
+
+/** Whether a claimed number is too far from the file's: 5 points for rates; for the total return also more than a tenth apart (method verify-1.2). */
+export function claimOff(name: "win rate" | "monthly return" | "largest fall from a high" | "total return", claimed: number, file: number): boolean {
+  const gap = Math.abs(claimed - file);
+  return name === "total return" ? gap > 0.05 && gap > 0.1 * Math.max(Math.abs(claimed), Math.abs(file)) : gap > 0.05;
+}
+
+/**
+ * The claimed win rate, monthly return or drawdown is more than 5 percentage points from the
+ * file, or the claimed total return is more than 5 points and more than a tenth away from it.
+ */
 export function claimCheck(claim: Claim, file: FileFacts): CheckRow & { contradicted: string[] } {
   const label = "Claim against file";
-  const pairs: [string, number | undefined, number | null][] = [
+  const pairs: ["win rate" | "monthly return" | "largest fall from a high" | "total return", number | undefined, number | null][] = [
     ["win rate", claim.winRate, file.winRate],
     ["monthly return", claim.monthlyReturn, file.monthlyReturn],
     ["largest fall from a high", claim.maxDrawdown, file.maxDrawdown],
+    ["total return", claim.totalReturn, samePeriod(claim.months, file.months) ? file.totalReturn ?? null : null],
   ];
   const given = pairs.filter(([, c]) => c != null);
   if (!given.length) return { id: "claim", label, status: "na", detail: `${NA}: no claim was entered.`, contradicted: [] };
   const off: string[] = [], ok: string[] = [], unknown: string[] = [];
   for (const [name, c, f] of given) {
     if (f == null) { unknown.push(name); continue; }
-    const gap = Math.abs(c! - f);
-    (gap > 0.05 ? off : ok).push(`${name}: claimed ${pp(c!)}, file ${pp(f)}`);
+    (claimOff(name, c!, f) ? off : ok).push(`${name}: claimed ${pp(c!)}, file ${pp(f)}`);
   }
-  if (off.length) return { id: "claim", label, status: "fail", detail: `The file does not back the claim. ${off.join("; ")} (more than 5 points apart).`, contradicted: off };
+  const line = off.some((o) => o.startsWith("total return")) ? "more than 5 points apart, and the total return more than a tenth apart" : "more than 5 points apart";
+  if (off.length) return { id: "claim", label, status: "fail", detail: `The file does not back the claim. ${off.join("; ")} (${line}).`, contradicted: off };
   if (!ok.length) return { id: "claim", label, status: "na", detail: `${NA}: the file cannot show the claimed ${unknown.join(" or ")} without a starting balance.`, contradicted: [] };
   return { id: "claim", label, status: "pass", detail: `${ok.join("; ")}: within 5 points.${unknown.length ? ` The ${unknown.join(" and ")} could not be compared.` : ""}`, contradicted: [] };
 }

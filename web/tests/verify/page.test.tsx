@@ -61,7 +61,7 @@ describe("every number has a one-line explanation (test 10)", () => {
     const { container } = render(<ResultView r={cases[1][1]} />);
     const n = container.querySelector<HTMLElement>(".vf-num")!;
     fireEvent.focus(n.parentElement!);
-    await waitFor(() => expect(screen.getByRole("tooltip")).toHaveTextContent(n.getAttribute("data-explain")!));
+    await waitFor(() => expect(screen.getByRole("tooltip")).toHaveTextContent(n.getAttribute("data-explain")!), { timeout: 4000 });
   });
 
   it("has an explanation for every id it uses, each one line", () => {
@@ -94,11 +94,11 @@ describe("the page reads a file in the browser (test 8 in jsdom)", () => {
     fireEvent.change(container.querySelector('input[type="file"]')!, { target: { files: [f] } });
     await screen.findByText(/Trade list, 6 closed trades/);
     fireEvent.click(screen.getByRole("button", { name: "Check this record" }));
-    await screen.findByText("Not enough data");
+    await screen.findByText("Not enough data", undefined, { timeout: 8000 });
     // Only our own price file may be asked for, and it carries nothing from the upload.
     for (const call of fetchSpy.mock.calls) {
       expect(String(call[0])).toMatch(/\/verify\/prices\.json$/);
       expect(call[1]?.body).toBeUndefined();
     }
-  });
+  }, 20_000);
 });

@@ -1,0 +1,29 @@
+Blue Harbour Scalper
+Gain : +128.40%
+Abs. Gain : +131.02%
+Daily : 0.12%
+Monthly : 3.95%
+Drawdown : 18.62%
+Balance : $11,402.10
+Equity : (100.00%) $11,402.10
+Profit : $6,402.10
+Deposits : $5,000.00
+Withdrawals : $0.00
+Updated 2026-11-01 09:15
+Tracking 37
+Trades 1,204
+Pips 3,512.4
+Average Win 9.41 pips / $21.07
+Average Loss -18.30 pips / -$37.72
+Lots 402.15
+Commissions $1,204.00
+Longs Won (640/702) 91%
+Shorts Won (430/502) 86%
+Best Trade($) (Mar 04) 412.00
+Worst Trade($) (Jun 11) -980.30
+Profitability 89%
+Profit Factor 1.61
+Standard Deviation $61.14
+Sharpe Ratio 0.11
+Expectancy 2.9 Pips $5.32
+Started on Mar 3, 2024

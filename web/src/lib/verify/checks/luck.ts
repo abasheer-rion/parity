@@ -1,7 +1,7 @@
 // Card 3: the luck check (REF-0016). The deflated Sharpe ratio at the number of tries the
 // person stated, the largest number of tries the record survives, and how much longer the
 // same results would need to run to pass.
-import { deflatedSharpeFrom, minTrackRecord, moments, survivesUpTo } from "../dsr";
+import { deflatedSharpeFrom, minTrackRecord, moments, survivesUpTo, type Moments } from "../dsr";
 
 export interface LuckCard {
   /** What one observation is: a day (week, month) of returns, or one trade's profit when returns are unknown. */
@@ -17,6 +17,8 @@ export interface LuckCard {
   monthsMore: number | null;
   /** The spread of Sharpe across tries is unknown, so the single-estimate stand-in was used. */
   varianceStandIn: boolean;
+  /** What the luck check is worked out from, so the report can draw it at any number of tries. */
+  moments?: Moments;
 }
 
 export function basisFor(periodsPerYear: number): LuckCard["basis"] {
@@ -39,5 +41,6 @@ export function luckCard(obs: readonly number[], basis: LuckCard["basis"], perYe
     tries, dsr, survives: survivesUpTo(m),
     monthsMore: dsr >= 0.95 ? 0 : Number.isFinite(need) && perYear > 0 ? (extra / perYear) * 12 : Infinity,
     varianceStandIn: true,
+    moments: m,
   };
 }

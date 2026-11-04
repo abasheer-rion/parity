@@ -7,7 +7,7 @@ import { useContext, useMemo, useState } from "react";
 import { complete, ProviderError } from "../../assistant/chat";
 import { PROVIDERS, providerById, readKey, readModel, readProvider, writeKey, writeProvider, type ProviderId } from "../../assistant/keys";
 import { startUrl } from "../../assistant/openrouter";
-import { checkBacktest, type Result } from "../../lib/verify/checks";
+import { benchmarkFrom, checkBacktest, type Result } from "../../lib/verify/checks";
 import { loadPrices } from "../../lib/verify/prices";
 import {
   exprText, finishRead, MARKETS, plainPrompt, readPlainReply, readStrategy, runStrategy, RulesError, ScriptError,
@@ -111,7 +111,7 @@ export function CodeInput({ onResult }: { onResult: (r: Result) => void }) {
       const book = await loadPrices();
       if (!book) { setError("Our daily prices could not be loaded. Try again in a moment."); return; }
       const ran = runStrategy(r as ScriptRead & { rules: Rules }, book);
-      onResult(checkBacktest(ran, triesN, tries.trim() === "1" || !tries.trim()));
+      onResult(checkBacktest(ran, triesN, tries.trim() === "1" || !tries.trim(), benchmarkFrom(book)));
     } catch (e) {
       if (e instanceof RulesError) { setError(e.message); return; }
       throw e;

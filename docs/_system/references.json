@@ -43204,6 +43204,51 @@
         "source": "manual",
         "doi_explicit": false
       }
+    },
+    {
+      "key": "url-cb22e73a",
+      "type": "web-page",
+      "authors": [],
+      "year": 2022,
+      "title": "Robots Exclusion Protocol (RFC 9309)",
+      "venue": "rfc-editor.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.rfc-editor.org/rfc/rfc9309",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md",
+        "docs/reference/0030-parity-verify-methodology.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c2019c86",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "X robots.txt",
+      "venue": "x.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://x.com/robots.txt",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
     }
   ]
 }

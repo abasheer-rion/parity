@@ -119,6 +119,29 @@ function badgePages(): Plugin {
   };
 }
 
+// "Read a seller's page" on /verify/ (DEC-0088) is a Pages Function in production
+// (functions/api/verify/claim-url.ts). The dev server runs the same handler.
+function claimUrlDev(): Plugin {
+  return {
+    name: "parity-claim-url",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/api/verify/claim-url", async (req, res) => {
+        const { handleClaimUrl } = await server.ssrLoadModule("/src/lib/verify/claims/endpoint.ts");
+        const chunks: Buffer[] = [];
+        for await (const c of req) chunks.push(c as Buffer);
+        const headers = new Headers();
+        for (const [k, v] of Object.entries(req.headers)) if (typeof v === "string") headers.set(k, v);
+        const request = new Request(`http://localhost${req.originalUrl ?? req.url ?? "/"}`, { method: req.method, headers, body: req.method === "POST" ? Buffer.concat(chunks) : undefined });
+        const out: Response = await handleClaimUrl(request, { fetch, siteDomain: ["paritytrading.app"], log: (l: unknown) => console.log(JSON.stringify(l)) });
+        res.statusCode = out.status;
+        out.headers.forEach((v, k) => res.setHeader(k, v));
+        res.end(await out.text());
+      });
+    },
+  };
+}
+
 function localScenarios(): Plugin {
   const file = process.env.PARITY_SCENARIOS_FILE ?? resolve(OUTPUT, "./scenarios.json");
   // Sim World's map file, written by `parity world export` (DEC-0016).
@@ -203,7 +226,7 @@ function localScenarios(): Plugin {
 //                            /lab/assets/ (lab.paritytrading.app).
 // `vite` (dev) serves all of them from one server.
 const SITE_PAGES = [
-  "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "v/index",
+  "index", "404", "login/index", "signup/index", "reset/index", "verify/index", "verify/report/index", "v/index",
   "connect/index", "connect/claude/index", "connect/chatgpt/index", "connect/gemini/index", "oauth/consent/index", "oauth/openrouter/index",
   "developers/index", "methodology/index", "legal/index", "legal/privacy/index", "legal/terms/index", "legal/cookies/index", "legal/accessibility/index", "legal/risk/index", "legal/regulatory/index",
   "download/index",
@@ -223,7 +246,7 @@ const VENDOR = {
 };
 
 export default defineConfig(({ command, mode }) => ({
-  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityBusiness(), parityMeta(), parityOg(), parityVersion()],
+  plugins: [react(), parityAnalytics(), parityBoot(), localResults(), localDownload(), localScenarios(), badgePages(), claimUrlDev(), parityNotFound(), parityDocs(), paritySite(), parityLegal(), parityBusiness(), parityMeta(), parityOg(), parityVersion()],
   // The glossary is imported from ../docs, outside this folder.
   server: { fs: { allow: [".."] } },
   // The catalog and glossary are bundled on purpose (about 170 kB gzipped); the docs

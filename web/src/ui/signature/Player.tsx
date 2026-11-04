@@ -55,15 +55,18 @@ export interface SignaturePlayerProps {
   size?: SizeName;
   /** Offer the data table (default true). */
   table?: boolean;
+  /** When it will not play on its own (reduced motion), open on the last step, which carries the verdict. */
+  startAtEnd?: boolean;
   className?: string;
 }
 
-export function SignaturePlayer({ visual, autoPlay = true, theme = "dark", size: forced, table = true, className = "" }: SignaturePlayerProps) {
+export function SignaturePlayer({ visual, autoPlay = true, theme = "dark", size: forced, table = true, className = "", startAtEnd = false }: SignaturePlayerProps) {
   const reduced = useReducedMotion();
   const last = Math.max(0, visual.steps.length - 1);
   const willPlay = autoPlay && !reduced && typeof IntersectionObserver !== "undefined";
-  const [step, setStep] = useState(0);
-  const [s, setS] = useState(willPlay ? -1 : 0);
+  const first = startAtEnd && !willPlay ? last : 0;
+  const [step, setStep] = useState(first);
+  const [s, setS] = useState(willPlay ? -1 : first);
   const [playing, setPlaying] = useState(false);
   const [grid, setGrid] = useState(false);
   const [showTable, setShowTable] = useState(false);
@@ -106,7 +109,7 @@ export function SignaturePlayer({ visual, autoPlay = true, theme = "dark", size:
   // A new visual starts again.
   useEffect(() => {
     cancelAnimationFrame(raf.current);
-    setStep(0); put(willPlay ? -1 : 0); setPlaying(false); played.current = false;
+    setStep(first); put(willPlay ? -1 : first); setPlaying(false); played.current = false;
   }, [visual]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Reduced motion turned on part way: settle on the whole step.
