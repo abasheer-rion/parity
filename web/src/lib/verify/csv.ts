@@ -175,6 +175,9 @@ export function headerOffset(h: string | undefined): number | undefined {
 
 function parseLocal(s: string, dayFirst: boolean): string | null {
   if (!s) return null;
+  // Time first: "08:02 2026-11-02" (Bybit's closed positions).
+  const tf = s.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s+(\d{4}[-./]\d{1,2}[-./]\d{1,2})$/);
+  if (tf) s = `${tf[2]} ${tf[1]}`;
   let y: number, mo: number, d: number;
   let rest = "";
   let m = s.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})(.*)$/);

@@ -5,7 +5,7 @@
 import { decodeBytes, ParseError, readTable, tableFromRows } from "../csv";
 import { FORMAT_LABEL, type FormatId, type Mapping, type Parsed, type Table, type Trade } from "../types";
 import { dropColumns, dropPersonal } from "./common";
-import { binanceFutures, binanceSpot, binanceStatement, bybitFills, bybitPnl, coinbase, coinbaseReport, kraken } from "./crypto";
+import { binanceFutures, binanceSpot, binanceStatement, bybitClosed, bybitFills, bybitPnl, coinbase, coinbaseReport, kraken } from "./crypto";
 import type { BuildOut, FieldDef, FormatDef } from "./format";
 import { buildEquity, buildTrades, detectEquity, detectTrades, mapEquity, mapTrades } from "./generic";
 import { ibkrActivity, ibkrFlex } from "./ibkr";
@@ -44,7 +44,7 @@ const FORMATS: FormatDef[] = [
     { field: "pnl", label: "Profit", required: true }, { field: "entry", label: "Price" }, { field: "size", label: "Contracts" }, { field: "symbol", label: "Symbol" },
   ] },
   { id: "mt4tester", detect: () => 0, map: () => ({}), build: (t) => buildMt4Tester(t), fields: [] },
-  ibkrFlex, ibkrActivity, binanceSpot, binanceFutures, binanceStatement, bybitFills, bybitPnl, coinbase, coinbaseReport, kraken,
+  ibkrFlex, ibkrActivity, binanceSpot, binanceFutures, binanceStatement, bybitFills, bybitPnl, bybitClosed, coinbase, coinbaseReport, kraken,
   ctrader, ninjatrader, tradovate, tradovatePositions, tradovateOrders, myfxbook, thinkorswim, alpaca,
   { id: "trades", detect: detectTrades, map: mapTrades, build: buildTrades, fields: [
     { field: "closeTime", label: "Close date", required: true }, { field: "pnl", label: "Profit per trade", required: true }, { field: "openTime", label: "Open date" },
@@ -94,7 +94,7 @@ export function build(table: Table, format: FormatId, mapping: Mapping, dropped:
   if (res.notes?.length) out.notes = res.notes;
   if (res.balance) out.inferredBalance = res.balance;
   if (!res.trades.length) {
-    const fillsFormat = !["mt4", "mt5", "tradingview", "trades", "ctrader", "ninjatrader", "tradovate", "tradovate_positions", "bybit_pnl", "myfxbook"].includes(format);
+    const fillsFormat = !["mt4", "mt5", "tradingview", "trades", "ctrader", "ninjatrader", "tradovate", "tradovate_positions", "bybit_pnl", "bybit_closed", "myfxbook"].includes(format);
     out.warnings.push(fillsFormat && table.rows.length
       ? "No round trips: none of the fills in the file closes a position that was opened in it. Export a longer period, from before the first purchase."
       : "No closed trades could be read with these columns.");
@@ -118,6 +118,7 @@ export function parseText(text: string): Parsed {
 /** Exports that are not trade lists, with what to download instead. */
 const NOT_TRADES: { test: (t: Table) => boolean; why: string }[] = [
   { test: (t) => has(t, /^refid$/) && has(t, /^asset$/) && has(t, /^amount$/) && has(t, /^balance$/), why: "This is a Kraken ledger (ledgers.csv), which lists money moving, not trades. Export History, Trades instead: trades.csv." },
+  { test: (t) => has(t, /^cash flow$/) && has(t, /^wallet balance$/) && has(t, /^contract$/), why: "This is Bybit's transaction log, which lists money moving with each fill, funding and transfers. Export Orders, Closed P&L (closed positions) for contracts, or the spot Trade History, instead." },
   { test: (t) => has(t, /^transaction id$/) && has(t, /^type$/) && has(t, /^asset$/) && has(t, /^symbol$/) && !has(t, /^price$/), why: "This is a Binance futures transaction history (funding, fees and realized profit), not trades. Export Orders, Futures, Trade History instead." },
   { test: (t) => has(t, /^(order|open) ?(time|date)$/) && has(t, /^status$/) && !has(t, /^(fill|filled)/) && has(t, /^(order )?type$/) && !has(t, /profit|p&l|pnl/), why: "This looks like a list of orders, not of fills or closed trades. Export the trade history instead." },
 ];

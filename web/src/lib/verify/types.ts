@@ -40,7 +40,7 @@ export interface EquityPoint { date: string; equity?: number; ret?: number; cash
 
 export type FormatId =
   | "mt4" | "mt5" | "mt5deals" | "tradingview"
-  | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "coinbase" | "kraken"
+  | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "bybit_closed" | "coinbase" | "kraken"
   | "ctrader" | "ninjatrader" | "tradovate" | "tos" | "alpaca"
   | "binance_statement" | "coinbase_tx" | "myfxbook" | "mt4tester" | "tradovate_positions" | "tradovate_orders"
   | "trades" | "equity";
@@ -56,6 +56,7 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
   binance_futures: "Binance futures trade history",
   bybit: "Bybit trade history",
   bybit_pnl: "Bybit closed P&L",
+  bybit_closed: "Bybit closed positions",
   coinbase: "Coinbase fills",
   kraken: "Kraken trades",
   ctrader: "cTrader history",
