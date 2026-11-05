@@ -243,8 +243,8 @@ test.describe("verify", () => {
   test("describing a bot needs a real description first", async ({ page }) => {
     await open(page, "/app/#/verify");
     await settled(page);
-    await page.getByRole("radio", { name: "Describe a bot" }).click();
-    const check = page.getByRole("button", { name: "Check this description" });
+    await page.getByRole("radio", { name: "Check a seller's claim" }).click();
+    const check = page.getByRole("button", { name: "Check these words" });
     await expect(check).toBeDisabled();
     await page.getByRole("textbox").first().fill("Buys the US market when it is above its 200-day average, otherwise holds cash.");
     await expect(check).toBeEnabled();

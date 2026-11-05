@@ -3,6 +3,7 @@
 import { useCallback, type ReactNode } from "react";
 import { Title } from "../components/Shell";
 import type { Result } from "../lib/verify/checks";
+import type { FetchAnswer } from "../lib/verify/connect";
 import { Checker, type FileMeta } from "./verify/Checker";
 import { Assistant } from "../assistant/Mount";
 import { signalDone } from "../onboarding/done";
@@ -10,7 +11,7 @@ import { FirstRunTour } from "../onboarding/FirstRunTour";
 
 export type { FileMeta };
 
-export function Verify({ share }: { share?: (r: Result, file: FileMeta | null) => ReactNode } = {}) {
+export function Verify({ share }: { share?: (r: Result, file: FileMeta | null, connected?: FetchAnswer | null) => ReactNode } = {}) {
   // A result on screen is the checklist's "Run your first Verify check" (DEC-0060).
   const done = useCallback(() => signalDone("verify"), []);
   return (

@@ -1,7 +1,7 @@
 // Helpers every format parser shares: finding columns by name, dropping personal
 // columns, and reading a mapped cell. Personal columns go before anything else reads
 // the table, so no later step ever holds their values (REF-0016, data handling 2).
-import { num, parseDate } from "../csv";
+import { headerOffset, num, parseDate } from "../csv";
 import type { Field, Mapping, Table } from "../types";
 
 /** Header names that look personal: account number, name, email, server, login, IP and the like. */
@@ -23,7 +23,7 @@ export function dropColumns(t: Table, patterns: RegExp[]): { table: Table; dropp
   const drop = t.headers.map((h, i) => (patterns.some((p) => p.test(norm(h))) ? i : -1)).filter((i) => i >= 0);
   if (!drop.length) return { table: t, dropped: [] };
   const keep = t.headers.map((_, i) => i).filter((i) => !drop.includes(i));
-  return { table: { headers: keep.map((i) => t.headers[i]), rows: t.rows.map((r) => keep.map((i) => r[i] ?? "")) }, dropped: drop.map((i) => t.headers[i]) };
+  return { table: { ...t, headers: keep.map((i) => t.headers[i]), rows: t.rows.map((r) => keep.map((i) => r[i] ?? "")) }, dropped: drop.map((i) => t.headers[i]) };
 }
 
 /** A number with a unit written next to it: "0.0100000000BTC", "1.00 Lots", "USDT 25". */
@@ -52,7 +52,7 @@ export function dropPersonal(t: Table): { table: Table; dropped: string[] } {
   });
   const keep = t.headers.map((_, i) => i).filter((i) => !drop.has(i));
   return {
-    table: { headers: keep.map((i) => t.headers[i]), rows: t.rows.map((r) => keep.map((i) => r[i] ?? "")) },
+    table: { ...t, headers: keep.map((i) => t.headers[i]), rows: t.rows.map((r) => keep.map((i) => r[i] ?? "")) },
     dropped: [...drop].map((i) => t.headers[i] || `column ${i + 1}`),
   };
 }
@@ -78,14 +78,45 @@ export function compact(m: Partial<Record<Field, number | undefined>>): Mapping 
   return out;
 }
 
-/** Reads mapped cells from one row. */
-export function reader(m: Mapping, decimalComma = false) {
+/**
+ * Reads mapped cells from one row. With the table, a date column whose header names a time
+ * zone ("Date(UTC)", "Closing Time (UTC-7)") is read in that zone and turned into UTC.
+ */
+export function reader(m: Mapping, t?: Table, decimalComma = false) {
+  const off = (f: Field) => (t && m[f] != null ? headerOffset(t.headers[m[f]!]) : undefined);
   return {
     text: (r: string[], f: Field) => (m[f] == null ? undefined : (r[m[f]!] ?? "").trim() || undefined),
     num: (r: string[], f: Field) => (m[f] == null ? null : num(r[m[f]!], decimalComma)),
     loose: (r: string[], f: Field) => (m[f] == null ? null : numLoose(r[m[f]!])),
-    date: (r: string[], f: Field, dayFirst = false) => (m[f] == null ? null : parseDate(r[m[f]!], dayFirst)),
+    date: (r: string[], f: Field, dayFirst = false) => (m[f] == null ? null : parseDate(r[m[f]!], dayFirst, off(f))),
+    /** The raw cell, for a message about it. */
+    cell: (r: string[], f: Field) => (m[f] == null ? "" : (r[m[f]!] ?? "").trim()),
   };
+}
+
+/** Where row k of a table is in the file, in words: "line 14" for a CSV, "row 14" for a sheet. */
+export function whereRow(t: Table, k: number): string {
+  const n = t.lines?.[k];
+  return n == null ? `row ${k + 1}` : `${t.unit ?? "line"} ${n}`;
+}
+
+/**
+ * One warning for rows that were skipped, naming the first few and why, for example
+ * "3 rows were skipped. Line 14: the close time "13/45/2024" is not a date we can read."
+ */
+export function skippedWarning(t: Table, skipped: { k: number; why: string }[]): string[] {
+  if (!skipped.length) return [];
+  const n = skipped.length;
+  const first = skipped.slice(0, 3).map((x) => `${capital(whereRow(t, x.k))}: ${x.why}`).join(" ");
+  return [`${n} row${n === 1 ? " was" : "s were"} skipped. ${first}${n > 3 ? ` And ${n - 3} more.` : ""}`];
+}
+
+const capital = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Why a row could not be read, from the cells that failed: "the close time "x" is not a date we can read". */
+export function whyBad(parts: [string, string, "date" | "number" | "text"][]): string {
+  const bits = parts.map(([what, cell, kind]) => (cell === "" ? `the ${what} is empty` : kind === "date" ? `the ${what} "${cell.slice(0, 40)}" is not a date we can read` : kind === "number" ? `the ${what} "${cell.slice(0, 40)}" is not a number` : `the ${what} "${cell.slice(0, 40)}" cannot be read`));
+  return `${bits.join(", and ")}.`;
 }
 
 /** "buy" or "sell" from the words platforms use, or undefined. */

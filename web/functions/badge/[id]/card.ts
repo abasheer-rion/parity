@@ -5,8 +5,9 @@
 // must be 12 letters or digits, cached five minutes in browsers, and logged by Cloudflare.
 import { badgeCardHtml, isBadgeId } from "../../../src/lib/verify/badge";
 import { lookup } from "../[id]";
+import { badgeTrust, type KeyEnv } from "../../../src/lib/connect/badgeTrust";
 
-interface Context { request: Request; params: { id?: string | string[] } }
+interface Context { request: Request; env?: KeyEnv; params: { id?: string | string[] } }
 
 const html = (body: string, status: number, maxAge: number) => new Response(body, {
   status,
@@ -21,13 +22,13 @@ const html = (body: string, status: number, maxAge: number) => new Response(body
   },
 });
 
-export const onRequestGet = async ({ request, params }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
+export const onRequestGet = async ({ request, params, env }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
   const id = Array.isArray(params.id) ? params.id[0] : params.id ?? "";
   const origin = new URL(request.url).origin;
   if (!isBadgeId(id)) return html(badgeCardHtml(null, id.slice(0, 12).replace(/[^A-Za-z0-9]/g, ""), origin), 404, 3600);
   try {
     const b = await lookup(id, fetcher);
-    return html(badgeCardHtml(b, id, origin), b ? 200 : 404, 300);
+    return html(badgeCardHtml(b, id, origin, await badgeTrust(b, env ?? {})), b ? 200 : 404, 300);
   } catch (e) {
     console.error("badge card lookup failed", id, String(e));
     return new Response("Record unavailable, try again later.", { status: 503, headers: { "Cache-Control": "no-store" } });

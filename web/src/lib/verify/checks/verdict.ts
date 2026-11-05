@@ -57,7 +57,8 @@ export function verdict(x: VerdictInput): Verdict {
   const unit = perTrade ? "trade" : "period";
 
   if ((x.trades == null || x.trades < MIN_TRADES) && x.dailyReturns < MIN_RETURNS) {
-    return v("not_enough_data", `Only ${x.trades ?? 0} trades and ${x.dailyReturns} daily returns. Verify needs at least ${MIN_TRADES} trades or ${MIN_RETURNS} daily returns before it can say anything.`);
+    const n = x.trades ?? 0, d = x.dailyReturns;
+    return v("not_enough_data", `Only ${n} ${n === 1 ? "trade" : "trades"} and ${d} daily ${d === 1 ? "return" : "returns"}. Verify needs at least ${MIN_TRADES} trades or ${MIN_RETURNS} daily returns before it can say anything.`);
   }
   if (x.contradicted.length) {
     return v("does_not_hold_up", `The file does not back the claim: ${x.contradicted.join("; ")}.`);

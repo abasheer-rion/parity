@@ -1,0 +1,1 @@
+{"error": [], "result": {"apiKeyName": "too-much", "permissions": ["query-funds", "query-closed-trades", "modify-trades", "withdraw-funds"], "iban": "AA12 N84G TEST KEY0"}}

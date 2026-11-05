@@ -1,0 +1,16 @@
+﻿Statement,Header,Field Name,Field Value
+Statement,Data,BrokerName,Interactive Brokers (U.K.) Limited
+Statement,Data,BrokerAddress,"20 Fenchurch Street, Floor 12, London EC3M 3BY, UK. Authorised and regulated by the Financial Conduct Authority"
+Statement,Data,Title,Activity Statement
+Statement,Data,Period,"February 28, 2023"
+Statement,Data,WhenGenerated,"2023-11-15, 04:35:54 EST"
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,C. Price,Proceeds,Comm/Fee,Basis,Realized P/L,Realized P/L %,MTM P/L,Code
+Trades,Data,Order,Stocks,USD,IP,"2023-02-28, 09:30:00",5.4725,36.546043856,36.39,-199.998225,-1,200.998225,0,0,-0.8539,FPA;FPA;O;P
+Trades,SubTotal,,Stocks,USD,IP,,5.4725,,,-199.998225,-1,200.998225,0,0.00,-0.8539,
+Trades,Data,Order,Stocks,USD,NWN,"2023-02-28, 09:30:01",4.4093,47.626202118,48.34,-209.998213,-1,210.998213,0,0,3.1473,FPA;FPA;O;P
+Trades,SubTotal,,Stocks,USD,NWN,,4.4093,,,-209.998213,-1,210.998213,0,0.00,3.1473,
+Trades,Total,,Stocks,USD,,,,,,-409.996438,-2,411.996438,0,,2.2934, 
+Trades,Header,DataDiscriminator,Asset Category,Currency,Symbol,Date/Time,Quantity,T. Price,,Proceeds,Comm in USD,,,,MTM in USD,Code
+Trades,Data,Order,Forex,USD,GBP.USD,"2023-02-28, 05:39:25",-345,1.2089,,417.0705,-1.993341262,,,,2.277,
+Trades,SubTotal,,Forex,USD,GBP.USD,,-345,,,417.0705,-1.993341262,,,,2.277,
+Trades,Total,,Forex,USD,,,,,,417.0705,-1.993341262,,,,2.277, 

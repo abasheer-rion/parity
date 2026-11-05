@@ -11,8 +11,9 @@ import { withHead } from "../../src/lib/meta";
 import { badgeMeta } from "../../src/lib/og/share";
 import { isBadgeId } from "../../src/lib/verify/badge";
 import { lookup } from "../badge/[id]";
+import { badgeTrust, type KeyEnv } from "../../src/lib/connect/badgeTrust";
 
-interface Context { request: Request; env: { ASSETS: { fetch: (req: Request | string) => Promise<Response> } }; params: { id?: string | string[] } }
+interface Context { request: Request; env: KeyEnv & { ASSETS: { fetch: (req: Request | string) => Promise<Response> } }; params: { id?: string | string[] } }
 
 export const onRequestGet = async ({ request, env, params }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
   const page = await env.ASSETS.fetch(new Request(new URL("/v/", request.url).toString(), { headers: request.headers }));
@@ -24,7 +25,7 @@ export const onRequestGet = async ({ request, env, params }: Context, fetcher: t
     try {
       const badge = await lookup(id, fetcher);
       found = badge !== null;
-      html = withHead(html, badgeMeta(badge, id));
+      html = withHead(html, badgeMeta(badge, id, await badgeTrust(badge, env)));
     } catch (e) {
       console.error("badge page tags failed", id, String(e));
     }

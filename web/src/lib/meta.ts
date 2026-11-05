@@ -189,6 +189,19 @@ export const PAGES: Record<string, PageMeta> = {
     description: "Check a trade history from your broker or exchange for profit per trade, worst loss, luck and look-ahead. Checked in your browser, never sent. No sign-in.",
     path: "/verify/", image: "verify", ld: [verifyAppLd()],
   },
+  // A Verify report shared by link (DEC-0089): the report is in the address after "#", so
+  // the page itself holds nothing to index.
+  "verify/report/index.html": {
+    title: "A Verify report · Parity",
+    description: "A Parity Verify report shared by link: the verdict, the numbers behind it, the record's pictures, the inputs used and what could not be checked.",
+    path: "/verify/report/", image: "verify", robots: PRIVATE,
+  },
+  // Two records side by side (DEC-0089).
+  "verify/compare/index.html": {
+    title: "Compare two trading records · Parity",
+    description: "Put two trading records side by side, such as two bots you are choosing between: verdicts, luck checks, worst falls and what each could not show.",
+    path: "/verify/compare/", image: "verify",
+  },
   // How Verify judges a record, every check and threshold, kept citable (REF-0030).
   "methodology/index.html": {
     title: "Verify methodology · Parity",
@@ -220,6 +233,32 @@ export const PAGES: Record<string, PageMeta> = {
   "legal/accessibility/index.html": { title: "Accessibility statement · Parity", description: "Parity's accessibility target, the known gaps, and how to report a barrier.", path: "/legal/accessibility/", image: "legal" },
   "legal/risk/index.html": { title: "Risk notice · Parity", description: "Why backtests and simulations can mislead, and the risks of crypto, perpetual futures, leverage and ETFs.", path: "/legal/risk/", image: "legal" },
   "legal/regulatory/index.html": { title: "Regulatory status and your rights · Parity", description: "What Parity is and is not, the laws and exemptions it relies on, your rights, and where to complain.", path: "/legal/regulatory/", image: "legal" },
+  // The pages for firms and the batch screen (DEC-0087).
+  "business/prop-firms/index.html": {
+    title: "Screen prop firm challenge accounts for luck · Parity",
+    description: "Find the funded traders who passed by luck. One verdict per account, firm rules compared, a back-test on your own outcomes. Checked in your browser.",
+    path: "/business/prop-firms/", image: "verify",
+  },
+  "business/prop-firms/sample/index.html": {
+    title: "Sample report: 500 synthetic challenge accounts · Parity",
+    description: "The batch screen's report on 500 made-up challenge accounts: verdicts, firm rules and a back-test against simulated payouts and blow-ups.",
+    path: "/business/prop-firms/sample/", image: "verify",
+  },
+  "business/copy-trading/index.html": {
+    title: "Screen copy-trading leaders for luck · Parity",
+    description: "Screen every strategy leader on a copy-trading platform in one batch: holds up, likely luck or not enough trades, with the numbers behind each.",
+    path: "/business/copy-trading/", image: "verify",
+  },
+  "business/bot-marketplaces/index.html": {
+    title: "Check trading bot and signal records · Parity",
+    description: "Screen the trade records behind every bot or signal you list: profit per trade, worst loss, size after losses and the luck check, in one batch.",
+    path: "/business/bot-marketplaces/", image: "verify",
+  },
+  "business/screen/index.html": {
+    title: "Batch screen for challenge accounts · Parity",
+    description: "Upload many trading accounts at once and get a verdict for each, a firm summary and a back-test. Checked in your browser, never sent to Parity.",
+    path: "/business/screen/", image: "verify",
+  },
   // The desktop app's download page (DEC-0072): links that always fetch the newest release.
   "download/index.html": { title: "Download Parity for Mac and Windows · Parity", description: "Parity's desktop app for Mac (Apple silicon and Intel) and Windows: the newest version, its size, checksums and system requirements.", path: "/download/", image: "default" },
   // The signed-in apps. Their tags change with each page (ROUTES_META); these are what a

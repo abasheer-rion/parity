@@ -1,0 +1,4 @@
+Market,Quantity,Direction,avgEntryPrice,avgExitPrice,Realized P&L,Opening Fee,Closing Fee,Funding Fee,cumOpenTradeFeeInfo,cumClosedTradeFeeInfo,Open Time,Open Duration,Close Time
+BTCUSDT,0.1,Long,60000,61000,93.34,3.3,3.36,0E-8,"{""USDT"":3.3}","{""USDT"":3.36}",09:15 2026-01-05,1H 6M,10:21 2026-01-05
+ETHUSDT,2,Short,3000,3050,-106.235,3.3,3.355,-0.42,"{""USDT"":3.3}","{""USDT"":3.355}",14:00 2026-01-06,1D 2H,16:30 2026-01-07
+SOLUSDT,10,Long,150,149.5,-6.75725,0.825,0.82225,0.11,"{""USDT"":0.825}","{""USDT"":0.82225}",08:00 2026-01-08,3H 0M,11:00 2026-01-08

@@ -27,10 +27,12 @@ jobs:
         run: echo "Supabase secrets are not set, nothing to migrate." >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/checkout@v7
         if: env.HAS_SECRETS == 'true'
+      # Pinned: CLI 3.0 refuses this config.toml ([inbucket] became [local_smtp]). Move the
+      # config over before unpinning.
       - uses: supabase/setup-cli@v3
         if: env.HAS_SECRETS == 'true'
         with:
-          version: latest
+          version: 2.101.0
       - name: Link and push
         if: env.HAS_SECRETS == 'true'
         env:

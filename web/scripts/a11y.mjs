@@ -55,7 +55,17 @@ for (const mode of MODES.filter((m) => m !== "desktop")) {
       page.on("popup", (p) => p.close().catch(() => {}));
       try {
         await openPage(page, server.base + path);
-        await audit(page, { mode, size: size.name, path });
+        try {
+          await audit(page, { mode, size: size.name, path });
+        } catch (e) {
+          // Pages that move on by themselves (the OAuth consent page sends a signed-out visitor
+          // to log in, the OpenRouter return page goes back where it came from) can navigate in
+          // the middle of a slow audit. Audit where they land, once.
+          if (!/Execution context was destroyed|navigation/.test(e.message)) throw e;
+          await page.waitForLoadState("load", { timeout: 15000 }).catch(() => {});
+          await page.waitForTimeout(1000);
+          await audit(page, { mode, size: size.name, path });
+        }
       } catch (e) {
         results.push({ mode, size: size.name, path, overflow: 0, error: e.message.split("\n")[0], violations: [] });
       }

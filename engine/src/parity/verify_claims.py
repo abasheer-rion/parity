@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import math
 
-METHOD_VERSION = "verify-1.0"
+METHOD_VERSION = "verify-1.1"
 SP500_LONG_RUN = 0.1
 FIELDS = ("winRate", "monthlyReturn", "maxDrawdown", "takeProfit", "stopLoss", "avgLoss",
           "maxLoss", "tradesPerMonth", "trades", "months", "leverage", "grid", "martingale",

@@ -5,8 +5,10 @@
 // verify_badge_public(), which never lists badges and never returns an owner.
 import { useEffect, useState } from "react";
 import type { Result } from "../lib/verify/checks";
-import { badgeAlt, isBadgeId, KIND_WORDS, NOT_ADVICE, survivesWords, TRUST_LINE, VERDICT_WORDS, type PublicBadge } from "../lib/verify/badge";
+import { badgeAlt, isBadgeId, kindWords, NOT_ADVICE, SELF_REPORTED, survivesWords, trustLine, venueName, VERDICT_WORDS, type PublicBadge } from "../lib/verify/badge";
 import { trustLevel } from "../lib/verify/connect";
+import { browserTrust } from "../lib/connect/badgeTrust";
+import type { Trust } from "../lib/connect/attest";
 import { Embeds } from "./verify/Embeds";
 import type { PublicCards } from "../lib/verify/publish";
 import { shortDate } from "../lib/verify/parse";
@@ -36,7 +38,11 @@ async function sha256(buf: ArrayBuffer): Promise<string> {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-export function VerifyBadge({ load = fetchBadge, path = window.location.pathname }: { load?: (id: string) => Promise<PublicBadge | null>; path?: string }) {
+export function VerifyBadge({ load = fetchBadge, path = window.location.pathname, checkTrust = browserTrust }: {
+  load?: (id: string) => Promise<PublicBadge | null>; path?: string;
+  /** Checks a broker proof against the published keys (DEC-0091). Tests pass a stand-in. */
+  checkTrust?: (b: PublicBadge) => Promise<Trust>;
+}) {
   const id = badgeIdFromPath(path);
   const [state, setState] = useState<State>(isBadgeId(id) ? { status: "loading" } : { status: "missing" });
   useEffect(() => {
@@ -70,7 +76,7 @@ export function VerifyBadge({ load = fetchBadge, path = window.location.pathname
             <p>Check your connection and reload the page.</p>
           </section>
         )}
-        {state.status === "ok" && (state.badge.withdrawn_at ? <Withdrawn b={state.badge} /> : <Live b={state.badge} />)}
+        {state.status === "ok" && (state.badge.withdrawn_at ? <Withdrawn b={state.badge} /> : <Live b={state.badge} checkTrust={checkTrust} />)}
       </main>
       <footer className="vb-footer">
         <LegalLinks />
@@ -85,13 +91,29 @@ function Withdrawn({ b }: { b: PublicBadge }) {
     <section className="vb-notice" data-testid="withdrawn">
       <h1>This record was withdrawn by its owner on {shortDate(b.withdrawn_at!.slice(0, 10))}</h1>
       <p>It was published on {shortDate(b.created_at.slice(0, 10))}. When an owner withdraws a record, we delete its numbers and keep this page with the date it was withdrawn.</p>
+      {b.broker_venue && (
+        <p data-testid="withdrawn-source">
+          It was a broker-connected record: Parity read its trades from {venueName(b.broker_venue)}
+          {b.broker_fetched_at ? ` on ${shortDate(b.broker_fetched_at.slice(0, 10))}` : ""}, account <code>{b.broker_account}</code>.
+          Records withdrawn from the same account keep the same code.
+        </p>
+      )}
       <img src={badgeSrc(b)} width={320} height={80} alt="Parity Verify badge: withdrawn by its owner" />
     </section>
   );
 }
 
-function Live({ b }: { b: PublicBadge }) {
+function Live({ b, checkTrust }: { b: PublicBadge; checkTrust: (b: PublicBadge) => Promise<Trust> }) {
   const origin = window.location.origin;
+  // Self-reported until a broker proof checks out against our published key.
+  const [trust, setTrust] = useState<Trust>(SELF_REPORTED);
+  useEffect(() => {
+    if (!b.attestation) return;
+    let live = true;
+    checkTrust(b).then((t) => live && setTrust(t)).catch(() => undefined);
+    return () => { live = false; };
+  }, [b, checkTrust]);
+  const connected = trust.level === "broker_connected" ? trust : null;
   const cards = b.cards as unknown as PublicCards;
   const r: Result = { ...cards, balance: null, triesDefaulted: false };
   const [check, setCheck] = useState<"same" | "different" | null>(null);
@@ -103,14 +125,16 @@ function Live({ b }: { b: PublicBadge }) {
           <h1 className="vb-title">{b.name}</h1>
           <p className="vb-verdict">{VERDICT_WORDS[b.verdict!]}. {survivesWords(b.survives_tries)}.</p>
         </div>
-        <img src={badgeSrc(b)} width={320} height={80} alt={badgeAlt(b)} className="vb-badge" />
+        <img src={badgeSrc(b, trust)} width={320} height={80} alt={badgeAlt(b, trust)} className="vb-badge" />
       </div>
       <section className="vb-record" aria-labelledby="vb-record-h">
         <h2 id="vb-record-h" className="sr-only">The record</h2>
         <dl className="vb-facts">
           <div><dt>Verdict</dt><dd>{VERDICT_WORDS[b.verdict!]}</dd></div>
           <div><dt>Luck check</dt><dd>{survivesWords(b.survives_tries)}, at {b.stated_tries?.toLocaleString("en-US")} {b.stated_tries === 1 ? "try" : "tries"} stated by the owner</dd></div>
-          <div><dt>Trust level</dt><dd>{trustLevel("upload")}. {b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record"}</dd></div>
+          <div><dt>Trust level</dt><dd data-testid="trust-level">{connected ? `${trustLevel("connection")}. ${connected.env === "paper" ? "A paper account" : "Real money"}, as ${venueName(connected.venue)} reports it` : `${trustLevel("upload")}. ${kindWords(b, trust)}`}</dd></div>
+          {connected && <div><dt>Read from</dt><dd>{venueName(connected.venue)}{connected.env === "paper" ? ", paper account" : ""}, on {shortDate(connected.fetchedAt.slice(0, 10))} at {connected.fetchedAt.slice(11, 16)} UTC</dd></div>}
+          {connected && <div><dt>Account</dt><dd><code>{connected.account}</code>, a one-way code, the same for every record from this account</dd></div>}
           <div><dt>Trades</dt><dd>{b.trade_count == null ? "Not a trade list" : b.trade_count.toLocaleString("en-US")}</dd></div>
           <div><dt>Period</dt><dd>{range}</dd></div>
           <div><dt>Checked on</dt><dd>{shortDate(b.created_at.slice(0, 10))}</dd></div>
@@ -119,9 +143,21 @@ function Live({ b }: { b: PublicBadge }) {
         </dl>
       </section>
       <div className="vb-trust">
-        <p><strong>{TRUST_LINE}</strong> {NOT_ADVICE}</p>
+        <p><strong>{trustLine(trust)}</strong> {NOT_ADVICE}</p>
+        {connected && (
+          <p className="vf-small">
+            The tries ({b.stated_tries?.toLocaleString("en-US")}){connected.balanceStated ? " and the starting balance" : ""} were stated by the owner: a broker shows what was
+            traded, not how many other things were tried. Anyone can check this record's proof with Parity's public key at <a href="/api/connect/keys">/api/connect/keys</a>.
+            What broker-connected does and does not prove is on the <a href="/methodology/#trust">methodology</a> page.
+          </p>
+        )}
+        {!connected && b.attestation && trust.level === "self_reported" && trust.why && trust.why !== "no_proof" && (
+          <p className="vf-small" data-testid="proof-mismatch">
+            This record carries a broker proof that does not match its numbers or our key, so it is shown as self-reported.
+          </p>
+        )}
         <p className="vf-small">
-          File fingerprint (SHA-256): <code className="vb-hash">{b.file_sha256}</code>. Anyone with the same file gets the same fingerprint.
+          {connected ? "Trades file fingerprint (SHA-256), of the file Parity read and gave the owner" : "File fingerprint (SHA-256)"}: <code className="vb-hash">{b.file_sha256}</code>. Anyone with the same file gets the same fingerprint.
         </p>
         <label className="vb-hashcheck">
           <span>Check a file against it, in your browser:</span>
@@ -132,11 +168,11 @@ function Live({ b }: { b: PublicBadge }) {
         </label>
       </div>
       <PublicLinks.Provider value={true}>
-        <ResultView r={r} />
+        <ResultView r={r} linkable={false} extra={{ badge: true, checkedOn: b.created_at?.slice(0, 10) }} />
       </PublicLinks.Provider>
       <details className="vb-share">
         <summary>Embed or share this record</summary>
-        <Embeds badge={b} origin={origin} host={window.location.host} />
+        <Embeds badge={b} origin={origin} host={window.location.host} trust={trust} />
       </details>
     </>
   );

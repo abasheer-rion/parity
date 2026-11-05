@@ -275,6 +275,7 @@ All fetched on 2026-10-23. Company figures are self-reported.
 - [INT-0003: Parity Verify, the lie detector for trading strategies and bots](../intent/0003-parity-verify-the-lie-detector-for-trading-strategies-and-bots.md)
 - [DEC-0032: Parity Verify as a data and API business, with a free retail tier](../decisions/0032-parity-verify-as-a-data-and-api-business-with-a-free-retail-tier.md)
 - [DEC-0047: Competitor profiles and a feedback collector that runs by itself](../decisions/0047-competitor-profiles-and-a-feedback-collector-that-runs-by-itself.md)
+- [RES-0029: Ayan's and Abanish's plans compared, and where Parity fits](0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md)
 - [REF-0016: Parity Verify MVP spec](../reference/0016-parity-verify-mvp-spec.md)
 - [CMP-0001: What users praise most in trading platforms, and what Parity takes from it](../competitors/0001-ux-patterns-users-praise-most.md)
 - [CMP-0004: MetaTrader 4 and 5, the free broker platform most FX traders use](../competitors/0004-metatrader-4-and-5.md)

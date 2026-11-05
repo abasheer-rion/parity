@@ -22528,7 +22528,8 @@
       "verification": "not checked",
       "used_in": [
         "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
-        "docs/reference/0019-latency-budget-and-target-architecture.md"
+        "docs/reference/0019-latency-budget-and-target-architecture.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "repo",
@@ -23008,7 +23009,8 @@
       "accessed": "2026-10-22",
       "verification": "not checked",
       "used_in": [
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "repo",
@@ -33921,7 +33923,8 @@
       "accessed": "2026-10-24",
       "verification": "not checked",
       "used_in": [
-        "docs/competitors/0014-binance.md"
+        "docs/competitors/0014-binance.md",
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
       ],
       "metadata": {
         "source": "repo",
@@ -39926,7 +39929,8 @@
       "verification": "ok",
       "verification_checked": "2026-10-26",
       "used_in": [
-        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md"
+        "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "note": "Read for DEC-0063 (public low-latency feed terms).",
       "metadata": {
@@ -39973,7 +39977,8 @@
       "verification_checked": "2026-10-26",
       "used_in": [
         "docs/decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md",
-        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md"
+        "docs/reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md",
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "note": "Read for DEC-0063 (public low-latency feed terms).",
       "metadata": {
@@ -43106,6 +43111,1225 @@
       "verification_checked": null,
       "used_in": [
         "docs/log/2026-10-28-fed-under-warsh-post-and-live-call.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fa6d5610",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "TradeRank AI trading leaderboard, October 2026",
+      "venue": "traderank.ai",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.traderank.ai/ai-trading-leaderboard",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f09d16b3",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "AI Trading Benchmark: LLM Leaderboard for Crypto Trading",
+      "venue": "oakresearch.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://oakresearch.io/en/ai/trading-benchmark",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "ulesov2026",
+      "type": "preprint",
+      "authors": [
+        "Ulesov, Makar",
+        "Smirnov, Vladislav",
+        "Ibrahim, Omar",
+        "Bobovnikov, Arsenii"
+      ],
+      "year": 2026,
+      "title": "Can LLMs Catch a Rigged Backtest? A Clean-Control Calibration Benchmark",
+      "venue": "arXiv preprint",
+      "doi": null,
+      "arxiv": "2609.28090",
+      "url": "https://arxiv.org/abs/2609.28090",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "barton2026",
+      "type": "preprint",
+      "authors": [
+        "Barton, T.J.",
+        "Constantakis, Chris",
+        "Hauseman, Patti",
+        "Mous, Annie",
+        "Hoffman, Alaska",
+        "Bergeron, Brian",
+        "Goodreau, Hunter"
+      ],
+      "year": 2026,
+      "title": "What LLM Trading Agents Actually Do in Production: A Six-Month, Population-Scale Record from Two Fleets",
+      "venue": "arXiv preprint",
+      "doi": null,
+      "arxiv": "2609.05663",
+      "url": "https://arxiv.org/abs/2609.05663",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md",
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-82637c93",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Prop Trading Statistics 2026: Pass Rates and Market Data",
+      "venue": "track360.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://track360.io/blog/prop-trading-industry-statistics-2026",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-f3b04298",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "ESMA communicates supervisory expectations on copy trading services",
+      "venue": "PwC Legal",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://legal.pwc.de/en/news/articles/esma-communicates-supervisory-expectations-on-copy-trading-services",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-28e0e490",
+      "type": "dataset",
+      "authors": [
+        "Chen, Andrew Y.",
+        "Zimmermann, Tom"
+      ],
+      "year": null,
+      "title": "Open Source Asset Pricing",
+      "venue": "openassetpricing.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.openassetpricing.com/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c2280db1",
+      "type": "dataset",
+      "authors": [
+        "Jensen, Theis Ingerslev",
+        "Kelly, Bryan",
+        "Pedersen, Lasse Heje"
+      ],
+      "year": null,
+      "title": "Global Factor Data",
+      "venue": "jkpfactors.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://jkpfactors.com/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "ok",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "harvey2019",
+      "type": "preprint",
+      "authors": [
+        "Harvey, Campbell R.",
+        "Liu, Yan"
+      ],
+      "year": 2019,
+      "title": "A Census of the Factor Zoo",
+      "venue": "SSRN working paper",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://papers.ssrn.com/abstract=3341728",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-e6249d93",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Quantpedia's Research in 2023",
+      "venue": "quantpedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpedia.com/quantpedias-research-in-2023/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "wiecki2016",
+      "type": "preprint",
+      "authors": [
+        "Wiecki, Thomas",
+        "Campbell, Andrew",
+        "Lent, Justin",
+        "Stauth, Jessica"
+      ],
+      "year": 2016,
+      "title": "All that Glitters Is Not Gold: Comparing Backtest and Out-of-Sample Performance on a Large Cohort of Trading Algorithms",
+      "venue": "SSRN working paper",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://papers.ssrn.com/abstract=2745220",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "blocked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-caa68e18",
+      "type": "software",
+      "authors": [],
+      "year": null,
+      "title": "pbo: Probability of Backtest Overfitting (R package)",
+      "venue": "CRAN",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://cran.r-project.org/package=pbo",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0029/RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-583d7f70",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Quantpedia, in-sample against out-of-sample analysis of trading strategies",
+      "venue": "quantpedia.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://quantpedia.com/tag/own-research/page/4/",
+      "also_at": [],
+      "accessed": "2026-10-29",
+      "verification": "unchecked",
+      "verification_checked": "2026-10-29",
+      "used_in": [
+        "docs/research/0030-outside-data-to-grow-the-counted-trials-dataset.md"
+      ],
+      "note": "Added for RES-0030",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fbe25501",
+      "type": "dataset",
+      "authors": [
+        "Chen, Andrew Y.",
+        "Zimmermann, Tom"
+      ],
+      "year": 2026,
+      "title": "Open Source Cross-Sectional Asset Pricing, data release 2026.10",
+      "venue": "Hugging Face",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://huggingface.co/datasets/OpenSourceAP/CrossSection",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "docs/research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md"
+      ],
+      "note": "Added for RES-0031. Licence CC BY 4.0 per the dataset card.",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a01473b5",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Open Source Asset Pricing, data page",
+      "venue": "openassetpricing.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.openassetpricing.com/data/",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-591ac0de",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "Open Source Asset Pricing release notes 2026.10",
+      "venue": "Hugging Face",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://huggingface.co/datasets/OpenSourceAP/CrossSection/blob/Data-Release-2026.10/Release%20Notes%202026.10.md",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8b97759b",
+      "type": "web-page",
+      "authors": [],
+      "year": null,
+      "title": "OpenSourceAP/CrossSection code",
+      "venue": "GitHub",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/OpenSourceAP/CrossSection",
+      "also_at": [],
+      "accessed": "2026-11-02",
+      "verification": "unchecked",
+      "verification_checked": "2026-11-02",
+      "used_in": [
+        "catalog/datasets/open-source-asset-pricing.json"
+      ],
+      "note": "Added for DAT-0048",
+      "metadata": {
+        "source": "repo",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-1287faa5",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Pine Script user manual: Strategies",
+      "venue": "tradingview.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.tradingview.com/pine-script-docs/concepts/strategies/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-546655e8",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Backtesting.py documentation",
+      "venue": "kernc.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://kernc.github.io/backtesting.py/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-02f1dd10",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "pandas.DataFrame.ewm",
+      "venue": "pandas.pydata.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-2eab3b36",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "agusalex/tax_calculator",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/agusalex/tax_calculator",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-77266c72",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "codecat92/apex-grid-ea",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/codecat92/apex-grid-ea",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec3186c4",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "PopovMP/mt-report-parser",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/PopovMP/mt-report-parser",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-00c665b4",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "pineforge-4pass/pineforge-corpus",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/pineforge-4pass/pineforge-corpus",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d7d63252",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "Delta-Compute/DeltaCFOAgent",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/Delta-Compute/DeltaCFOAgent",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0b180ad0",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "alpacahq/alpaca-py",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/alpacahq/alpaca-py",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0084-verify-imports-are-tested-on-real-exports.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-cb22e73a",
+      "type": "web-page",
+      "authors": [],
+      "year": 2022,
+      "title": "Robots Exclusion Protocol (RFC 9309)",
+      "venue": "rfc-editor.org",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.rfc-editor.org/rfc/rfc9309",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md",
+        "docs/reference/0030-parity-verify-methodology.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c2019c86",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "X robots.txt",
+      "venue": "x.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://x.com/robots.txt",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a90d5b50",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: send request",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/api-reference/send-request",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-04e24492",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: get statement",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/api-reference/get-statement",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-79a6e62d",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Interactive Brokers Flex Web Service: error codes",
+      "venue": "interactivebrokers.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.interactivebrokers.com/docs/web-api/flex-web-service/error-codes",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec9e6ffe",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca API documentation: using oauth2 and trading api",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/docs/using-oauth2-and-trading-api",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-0b3147c5",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca support: usage limit api calls",
+      "venue": "alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://alpaca.markets/support/usage-limit-api-calls",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-b6a9ee4e",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca API documentation: account activities",
+      "venue": "docs.alpaca.markets",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.alpaca.markets/us/docs/account-activities.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-301e4f80",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: get api key permissions",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/data-api/get-api-key-permissions.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-4759dcf9",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: api key authentication",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/coinbase-app/authentication-authorization/api-key-authentication.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ec8624cb",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Coinbase Developer Platform documentation: list fills",
+      "venue": "docs.cdp.coinbase.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-fills.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-ff1e011c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: get api key info",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api-reference/account-data/get-api-key-info.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-69f39364",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: authentication",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/exchange/guides/rest/authentication.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-663687ee",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: ratelimits",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/exchange/guides/rest/ratelimits.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-43011619",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Kraken API documentation: get trades history",
+      "venue": "docs.kraken.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.kraken.com/api-reference/account-data/get-trades-history.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-360b6e3d",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance developer documentation: api key permission",
+      "venue": "developers.binance.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://developers.binance.com/docs/wallet/account/api-key-permission",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-a25a1dce",
+      "type": "software",
+      "authors": [],
+      "year": 2026,
+      "title": "binance/binance-spot-api-docs: rest api",
+      "venue": "github.com",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8e10fd9b",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance.US API documentation: ",
+      "venue": "docs.binance.us",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://docs.binance.us/",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-fd48c123",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: apikey info",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/user/apikey-info",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-8584fd9c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: execution",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/order/execution",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-acd0e07b",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit V5 API documentation: rate limit",
+      "venue": "bybit-exchange.github.io",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://bybit-exchange.github.io/docs/v5/rate-limit",
+      "also_at": [],
+      "accessed": "2026-11-03",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-52115a81",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Alpaca customer agreement",
+      "venue": "Alpaca",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-aae2961c",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "IEX historical data terms of use",
+      "venue": "IEX",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.iex.io/legal/hist-data-terms",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-89ecfc73",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Binance Vision dataset terms of use",
+      "venue": "Binance",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://data.binance.vision/Binance_Vision-Terms_of_Use.pdf",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-c706258a",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Bybit terms of service",
+      "venue": "Bybit",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.bybit.com/en/legal/terms-of-service/terms-of-service",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-6fae220f",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "OKX API agreement",
+      "venue": "OKX",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://www.okx.com/en-us/help/okx-api-agreement",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
+      ],
+      "metadata": {
+        "source": "manual",
+        "doi_explicit": false
+      }
+    },
+    {
+      "key": "url-d9789392",
+      "type": "web-page",
+      "authors": [],
+      "year": 2026,
+      "title": "Tenderly terms of service",
+      "venue": "Tenderly",
+      "doi": null,
+      "arxiv": null,
+      "url": "https://tenderly.co/terms-of-service",
+      "also_at": [],
+      "accessed": "2026-11-04",
+      "verification": "unchecked",
+      "verification_checked": null,
+      "used_in": [
+        "docs/decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md"
       ],
       "metadata": {
         "source": "manual",

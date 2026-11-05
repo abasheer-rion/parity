@@ -32,8 +32,8 @@ function nav(path: string): string {
 // shows when it asks to use one.
 const TOOLS: [string, string][] = [
   ["verify_trades", "Verify a trade list or equity curve: a verdict, one sentence, five cards and how many tries it survives. Nothing is saved."],
-  ["verify_strategy", "Verify one of Parity's tested strategies with every try we counted, or find the closest ones to a rule set in words."],
-  ["verify_claim", "Check a seller's claim, such as a win rate with a take-profit and no stop, and say which numbers cannot hold."],
+  ["verify_strategy", "Verify a strategy from its Pine Script or Python code, or from rules, run on Parity's daily prices with real costs; or one of Parity's tested strategies."],
+  ["verify_claim", "Check a seller's claim from their page's address or their words: each claim with the words it came from, which numbers cannot hold, and, with the record, which ones it backs."],
   ["search_strategies", "Find strategies Parity has tested against the S&P 500, with each one's verdict from the 11 tests."],
   ["get_strategy", "Full results for one strategy: its settings, the 11 tests, yearly returns and its equity curve."],
   ["search_leads", "The best variations from Parity's always-on strategy search, with the luck check."],
@@ -55,8 +55,8 @@ const PROMPTS: [string, string, string][] = [
     "A verdict such as \"Could be luck\", one sentence written from the numbers, the profit per trade, the worst losses, the luck check after 12 tries, signs of peeking or tuning, and what it could not check."],
   ["verify_claim", "Is a 92% win rate with 5% take-profit and no stop possible?",
     "Each claim marked impossible, needs more data or adds up, with the sums: here, losses must average under 57.5% of a position to break even, and with no stop nothing keeps them there."],
-  ["verify_strategy", "Verify the strategy 'The Gambit'.",
-    "The verdict on our research numbers with every try our research and search have counted, the tests it passed out of 11, and how many tries it survives."],
+  ["verify_strategy", "Verify this TradingView strategy on Bitcoin. I tried 8 versions of it. [paste the Pine Script]",
+    "The verdict after running it on Parity's daily prices with real costs, the luck check after your 8 tries plus the settings next to yours, how many tries it survives, and any line it could not run."],
 ];
 
 const WRITE_TOOLS: [string, string][] = [
@@ -69,7 +69,7 @@ const toolRows = (rows: [string, string][]) => rows.map(([n, d]) => `<tr><th sco
 const BLOCKS: Record<string, string> = {
   verify: `
         <h2 id="verify">What your AI can verify</h2>
-        <p>Paste a trade list, name one of our strategies, or quote a seller's claim, and your AI runs Parity Verify with three tools: <code>verify_trades</code>, <code>verify_strategy</code> and <code>verify_claim</code>. They run the same checks as Verify on the website. Nothing you send is saved. How the checks work: <a href="/methodology/">methodology</a>.</p>
+        <p>Paste a trade list or a strategy's code, name one of our strategies, or quote a seller's claim, and your AI runs Parity Verify with three tools: <code>verify_trades</code>, <code>verify_strategy</code> and <code>verify_claim</code>. They run the same checks as Verify on the website. Nothing you send is saved. How the checks work: <a href="/methodology/">methodology</a>.</p>
         <div class="lg-table-wrap gd-tools" tabindex="0" role="region" aria-label="Prompts to try">
           <table>
             <caption>Prompts to copy, and what comes back</caption>

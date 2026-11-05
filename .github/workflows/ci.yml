@@ -116,7 +116,11 @@ jobs:
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci
+      # The E2E build is the sandbox: read-only broker connections are on (DEC-0091), as in
+      # pull request previews. Production stays off until the owner turns it on.
       - run: npm run build
+        env:
+          VITE_VERIFY_CONNECTIONS: "on"
       - uses: actions/upload-artifact@v7
         with:
           name: e2e-dist

@@ -7,8 +7,12 @@ import type { Report } from "../types";
 import type { SearchDoc } from "../data";
 import { nameOf, searchTextOf, tagsOf } from "../strategyMeta";
 import { tagline } from "../strategyNames";
-import { checkDescription, checkFile, checkStrategy, claimRows, NA, survivesText, type ClaimRow, type Result } from "../verify/checks";
+import { checkBacktest, checkDescription, checkFile, checkStrategy, claimRows, NA, survivesText, type ClaimRow, type Result } from "../verify/checks";
+import { MARKETS, readStrategy, runStrategy as runRulesOnPrices, RulesError, ScriptError, RULES_FORMAT, type Language, type Rules } from "../verify/strategy";
 import { closest, extract, searchVerdict, type Candidate } from "../verify/describe";
+import { againstSummary, claimsAgainst } from "../verify/claims/against";
+import { claimFrom, extractClaims, type FoundClaim } from "../verify/claims/extract";
+import { fetchPage } from "../verify/claims/fetch";
 import { priceBook, type PriceBook } from "../verify/prices";
 import type { Claim, EquityPoint, InputKind, Parsed, Trade } from "../verify/types";
 import type { Schema } from "./schema";
@@ -38,6 +42,10 @@ export const claimSchema: Schema = {
     winRate: { type: "number", minimum: 0, maximum: 1, description: "Share of trades that win. 0.92 for 92%." },
     monthlyReturn: { type: "number", minimum: -1, maximum: 100, description: "Average return a month. 0.1 for 10%." },
     maxDrawdown: { type: "number", minimum: 0, maximum: 1, description: "Largest fall from a high, as a share of the account. 0.08 for 8%." },
+    totalReturn: { type: "number", minimum: -1, maximum: 100000, description: "Total return over the whole record. 3.4 for +340%." },
+    yearlyReturn: { type: "number", minimum: -1, maximum: 10000, description: "Return a year, as stated. 0.25 for 25%." },
+    profitFactor: { type: "number", minimum: 0, maximum: 1000, description: "Gross profit over gross loss, as stated." },
+    startDate: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "The day the record is said to start, YYYY-MM-DD." },
     takeProfit: { type: "number", minimum: 0, maximum: 10, description: "Take-profit as a share of the position. 0.05 for 5%." },
     stopLoss: { type: "number", minimum: 0, maximum: 10, description: "Stop-loss as a share of the position. Leave out when there is no stop." },
     avgLoss: { type: "number", minimum: 0, maximum: 10, description: "Average losing trade as a share of the position." },
@@ -57,7 +65,7 @@ export function toClaim(v: unknown): Claim {
   const out: Claim = {};
   if (!v || typeof v !== "object") return out;
   for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
-    if (typeof x === "number" || typeof x === "boolean") (out as Record<string, unknown>)[k] = x;
+    if (typeof x === "number" || typeof x === "boolean" || (k === "startDate" && typeof x === "string")) (out as Record<string, unknown>)[k] = x;
   }
   return out;
 }
@@ -143,6 +151,11 @@ export function fullResult(r: Result, ctx: Pick<ToolContext, "origin">) {
 // ---------------------------------------------------------------------------- verify_trades
 
 async function runTrades(a: Record<string, unknown>, ctx: ToolContext) {
+  return fullResult(await recordResult(a, ctx, toClaim(a.claim)), ctx);
+}
+
+/** The five cards for a trade list or equity curve sent in the call, judged against `claim`. */
+async function recordResult(a: Record<string, unknown>, ctx: ToolContext, claim: Claim): Promise<Result> {
   const trades = Array.isArray(a.trades) && a.trades.length ? toTrades(a.trades) : undefined;
   const equity = !trades && Array.isArray(a.equity) && a.equity.length
     ? (a.equity as Record<string, unknown>[]).map((p): EquityPoint => ({ date: str(p.date), equity: Number(p.equity), ...(typeof p.cashflow === "number" ? { cashflow: p.cashflow } : {}) }))
@@ -156,11 +169,10 @@ async function runTrades(a: Record<string, unknown>, ctx: ToolContext) {
   const prices: PriceBook | null = doc ? priceBook(doc) : null;
   const tries = typeof a.tries === "number" && Number.isFinite(a.tries) ? Math.max(1, Math.round(a.tries)) : 1;
   const balance = typeof a.starting_balance === "number" && a.starting_balance > 0 ? a.starting_balance : null;
-  const result = checkFile({
+  return checkFile({
     parsed, prices, triesDefaulted: a.tries == null,
-    answers: { kind: str(a.kind) as InputKind, balance, tries, claim: toClaim(a.claim), noCashflows: true },
+    answers: { kind: (str(a.kind) || "backtest") as InputKind, balance, tries, claim, noCashflows: true },
   });
-  return fullResult(result, ctx);
 }
 
 const tradesInput: Tool["inputSchema"] = {
@@ -235,9 +247,56 @@ function findRun(report: Report, q: string) {
   throw new ToolError(`No strategy matches "${q}". Call search_strategies for the ids, or send it as description to get the closest strategies we have tested.`);
 }
 
+/** Code or rules, run on our daily prices (DEC-0083). */
+async function runCode(a: Record<string, unknown>, ctx: ToolContext) {
+  const market = str(a.market).trim();
+  if (!market) throw new ToolError(`Give market: the code does not say which market it trades. One of ${MARKETS.map((m) => m.id).join(", ")}.`);
+  let read;
+  try {
+    read = readStrategy({ code: typeof a.code === "string" ? a.code : undefined, rules: a.rules, language: (str(a.language) || "auto") as Language | "auto", market, from: str(a.from) || undefined, to: str(a.to) || undefined });
+  } catch (e) {
+    if (e instanceof ScriptError) throw new ToolError(`The code could not be read. ${e.message}`);
+    if (e instanceof RulesError) throw new ToolError(e.problems.length > 1 ? `The rules have problems: ${e.problems.join(" ")}` : e.message);
+    throw e;
+  }
+  const words = (u: { what: string; line: number; why: string }) => ({ what: u.what, line: u.line || null, why: u.why });
+  const base = { mode: "code", language: read.language, name: read.name };
+  if (!read.rules) {
+    return tidy({
+      ...base, ran: false, verdict: null,
+      sentence: `Not run: ${read.blocking.length} part${read.blocking.length === 1 ? "" : "s"} of the code cannot be turned into rules we can test. Each is listed in cannot_run with its line.`,
+      cannot_run: read.blocking.map(words), left_out: read.ignored.map(words), notes: read.notes, methodology: methodology(ctx), note: NOTE,
+    }) as Record<string, unknown>;
+  }
+  const doc = await ctx.data.json<Parameters<typeof priceBook>[0]>("/data/verify/prices.json").catch(() => null);
+  if (!doc) throw new ToolError("Our daily prices are not published yet, so the code cannot be run.");
+  const capital = typeof a.starting_balance === "number" && a.starting_balance > 0 ? a.starting_balance : undefined;
+  let run;
+  try { run = runRulesOnPrices(read as typeof read & { rules: Rules }, priceBook(doc), capital); } catch (e) {
+    if (e instanceof RulesError) throw new ToolError(e.message);
+    throw e;
+  }
+  const tries = typeof a.tries === "number" && Number.isFinite(a.tries) ? Math.max(1, Math.round(a.tries)) : 1;
+  const r = checkBacktest(run, tries, a.tries == null);
+  const c = r.code!;
+  return {
+    ...base, ran: true,
+    ...fullResult(r, ctx),
+    rules: run.rules,
+    tries_counted: { stated: c.triesStated, nearby_settings: c.triesSweep, total: r.tries },
+    backtest: tidy({
+      market: c.market, from: r.dateFrom, to: r.dateTo, starting_balance: c.capital, cost_each_way: c.cost, cost_why: c.costWhy,
+      total_return: c.totalReturn, total_return_one_day_later: c.delayedReturn, buy_and_hold_return: c.buyHoldReturn, prices: c.priceSource,
+    }),
+    nearby_settings: tidy(c.sweep),
+    left_out: read.ignored.map(words),
+  } as Record<string, unknown>;
+}
+
 async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
+  if (a.code != null || a.rules != null) return runCode(a, ctx);
   const name = str(a.strategy).trim(), text = str(a.description).trim();
-  if (!name && !text) throw new ToolError("Give strategy (an id or name from our tested list, such as fx_carry or \"The Gambit\") or description (a rule set in words).");
+  if (!name && !text) throw new ToolError("Give strategy (an id or name from our tested list, such as fx_carry or \"The Gambit\"), code (Pine Script or Python) with market, rules with market, or description (a rule set in words).");
   const { report, search } = await research(ctx);
   const tries = (search?.trials ?? 0) + report.n_trials;
   if (name) {
@@ -267,7 +326,7 @@ async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
     claim_arithmetic: claimRows(x.claim),
     tries_counted: { research: report.n_trials, search: search?.trials ?? 0, total: tries },
     research_as_of: report.generated_at,
-    could_not_check: [{ check: "This rule set's own results", why: "A described rule set has not been backtested by Parity. These are the closest strategies we have tested. Send the rule set's trade log to verify_trades to check its record." }],
+    could_not_check: [{ check: "This rule set's own results", why: `A description in words is not backtested by Parity. To backtest it, write it as rules (format ${RULES_FORMAT}, see this tool's description) and send rules with market, or send the strategy's Pine Script or Python as code. These are the closest strategies we have tested.` }],
     methodology: methodology(ctx),
     note: NOTE,
   }) as Record<string, unknown>;
@@ -275,18 +334,28 @@ async function runStrategy(a: Record<string, unknown>, ctx: ToolContext) {
 
 export const verifyStrategy: Tool = {
   name: "verify_strategy",
-  title: "Verify a tested strategy",
+  title: "Verify a strategy",
   description: [
-    "Runs Parity Verify on one of the strategies Parity has tested, using our research numbers and the real number of tries our research and strategy search have counted (thousands), so the luck check is as strict as it should be.",
-    "Send strategy: an id or a name, such as \"fx_carry\" or \"The Gambit\". Returns the verdict, one sentence, the five cards, survives_up_to_tries, the gauntlet result (tests passed of 11), the method version and could_not_check.",
-    "Or send description: a rule set in words, such as \"buys the highest-yielding currency and sells the lowest, rebalanced monthly\". Returns the closest strategies we have tested, each with its verdict and luck check, and an id to verify next. A description is not backtested.",
-    "Use search_strategies to browse the ids. Runs in memory; nothing is stored. A check, not advice.",
+    "Runs Parity Verify on a strategy. Three ways:",
+    "(1) code: TradingView Pine Script (v4 to v6) or a simple Python strategy (pandas signal columns, vectorbt entries and exits, or a backtesting.py Strategy class), with market. Parity reads it into rules, backtests them on its own daily closing prices with retail costs, also runs the nearby settings (each setting at half to one and a half times its value), and returns the verdict, one sentence, the five cards, survives_up_to_tries, the rules it ran, the backtest's returns, the one-day-later return and could_not_check. Parts it cannot run (the day's high, low or volume, other time frames, trailing stops, loops) are listed in cannot_run with their line, and nothing is run; drawings and alerts are listed in left_out.",
+    `(2) rules: the strategy in Parity's rule format (${RULES_FORMAT}), with market. Use this to backtest a strategy someone described in words: write it as rules yourself. Expressions are JSON lists: ["sma", "close", 20], ["crossover", "fast", "slow"], [">", "rsi14", 70], ["and", a, b], ["prev", "close", 1]. Functions: sma, ema, rma, wma, rsi, roc, change, stdev, highest, lowest, cci, macd, macd_signal, macd_hist, bb_upper, bb_lower, crossover, crossunder, cross, abs, max, min, nz, if. Built-ins: close, entry_price, position. Example: {"market": "BTCUSD", "inputs": {"fast": 10, "slow": 30}, "let": {"f": ["sma", "close", "fast"], "s": ["sma", "close", "slow"]}, "long": {"entry": ["crossover", "f", "s"], "exit": ["crossunder", "f", "s"], "stop_loss": 0.05}}.`,
+    "Send tries: how many versions or settings the person tried before this one. The luck check counts those plus the nearby settings Parity ran.",
+    "(3) strategy: an id or name of a strategy Parity has tested, such as \"fx_carry\", checked with every try our research and search have counted. description in words returns the closest strategies we have tested instead (not a backtest).",
+    `Markets: ${MARKETS.map((m) => m.id).join(", ")}, daily closes. Runs in memory; nothing is stored. A check, not advice.`,
   ].join(" "),
   inputSchema: {
     type: "object",
     properties: {
+      code: { type: "string", minLength: 1, maxLength: 60000, description: "Pine Script or Python source of the strategy. Needs market." },
+      language: { type: "string", enum: ["auto", "pine", "python", "rules"], description: "The language of code. Default auto: found from how it looks." },
+      rules: { type: "object", description: `The strategy in Parity's rule format (${RULES_FORMAT}): market, inputs, let, long and short with entry, exit, stop, limit, stop_loss, take_profit. Needs market.` },
+      market: { type: "string", enum: MARKETS.map((m) => m.id), description: "The market to run code or rules on, with our daily closing prices." },
+      tries: { type: "integer", minimum: 1, maximum: 10000000, description: "How many versions or settings were tried before this one, counting this one. Default 1." },
+      starting_balance: { type: "number", minimum: 1, maximum: 1e12, description: "Starting balance for the backtest. Default: the script's own, or 10,000." },
+      from: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "First day to test, YYYY-MM-DD. Default: all our prices." },
+      to: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$", description: "Last day to test, YYYY-MM-DD." },
       strategy: { type: "string", minLength: 1, maxLength: 120, description: "An id or name from Parity's tested list, such as fx_carry or The Gambit." },
-      description: { type: "string", minLength: 1, maxLength: 4000, description: "A rule set in words, when it is not one of ours. Returns the closest tested strategies." },
+      description: { type: "string", minLength: 1, maxLength: 4000, description: "A rule set in words. Returns the closest tested strategies; to backtest it, send rules instead." },
       limit: { type: "integer", minimum: 1, maximum: 10, description: "How many close strategies to return for a description (default 3)." },
     },
     additionalProperties: false,
@@ -303,58 +372,98 @@ const claimWord = (c: ClaimRow): ClaimWord =>
 
 async function runClaim(a: Record<string, unknown>, ctx: ToolContext, strict = true) {
   const text = str(a.text).trim();
-  if (strict && !text && !Object.keys(toClaim(a.claim)).length) {
-    throw new ToolError("Nothing to check. Give text (the seller's words) or claim fields such as {\"winRate\": 0.92, \"takeProfit\": 0.05}.");
+  const url = str(a.url).trim();
+  const record = a.record && typeof a.record === "object" ? (a.record as Record<string, unknown>) : null;
+  if (strict && !text && !url && !Object.keys(toClaim(a.claim)).length) {
+    throw new ToolError("Nothing to check. Give url (a seller's page), text (the seller's words) or claim fields such as {\"winRate\": 0.92, \"takeProfit\": 0.05}.");
   }
+  // A seller's page, read under robots.txt with no login (DEC-0088).
+  let page: { url: string; final_url: string; title: string | null; read_at: string; notes: string[] } | null = null;
+  let found: FoundClaim[] = [];
+  if (url) {
+    const p = await fetchPage(url, { fetch: ctx.fetch ?? fetch });
+    if (!p.ok) throw new ToolError(`The page could not be read: ${p.detail}`);
+    found = extractClaims(p.text);
+    page = {
+      url: p.url, final_url: p.finalUrl, title: p.title, read_at: p.fetchedAt,
+      notes: [...(p.scripted ? ["The page fills in its numbers with scripts after it opens, so they were not in what we read. Send them as text or claim fields instead."] : []), ...(p.truncated ? ["Only the first 2 MB of the page were read."] : [])],
+    };
+  }
+  if (text) found = [...found, ...extractClaims(text).map((f) => ({ ...f, at: f.at + 1_000_000 }))];
   const x = text ? extract(text) : null;
-  // Fields sent by the caller win over what was read from the text.
-  const found: Claim = {};
-  for (const [k, v] of Object.entries(x?.claim ?? {})) if (v !== undefined) (found as Record<string, unknown>)[k] = v;
-  const claim: Claim = { ...found, ...toClaim(a.claim) };
+  // Fields sent by the caller win over what was read from the page and the text.
+  const read: Claim = { ...claimFrom(found) };
+  for (const [k, v] of Object.entries(x?.claim ?? {})) if (v !== undefined && (read as Record<string, unknown>)[k] === undefined) (read as Record<string, unknown>)[k] = v;
+  const claim: Claim = { ...read, ...toClaim(a.claim) };
   const settings = typeof a.settings === "number" ? a.settings : x?.settings || null;
-  const trades = typeof a.trades === "number" ? a.trades : x?.trades ?? null;
-  const r = checkDescription({ text, claim, settings, trades });
+  const trades = typeof a.trades === "number" ? a.trades : x?.trades ?? claim.trades ?? null;
+  const r = checkDescription({ text: text || page?.title || url, claim, settings, trades });
   const claims = r.claims.map((c) => ({ id: c.id, status: claimWord(c), text: c.text }));
+  const quoted = found.map((f) => ({ field: f.field, value: f.value, as_written: f.shown, words: f.quote, how: f.rule, from: f.at >= 1_000_000 ? "text" : "page" }));
+  // With a record: every claim set against it, and the record's own verdict.
+  const rec = record ? await recordResult(record, ctx, claim) : null;
+  const against = claimsAgainst(found, rec ?? r);
   return tidy({
-    verdict: r.verdict,
-    sentence: r.verdict.sentence,
+    verdict: rec ? rec.verdict : r.verdict,
+    sentence: rec ? rec.verdict.sentence : r.verdict.sentence,
     claims,
     impossible: claims.filter((c) => c.status === "impossible").length,
     needs_more_data: claims.filter((c) => c.status === "needs_more_data").length,
     claim_used: claim,
     found_in_text: x?.found ?? [],
+    claims_found: quoted,
+    ...(page ? { page } : {}),
+    against_record: against.map((row) => ({ field: row.field, claimed: row.shown, record: row.record, status: row.status, why: row.why, changes_verdict: row.decides })),
+    against_record_summary: againstSummary(against),
+    ...(rec ? { record: fullResult(rec, ctx) } : {}),
     settings_check: r.card5[3],
     claim_arithmetic: r.claims,
     signs_of_tuning: r.card5,
-    could_not_check: [{ check: "Whether the claimed results happened", why: "A claim is not a record. Send the trade list or equity curve to verify_trades to check it." }],
+    could_not_check: rec ? [] : [{ check: "Whether the claimed results happened", why: "A claim is not a record. Send the account's trades or equity as record (or to verify_trades with claim) to check it." }],
     method_version: r.methodVersion,
-    notes: r.notes,
+    notes: [...r.notes, ...(page?.notes ?? [])],
     methodology: methodology(ctx),
     note: NOTE,
   }) as Record<string, unknown>;
 }
 
+const recordSchema: Schema = {
+  type: "object",
+  description: "The record behind the claim, to check each claim against it: kind, and trades (close_time and pnl each) or equity (date and equity each), with starting_balance for returns. Same fields as verify_trades.",
+  properties: {
+    kind: { type: "string", enum: ["real", "demo", "backtest"] },
+    trades: tradesSchema,
+    equity: equitySchema,
+    starting_balance: { type: "number", minimum: 0, maximum: 1e12 },
+    tries: { type: "integer", minimum: 1, maximum: 10000000 },
+  },
+  additionalProperties: false,
+};
+
 export const verifyClaim: Tool = {
   name: "verify_claim",
   title: "Check a seller's claim",
   description: [
-    "Checks the arithmetic of a trading claim, such as a bot or signal seller's page, and says which claims are impossible and which need more data before anyone could believe them.",
-    "Send text (the seller's words), claim fields, or both; fields win over the text. Rates are fractions: 0.92 means 92%.",
-    "Example: {\"text\": \"92% win rate, 5% take-profit, no stop loss\"} or {\"claim\": {\"winRate\": 0.92, \"takeProfit\": 0.05}}.",
+    "Checks a trading claim, such as a bot or signal seller's page, and says which claims are impossible and which need more data before anyone could believe them.",
+    "Send url (a public page: Parity reads it under its robots.txt, with no login, and lists each claim with the words it came from), text (the seller's words), claim fields, or any of them; fields win over the page and the text. Rates are fractions: 0.92 means 92%.",
+    "Add record (kind and trades or equity, as in verify_trades) to check every claim against the account's record: against_record says for each whether the record agrees, differs or cannot show it, and the verdict is then the record's.",
+    "Example: {\"url\": \"https://www.mql5.com/en/signals/123456\"} or {\"text\": \"92% win rate, 5% take-profit, no stop loss\"} or {\"claim\": {\"winRate\": 0.92, \"takeProfit\": 0.05}}.",
     "Returns a verdict, one sentence, and claims, each marked impossible, needs_more_data, loss_not_capped or adds_up with the sums in words (for example the average loss a win rate and take-profit can afford), plus what was read from the text.",
     "A claim cannot show an edge; this only catches numbers that fail on their own. To check the record behind a claim, use verify_trades. Runs in memory; nothing is stored. A check, not advice.",
   ].join(" "),
   inputSchema: {
     type: "object",
     properties: {
+      url: { type: "string", minLength: 4, maxLength: 2048, description: "A seller's public page (a bot or signal sales page, an MQL5 signal, a statistics page). Read once, under its robots.txt, with no login; nothing is stored. X posts cannot be read (X asks every automatic reader to stay out): send their words as text." },
       text: { type: "string", minLength: 1, maxLength: 4000, description: "The claim in the seller's words. Win rate, take-profit, stop, monthly return, drawdown, trades a month, grid or martingale are read from it." },
       claim: claimSchema,
+      record: recordSchema,
       settings: { type: "integer", minimum: 0, maximum: 10000, description: "How many adjustable settings the rules have, when known." },
       trades: { type: "integer", minimum: 0, maximum: 10000000, description: "How many trades the claimed record has, when known." },
     },
     additionalProperties: false,
   },
-  annotations: READ("Check a seller's claim"),
+  annotations: { title: "Check a seller's claim", readOnlyHint: true, openWorldHint: true },
   run: (a, ctx) => runClaim(a, ctx),
 };
 

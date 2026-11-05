@@ -43,8 +43,11 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - if: steps.want.outputs.go == 'true'
         run: npm ci
+      # The same build as the E2E job in ci.yml: broker connections on (DEC-0091).
       - if: steps.want.outputs.go == 'true'
         run: npm run build
+        env:
+          VITE_VERIFY_CONNECTIONS: "on"
       - if: steps.want.outputs.go == 'true'
         run: npx playwright install --with-deps chromium
       # Every baseline written fresh, then the same tests twice more against them, so a

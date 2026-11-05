@@ -13,7 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from . import strategies
+from . import holdout, strategies
 from .backtest import BacktestConfig, run
 from .compare import SOURCE_PAIRS, source_checks, strategy_comparison
 from .data import catalog, store
@@ -94,7 +94,7 @@ def run_all(names: list[str] | None = None, config: BacktestConfig | None = None
     """Run strategies and their gauntlets. `specs` ([{"name", "params"}]) pins exact
     parameters, as official runs do; otherwise every registered strategy runs with
     its defaults. `n_trials` overrides the trial count used for deflated Sharpe."""
-    config = config or BacktestConfig()
+    config = holdout.clamp_config(config or BacktestConfig())
     registry = strategies.available()
     if specs:
         instances = {s["name"]: strategies.get(s["name"], **s.get("params", {})) for s in specs}

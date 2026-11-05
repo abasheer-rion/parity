@@ -88,6 +88,11 @@ export const test = base.extend<Fixtures>({
       status: 200, contentType: "application/json",
       body: JSON.stringify({ mode: "demo", engine: "browser", badge: "Demo money", notes: [], limits: { maxOrderValue: 25000, maxQty: 10000, priceCollar: 0.1, shortingAllowed: false, ordersPerMinute: 20 } }),
     }));
+    // The fill price check (DEC-0092) is a Pages Function too. By default it covers nothing,
+    // so no test sends fills unless it serves the real handler itself (verify-fills.spec.ts).
+    await context.route((url) => url.origin === BASE && url.pathname === "/api/verify/fills", (route) => route.fulfill({
+      status: 200, contentType: "application/json", body: JSON.stringify({ markets: [], coins: [] }),
+    }));
     await context.routeWebSocket((url) => !url.href.includes("supabase.co"), (ws) => { ws.onMessage(() => {}); });
     await stubSupabase(context, db, () => live);
     const allowed = (m: string, url: string) =>
