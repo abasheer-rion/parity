@@ -1,5 +1,5 @@
 {
- "at": "2026-10-30T11:38:03Z",
+ "at": "2026-11-05T13:29:14Z",
  "pools": [
   {
    "token": "virtual-protocol",
@@ -15,6 +15,21 @@
    "swaps": null,
    "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
    "enrolledAt": "2026-10-30T11:38:03Z"
+  },
+  {
+   "token": "derive",
+   "series": "onchain.0x9011cbf8d2900908286c9bf4d5d1644ece7b684a",
+   "chain": "base",
+   "pool": "0x9011cbf8d2900908286c9bf4d5d1644ece7b684a",
+   "base": "0x9d0e8f5b25384c7310cb8c6ae32c8fbeb645d083",
+   "decimals": 18,
+   "quote": "WETH",
+   "dex": "Uniswap v3 0.3%",
+   "fee": 0.003,
+   "liq": 51947,
+   "swaps": null,
+   "topic": "0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67",
+   "enrolledAt": "2026-11-05T13:29:14Z"
   }
  ]
 }
