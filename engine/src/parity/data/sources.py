@@ -101,12 +101,15 @@ def fetch_fred_initial(series: Series) -> pd.DataFrame:
     realtime_start gives the date a strategy could first have known that value.
     """
     key = api_key("FRED_API_KEY")
-    resp = _get("https://api.stlouisfed.org/fred/series/observations",
-                {"series_id": series.code, "api_key": key, "file_type": "json",
-                 "output_type": 4, "limit": 100000, "offset": 0})
-    observations = resp.json().get("observations", [])
-    rows = [(o["date"], o["realtime_start"], float(o["value"]))
-            for o in observations if o.get("value") not in (None, ".")]
+    rows = []
+    for start, end in _fred_realtime_windows(series.code, key):
+        resp = _get("https://api.stlouisfed.org/fred/series/observations",
+                    {"series_id": series.code, "api_key": key, "file_type": "json",
+                     "output_type": 4, "realtime_start": start, "realtime_end": end,
+                     "limit": 100000, "offset": 0}, pause=0.5)
+        rows += [(o["date"], o["realtime_start"], float(o["value"]))
+                 for o in resp.json().get("observations", [])
+                 if o.get("value") not in (None, ".")]
     if not rows:
         raise ValueError(f"No initial-release observations for {series.code}")
     out = pd.DataFrame(rows, columns=["date", "available_at", "value"])
@@ -115,6 +118,32 @@ def fetch_fred_initial(series: Series) -> pd.DataFrame:
     if series.invert:
         out["value"] = 1.0 / out["value"]
     return out.sort_values(["available_at", "date"]).reset_index(drop=True)
+
+
+#: FRED refuses an output_type=4 request whose real-time window holds more vintages.
+FRED_MAX_VINTAGES = 2000
+
+
+def _fred_realtime_windows(code: str, key: str) -> list[tuple[str, str]]:
+    """Real-time windows that together cover every vintage of a FRED series.
+
+    Without realtime_start and realtime_end FRED uses today's window, which returns
+    either an error (no release today) or only today's release. Daily series such as
+    DTB3 have more than FRED_MAX_VINTAGES vintages, so the history is fetched in
+    disjoint windows of at most that many vintage dates each.
+    """
+    dates: list[str] = []
+    while True:
+        resp = _get("https://api.stlouisfed.org/fred/series/vintagedates",
+                    {"series_id": code, "api_key": key, "file_type": "json",
+                     "limit": 10000, "offset": len(dates)}, pause=0.5)
+        page = resp.json().get("vintage_dates", [])
+        dates += page
+        if len(page) < 10000:
+            break
+    dates.sort()
+    return [(dates[i], dates[min(i + FRED_MAX_VINTAGES, len(dates)) - 1])
+            for i in range(0, len(dates), FRED_MAX_VINTAGES)]
 
 
 def _curl(url: str, retries: int = 3) -> str:
