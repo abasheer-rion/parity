@@ -1,0 +1,72 @@
+{
+  "id": "ALG-0106",
+  "slug": "gross-profitability",
+  "name": "Gross profitability (quality) premium in stocks",
+  "family": "macro-fundamental",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "quality",
+    "profitability",
+    "factor",
+    "value"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Novy-Marx",
+    "source_title": "The other side of value: The gross profitability premium (Journal of Financial Economics 108(1), 1-28)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2013.01.003"
+  },
+  "how_it_works": {
+    "simple": "Buy companies that make a lot of gross profit for the size of their balance sheet and sell those that make little. Profitable firms have earned more, even though they look expensive.",
+    "analogy": "Like preferring the busy restaurant over the empty one even though its shares cost more.",
+    "precise": "Gross profits to assets is revenue minus cost of goods sold, divided by total assets. Sorted on this, profitable firms earn higher average returns than unprofitable ones despite higher valuation ratios, and combining profitability with book-to-market improves value strategies, especially among large, liquid stocks."
+  },
+  "rule": "Each year after accounts are published, rank stocks by gross profits to assets; hold the top group long and the bottom group short, rebalanced monthly or yearly.",
+  "data_needed": [
+    "Company accounts (revenue, cost of goods sold, total assets)",
+    "Monthly stock returns",
+    "The Kenneth French library's RMW factor is a free, related operating-profitability series"
+  ],
+  "economic_rationale": "Gross profit is a cleaner measure of a firm's earning power than net earnings, and the market seems to underprice it.",
+  "why_it_might_fail": "Quality factors became popular after 2013, so the premium may have shrunk. The free RMW factor uses operating, not gross, profitability, so it is not the same test.",
+  "reported_results": [
+    {
+      "source": "Novy-Marx (2013), abstract",
+      "source_url": "https://ideas.repec.org/a/eee/jfinec/v108y2013i1p1-28.html",
+      "period": "not stated in the abstract",
+      "market": "US stocks",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "The abstract says gross profits to assets has roughly the same power as book-to-market in predicting average returns, and that controlling for profitability dramatically increases the performance of value strategies. It gives no figures; the tables were not read."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "A well-known equity factor and a common 'quality' screen in retail stock-picking tools; a related free factor exists."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Testable only in its operating-profitability form (RMW) with free data. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}

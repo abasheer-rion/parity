@@ -1,0 +1,72 @@
+{
+  "id": "ALG-0100",
+  "slug": "covered-call-buy-write",
+  "name": "Covered calls on the S&P 500 (buy-write, BXM)",
+  "family": "volatility",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "options",
+    "covered-call",
+    "income",
+    "volatility-risk-premium",
+    "sp500"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2002,
+    "authors": "Whaley",
+    "source_title": "Return and Risk of CBOE Buy Write Monthly Index (Journal of Derivatives 10(2), 35-42)",
+    "source_url": "https://doi.org/10.3905/jod.2002.319194"
+  },
+  "how_it_works": {
+    "simple": "Own the S&P 500 and every month sell someone the right to buy it from you at today's price. You keep the fee, but you give up any gain above that price.",
+    "analogy": "Like renting out a spare room: steady rent, but if a buyer offers a fortune for the house that month, you have already promised it at a fixed price.",
+    "precise": "Cboe's BXM index holds the S&P 500 and writes the near-term at-the-money call, generally on the third Friday of each month, holding it to expiry and cash-settling. Index options are usually priced above the volatility that follows (the volatility risk premium), so the written calls earn more on average than they pay out."
+  },
+  "rule": "On each monthly option expiry, hold the S&P 500 and sell one at-the-money one-month S&P 500 call per unit held; keep the premium; repeat at the next expiry.",
+  "data_needed": [
+    "Cboe BXM index daily history (free CSV)",
+    "S&P 500 total return for comparison"
+  ],
+  "economic_rationale": "Investors pay up for index options as insurance, so option sellers earn a premium for bearing crash risk (the volatility risk premium).",
+  "why_it_might_fail": "The upside is capped, so it lags in strong bull markets and still takes most of a crash. The index ignores costs and taxes. Retail funds and bots often present the premium as 'yield', which it is not: it is payment for giving up gains.",
+  "reported_results": [
+    {
+      "source": "Callan Associates (2006), An Historical Evaluation of the CBOE S&P 500 BuyWrite Index Strategy",
+      "source_url": "https://cdn.cboe.com/resources/education/research_publications/Callan_CBOE.pdf",
+      "period": "1988-06-01 to 2006-08-31",
+      "market": "S&P 500 (BXM index)",
+      "sharpe": 0.77,
+      "annual_return": 0.1177,
+      "volatility": 0.0929,
+      "max_drawdown": null,
+      "evidence_type": "index",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Annualised compound return 11.77% for BXM vs 11.67% for the S&P 500; annualised standard deviation 9.29% vs 13.89%; annualised Sharpe ratio 0.77 vs 0.51; skew -1.24 vs -0.44. Index values, no trading costs. Study commissioned via Cboe."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet. The 1988 to 2006 window ends before the 2009 to 2021 bull market, when a capped strategy would be expected to lag; Cboe's free BXM history lets us check this.",
+  "implementations": [],
+  "relevance": {
+    "score": 4,
+    "reason": "Covered call income funds and bots are among the most marketed retail strategies, so Verify needs a fair benchmark for what this premium has actually paid."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Cboe publishes BXM daily history free at https://cdn.cboe.com/api/global/us_indices/daily_prices/BXM_History.csv; we have not added a fetcher. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}
