@@ -4,11 +4,12 @@
 // can see), and draws the 320 by 80 image. GET only, the id must be 12 letters or digits,
 // answers are cached for five minutes in browsers and one minute at the edge, and each request is logged by Cloudflare.
 import { badgeSvg, isBadgeId, type PublicBadge } from "../../src/lib/verify/badge";
+import { badgeTrust, type KeyEnv } from "../../src/lib/connect/badgeTrust";
 
 const SUPABASE_URL = "https://ttqvpxvctnomfbeoqbbs.supabase.co";
 const PUBLISHABLE_KEY = "sb_publishable_12CQmnbBgVYpkflKhwHD-A_2Xby8b-x";
 
-interface Context { request: Request; params: { id?: string | string[] } }
+interface Context { request: Request; env?: KeyEnv; params: { id?: string | string[] } }
 
 const svg = (body: string, status = 200, maxAge = 300) => new Response(body, {
   status,
@@ -55,13 +56,13 @@ export async function lookup(id: string, fetcher: typeof fetch = fetch): Promise
   return badge;
 }
 
-export const onRequestGet = async ({ params }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
+export const onRequestGet = async ({ params, env }: Context, fetcher: typeof fetch = fetch): Promise<Response> => {
   const raw = Array.isArray(params.id) ? params.id[0] : params.id ?? "";
   const id = raw.replace(/\.svg$/, "");
   if (!isBadgeId(id)) return svg(badgeSvg(null), 404, 3600);
   try {
     const b = await lookup(id, fetcher);
-    return svg(badgeSvg(b), b ? 200 : 404);
+    return svg(badgeSvg(b, await badgeTrust(b, env ?? {})), b ? 200 : 404);
   } catch (e) {
     console.error("badge lookup failed", id, String(e));
     return new Response("Badge unavailable, try again later.", { status: 503, headers: { "Cache-Control": "no-store" } });

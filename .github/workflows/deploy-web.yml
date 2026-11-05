@@ -35,7 +35,8 @@
 # GSC_SERVICE_ACCOUNT_JSON (optional: the Search Console service account key, for the token,
 # the sitemap submit and verification).
 # Variables (optional): GSC_VERIFICATION, BING_VERIFICATION, GSC_OWNER_EMAILS (comma list of
-# people made owners of the Search Console property), SEO_AUTOMATION (kill switch).
+# people made owners of the Search Console property), SEO_AUTOMATION (kill switch),
+# VERIFY_CONNECTIONS ("on" opens read-only broker connections in production, DEC-0091).
 name: Deploy dashboard
 
 on:
@@ -120,6 +121,9 @@ jobs:
           VITE_AUTH_PASSKEYS: ${{ vars.AUTH_PASSKEYS }}
           # The bring-your-own-model assistant panel (DEC-0051). Off unless this is "on".
           VITE_AI_ASSISTANT: ${{ vars.AI_ASSISTANT }}
+          # Read-only broker connections (DEC-0091): on for pull request previews; production
+          # follows the VERIFY_CONNECTIONS variable, unset (off) until the owner turns it on.
+          VITE_VERIFY_CONNECTIONS: ${{ env.IS_PROD != 'true' && 'on' || vars.VERIFY_CONNECTIONS }}
           # Search engine verification tokens (DEC-0023, DEC-0073). Public values: the variable,
           # else the token fetched above, else empty.
           GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION || steps.gsc_token.outputs.token }}

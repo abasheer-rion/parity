@@ -1,0 +1,12 @@
+<FlexQueryResponse queryName="parity-trades" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U7654321" fromDate="20260105" toDate="20260130" period="Custom" whenGenerated="20260131;090000">
+<Trades>
+<Trade accountId="U7654321" currency="USD" fxRateToBase="1" assetCategory="STK" symbol="MSFT" multiplier="1" dateTime="20260105;101500" tradeDate="20260105" quantity="10" tradePrice="400" proceeds="-4000" taxes="0" ibCommission="-1" ibCommissionCurrency="USD" buySell="BUY" fifoPnlRealized="0" openCloseIndicator="O" levelOfDetail="EXECUTION" />
+<Trade accountId="U7654321" currency="USD" fxRateToBase="1" assetCategory="STK" symbol="MSFT" multiplier="1" dateTime="20260112;143000" tradeDate="20260112" quantity="-10" tradePrice="410" proceeds="4100" taxes="0" ibCommission="-1" ibCommissionCurrency="USD" buySell="SELL" fifoPnlRealized="98" openCloseIndicator="C" levelOfDetail="EXECUTION" />
+<Trade accountId="U7654321" currency="USD" fxRateToBase="1" assetCategory="STK" symbol="AAPL" multiplier="1" dateTime="20260115;100000" tradeDate="20260115" quantity="20" tradePrice="200" proceeds="-4000" taxes="0" ibCommission="-1" ibCommissionCurrency="USD" buySell="BUY" fifoPnlRealized="0" openCloseIndicator="O" levelOfDetail="EXECUTION" />
+<Trade accountId="U7654321" currency="USD" fxRateToBase="1" assetCategory="STK" symbol="AAPL" multiplier="1" dateTime="20260130;153000" tradeDate="20260130" quantity="-20" tradePrice="195" proceeds="3900" taxes="0" ibCommission="-1" ibCommissionCurrency="USD" buySell="SELL" fifoPnlRealized="-102" openCloseIndicator="C" levelOfDetail="EXECUTION" />
+</Trades>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

@@ -139,6 +139,20 @@ def test_custom_params_count_as_a_trial(settings):
     assert con.execute("SELECT COUNT(*) FROM mcp_trials").fetchone()[0] == 1
 
 
+def test_trial_identity_includes_config_and_data_snapshot(settings):
+    tools = ParityTools(settings)
+    spec = {"kind": "strategy", "name": "fx_trend_3m", "params": {"lookback": 63}}
+    row = {"error": "test"}
+    desc = {"name": "test", "family": "trend", "asset": "fx"}
+    a = tools.trials.record(spec, {"cost_bps": 1}, "snapshot-a", desc, row)
+    again = tools.trials.record(spec, {"cost_bps": 1}, "snapshot-a", desc, row)
+    b = tools.trials.record(spec, {"cost_bps": 2}, "snapshot-a", desc, row)
+    c = tools.trials.record(spec, {"cost_bps": 1}, "snapshot-b", desc, row)
+    assert a == again and len({a, b, c}) == 3
+    assert tools.trials.counts()["assistant_trials"] == 3
+    assert tools.trials.counts()["assistant_calls"] == 4
+
+
 def test_evaluate_spec_counts_every_try_and_checks_look_ahead(settings):
     out = call(settings, "evaluate_spec", {"spec": CARRY, "hypothesis": "carry premium"})
     assert out["disclaimer"] == DISCLAIMER
@@ -282,7 +296,7 @@ def test_verify_claim_matches_the_hosted_rules(settings):
         "keeps it there.")
     assert rows["winrate"]["status"] == "needs_more_data"
     assert out["verdict"]["id"] == "not_enough_data"
-    assert out["method_version"] == "verify-1.0"
+    assert out["method_version"] == "verify-1.1"
     bad = call(settings, "verify_claim", {"claim": {"winRate": 0.8, "takeProfit": 0.02,
                                                     "stopLoss": 0.1, "maxDrawdown": 0.05,
                                                     "maxLoss": 0.1}})

@@ -3,7 +3,7 @@ import type { Field, FormatId, Mapping, Table, Trade } from "../types";
 import { col } from "./common";
 
 export interface FieldDef { field: Field; label: string; required?: boolean }
-export interface BuildOut { trades: Trade[]; warnings?: string[]; balance?: number }
+export interface BuildOut { trades: Trade[]; warnings?: string[]; notes?: string[]; balance?: number }
 
 export interface FormatDef {
   id: FormatId;

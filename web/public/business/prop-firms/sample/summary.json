@@ -1,0 +1,56 @@
+{
+  "synthetic": true,
+  "accounts": 500,
+  "passers": 169,
+  "judgedPassers": 97,
+  "luckyPassers": 45,
+  "luckyPasserShare": 0.464,
+  "onlyLuckCheck": 7,
+  "notEnoughPassers": 72,
+  "backtest": {
+    "n": 97,
+    "hitRate": 0.467,
+    "hitLo": 0.329,
+    "hitHi": 0.609,
+    "falseAlarms": 0.333,
+    "falseLo": 0.235,
+    "falseHi": 0.448,
+    "caught": 0.84,
+    "caughtLo": 0.653,
+    "caughtHi": 0.936,
+    "luckyBlowup": 0.467,
+    "holdsBlowup": 0.077,
+    "holdsLo": 0.03,
+    "holdsHi": 0.182
+  },
+  "byStyle": {
+    "skilled": {
+      "accounts": 86,
+      "passed": 70,
+      "holds": 49,
+      "lucky": 14,
+      "thin": 7
+    },
+    "no_edge": {
+      "accounts": 269,
+      "passed": 42,
+      "holds": 3,
+      "lucky": 30,
+      "thin": 9
+    },
+    "gambling": {
+      "accounts": 145,
+      "passed": 57,
+      "holds": 0,
+      "lucky": 1,
+      "thin": 56
+    }
+  },
+  "noEdgePassChance": 0.556,
+  "rules": {
+    "target": 0.08,
+    "maxLoss": 0.1,
+    "dailyLoss": 0.05,
+    "days": 30
+  }
+}

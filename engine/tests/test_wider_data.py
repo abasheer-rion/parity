@@ -120,6 +120,38 @@ def test_cot_is_used_three_business_days_late(tmp_path):
     assert not p.loc["2026-10-02":].isna().any()  # weekly values fill the gaps
 
 
+def test_fred_panel_uses_initial_release_date_when_available(tmp_path):
+    spec = catalog.get("fx.EUR")
+    raw = pd.Series([1.1, 1.2], index=pd.to_datetime(["2020-01-01", "2020-01-02"]),
+                    name=spec.key)
+    path = store._path(spec, tmp_path)
+    path.parent.mkdir(parents=True)
+    raw.to_frame().to_parquet(path)
+    pit = store._initial_release_path(spec, tmp_path)
+    pit.parent.mkdir(parents=True)
+    pd.DataFrame({"date": pd.to_datetime(["2020-01-01", "2020-01-02"]),
+                  "available_at": pd.to_datetime(["2020-01-02", "2020-01-06"]),
+                  "value": [1.1, 1.2]}).to_parquet(pit, index=False)
+
+    panel = store.panel([spec.key], tmp_path)[spec.key]
+    assert pd.isna(panel.loc["2020-01-01"])
+    assert panel.loc["2020-01-02"] == pytest.approx(1.1)
+    assert panel.loc["2020-01-03"] == pytest.approx(1.1)
+    assert panel.loc["2020-01-06"] == pytest.approx(1.2)
+    one = pd.DataFrame({"date": pd.to_datetime(["2020-01-01"]),
+                        "available_at": pd.to_datetime(["2020-01-02"]), "value": [1.1]})
+    revised_release = one.assign(value=[1.11])
+    assert store.vintage_hash(one) != store.vintage_hash(revised_release)
+    (tmp_path / "coverage.json").write_text(json.dumps({"series": [{
+        "key": spec.key, "sha256": store.content_hash(raw),
+        "point_in_time_sha256": store.vintage_hash(pd.read_parquet(pit)),
+    }]}))
+    assert store.snapshot_issues([spec.key], tmp_path) == []
+    raw.loc["2020-01-02"] = 1.25
+    raw.to_frame().to_parquet(path)
+    assert "raw cache does not match" in store.snapshot_issues([spec.key], tmp_path)[0]
+
+
 # ------------------------------------------------------------------ EIA and keys
 
 

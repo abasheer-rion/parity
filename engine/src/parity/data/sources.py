@@ -94,6 +94,29 @@ def fetch_fred(series: Series) -> pd.Series:
         f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series.code}"), series)
 
 
+def fetch_fred_initial(series: Series) -> pd.DataFrame:
+    """Fetch FRED's initial-release observations with their actual release dates.
+
+    The API's output_type=4 returns the initial release for each observation. Keeping
+    realtime_start gives the date a strategy could first have known that value.
+    """
+    key = api_key("FRED_API_KEY")
+    resp = _get("https://api.stlouisfed.org/fred/series/observations",
+                {"series_id": series.code, "api_key": key, "file_type": "json",
+                 "output_type": 4, "limit": 100000, "offset": 0})
+    observations = resp.json().get("observations", [])
+    rows = [(o["date"], o["realtime_start"], float(o["value"]))
+            for o in observations if o.get("value") not in (None, ".")]
+    if not rows:
+        raise ValueError(f"No initial-release observations for {series.code}")
+    out = pd.DataFrame(rows, columns=["date", "available_at", "value"])
+    out["date"] = pd.to_datetime(out["date"])
+    out["available_at"] = pd.to_datetime(out["available_at"])
+    if series.invert:
+        out["value"] = 1.0 / out["value"]
+    return out.sort_values(["available_at", "date"]).reset_index(drop=True)
+
+
 def _curl(url: str, retries: int = 3) -> str:
     if not shutil.which("curl"):
         raise RuntimeError("curl is not installed; set FRED_API_KEY instead")

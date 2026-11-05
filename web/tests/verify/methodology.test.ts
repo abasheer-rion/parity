@@ -7,6 +7,8 @@ import { fillMethodology, METHOD_VALUES } from "../../plugins/legal";
 import { LUCK_LINE } from "../../src/lib/verify/dsr";
 import { MIN_RETURNS, MIN_TRADES } from "../../src/lib/verify/checks/verdict";
 import { METHOD_CHANGELOG, METHOD_VERSION } from "../../src/lib/verify/types";
+import { SOURCE_INFO } from "../../src/lib/verify/range/info";
+import { FAIL_MIN, FAIL_SHARE } from "../../src/lib/verify/range/rows";
 
 const raw = readFileSync(resolve(import.meta.dirname, "../../methodology/index.html"), "utf8");
 const html = fillMethodology(raw);
@@ -30,6 +32,16 @@ describe("methodology page", () => {
     for (const id of ["verdict", "luck", "lookahead", "trust", "cite", "changelog"]) expect(html).toContain(`id="${id}"`);
     expect(html).not.toMatch(/[–—]/);
     expect(Object.values(METHOD_VALUES).join(" ")).not.toMatch(/[–—]/);
+  });
+
+  it("prints the fill price check's sources, windows and tolerances from the code (DEC-0092)", () => {
+    expect(html).toContain('id="fills"');
+    for (const x of Object.values(SOURCE_INFO)) {
+      expect(html).toContain(`<td>${x.name}</td>`);
+      expect(html).toContain(`${Math.round(x.window / 60_000)} minutes either side of the fill</td><td>${(x.tolBar * 100).toFixed(1)}%`);
+    }
+    expect(html).toContain(`more than ${Math.round(FAIL_SHARE * 100)} in 100 of the fills checked, and at least ${FAIL_MIN}`);
+    expect(html).toContain("Data provided for free by IEX.");
   });
 
   it("refuses an unknown marker, so a typo cannot ship", () => {

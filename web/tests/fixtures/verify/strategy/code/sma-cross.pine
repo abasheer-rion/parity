@@ -1,0 +1,19 @@
+//@version=5
+strategy("SMA cross", overlay=true, initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100, commission_type=strategy.commission.percent, commission_value=0.1)
+
+fastLength = input.int(10, "Fast length", minval=1)
+slowLength = input.int(30, "Slow length", minval=1)
+
+fastMA = ta.sma(close, fastLength)
+slowMA = ta.sma(close, slowLength)
+
+longCondition = ta.crossover(fastMA, slowMA)
+if (longCondition)
+    strategy.entry("Long", strategy.long)
+
+shortCondition = ta.crossunder(fastMA, slowMA)
+if (shortCondition)
+    strategy.close("Long")
+
+plot(fastMA, color=color.blue)
+plot(slowMA, color=color.orange)

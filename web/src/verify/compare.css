@@ -1,0 +1,25 @@
+/* Two records side by side, /verify/compare/ (DEC-0089). The report's cards, two to a row. */
+.cp-hero { padding-top: var(--space-6); }
+.cp-hero h1 { margin: 0 0 var(--space-4); font-size: var(--fs-3xl); line-height: 1.1; letter-spacing: -0.02em; }
+.cp-sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.cp-pick { display: flex; flex-direction: column; gap: var(--space-3); }
+.cp-or { margin: var(--space-2) 0 0; color: var(--color-text-muted); font-size: var(--type-sm); }
+.cp-questions { display: flex; flex-direction: column; gap: var(--space-3); }
+.cp-side { border-left: 6px solid var(--vf-tone); }
+.cp-name { margin: 0 0 var(--space-2); font-size: var(--type-lg); font-weight: var(--fw-medium); color: var(--color-text-body); overflow-wrap: anywhere; }
+.cp-verdict { margin: 0 0 var(--space-3); font-size: clamp(var(--type-5xl), 3.6vw, var(--type-7xl)); font-weight: var(--fw-bold); letter-spacing: -0.03em; line-height: 1.05; color: var(--vf-tone); }
+.cp-sentence { margin: 0 0 var(--space-4); color: var(--color-text); font-size: var(--type-lg); line-height: 1.5; }
+.cp-summary, .cp-sides + .rp-card { margin-top: var(--space-4); }
+.cp-actions { margin-bottom: var(--space-4); }
+.cp-table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.cp-table-wrap:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+table.cp-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: var(--type-md); font-variant-numeric: var(--num-variant); }
+table.cp-table th, table.cp-table td { padding: var(--space-3) var(--space-4); text-align: left; vertical-align: top; border-top: 1px solid var(--color-border); white-space: normal; }
+table.cp-table thead th { border-top: 0; color: var(--color-text-muted); font-weight: var(--fw-regular); background: var(--color-surface-raised); }
+table.cp-table tbody th { color: var(--color-text-body); font-weight: var(--fw-regular); }
+table.cp-table tr > :first-child { width: 28%; }
+table.cp-table td { color: var(--color-text); overflow-wrap: anywhere; }
+table.cp-table td.cp-worse { color: var(--color-negative); }
+.rp-main { gap: var(--space-6); }
+@media (max-width: 900px) { .cp-sides { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) { table.cp-table th, table.cp-table td { padding: var(--space-2) var(--space-3); font-size: var(--type-sm); } }

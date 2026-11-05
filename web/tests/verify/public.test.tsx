@@ -17,7 +17,7 @@ vi.mock("../../src/auth/client", () => ({ supabase: {} }));
 import { onRequestGet as serveCard } from "../../functions/badge/[id]/card";
 import { badgeAlt, badgeCardHtml, cardSnippet, embedSnippet, markdownSnippet, type PublicBadge } from "../../src/lib/verify/badge";
 import { checkFile } from "../../src/lib/verify/checks";
-import { connect, connectionsEnabled, NotAvailable, PROVIDERS, trustLevel } from "../../src/lib/verify/connect";
+import { connectionsEnabled, PROVIDERS, trustLevel } from "../../src/lib/verify/connect";
 import { parseText } from "../../src/lib/verify/parse";
 import { SIGNED_OUT_PRICES } from "../../src/pages/verify/Checker";
 import { AUTH_KEYS, isAuthLink } from "../../src/verify/dispatch";
@@ -136,13 +136,13 @@ describe("embeds", () => {
   });
 });
 
-describe("read-only connections: a scaffold, switched off", () => {
-  it("is off unless the build turns it on, and never connects", async () => {
+describe("read-only connections: behind the build's switch (DEC-0091)", () => {
+  it("is off unless the build turns it on, and offers every venue that can be proved read-only", () => {
     expect(connectionsEnabled({})).toBe(false);
     expect(connectionsEnabled({ VITE_VERIFY_CONNECTIONS: "on" })).toBe(true);
-    await expect(connect("alpaca", {})).rejects.toBeInstanceOf(NotAvailable);
-    await expect(connect("kraken", { VITE_VERIFY_CONNECTIONS: "on" })).rejects.toThrow("not built yet");
-    expect(PROVIDERS.map((p) => p.id)).toEqual(["alpaca", "binance", "coinbase", "kraken", "ibkr"]);
+    // Binance.US cannot say what a key may do, so it is not offered.
+    expect(PROVIDERS.map((p) => p.id)).toEqual(["ibkr", "alpaca", "coinbase", "kraken", "binance", "bybit"]);
     expect(trustLevel("upload")).toBe("Self-reported");
+    expect(trustLevel("connection")).toBe("Broker-connected");
   });
 });

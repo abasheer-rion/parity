@@ -2,7 +2,7 @@
 // in the browser only: a parsed file is never sent anywhere.
 
 /** Bump when a check or a threshold changes, so a badge says which rules judged it. */
-export const METHOD_VERSION = "verify-1.0";
+export const METHOD_VERSION = "verify-1.3";
 
 /**
  * Every method version, newest first, with the date it took effect and what changed. The
@@ -10,11 +10,14 @@ export const METHOD_VERSION = "verify-1.0";
  * METHOD_VERSION changes (a test checks the first row matches it).
  */
 export const METHOD_CHANGELOG: { version: string; date: string; changes: string }[] = [
+  { version: "verify-1.3", date: "2026-11-04", changes: "Fill prices against market data: with the person's leave, the symbol, time and price of each fill go to our server, which compares them with the range traded at that time (IEX exchange trades for US stocks once switched on, swaps in our on-chain pools for crypto) and counts fills outside it, at the day's exact high or low, and timed while the market was closed. Two new rows on card 4, \"fill prices against the traded range\" and \"fills while the market was closed\", each failing when more than 2 in 100 checked fills, and at least 2, are outside or closed. \"Perfect timing\" uses the day's real low and high from this check when at least 10 entries have one." },
+  { version: "verify-1.2", date: "2026-11-03", changes: "Claims can be read from a seller's page or words, each with the words it came from. \"Claim against file\" also compares the total return: it fails when the file is more than 5 points and more than a tenth away from the claim, unless the claim names a length of time more than a quarter away from the record's. The report draws the record against the S&P 500 when our daily prices are loaded, and the spread of profit per trade for a trade list without a balance." },
+  { version: "verify-1.1", date: "2026-11-03", changes: "Strategy code: Pine Script, Python and rules are run on our daily closes with retail costs. The luck check counts the stated tries plus the nearby settings we ran. Two checks for code: \"perfect timing\" compares a run filled one day late, and \"settings next to yours\" fails when fewer than half of the nearby settings make money. \"Many settings, few trades\" now applies to code too." },
   { version: "verify-1.0", date: "2026-10-24", changes: "First version: five verdicts in a fixed order, five check cards, the luck check (deflated Sharpe ratio) with \"survives up to N tries\", claim arithmetic, and fill checks against one price a day." },
 ];
 
 export type InputKind = "real" | "demo" | "backtest";
-export type Source = "file" | "description" | "strategy";
+export type Source = "file" | "description" | "strategy" | "code";
 
 /** One closed trade, after personal columns were dropped. Money is in the account's currency. */
 export interface Trade {
@@ -27,6 +30,8 @@ export interface Trade {
   side?: "buy" | "sell";
   size?: number;
   entry?: number;
+  /** True when the entry is the average of opening fills at different prices, so no fill was at it. */
+  entryMixed?: boolean;
   exit?: number;
   /** Commission, swap and fees, as a cost (negative when a swap paid the account). */
   fees: number;
@@ -39,8 +44,9 @@ export interface EquityPoint { date: string; equity?: number; ret?: number; cash
 
 export type FormatId =
   | "mt4" | "mt5" | "mt5deals" | "tradingview"
-  | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "coinbase" | "kraken"
+  | "ibkr" | "ibkr_activity" | "binance_spot" | "binance_futures" | "bybit" | "bybit_pnl" | "bybit_closed" | "coinbase" | "kraken"
   | "ctrader" | "ninjatrader" | "tradovate" | "tos" | "alpaca"
+  | "binance_statement" | "coinbase_tx" | "myfxbook" | "mt4tester" | "tradovate_positions" | "tradovate_orders"
   | "trades" | "equity";
 
 export const FORMAT_LABEL: Record<FormatId, string> = {
@@ -54,6 +60,7 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
   binance_futures: "Binance futures trade history",
   bybit: "Bybit trade history",
   bybit_pnl: "Bybit closed P&L",
+  bybit_closed: "Bybit closed positions",
   coinbase: "Coinbase fills",
   kraken: "Kraken trades",
   ctrader: "cTrader history",
@@ -61,6 +68,12 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
   tradovate: "Tradovate performance",
   tos: "thinkorswim trade history",
   alpaca: "Alpaca activities",
+  binance_statement: "Binance account statement",
+  coinbase_tx: "Coinbase transaction report",
+  myfxbook: "Myfxbook trade history",
+  mt4tester: "MetaTrader 4 Strategy Tester report",
+  tradovate_positions: "Tradovate position history",
+  tradovate_orders: "Tradovate orders",
   trades: "Trade list",
   equity: "Equity curve",
 };
@@ -69,12 +82,16 @@ export const FORMAT_LABEL: Record<FormatId, string> = {
 export type Field =
   | "id" | "openTime" | "closeTime" | "symbol" | "side" | "size" | "entry" | "exit" | "commission" | "swap" | "fees" | "pnl"
   | "date" | "equity" | "ret" | "cashflow" | "direction" | "tvType" | "position"
-  | "value" | "multiplier" | "realized" | "feeCurrency" | "rowType" | "expiry" | "strike" | "assetType";
+  | "value" | "multiplier" | "realized" | "feeCurrency" | "rowType" | "expiry" | "strike" | "assetType"
+  | "fxRate" | "currency" | "tax" | "balance";
 
 export type Mapping = Partial<Record<Field, number>>;
 
-/** A table read from a CSV file, after personal columns were removed. */
-export interface Table { headers: string[]; rows: string[][] }
+/**
+ * A table read from a file, after personal columns were removed. `lines` holds where each
+ * row is in the file (a CSV line, or a sheet or HTML table row), so a problem can name it.
+ */
+export interface Table { headers: string[]; rows: string[][]; lines?: number[]; unit?: "line" | "row" }
 
 export interface Parsed {
   format: FormatId;
@@ -85,8 +102,12 @@ export interface Parsed {
   trades?: Trade[];
   equity?: EquityPoint[];
   warnings: string[];
-  /** True for a TradingView Strategy Tester export: a backtest, not real trading. */
+  /** How the file was read, in words, for information: "times are the broker's server time". */
+  notes?: string[];
+  /** True for a Strategy Tester export (TradingView, MetaTrader): a backtest, not real trading. */
   backtestExport: boolean;
+  /** What the file is, in words, when it says more than the format's label ("MetaTrader 5 Strategy Tester report"). */
+  what?: string;
   /** First equity value or balance found in the file, if any. */
   inferredBalance?: number;
 }
@@ -107,6 +128,13 @@ export interface Answers {
 export interface Claim {
   winRate?: number;
   monthlyReturn?: number;
+  /** Total return over the whole record, as a fraction (3.4 = +340%). */
+  totalReturn?: number;
+  /** Return a year, as the seller states it. */
+  yearlyReturn?: number;
+  profitFactor?: number;
+  /** The day the record is said to start, YYYY-MM-DD. */
+  startDate?: string;
   maxDrawdown?: number;
   /** Take-profit and stop-loss as a share of the position (0.05 = 5%). */
   takeProfit?: number;

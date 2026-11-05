@@ -1,0 +1,22 @@
+//@version=6
+strategy("RSI dip buyer", overlay=false, default_qty_type=strategy.percent_of_equity, default_qty_value=50)
+
+len = input.int(14, title="RSI length")
+oversold = input.float(30, title="Oversold")
+overbought = input.float(70, title="Overbought")
+stopPct = input.float(5, title="Stop %") / 100
+targetPct = input.float(10, title="Target %") / 100
+
+r = ta.rsi(close, len)
+trend = close > ta.ema(close, 200)
+
+if ta.crossover(r, oversold) and trend
+    strategy.entry("Buy", strategy.long)
+    strategy.exit("Exit", "Buy", stop=close * (1 - stopPct), limit=close * (1 + targetPct))
+
+if ta.crossunder(r, overbought)
+    strategy.close("Buy")
+
+hline(30)
+hline(70)
+plot(r, "RSI")

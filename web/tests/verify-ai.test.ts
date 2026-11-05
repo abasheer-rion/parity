@@ -11,6 +11,7 @@ import type { KeyRecord, Store } from "../src/lib/api/store";
 import { handleMcp, MODERN, type ServerDeps } from "../src/lib/mcp/server";
 import { byName, TOOLS, type Data, type Db, type ToolContext } from "../src/lib/mcp/tools";
 import { MAX_ROWS } from "../src/lib/mcp/verify";
+import { METHOD_VERSION } from "../src/lib/verify/types";
 
 const ORIGIN = "https://paritytrading.app";
 
@@ -90,7 +91,7 @@ describe("Verify tools on the hosted MCP server", () => {
     for (const k of ["profit_per_trade", "worst_losses", "luck_check", "signs_of_peeking_or_editing", "signs_of_tuning"]) expect(r).toHaveProperty(k);
     expect(r.tries).toBe(12);
     expect(r.tries_defaulted).toBe(false);
-    expect(r.method_version).toBe("verify-1.0");
+    expect(r.method_version).toBe(METHOD_VERSION);
     expect(r).toHaveProperty("survives_up_to_tries");
     expect(String(r.survives)).toMatch(/tries|try|measured/);
     const cannot = r.could_not_check as { check: string; why: string }[];
@@ -156,6 +157,41 @@ describe("Verify tools on the hosted MCP server", () => {
     const monthly = await run1("verify_claim", { claim: { monthlyReturn: 0.2 } });
     expect((monthly.claims as { text: string }[])[0].text).toContain("792% a year");
     expect((monthly.claims as { text: string }[])[0].text).toContain("$79,497");
+  });
+
+  it("verify_claim reads a seller's page from its url, with the words for each claim (DEC-0088)", async () => {
+    const seen: string[] = [];
+    const fakeFetch = (async (input: RequestInfo | URL) => {
+      const u = String(input);
+      seen.push(u);
+      if (u.endsWith("/robots.txt")) return new Response("User-agent: *\nDisallow: /private", { headers: { "content-type": "text/plain" } });
+      return new Response("<html><head><title>Gold bot</title></head><body><p>92% win rate, +340% in 12 months, no stop loss.</p><p>Take profit 5%</p></body></html>", { headers: { "content-type": "text/html" } });
+    }) as typeof fetch;
+    const c = { ...ctx, fetch: fakeFetch };
+    const r = await byName("verify_claim").run({ url: "https://bots.example.com/gold" }, c) as Record<string, unknown>;
+    expect(seen).toEqual(["https://bots.example.com/robots.txt", "https://bots.example.com/gold"]);
+    expect((r.page as { title: string }).title).toBe("Gold bot");
+    expect((r.claim_used as { winRate: number; totalReturn: number }).winRate).toBe(0.92);
+    expect((r.claim_used as { totalReturn: number }).totalReturn).toBe(3.4);
+    const found = r.claims_found as { field: string; words: string; from: string }[];
+    expect(found.find((f) => f.field === "winRate")).toMatchObject({ from: "page" });
+    expect(found.find((f) => f.field === "winRate")!.words).toContain("92% win rate");
+    expect((r.against_record as { status: string }[]).every((x) => x.status === "needs_record" || x.status === "not_compared")).toBe(true);
+    // The no-stop rule fires on the page's words.
+    expect((r.claims as { id: string }[]).map((x) => x.id)).toContain("breakeven");
+    // robots.txt says no: nothing is fetched and the answer says why.
+    await expect(byName("verify_claim").run({ url: "https://bots.example.com/private/x" }, c)).rejects.toThrow(/robots\.txt/);
+    await expect(byName("verify_claim").run({ url: "https://x.com/someone/status/1" }, c)).rejects.toThrow(/X does not allow/);
+    expect(byName("verify_claim").annotations.openWorldHint).toBe(true);
+  });
+
+  it("verify_claim checks each claim against a record sent with it", async () => {
+    const r = await run1("verify_claim", { text: "Win rate 90%, total return 2% so far", record: { kind: "real", starting_balance: 10_000, trades: TRADES } });
+    const against = r.against_record as { field: string; status: string; changes_verdict: boolean }[];
+    expect(against.find((x) => x.field === "winRate")).toMatchObject({ status: "differs", changes_verdict: true });
+    expect((r.verdict as { id: string }).id).toBe("does_not_hold_up");
+    expect((r.record as { trades: number }).trades).toBe(TRADES.length);
+    expect(r.could_not_check).toEqual([]);
   });
 
   it("verify_description still answers a description with no numbers", async () => {
@@ -246,7 +282,7 @@ describe("Verify endpoints on /api/v1", () => {
     expect(((await long.json()) as { detail: string }).detail).toContain("at most 4000 characters");
   });
 
-  it("documents the three endpoints in OpenAPI and marks the old ones deprecated", async () => {
+  it("documents the endpoints in OpenAPI and marks the old ones deprecated", async () => {
     const { deps } = await key([]);
     const spec = (await (await handleApi(new Request(`${ORIGIN}/api/v1/openapi.json`), deps)).json()) as { paths: Record<string, Record<string, { requestBody?: unknown; deprecated?: boolean; "x-required-scope": string }>> };
     for (const p of ["/verify/trades", "/verify/strategy", "/verify/claim"]) {
@@ -257,6 +293,6 @@ describe("Verify endpoints on /api/v1", () => {
     expect(spec.paths["/api/v1/verify"].post.deprecated).toBe(true);
     expect(spec.paths["/api/v1/verify/description"].post.deprecated).toBe(true);
     expect(spec.paths["/api/v1/verify/strategy"].post["x-required-scope"]).toBe("read:verify");
-    expect(ROUTES.filter((r) => r.path.startsWith("/verify")).length).toBe(6);
+    expect(ROUTES.filter((r) => r.path.startsWith("/verify")).length).toBe(7); // with /verify/batch (DEC-0087)
   });
 });

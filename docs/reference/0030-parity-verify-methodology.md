@@ -4,17 +4,17 @@ title: Parity Verify methodology
 type: reference
 status: current
 created: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-04
 authors: [ayan]
 tags: [method]
-related: [REF-0016, DEC-0036, DEC-0081]
+related: [REF-0016, DEC-0036, DEC-0081, DEC-0083, DEC-0084, DEC-0088, DEC-0089, DEC-0090, DEC-0091, DEC-0092]
 ---
 
 # Parity Verify methodology
 
 ## In plain words
 
-This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.0`. Research only. Not investment advice.
+This is the repository copy of the public page at `/methodology/`, which says how Verify judges a trading record: the order of the five verdicts, every check and its threshold, the luck check, trust levels and what is stored. The public page fills in the method version, its changelog and the main thresholds from the code at build time (`web/plugins/legal.ts`), so it cannot drift; this copy is kept by hand and must change with it. The method version today is `verify-1.3`. Research only. Not investment advice.
 
 ## Summary
 
@@ -23,7 +23,8 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 | Verdict order | Not enough data, does not hold up, fragile, could be luck, holds up |
 | Luck check | Deflated Sharpe ratio at the stated tries, pass at 0.95, "survives up to N tries" |
 | Red flags | More than 20 average wins lost to one loss, martingale or grid, fall over 50% |
-| Trust | Self-reported for every upload |
+| Trust | Self-reported for every upload; broker-connected when Parity read the trades from the broker and the signed proof matches |
+| Fill prices | With leave, symbol, time and price of each fill checked on our server against the range traded then ([DEC-0092](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)) |
 | Stored | Nothing unless a badge is published or the dataset box is ticked |
 
 ## Inputs
@@ -31,6 +32,16 @@ This is the repository copy of the public page at `/methodology/`, which says ho
 - **A file**: a trade list or equity curve, CSV or tab separated, up to 5 MB and 50,000 rows, read and checked in the browser and never sent. Before the checks run the person states real money, demo or backtest (default backtest), the starting balance, the number of things tried before this one (default 1) and, optionally, what was claimed.
 - **A description of a bot**: a rule-based reader pulls out the claims. Only the claim arithmetic and the settings count can be checked.
 - **One of our strategies**: its research equity curve, at the number of tries our research and search have counted.
+- **A seller's page or words**: the claims on a public page, read by our server under its robots.txt with no login, or in words pasted, each with the words it came from ([DEC-0088](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)).
+- **Strategy code**: Pine Script, a simple Python strategy, or rules in the `parity-rules-1` format (also written from a description by the person's own model), run by us on our daily closes ([DEC-0083](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)).
+
+## Strategy code
+
+- **Read, not run as code.** Pine Script 4 to 6 and Python (pandas signal columns, vectorbt entries and exits, backtesting.py classes) are read into one rule format. The same code gives the same rules. Anything the orders depend on that one close a day cannot support (the day's open, high, low or volume, other markets or time frames, values carried from day to day, orders that wait for a price, trailing stops, partial closes) is refused by name and line, and nothing runs. Reading a later price is refused as peeking. Drawings, alerts and unused values are listed as left out.
+- **Fills** at the close of the day the rule is true; stops and targets are checked against each close from the day after entry. One position at a time with the whole account (or the script's share); an opposite entry turns it around.
+- **Costs** each way: 1 basis point for major currency pairs (1.5 for NZD, 3 for NOK and SEK), 2 for the S&P 500, 0.15% for Bitcoin and Ether, or the script's own commission when higher. Financing, short borrowing and perpetual funding are not charged.
+- **Nearby settings**: each setting, including numbers written into an indicator, at half to one and a half times its value: all combinations of 5 values for up to 3 settings, 3 values for 4 settings, one at a time beyond that. Lengths stay whole.
+- **Tries** for the luck check: the stated tries plus the nearby runs.
 
 ## From a record to returns
 
@@ -86,17 +97,31 @@ Each check is passed, failed or "cannot be checked from this input", never hidde
 | --- | --- |
 | Fills outside the day's range | With the day's high and low: a fill more than 0.1% outside them |
 | Fills far from the day's price | With one price a day: further from it than 3 times that market's 1-in-100 daily move, at least 1% |
-| Perfect timing | With highs and lows and at least 10 dated entries: more than 30% within 0.05% of the day's best price |
+| Fill prices against the traded range | With the fill price check: more than 2 in 100 checked fills, and at least 2, outside the range traded at that time on our data source |
+| Fills while the market was closed | With the fill price check: the same share of US stock fills timed on a weekend or a market holiday |
+| Perfect timing | With highs and lows (from the fill price check or the price file) and at least 10 dated entries: more than 30% within 0.05% of the day's best price |
 | Too smooth | At least 30 returns: lag-one autocorrelation above 0.3, or (daily) no losing month in more than 24 months with under 3% losing days [@getmansky2004] |
 | Edited history | At least 10 trades: median gap at most 3 days but gaps over 30 days; for TradingView and plain lists also skipped trade numbers when 90% of steps are 1 |
 | Backtest labelled as real | Said real money, file is a TradingView Strategy Tester export |
-| Strategy look-ahead test | Our strategies only |
+| Strategy look-ahead test | Our strategies: cut-the-data test. Strategy code: passes, because each day sees only that close and earlier ones and look-ahead code is refused |
+| Perfect timing, for code | Run again with every order a day late, the Sharpe ratio falls below half of a positive original |
 
-We hold one price a day for major currency pairs, Bitcoin, Ether and the S&P 500, so for these the fill check is "far from the day's price" and perfect timing cannot be checked ([DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)). Without the price file, both say they cannot be checked.
+Our price file holds one price a day for major currency pairs, Bitcoin, Ether and the S&P 500, so against it the fill check is "far from the day's price"; the fill price check below covers the rest it can ([DEC-0036](../decisions/0036-verify-runs-its-checks-in-the-browser-and-holds-daily-prices-only.md)). Without the price file, both say they cannot be checked.
+
+## Fill prices against market data
+
+[DEC-0092](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), method `fills-1.0`.
+
+- **What leaves the browser.** Only with the box left ticked and signed in: the symbol, time and price of each fill a source covers, and nothing else. The page asks first which markets and coins are covered. Unticked or signed out, nothing is sent and the rows say "Not run". Nothing about the fills is stored.
+- **Sources.** US stocks and funds: IEX exchange trades through Alpaca, one-minute bars 5 minutes either side, 0.5% (at least a cent), the day's range at 1% in the regular session when IEX had no trade; switched on only after Alpaca has had the notice its terms ask for. Crypto: swaps in our on-chain pools on Base, 10 minutes either side, 1%, about the last eight weeks. Exchanges' candles and every free currency source were read and refused this use.
+- **Answers.** Inside, outside, market closed (US stocks from 8 p.m. Friday to 8 p.m. Sunday New York time, and holidays), or not checked and why. Within 0.05% of the day's high or low is counted for perfect timing.
+- **Time zones.** As the file says; Interactive Brokers in New York time; otherwise the zone from UTC-12 to UTC+14 that fits most fills, an hour either way; fewer than 5 fills, inside at any zone counts.
+- **Fails** at more than 2 in 100 checked fills, and at least 2. Wording: "N fills fall outside the traded range on our data source".
+- **Limits.** 1,000 fills a request, 50,000 fills and 400 checks a day per person, 10,000 fills a batch. Broker-connected records are checked on our server as a self-test. Not in the API or AI apps yet.
 
 ## Card 5: overfitting flags
 
-Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions only, more than one setting per 20 trades. Claim against file: more than 5 points apart on win rate, monthly return or largest fall.
+Short sample: fewer than 100 trades or less than 12 months. First part against last part: last 30% Sharpe below half of the first 70%'s, when that is positive (at least 30 results). Concentration: best 5 trades over 50% of profit (at least 10 trades). Many settings, few trades: descriptions and strategy code, more than one setting per 20 trades. Settings next to yours, for code: fewer than half of the nearby settings make money after costs. Claim against file: more than 5 points apart on win rate, monthly return or largest fall; or, on total return, more than 5 points and more than a tenth apart, unless the claim names a length of time more than a quarter away from the record's.
 
 ## Claim arithmetic
 
@@ -106,23 +131,51 @@ Short sample: fewer than 100 trades or less than 12 months. First part against l
 4. Grid or martingale with no stated maximum loss: "loss is not capped".
 5. Win rate above 90% with no average loss or stop: "the win rate alone says nothing about profit".
 
+## Claims from a seller's page
+
+- **Reading.** The page is fetched once as `ParityVerify/1.0`, after its robots.txt allows it [RFC 9309](https://www.rfc-editor.org/rfc/rfc9309): our group if named, else "*", longest rule first, allow on a tie. No cookies or login; at most 3 redirects, each checked again; the first 2 MB; 8 seconds; http or https on ports 80 and 443; no IP addresses or local names. A login wall or a bot check is reported. X refuses all automatic readers, so its posts are pasted. Nothing is kept.
+- **Finding.** Fixed patterns read labelled values and sentences: total, monthly and yearly return, win rate, largest fall, trades, trades a month, length of time, start date, profit factor, take-profit, stop, grid and martingale. A label beats a sentence; of several drawdowns the largest is used. A person's own model can add claims, each quoting words on the page.
+- **Against a record.** Win rate, monthly return, largest fall and total return use the claim-against-file lines and can change the verdict. Trades (within a tenth), profit factor, start date (within a month), length of time and yearly return are shown only. Pips and a site's Sharpe ratio are not compared.
+
+## The report
+
+Every check ends in one report ([DEC-0089](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)): growth (against the S&P 500's daily closes when our prices are loaded), the luck check at 1 to 1 billion tries, the spread of the Sharpe ratio over 1,000 reshuffles in 21-day blocks or of profit per trade over 1,000 seeded draws of the trades (at least 200 for very long lists), falls from a high, and returns by kind of market, year, market and side. A shared report travels after the "#" of its link and is not stored or vouched for. Two reports can be compared side by side, never ranked ([DEC-0090](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)).
+
 ## Imports
 
-Fills are paired first in, first out per symbol into round trips. Each closing fill is one trade, so a partial close is its own trade. Profit is the price difference times quantity and contract size minus the fees of both sides, opening fees shared by quantity. Personal columns, and order ids that identify an account, are removed first. The supported exports and the layouts not yet confirmed against an official export are listed on `/verify/` ([DEC-0081](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)).
+Fills are paired first in, first out per symbol into round trips. Each closing fill is one trade, so a partial close is its own trade. Profit is the price difference times quantity and contract size minus the fees of both sides, opening fees shared by quantity. Fees count as each platform means them: Interactive Brokers' negative commissions are costs and positive ones rebates; a platform's own realized profit is used only for a close whose opening is before the file starts, as net of fees (Interactive Brokers) or before them (Binance futures); profit a platform already gives after commission (Myfxbook, NinjaTrader, cTrader net) is not reduced again; fees in a coin we cannot price (BNB) are named and left out. With a rate per row every amount becomes the base currency; several currencies without rates are flagged. A time zone in a cell or a header is turned into UTC; MetaTrader server time and Interactive Brokers' US Eastern time are stated. A skipped row is named with its line and cell. Personal columns, and order ids that identify an account, are removed first. MetaTrader 4 and 5 reports are read as saved (HTML in any language, UTF-16, and Excel), as are TradingView's Excel download and JSON from Alpaca. Each supported file is marked tested on a real export, layout copied from a real export, or unverified ([DEC-0084](../decisions/0084-verify-imports-are-tested-on-real-exports.md)).
+
+## What Verify cannot check yet
+
+- Anything inside the day, for strategy code: code needing the open, high, low, volume, intraday bars, trailing stops or waiting orders is refused.
+- Fill prices outside our sources: currencies, futures, options, metals, indexes and coins without a Base pool are not checked against market data; crypto reaches back about eight weeks and needs a time of day and zone; US stocks wait for Alpaca's notice; a fair price at the wrong minute of the same day can still pass.
+- Other markets: strategy code runs on 9 currency pairs, Bitcoin, Ether and the S&P 500 only.
+- Some costs: overnight financing and swap, short borrowing and perpetual funding are not charged to strategy code.
+- Some code: values carried from day to day, functions written in the script, other time frames, partial exits and adding to a position are refused by name and line.
+- Words: a description is only as good as the rules the person's own model writes; the rules are shown before they run.
+- Some files: Bybit's spot trade history and older closed P&L layouts are from help pages only (its closed positions export is copied from a real one); BNB fees cannot be priced; an Interactive Brokers activity statement in several currencies is not converted; trades opened before a file starts have no known cost.
+- Where a file came from: every upload is self-reported. A broker-connected record shows where its trades came from but not how many other things were tried.
 
 ## Trust levels and storage
 
-Every upload is "Self-reported: Parity checked the numbers in the file, not where the file came from." "Broker-connected" needs read-only connections and is not available. The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256; the dataset opt-in stores no user id and month-rounded dates.
+Every upload is "Self-reported: Parity checked the numbers in the file, not where the file came from." A record is "Broker-connected" when Parity's server read the trades from the venue itself through a read-only link ([DEC-0091](../decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)): Interactive Brokers (Flex token), Alpaca (sign-in, no scope), Coinbase, Kraken, Binance and Bybit (keys whose permissions the venue reports as read-only; anything else is refused before a trade is read). Binance.US is not taken: it cannot say what a key may do. The same checks run on the server, and the result is signed with Ed25519; the public key is at `/api/connect/keys`. A badge shows as broker-connected only when the signature checks out and every number on it matches the signed ones, and it names the venue, live or paper (from the venue), a one-way account code and the fetch time.
+
+Broker-connected shows that the trades came from that venue and account and were not edited before the checks. It does not show how many other things were tried (tries are stated by the owner), the starting balance when typed, whose account it is beyond holding a read-only key, anything outside the dates read, or costs the venue books apart from fills.
+
+The file, its trades and personal columns are never stored. A published badge stores summary numbers, the method version and the file's SHA-256 (for a broker-connected record, of the trades file Parity read), plus the signed proof; withdrawing deletes the numbers and the proof and keeps the venue and account code. A broker key is used once and dropped unless the owner asks to keep it in sync; then it is sealed with AES-GCM under a per-person key and can be revoked. Every read is logged for the owner. The dataset opt-in stores no user id and month-rounded dates. The fill price check stores no fill; the database counts fills and checks per person per day, for 30 days.
 
 ## Method versions
 
 | Version | From | What changed |
 | --- | --- | --- |
+| verify-1.3 | 2026-11-04 | Fill prices against market data: two card 4 rows, and perfect timing from the day's real low and high when known |
+| verify-1.2 | 2026-11-03 | Claims read from a seller's page or words; claim against file also compares the total return |
+| verify-1.1 | 2026-11-03 | Strategy code run on our prices; tries include the nearby settings; perfect timing by a one-day-late run and settings next to yours for code; many settings, few trades for code too |
 | verify-1.0 | 2026-10-24 | First version |
 
 ## Cite this
 
-Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.0. paritytrading.app/methodology/
+Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.3. paritytrading.app/methodology/
 
 <!-- backlinks:start (generated by scripts/docs.py) -->
 ## Sources cited
@@ -134,4 +187,12 @@ Parity Trading, Inc. (2026). Parity Verify methodology, version verify-1.0. pari
 ## Referenced by
 
 - [DEC-0081: Verify is a public page with broker imports, embeds and a citable method](../decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md)
+- [DEC-0083: Verify runs a strategy from its code on our prices](../decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md)
+- [DEC-0084: Verify's imports are tested on real exports](../decisions/0084-verify-imports-are-tested-on-real-exports.md)
+- [DEC-0088: Verify reads a seller's claims from their page](../decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
+- [DEC-0089: Every Verify check ends in one report that can be shared and printed](../decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
+- [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](../decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
+- [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](../decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](../decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
+- [LOG-0022: Read-only broker connections built](../log/2026-11-03-read-only-broker-connections-built.md)
 <!-- backlinks:end -->

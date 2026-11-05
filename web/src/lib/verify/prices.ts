@@ -5,7 +5,9 @@
 // the high and low checks say they cannot be checked. A symbol with real highs and lows
 // ("hl") gets the full checks. Only this public price file is fetched: the person's file
 // never leaves the browser.
-import { source } from "../data";
+// Same rule as lib/data.ts's source, written out here so the checks (which the server also
+// runs, DEC-0091) do not pull in the browser data layer.
+const source = import.meta.env?.DEV ? "local" : "static";
 
 export interface PriceSeries {
   /** "hl": the day's low and high. "price": one price a day, inside that day's range. */

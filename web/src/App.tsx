@@ -289,7 +289,7 @@ function Dashboard({ email, onSignOut }: { email: string | null; onSignOut?: () 
       {route === "private" && <PrivateResearch />}
       {route === "competitors" && <Competitors focus={dec(arg)} />}
       {route === "pairs" && <Pairs />}
-      {route === "verify" && <Verify share={(r, file) => <SharePanel key={`${file?.sha256 ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} />} />}
+      {route === "verify" && <Verify share={(r, file, connected) => <SharePanel key={`${file?.sha256 ?? connected?.record.attestation.slice(-16) ?? ""}:${r.tries}:${r.kind}:${r.verdict.sentence}`} r={r} file={file} connected={connected} />} />}
       {route === "algo" && arg && <AlgorithmReport slug={dec(arg)!} />}
       {route === "ledger" && <LedgerPage />}
       {route === "news" && <News view={arg} />}

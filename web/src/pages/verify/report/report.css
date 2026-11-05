@@ -1,0 +1,120 @@
+/* The Verify report (DEC-0089). Same look as the front page and the pages for firms: big,
+   bold, solid cards on layered charcoal, Invicta blue only for the main action and accents,
+   no eyebrow labels. Sizes are fixed where content arrives late, so nothing below jumps.
+   Colours from tokens only (DEC-0058). Printing (Save as PDF) turns it into a light page. */
+
+.rp { display: flex; flex-direction: column; gap: var(--space-6); }
+.rp-card, .rp .mcard {
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
+  border: 1px solid var(--color-border-strong);
+}
+.rp-card { padding: var(--space-6); min-width: 0; }
+.rp-h2 { margin: 0 0 var(--space-4); font-size: var(--type-4xl); line-height: 1.15; letter-spacing: -0.02em; font-weight: var(--fw-bold); }
+.rp-h3 { margin: 0 0 var(--space-3); font-size: var(--type-2xl); font-weight: var(--fw-bold); }
+.rp-lead { margin: 0 0 var(--space-4); color: var(--color-text-body); font-size: var(--type-lg); line-height: 1.55; max-width: 75ch; }
+.rp-section { min-width: 0; }
+
+/* The verdict: one big card with the sentence and what to do with it. */
+.rp-hero.vf-verdict {
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--color-surface-raised), var(--color-surface));
+  border: 1px solid var(--color-border-strong);
+  border-left: 6px solid var(--vf-tone);
+  box-shadow: 0 30px 80px -40px var(--color-glow);
+}
+.rp-verdict.vf-verdict-label { margin: 0 0 var(--space-3); font-size: clamp(var(--type-6xl), 5vw, var(--type-8xl)); line-height: 1.02; letter-spacing: -0.035em; font-weight: var(--fw-bold); }
+.rp-sentence.vf-sentence { font-size: var(--type-2xl); line-height: 1.45; max-width: 62ch; margin: 0 0 var(--space-4); color: var(--color-text); }
+.rp-hero .vf-meta { font-size: var(--type-md); gap: var(--space-2) var(--space-5); }
+.rp-shared { margin: var(--space-4) 0 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--color-accent-soft); color: var(--color-text-body); font-size: var(--type-sm); max-width: 75ch; }
+
+.rp-actions { margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+.rp-actions-row { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.rp-link { display: flex; flex-direction: column; gap: var(--space-2); max-width: 760px; }
+.rp-link-input { width: 100%; font-family: var(--font-mono); font-size: var(--type-xs); }
+
+/* The numbers that decided it: big, in solid cards. */
+.rp-keys { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.rp-key { margin: 0; padding: var(--space-5) var(--space-6); border-radius: var(--radius-xl); background: linear-gradient(180deg, var(--color-surface-raised), var(--color-surface)); border: 1px solid var(--color-border-strong); min-width: 0; }
+.rp-key dt { color: var(--color-text-muted); font-size: var(--type-md); margin: 0 0 var(--space-2); }
+.rp-key dd { margin: 0; font-size: clamp(var(--type-4xl), 2.4vw, var(--type-6xl)); font-weight: var(--fw-bold); letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: var(--num-variant); overflow-wrap: anywhere; }
+.rp-key.rp-good dd { color: var(--color-positive); }
+.rp-key.rp-bad dd { color: var(--color-negative); }
+.rp-key .vf-num { border-bottom-color: var(--color-border-max); }
+
+/* Pictures: two to a row, the growth line across both. */
+.rp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.rp-wide { grid-column: 1 / -1; }
+.rp-chart h3 { margin: 0 0 var(--space-2); font-size: var(--type-2xl); font-weight: var(--fw-bold); letter-spacing: -0.01em; }
+.rp-chart .rp-lead { font-size: var(--type-md); margin-bottom: var(--space-3); }
+.rp-gap { margin: 0; color: var(--color-text-muted); font-size: var(--type-md); max-width: 70ch; }
+.rp-gap-inline { margin-top: var(--space-3); font-size: var(--type-sm); }
+.rp-still { margin: 0; }
+/* A picture not drawn yet keeps the player's shape and the room for its controls, so nothing moves when it draws. */
+.rp-pic-wait { padding-bottom: calc(var(--space-16) + var(--space-8)); }
+.rp-still figcaption { margin-top: var(--space-2); font-size: var(--type-sm); color: var(--color-text-body); }
+
+/* What the seller claims. */
+.rp-claim-list { list-style: none; margin: 0 0 var(--space-4); padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-3); }
+.rp-claim { padding: var(--space-4) var(--space-5); border-radius: var(--radius-lg); background: var(--color-surface); border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.rp-claim-differs { border-color: var(--color-negative); }
+.rp-claim-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.rp-claim-label { font-weight: var(--fw-bold); font-size: var(--type-lg); }
+.rp-claim-values { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); }
+.rp-claim-values > div { display: flex; flex-direction: column; gap: var(--space-half); }
+.rp-claim-k { color: var(--color-text-muted); font-size: var(--type-xs); }
+.rp-claim-values .vf-num { font-size: var(--type-3xl); font-weight: var(--fw-bold); letter-spacing: -0.02em; }
+.rp-claim-quote { margin: 0; font-size: var(--type-sm); color: var(--color-text-body); overflow-wrap: anywhere; }
+.rp-claim-quote q { quotes: '"' '"'; }
+.rp-claim-quote mark { background: var(--color-accent-soft); color: var(--color-text); border-radius: var(--radius-xs); padding: 0 var(--space-half); }
+.rp-claim-open { color: var(--color-accent-text); white-space: nowrap; }
+.rp-claim-why { margin: 0; font-size: var(--type-sm); color: var(--color-text); }
+.rp-claim-how { margin: 0; font-size: var(--type-xs); color: var(--color-text-muted); }
+.rp-claim-actions { margin-top: var(--space-2); }
+
+/* What was checked, and what could not be. */
+.rp-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.rp-inputs { margin: 0 0 var(--space-3); display: grid; grid-template-columns: minmax(110px, auto) minmax(0, 1fr); gap: var(--space-2) var(--space-4); font-size: var(--type-md); }
+.rp-inputs > div { display: contents; }
+.rp-inputs dt { color: var(--color-text-muted); }
+.rp-inputs dd { margin: 0; color: var(--color-text); overflow-wrap: anywhere; }
+.rp-inputs a, .rp-cannot a, .rp-pair .vf-small a { color: var(--color-accent-text); text-decoration: underline; text-underline-offset: 2px; }
+.rp-cannot { margin: 0 0 var(--space-3); padding-left: 1.1em; display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--type-md); line-height: 1.5; }
+.rp-words q { overflow-wrap: anywhere; }
+.rp-notes ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: var(--space-2); color: var(--color-text-body); font-size: var(--type-md); }
+
+@media (max-width: 900px) {
+  .rp-grid, .rp-pair { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .rp-hero.vf-verdict { padding: var(--space-5); border-left-width: 4px; }
+  .rp-card { padding: var(--space-4); }
+  .rp-sentence.vf-sentence { font-size: var(--type-xl); }
+  .rp-keys { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+  .rp-key { padding: var(--space-4); }
+  .rp-key dd { font-size: var(--type-3xl); }
+  .rp-inputs { grid-template-columns: minmax(0, 1fr); gap: var(--space-half) 0; }
+  .rp-inputs dd { margin-bottom: var(--space-2); }
+  .rp-actions-row .ui-btn { flex: 1 1 100%; justify-content: center; }
+}
+
+/* Save as PDF: a light page, still pictures, no controls. */
+@media print {
+  html, body, .vp-page, .vb-page { background: var(--palette-white) !important; }
+  .rp, .vp-page, .vb-page, .cp-page {
+    --color-surface: var(--palette-white); --color-surface-raised: var(--palette-white); --surface: var(--palette-white);
+    --color-text: var(--palette-black); --text: var(--palette-black); --color-text-body: var(--palette-ink-3); --color-text-muted: var(--palette-grey-500);
+    --text-2: var(--palette-grey-500); --muted: var(--palette-grey-500); --color-border: var(--palette-grey-300); --color-border-strong: var(--palette-grey-300); --border: var(--palette-grey-300);
+    --color-glow: transparent; color: var(--palette-black);
+  }
+  /* The public page prints the report only: not the page's introduction, the list of
+     supported files or the sections under it (they made a one-page report ten pages). */
+  .vp-page:has(.vf-result) :is(.vp-hero, .vp-section) { display: none !important; }
+  .rp-actions, .sg-controls, .sg-scrub, .vp-corner nav, .skip, .vp-tool > :not(.vf-result), .vf-share, .vf-matches .vf-row, .ui-toaster, .rp-claim-actions, .vb-share { display: none !important; }
+  .rp-card, .rp .mcard, .rp-key, .rp-claim, .rp-hero { break-inside: avoid; box-shadow: none !important; background: var(--palette-white) !important; }
+  .rp-grid, .rp-pair { grid-template-columns: minmax(0, 1fr); }
+  .rp a { color: var(--palette-black); }
+  .rp h2, .rp h3, .rp-h2, .rp-h3, .vp-main h1 { color: var(--palette-black); }
+  .vp-brand img { filter: invert(1); }
+}

@@ -58,6 +58,8 @@ Every button, field, table and panel on Parity now meets the WCAG 2.2 AA accessi
 - [DEC-0067: One signature chart system for lessons, strategy pages and clips](0067-one-signature-chart-system-for-lessons-strategy-pages-and-clips.md)
 - [DEC-0073: Search and content run by themselves, with caps, a log and a kill switch](0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md)
 - [DEC-0075: The app home is a full-width grid of widgets each person arranges](0075-the-app-home-is-a-full-width-grid-of-widgets-each-person-arranges.md)
+- [DEC-0089: Every Verify check ends in one report that can be shared and printed](0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
 - [REF-0009: UI library](../reference/0009-ui-library.md)
 - [REF-0026: Accessibility audit, WCAG 2.2 AA](../reference/0026-accessibility-audit-wcag-2-2-aa.md)
+- [LOG-0023: Verify QA sweep on production](../log/2026-11-04-verify-qa-sweep-on-production.md)
 <!-- backlinks:end -->

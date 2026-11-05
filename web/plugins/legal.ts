@@ -13,7 +13,14 @@ import { MAX_TRIES, LUCK_LINE } from "../src/lib/verify/dsr";
 import { MIN_RETURNS, MIN_TRADES } from "../src/lib/verify/checks/verdict";
 import { DRAWDOWN_LIMIT, WIPEOUT_LIMIT } from "../src/lib/verify/checks/tail";
 import { METHOD_CHANGELOG, METHOD_VERSION } from "../src/lib/verify/types";
+import { SCREEN_VERSION, TOP5_LIMIT } from "../src/lib/screen/score";
+import { MARKETS } from "../src/lib/verify/strategy/rules";
+import { VENUE_LIST, VENUES } from "../src/lib/connect/venues";
 import { fillGuide, isGuide } from "./guides";
+import { SOURCE_INFO } from "../src/lib/verify/range/info";
+import { FAIL_MIN, FAIL_SHARE } from "../src/lib/verify/range/rows";
+import { EDGE, LIMITS, RANGE_VERSION } from "../src/lib/verify/range/types";
+import { MAX_BATCH_FILLS } from "../src/lib/screen/fills";
 
 export const LEGAL_LINKS: [string, string][] = [
   ["/legal/privacy/", "Privacy"],
@@ -59,6 +66,9 @@ const FOOTER = `
       <p>&copy; 2026 Parity</p>
     </footer>`;
 
+/** Whether this build turns read-only broker connections on (DEC-0091): the same switch as the pages. */
+const CONNECTIONS_ON = process.env.VITE_VERIFY_CONNECTIONS === "on";
+
 const escHtml = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 /** The values the methodology page prints, by marker name. */
@@ -70,6 +80,26 @@ export const METHOD_VALUES: Record<string, string> = {
   "drawdown-limit": `${Math.round(DRAWDOWN_LIMIT * 100)}%`,
   "luck-line": LUCK_LINE.toFixed(2),
   "max-tries": MAX_TRIES.toLocaleString("en-US"),
+  "screen-version": SCREEN_VERSION,
+  "top-five-limit": `${Math.round(TOP5_LIMIT * 100)}%`,
+  markets: MARKETS.map((m) => `<tr><td>${escHtml(m.name)} (<code>${m.id}</code>)</td><td>${(m.cost * 100).toFixed(m.cost < 0.001 ? 2 : 2)}%</td><td>${escHtml(m.costWhy)}</td></tr>`).join("\n        "),
+  "connect-status": CONNECTIONS_ON
+    ? "Read-only connections are switched on: on the Verify page, pick \u201cRead from your broker\u201d."
+    : "Read-only connections are built and being tested, and are not open on this site yet. Until they are, every badge here is self-reported.",
+  "connect-venues": [
+    ...VENUE_LIST.map((v) => `<li><strong>${escHtml(v.name)}.</strong> ${escHtml(v.readOnly)}</li>`),
+    `<li><strong>${escHtml(VENUES.binance_us.name)}.</strong> ${escHtml(VENUES.binance_us.readOnly)}</li>`,
+  ].join("\n    "),
+  "fills-version": RANGE_VERSION,
+  "fills-fail": `more than ${Math.round(FAIL_SHARE * 100)} in 100 of the fills checked, and at least ${FAIL_MIN}`,
+  "fills-edge": `${(EDGE * 100).toFixed(2)}%`,
+  "fills-per-request": LIMITS.fills.toLocaleString("en-US"),
+  "fills-batch": MAX_BATCH_FILLS.toLocaleString("en-US"),
+  "fills-sources": Object.values(SOURCE_INFO).map((x) => {
+    const mins = Math.round(x.window / 60_000);
+    const day = x.exactTime ? "Not used: a pool has no day bars here" : `${(x.tolDay * 100).toFixed(1)}%, in the regular session only when nothing traded in the window`;
+    return `<tr><td>${escHtml(x.name)}</td><td>${x.market === "stock" ? "US stocks and funds" : "Crypto"}</td><td>${x.exactTime ? "Each swap" : "One minute"}, ${mins} minutes either side of the fill</td><td>${(x.tolBar * 100).toFixed(1)}%${x.tick ? ", at least a cent" : ""}</td><td>${day}</td></tr>`;
+  }).join("\n        "),
   changelog: METHOD_CHANGELOG.map((c) => `<tr><td><code>${escHtml(c.version)}</code></td><td>${c.date}</td><td>${escHtml(c.changes)}</td></tr>`).join("\n        "),
 };
 

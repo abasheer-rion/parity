@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title, description and share tags: src/lib/meta.ts. The page for prop firms (DEC-0087).
+         Numbers marked pilot: come from the synthetic sample (plugins/business.ts). -->
+    <!--site-kit-->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=optional" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/business/business.css" />
+    <script type="module" src="/src/business/pilot.ts"></script>
+  </head>
+  <body class="bz" data-kind="prop_firm">
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <!--business:corner-->
+    <main id="main" tabindex="-1">
+      <section class="bz-hero" aria-labelledby="hero-h">
+        <div class="wrap">
+          <h1 id="hero-h">Find the funded traders who passed by luck.</h1>
+          <p class="bz-lead">Upload your challenge accounts in one file. For each one Parity says whether it holds up, looks like luck, or has too few trades to tell, with the numbers behind it and one line saying why.</p>
+          <div class="bz-cta">
+            <a class="btn primary" href="mailto:contact@paritytrading.app?subject=Free%2030-day%20pilot" data-pilot>Start a free 30-day pilot</a>
+            <a class="bz-link" href="/business/prop-firms/sample/">See the sample report</a>
+          </div>
+          <p class="bz-fine">Your files are checked in your browser and never sent to us. Research only, not investment advice.</p>
+        </div>
+      </section>
+
+      <section class="bz-sec" aria-labelledby="math-h">
+        <div class="wrap">
+          <h2 id="math-h">Passing a challenge does not need an edge.</h2>
+          <p class="bz-sub">A trader with no skill at all, who keeps trading until they hit the target or the loss limit, passes more often than not. The numbers below are arithmetic and a labelled simulation, not client data.</p>
+          <ul class="bz-stats">
+            <li class="bz-stat"><b class="accent"><!--pilot:no-edge-pass--></b><span>chance that a trader with no edge reaches a <!--pilot:target--> target before a <!--pilot:max-loss--> loss limit.</span><small>Arithmetic: the loss limit over the two added together, for a fair coin flip with no time limit.</small></li>
+            <li class="bz-stat"><b><!--pilot:lucky-share--></b><span>of the passers we could judge look like luck: <!--pilot:lucky-passers--> of <!--pilot:judged-passers-->.</span><small>Synthetic sample of <!--pilot:accounts--> made-up challenge accounts.</small></li>
+            <li class="bz-stat"><b><!--pilot:hit-rate--></b><span>of the passers flagged as luck later blew up, against <!--pilot:holds-blowup--> of those that hold up.</span><small>Synthetic sample. 95% intervals: <!--pilot:hit-ci--> and <!--pilot:holds-ci-->.</small></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="bz-sec" aria-labelledby="get-h">
+        <div class="wrap">
+          <h2 id="get-h">One verdict per account. <span class="dim">The numbers behind it.</span></h2>
+          <p class="bz-sub">The screen uses the same checks as Parity Verify, judged for a record that lasts weeks, not years.</p>
+          <ul class="bz-cards">
+            <li class="bz-card"><h3>Holds up</h3><p>Makes money per trade after fees, no single bad run could erase it, and the result clears the luck check for the attempts behind it.</p></li>
+            <li class="bz-card"><h3>Likely luck</h3><p>Loses money per trade, could be wiped out by one bad run, or does not clear the luck check once its attempts are counted.</p></li>
+            <li class="bz-card"><h3>Not enough trades</h3><p>Fewer than 30 trades. Nothing can be told from so few, and a quick pass on a handful of large trades is itself worth a look.</p></li>
+          </ul>
+          <ul class="bz-cards four">
+            <li class="bz-card"><h3>Luck check</h3><p>The deflated Sharpe ratio of the trades, at the number of attempts the trader made.</p></li>
+            <li class="bz-card"><h3>Tries survived</h3><p>How many attempts the result could have taken and still pass the luck check.</p></li>
+            <li class="bz-card"><h3>Worst fall</h3><p>The largest drop from a high, and whether position size grew after losses.</p></li>
+            <li class="bz-card"><h3>Consistency</h3><p>How much of the profit came from the best day and from the best 5 trades.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="bz-sec" aria-labelledby="rules-h">
+        <div class="wrap">
+          <h2 id="rules-h">See what your rules already catch.</h2>
+          <p class="bz-sub">For the passers that look like luck, the report shows which common firm rules would have stopped them: a consistency rule, a minimum number of trading days, size growing after losses, and the best 5 trades making most of the profit. It also shows the good passers each rule would have stopped too.</p>
+          <ul class="bz-stats">
+            <li class="bz-stat"><b><!--pilot:only-luck--></b><span>passers that look like luck pass all four rules in the sample. Only the luck check flags them.</span><small>Synthetic sample.</small></li>
+            <li class="bz-stat"><b><!--pilot:thin-passers--></b><span>passers in the sample had fewer than 30 trades: a pass on a few large bets.</span><small>Synthetic sample.</small></li>
+            <li class="bz-stat"><b><!--pilot:false-alarms--></b><span>of the passers that went on to a payout were flagged as luck. The report shows this false alarm rate for your own data.</span><small>Synthetic sample. 95% interval: <!--pilot:false-ci-->.</small></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="bz-sec" aria-labelledby="proof-h">
+        <div class="wrap">
+          <h2 id="proof-h">Proof on your own history.</h2>
+          <p class="bz-sub">Add what happened to each account after the challenge, a payout or a blow-up, and the report tests the screen itself: how often a "likely luck" verdict was followed by a blow-up, how many blow-ups it caught, and how often it flagged a trader who went on to be paid. Every rate comes with a 95% interval, so a small sample says so.</p>
+          <ol class="bz-steps">
+            <li><b>Export last quarter's challenge accounts.</b><span>One CSV with an account column, or a zip with one trade file per account. MetaTrader, cTrader, TradingView and plain CSVs all work.</span></li>
+            <li><b>Add the outcomes if you have them.</b><span>A second file with the account, its starting balance, attempts, whether it passed, and payout or blow-up.</span></li>
+            <li><b>Read the report.</b><span>Per account verdicts, the firm summary and the back-test, as a CSV and a page you can print or save as PDF.</span></li>
+          </ol>
+          <div class="bz-cta" style="margin-top: 40px">
+            <a class="btn" href="/business/screen/">Screen a batch now</a>
+            <a class="bz-link" href="/business/prop-firms/sample/">See the sample report</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="bz-sec" aria-labelledby="data-h">
+        <div class="wrap">
+          <h2 id="data-h">Your traders' data stays with you.</h2>
+          <ul class="bz-cards">
+            <li class="bz-card"><h3>Checked in your browser</h3><p>The page reads your files on your computer. Nothing is uploaded to Parity, and closing the tab removes it.</p></li>
+            <li class="bz-card"><h3>An API for larger jobs</h3><p><code>POST /api/v1/verify/batch</code> with an API key: up to 500 accounts and 50,000 trades a request. Nothing sent is stored.</p><a class="bz-go" href="/developers/#verify-batch">Read the API guide</a></li>
+            <li class="bz-card"><h3>A method you can cite</h3><p>Every rule and threshold is public, versioned and the same for every firm.</p><a class="bz-go" href="/methodology/#batch">Read the methodology</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="bz-closing" aria-labelledby="close-h">
+        <div class="wrap">
+          <h2 id="close-h">Thirty days, free, on your own accounts.</h2>
+          <p>We set it up with you, run it on a past quarter and show you the back-test. You decide after.</p>
+          <div class="bz-cta">
+            <a class="btn primary" href="mailto:contact@paritytrading.app?subject=Free%2030-day%20pilot" data-pilot>Start a free 30-day pilot</a>
+          </div>
+          <p class="bz-fine" style="margin-inline: auto">Also for <a href="/business/copy-trading/">copy-trading platforms</a> and <a href="/business/bot-marketplaces/">bot and signal marketplaces</a>.</p>
+        </div>
+      </section>
+    </main>
+    <!--business:footer-->
+    <!--business:pilot-->
+  </body>
+</html>

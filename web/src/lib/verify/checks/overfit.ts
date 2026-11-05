@@ -5,6 +5,7 @@ import { daysBetween } from "../returns";
 import { sharpe } from "../stats";
 import type { Claim, Trade } from "../types";
 import { NA, type CheckRow } from "./lookahead";
+import { count } from "../words";
 
 const pp = (v: number) => `${(v * 100).toFixed(1)}%`;
 
@@ -14,10 +15,10 @@ export function shortSampleCheck(trades: number | null, firstDate: string | null
   if (!firstDate) return { id: "short", label, status: "na", detail: `${NA}: there are no dates.` };
   const fewTrades = trades != null && trades < 100;
   if (fewTrades || months < 12) {
-    const why = [fewTrades ? `${trades} trades (100 is the line)` : "", months < 12 ? `${months.toFixed(1)} months (12 is the line)` : ""].filter(Boolean).join(" and ");
+    const why = [fewTrades ? `${count(trades ?? 0, "trade")} (100 is the line)` : "", months < 12 ? `${months.toFixed(1)} months (12 is the line)` : ""].filter(Boolean).join(" and ");
     return { id: "short", label, status: "fail", detail: `Only ${why}. A short record can look good by chance.` };
   }
-  return { id: "short", label, status: "pass", detail: `${trades != null ? `${trades.toLocaleString("en-US")} trades over ` : ""}${months.toFixed(0)} months.` };
+  return { id: "short", label, status: "pass", detail: `${trades != null ? `${count(trades, "trade")} over ` : ""}${months.toFixed(0)} months.` };
 }
 
 /** Sharpe in the last 30% of the record below half the Sharpe of the first 70%. */
@@ -49,29 +50,62 @@ export function settingsCheck(settings: number | null, trades: number | null): C
   const label = "Many settings, few trades";
   if (settings == null || trades == null) return { id: "settings", label, status: "na", detail: `${NA}: it needs a description with its rules and a number of trades.` };
   return settings > trades / 20
-    ? { id: "settings", label, status: "fail", detail: `${settings} adjustable settings for ${trades} trades: more than one setting per 20 trades, so the rules can be fitted to almost any past data.` }
-    : { id: "settings", label, status: "pass", detail: `${settings} adjustable settings for ${trades} trades (one per 20 trades is the line).` };
+    ? { id: "settings", label, status: "fail", detail: `${count(settings, "adjustable setting")} for ${count(trades ?? 0, "trade")}: more than one setting per 20 trades, so the rules can be fitted to almost any past data.` }
+    : { id: "settings", label, status: "pass", detail: `${count(settings, "adjustable setting")} for ${count(trades ?? 0, "trade")} (one per 20 trades is the line).` };
 }
 
-export interface FileFacts { winRate: number | null; monthlyReturn: number | null; maxDrawdown: number | null }
+export interface FileFacts { winRate: number | null; monthlyReturn: number | null; maxDrawdown: number | null; totalReturn?: number | null; months?: number | null }
 
-/** The claimed win rate, monthly return or drawdown is more than 5 percentage points from the file. */
+/** A total return claimed for a stated length of time can only be compared with a record of about that length (within a quarter). */
+export function samePeriod(claimMonths: number | undefined, fileMonths: number | null | undefined): boolean {
+  return claimMonths == null || fileMonths == null || Math.abs(fileMonths - claimMonths) <= 0.25 * claimMonths;
+}
+
+/** Whether a claimed number is too far from the file's: 5 points for rates; for the total return also more than a tenth apart (method verify-1.2). */
+export function claimOff(name: "win rate" | "monthly return" | "largest fall from a high" | "total return", claimed: number, file: number): boolean {
+  const gap = Math.abs(claimed - file);
+  return name === "total return" ? gap > 0.05 && gap > 0.1 * Math.max(Math.abs(claimed), Math.abs(file)) : gap > 0.05;
+}
+
+/**
+ * The claimed win rate, monthly return or drawdown is more than 5 percentage points from the
+ * file, or the claimed total return is more than 5 points and more than a tenth away from it.
+ */
 export function claimCheck(claim: Claim, file: FileFacts): CheckRow & { contradicted: string[] } {
   const label = "Claim against file";
-  const pairs: [string, number | undefined, number | null][] = [
+  const pairs: ["win rate" | "monthly return" | "largest fall from a high" | "total return", number | undefined, number | null][] = [
     ["win rate", claim.winRate, file.winRate],
     ["monthly return", claim.monthlyReturn, file.monthlyReturn],
     ["largest fall from a high", claim.maxDrawdown, file.maxDrawdown],
+    ["total return", claim.totalReturn, samePeriod(claim.months, file.months) ? file.totalReturn ?? null : null],
   ];
   const given = pairs.filter(([, c]) => c != null);
   if (!given.length) return { id: "claim", label, status: "na", detail: `${NA}: no claim was entered.`, contradicted: [] };
   const off: string[] = [], ok: string[] = [], unknown: string[] = [];
   for (const [name, c, f] of given) {
     if (f == null) { unknown.push(name); continue; }
-    const gap = Math.abs(c! - f);
-    (gap > 0.05 ? off : ok).push(`${name}: claimed ${pp(c!)}, file ${pp(f)}`);
+    (claimOff(name, c!, f) ? off : ok).push(`${name}: claimed ${pp(c!)}, file ${pp(f)}`);
   }
-  if (off.length) return { id: "claim", label, status: "fail", detail: `The file does not back the claim. ${off.join("; ")} (more than 5 points apart).`, contradicted: off };
+  const line = off.some((o) => o.startsWith("total return")) ? "more than 5 points apart, and the total return more than a tenth apart" : "more than 5 points apart";
+  if (off.length) return { id: "claim", label, status: "fail", detail: `The file does not back the claim. ${off.join("; ")} (${line}).`, contradicted: off };
   if (!ok.length) return { id: "claim", label, status: "na", detail: `${NA}: the file cannot show the claimed ${unknown.join(" or ")} without a starting balance.`, contradicted: [] };
   return { id: "claim", label, status: "pass", detail: `${ok.join("; ")}: within 5 points.${unknown.length ? ` The ${unknown.join(" and ")} could not be compared.` : ""}`, contradicted: [] };
+}
+
+export interface SweepFacts { runs: number; profitable: number; rank: number | null; ranges: string[] }
+
+/**
+ * Settings next to yours, for code we ran: each setting at half to one and a half times its
+ * value. Fails when fewer than half of those runs make money after costs: the result then
+ * depends on the exact settings, the mark of rules tuned to the past.
+ */
+export function neighboursCheck(s: SweepFacts | null): CheckRow {
+  const label = "Settings next to yours";
+  if (!s || s.runs < 2) return { id: "sweep", label, status: "na", detail: `${NA}: the rules have no settings to vary.` };
+  const share = `${Math.round(s.profitable * 100)}%`;
+  const where = s.rank != null ? ` Yours rank ${s.rank} of ${s.runs} by Sharpe.` : "";
+  const what = s.ranges.length ? ` We tried ${s.ranges.join(", ")}.` : "";
+  return s.profitable < 0.5
+    ? { id: "sweep", label, status: "fail", detail: `Only ${share} of ${s.runs} nearby settings make money after costs.${where}${what} A result that needs its exact settings is often tuned to the past.` }
+    : { id: "sweep", label, status: "pass", detail: `${share} of ${s.runs} nearby settings make money after costs (half is the line).${where}${what}` };
 }

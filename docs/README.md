@@ -7,16 +7,16 @@ and the tag list is in [TAGS.md](TAGS.md).
 | Type | What it holds | Count |
 | --- | --- | --- |
 | [intent](#intent) | Why the project exists. Changed rarely, and only by adding a new intent that supersedes the old one. | 3 |
-| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 82 |
+| [decision](#decision) | One choice we made and why. Never edited after acceptance except to mark it superseded. | 90 |
 | [hypothesis](#hypothesis) | A claim about markets that an experiment can support or reject. | 8 |
 | [experiment](#experiment) | One run or set of runs, with the exact settings, so anyone can reproduce it. | 5 |
-| [research](#research) | Reading notes, surveys of papers, code and forums. | 20 |
+| [research](#research) | Reading notes, surveys of papers, code and forums. | 23 |
 | [guide](#guide) | How to do something in this repo, step by step. | 9 |
 | [reference](#reference) | Facts to look up: definitions, data sources, architecture. | 30 |
 | [competitor](#competitor) | One trading product we study: who uses it, what it costs, what users praise and complain about, its UX, and what Parity takes from it. Counts come from the feedback collector. | 23 |
-| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 21 |
+| [log](#log) | A dated, append-only record of a working session. Corrections go in a new entry, not an edit. | 23 |
 | [algorithm](#algorithm) | One report per trading algorithm we know of, generated from catalog/algorithms/. Edit the JSON, not the page. | 90 |
-| [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 47 |
+| [dataset](#dataset) | One report per data source, generated from catalog/datasets/. Edit the JSON, not the page. | 48 |
 
 ## Open questions right now
 
@@ -30,14 +30,14 @@ and the tag list is in [TAGS.md](TAGS.md).
 
 ## Recently updated
 
-- 2026-10-28 [LOG-0021: Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md)
-- 2026-10-28 [DEC-0086: New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md)
-- 2026-10-28 [DEC-0085: Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md)
-- 2026-10-27 [RES-0028: Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md)
-- 2026-10-27 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
-- 2026-10-27 [REF-0020: Compliance checklist before each new step](reference/0020-compliance-checklist-before-each-new-step.md)
-- 2026-10-27 [LOG-0020: Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md)
-- 2026-10-27 [GDE-0008: Rendering shareable clips from the sims](guides/0008-rendering-shareable-clips-from-the-sims.md)
+- 2026-11-04 [REF-0030: Parity Verify methodology](reference/0030-parity-verify-methodology.md)
+- 2026-11-04 [LOG-0023: Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md)
+- 2026-11-04 [DEC-0092: Verify checks fill prices against market data, sending only symbol, time and price](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md)
+- 2026-11-03 [LOG-0022: Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md)
+- 2026-11-03 [DEC-0091: Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md)
+- 2026-11-03 [DEC-0090: Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md)
+- 2026-11-03 [DEC-0089: Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md)
+- 2026-11-03 [DEC-0088: Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md)
 
 ## intent
 
@@ -131,8 +131,16 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DEC-0080 | [The front page leads with Verify, three ways in and planned prices](decisions/0080-the-front-page-leads-with-verify-three-ways-in-and-planned-prices.md) | accepted | 2026-10-27 | [ui](TAGS.md#ui) |
 | DEC-0081 | [Verify is a public page with broker imports, embeds and a citable method](decisions/0081-verify-is-a-public-page-with-broker-imports-embeds-and-a-citable-method.md) | accepted | 2026-10-27 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0082 | [Verify tools and endpoints for AI apps and programs](decisions/0082-verify-tools-and-endpoints-for-ai-apps-and-programs.md) | accepted | 2026-10-27 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0083 | [Verify runs a strategy from its code on our prices](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [strategy](TAGS.md#strategy), [ui](TAGS.md#ui) |
+| DEC-0084 | [Verify's imports are tested on real exports](decisions/0084-verify-imports-are-tested-on-real-exports.md) | accepted | 2026-11-03 | [data](TAGS.md#data), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 | DEC-0085 | [Academy lessons play as short motion films](decisions/0085-academy-lessons-play-as-short-motion-films.md) | accepted | 2026-10-28 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | DEC-0086 | [New site versions reload in place, and only app changes ask for a restart](decisions/0086-new-site-versions-reload-in-place-and-only-app-changes-ask-for-a-restart.md) | accepted | 2026-10-28 | [infra](TAGS.md#infra), [ui](TAGS.md#ui) |
+| DEC-0087 | [Free pilots for prop firms with a batch screen, a back-test and a sample report](decisions/0087-free-pilots-for-prop-firms-with-a-batch-screen-a-back-test-and-a-sample-report.md) | accepted | 2026-11-03 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
+| DEC-0088 | [Verify reads a seller's claims from their page](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0089 | [Every Verify check ends in one report that can be shared and printed](decisions/0089-every-verify-check-ends-in-one-report-that-can-be-shared-and-printed.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0090 | [Two Verify reports side by side, and a batch row opens its full report](decisions/0090-two-verify-reports-side-by-side-and-a-batch-row-opens-its-full-report.md) | accepted | 2026-11-03 | [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0091 | [Verify reads trades from brokers with read-only keys and marks the record broker-connected](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md) | accepted | 2026-11-03 | [infra](TAGS.md#infra), [method](TAGS.md#method), [ui](TAGS.md#ui) |
+| DEC-0092 | [Verify checks fill prices against market data, sending only symbol, time and price](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md) | accepted | 2026-11-04 | [data](TAGS.md#data), [method](TAGS.md#method), [ui](TAGS.md#ui) |
 
 ## hypothesis
 
@@ -181,6 +189,9 @@ and the tag list is in [TAGS.md](TAGS.md).
 | RES-0026 | [Laws and rules that apply to Parity now and later](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md) | current | 2026-10-25 | [crypto](TAGS.md#crypto), [process](TAGS.md#process) |
 | RES-0027 | [How Pyth works and what we may take from it](research/0027-how-pyth-works-and-what-we-may-take-from-it.md) | current | 2026-10-26 | [crypto](TAGS.md#crypto), [data](TAGS.md#data), [infra](TAGS.md#infra) |
 | RES-0028 | [Pairs trading and statistical arbitrage, what the research says](research/0028-pairs-trading-and-statistical-arbitrage.md) | current | 2026-10-27 | [data](TAGS.md#data), [method](TAGS.md#method), [strategy](TAGS.md#strategy) |
+| RES-0029 | [Ayan's and Abanish's plans compared, and where Parity fits](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md) | current | 2026-10-29 | [competitors](TAGS.md#competitors), [method](TAGS.md#method), [news](TAGS.md#news), [strategy](TAGS.md#strategy) |
+| RES-0030 | [Outside data to grow the counted-trials dataset](research/0030-outside-data-to-grow-the-counted-trials-dataset.md) | current | 2026-11-02 | [data](TAGS.md#data), [method](TAGS.md#method), [open-source](TAGS.md#open-source) |
+| RES-0031 | [Do published stock signals that pass the luck check keep working](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md) | current | 2026-11-02 | [data](TAGS.md#data), [method](TAGS.md#method), [open-source](TAGS.md#open-source) |
 
 ## guide
 
@@ -229,7 +240,7 @@ and the tag list is in [TAGS.md](TAGS.md).
 | REF-0027 | [AI connector directory submissions for Claude, ChatGPT and Gemini](reference/0027-ai-connector-directory-submissions-for-claude-chatgpt-and-gemini.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
 | REF-0028 | [Database egress, what used it and what we cut](reference/0028-database-egress-what-used-it-and-what-we-cut.md) | current | 2026-10-26 | [process](TAGS.md#process) |
 | REF-0029 | [Going live with real trading](reference/0029-going-live-with-real-trading.md) | current | 2026-10-26 | [infra](TAGS.md#infra), [process](TAGS.md#process) |
-| REF-0030 | [Parity Verify methodology](reference/0030-parity-verify-methodology.md) | current | 2026-10-27 | [method](TAGS.md#method) |
+| REF-0030 | [Parity Verify methodology](reference/0030-parity-verify-methodology.md) | current | 2026-11-04 | [method](TAGS.md#method) |
 
 ## competitor
 
@@ -284,6 +295,8 @@ and the tag list is in [TAGS.md](TAGS.md).
 | LOG-0019 | [Work log for 24 and 25 October](log/2026-10-25-work-log-for-24-and-25-october.md) | final | 2026-10-25 | [infra](TAGS.md#infra), [process](TAGS.md#process), [ui](TAGS.md#ui) |
 | LOG-0020 | [Trade profile and leaderboard docs and privacy policy](log/2026-10-27-trade-profile-and-leaderboard-docs-and-privacy-policy.md) | final | 2026-10-27 | [docs](TAGS.md#docs), [process](TAGS.md#process) |
 | LOG-0021 | [Fed under Warsh post and the live call for the 28 October decision](log/2026-10-28-fed-under-warsh-post-and-live-call.md) | final | 2026-10-28 | [process](TAGS.md#process) |
+| LOG-0022 | [Read-only broker connections built](log/2026-11-03-read-only-broker-connections-built.md) | final | 2026-11-03 | [infra](TAGS.md#infra), [method](TAGS.md#method) |
+| LOG-0023 | [Verify QA sweep on production](log/2026-11-04-verify-qa-sweep-on-production.md) | final | 2026-11-04 | [process](TAGS.md#process), [ui](TAGS.md#ui) |
 
 ## algorithm
 
@@ -431,3 +444,4 @@ and the tag list is in [TAGS.md](TAGS.md).
 | DAT-0045 | [Bank of Japan what's new](datasets/0045-bank-of-japan-news.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [news](TAGS.md#news) |
 | DAT-0046 | [SEC press releases](datasets/0046-sec-press.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [news](TAGS.md#news) |
 | DAT-0047 | [CFTC press releases](datasets/0047-cftc-press.md) | in-use | 2026-10-21 | [data](TAGS.md#data), [news](TAGS.md#news) |
+| DAT-0048 | [Open Source Asset Pricing](datasets/0048-open-source-asset-pricing.md) | candidate | 2026-11-02 | [data](TAGS.md#data), [method](TAGS.md#method) |

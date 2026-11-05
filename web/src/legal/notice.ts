@@ -25,9 +25,33 @@ function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, 
   return node;
 }
 
+// While the notice shows, the page keeps a strip at its bottom free of it, so a control that
+// takes focus (or the last thing on the page) is scrolled above the notice, never under it
+// (WCAG 2.4.11, focus not obscured).
+let spacer: HTMLElement | null = null;
+let sizes: ResizeObserver | null = null;
+
+function reserveSpace() {
+  if (!banner) return;
+  const h = Math.ceil(banner.getBoundingClientRect().height) + 32;
+  document.documentElement.style.scrollPaddingBottom = `${h}px`;
+  if (!spacer) {
+    spacer = document.createElement("div");
+    spacer.className = "cn-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(spacer, banner);
+  }
+  spacer.style.height = `${h}px`;
+}
+
 function closeBanner() {
   banner?.remove();
   banner = null;
+  sizes?.disconnect();
+  sizes = null;
+  spacer?.remove();
+  spacer = null;
+  document.documentElement.style.removeProperty("scroll-padding-bottom");
 }
 
 function showBanner() {
@@ -52,6 +76,8 @@ function showBanner() {
     h("p", { class: "cn-text" }, text, h("a", { href: POLICY }, "Cookie policy")),
     h("div", { class: "cn-actions" }, prefs, essential, allow));
   document.body.appendChild(banner);
+  reserveSpace();
+  if (typeof ResizeObserver !== "undefined") { sizes = new ResizeObserver(reserveSpace); sizes.observe(banner); }
 }
 
 function category(id: string, name: string, help: string, checked: boolean, disabled: boolean): HTMLLIElement {

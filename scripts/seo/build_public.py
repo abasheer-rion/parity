@@ -836,7 +836,7 @@ def build_private_markets(pm: dict, notes: list[dict], terms: list[dict]) -> dic
 
 # ---------------------------------------------------------------- output
 
-STATIC_PUBLIC = ["/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/verify/", "/methodology/"]
+STATIC_PUBLIC = ["/", "/connect/", "/connect/claude/", "/connect/chatgpt/", "/connect/gemini/", "/legal/", "/legal/privacy/", "/legal/terms/", "/legal/cookies/", "/legal/accessibility/", "/legal/risk/", "/legal/regulatory/", "/download/", "/verify/", "/methodology/", "/business/prop-firms/", "/business/prop-firms/sample/", "/business/copy-trading/", "/business/bot-marketplaces/", "/business/screen/"]
 
 
 def sitemap(urls: list[tuple[str, str]]) -> str:

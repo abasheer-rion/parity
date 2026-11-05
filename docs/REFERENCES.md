@@ -3,16 +3,16 @@
 
 Every outside source this project relies on: papers, books, datasets, code, web pages, forum posts, regulators and news. Each entry gives the full citation, the date we first recorded it, whether its claims have been checked, and every page in this repo that cites it.
 
-1820 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
+1873 sources. 204 have their details filled from Crossref or arXiv; the rest use what the citing page says. This page is generated from `docs/_system/references.json` by `scripts/docs.py index`. To add a source, put its link in a doc or catalog entry, run `python3 scripts/references.py`, then `python3 scripts/docs.py index`. To cite one in prose, write `[@key]` with the key shown above its entry. How this works is in [GDE-0003](guides/0003-writing-docs.md#citing-sources).
 
 | Type | Sources |
 | --- | --- |
 | [Papers](#papers) | 348 |
-| [Preprints and working papers](#preprints-and-working-papers) | 47 |
+| [Preprints and working papers](#preprints-and-working-papers) | 51 |
 | [Books](#books) | 21 |
-| [Datasets](#datasets) | 66 |
-| [Software](#software) | 105 |
-| [Web pages](#web-pages) | 1051 |
+| [Datasets](#datasets) | 69 |
+| [Software](#software) | 116 |
+| [Web pages](#web-pages) | 1086 |
 | [Forum posts](#forum-posts) | 81 |
 | [Regulators](#regulators) | 88 |
 | [News](#news) | 13 |
@@ -225,13 +225,13 @@ Cited in: [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-co
 
 Bailey, David H.; López de Prado, Marcos (2014). The Deflated Sharpe Ratio: Correcting for Selection Bias, Backtest Overfitting, and Non-Normality. *The Journal of Portfolio Management 40(5), 94-107*. doi:10.3905/jpm.2014.40.5.094 <https://doi.org/10.3905/jpm.2014.40.5.094>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md).
+Cited in: [REF-0016](reference/0016-parity-verify-mvp-spec.md), [REF-0030](reference/0030-parity-verify-methodology.md), [RES-0001](research/0001-reading-list.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0028](research/0028-pairs-trading-and-statistical-arbitrage.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### bailey2016
 
 Bailey, David; Borwein, Jonathan; López de Prado, Marcos; Zhu, Qiji Jim (2016). The probability of backtest overfitting. *The Journal of Computational Finance*. doi:10.21314/jcf.2016.322 <https://doi.org/10.21314/jcf.2016.322>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### bajgrowicz2012
 
@@ -581,7 +581,7 @@ Chen, Andrew Y.; Zimmermann, Tom (2022). Open Source Cross-Sectional Asset Prici
 
 Note: Checked for RES-0011 on 2026-10-23 against Crossref.
 
-Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### chernenko2022
 
@@ -1047,7 +1047,7 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 
 Harvey, Campbell R.; Liu, Yan; Zhu, Heqing (2015). ... and the Cross-Section of Expected Returns. *Review of Financial Studies 29(1), 5-68*. doi:10.1093/rfs/hhv059 <https://doi.org/10.1093/rfs/hhv059>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md).
+Cited in: [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### harvey2015a
 
@@ -1253,7 +1253,7 @@ Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how
 
 Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (2023). Is There a Replication Crisis in Finance? *The Journal of Finance 78(5), 2465-2518*. doi:10.1111/jofi.13249 <https://doi.org/10.1111/jofi.13249>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [RES-0001](research/0001-reading-list.md).
+Cited in: [RES-0001](research/0001-reading-list.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### johansen1991
 
@@ -1667,7 +1667,7 @@ Cited in: [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn
 
 McLean, R. David; Pontiff, Jeffrey (2016). Does Academic Research Destroy Stock Return Predictability? *The Journal of Finance 71(1), 5-32*. doi:10.1111/jofi.12365 <https://doi.org/10.1111/jofi.12365>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
 
-Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+Cited in: [catalog/algorithms/betting-against-beta.json](../catalog/algorithms/betting-against-beta.json), [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/algorithms/equity-cross-sectional-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/pairs-trading-distance.json](../catalog/algorithms/pairs-trading-distance.json), [catalog/algorithms/stat-arb-pca-residuals.json](../catalog/algorithms/stat-arb-pca-residuals.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [catalog/algorithms/turn-of-the-month.json](../catalog/algorithms/turn-of-the-month.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0037](algorithms/0037-betting-against-beta.md), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0042](algorithms/0042-equity-cross-sectional-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0045](algorithms/0045-pairs-trading-distance.md), [ALG-0050](algorithms/0050-stat-arb-pca-residuals.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md), [ALG-0052](algorithms/0052-turn-of-the-month.md), [ALG-0053](algorithms/0053-value-hml.md), [REF-0004](reference/0004-glossary.md), [RES-0001](research/0001-reading-list.md), [RES-0006](research/0006-courses-and-trader-beliefs.md), [RES-0009](research/0009-trading-myths-and-what-the-evidence-says.md), [RES-0011](research/0011-where-market-edges-come-from-and-which-survive.md), [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
 
 ### meese1983
 
@@ -2683,6 +2683,14 @@ Bailey, David H.; López de Prado, Marcos (2019). The Deflated Sharpe Ratio: Cor
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### barton2026
+
+Barton, T.J.; Constantakis, Chris; Hauseman, Patti; Mous, Annie; Hoffman, Alaska; Bergeron, Brian; Goodreau, Hunter (2026). What LLM Trading Agents Actually Do in Production: A Six-Month, Population-Scale Record from Two Fleets. *arXiv preprint*. arXiv:2609.05663 <https://arxiv.org/abs/2609.05663>. <https://arxiv.org/abs/2609.05663>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### baz2015
 
 Baz, Jamil; Granger, Nicolas; Harvey, Campbell R.; Le Roux, Nicolas; Rattray, Sandy (2015). Dissecting Investment Strategies in the Cross Section and Time Series. *SSRN Working Paper 2695101*. doi:10.2139/ssrn.2695101 <https://doi.org/10.2139/ssrn.2695101>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -2841,6 +2849,14 @@ Note: Checked for RES-0012 on 2026-10-23 against Crossref.
 
 Cited in: [RES-0012](research/0012-private-markets-how-they-are-measured-and-how-individuals-get-in.md).
 
+### harvey2019
+
+Harvey, Campbell R.; Liu, Yan (2019). A Census of the Factor Zoo. *SSRN working paper*. <https://papers.ssrn.com/abstract=3341728>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md), [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
+
 ### he2022
 
 He, Songrun; Manela, Asaf; Ross, Omri; von Wachter, Victor (2022). Fundamentals of Perpetual Futures. *arXiv preprint arXiv:2212.06888*. arXiv:2212.06888 <https://arxiv.org/abs/2212.06888>. <https://arxiv.org/abs/2212.06888>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -2931,6 +2947,14 @@ Novy-Marx, Robert; Velikov, Mihail (2014). A Taxonomy of Anomalies and their Tra
 
 Cited in: [RES-0010](research/0010-paper-library-fx-and-market-microstructure.md).
 
+### ulesov2026
+
+Ulesov, Makar; Smirnov, Vladislav; Ibrahim, Omar; Bobovnikov, Arsenii (2026). Can LLMs Catch a Rigged Backtest? A Clean-Control Calibration Benchmark. *arXiv preprint*. arXiv:2609.28090 <https://arxiv.org/abs/2609.28090>. <https://arxiv.org/abs/2609.28090>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-3465fab3
 
 MacKinnon, James G. (2010). Critical Values for Cointegration Tests. *Queen's Economics Department Working Paper 1227*. <https://www.econ.queensu.ca/sites/econ.queensu.ca/files/wpaper/qed_wp_1227.pdf>. Accessed 2026-10-26. Verification: not checked.
@@ -2950,6 +2974,14 @@ No title recorded. (n.d.). <https://conference.nber.org/confer/2013/MEs13/Lucca_
 Note: Cited in this repo as: Lucca and Moench (2013 working paper version), pre-FOMC 2pm to 2pm window.
 
 Cited in: [catalog/algorithms/pre-fomc-drift.json](../catalog/algorithms/pre-fomc-drift.json), [ALG-0019](algorithms/0019-pre-fomc-drift.md).
+
+### wiecki2016
+
+Wiecki, Thomas; Campbell, Andrew; Lent, Justin; Stauth, Jessica (2016). All that Glitters Is Not Gold: Comparing Backtest and Out-of-Sample Performance on a Large Cohort of Trading Algorithms. *SSRN working paper*. <https://papers.ssrn.com/abstract=2745220>. Accessed 2026-10-29. Verification: blocked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
 
 ### zarattini2024
 
@@ -3185,6 +3217,14 @@ Our calculation from Kenneth French data library, US market (Mkt-RF + RF). (n.d.
 
 Cited in: [catalog/algorithms/dual-momentum.json](../catalog/algorithms/dual-momentum.json), [catalog/algorithms/sp500-buy-and-hold.json](../catalog/algorithms/sp500-buy-and-hold.json), [catalog/algorithms/value-hml.json](../catalog/algorithms/value-hml.json), [ALG-0040](algorithms/0040-dual-momentum.md), [ALG-0049](algorithms/0049-sp500-buy-and-hold.md), [ALG-0053](algorithms/0053-value-hml.md).
 
+### url-28e0e490
+
+Chen, Andrew Y.; Zimmermann, Tom (n.d.). Open Source Asset Pricing. *openassetpricing.com*. <https://www.openassetpricing.com/>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-30667bf2
 
 Finnhub API spec. (n.d.). *Finnhub Stock API*. <https://finnhub.io/static/swagger.json>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3401,6 +3441,14 @@ Our calculation from AQR Time Series Momentum factors dataset (TSMOM^CM). (n.d.)
 
 Cited in: [catalog/algorithms/commodity-time-series-momentum.json](../catalog/algorithms/commodity-time-series-momentum.json), [catalog/algorithms/managed-futures-trend-following.json](../catalog/algorithms/managed-futures-trend-following.json), [catalog/algorithms/trend-plus-carry-combined.json](../catalog/algorithms/trend-plus-carry-combined.json), [ALG-0039](algorithms/0039-commodity-time-series-momentum.md), [ALG-0043](algorithms/0043-managed-futures-trend-following.md), [ALG-0051](algorithms/0051-trend-plus-carry-combined.md).
 
+### url-c2280db1
+
+Jensen, Theis Ingerslev; Kelly, Bryan; Pedersen, Lasse Heje (n.d.). Global Factor Data. *jkpfactors.com*. <https://jkpfactors.com/>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-c5b934bb
 
 Our calculation from Kenneth French data library, market excess return. (n.d.). *mba.tuck.dartmouth.edu*. <https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3527,6 +3575,14 @@ Interactive Brokers paper trading. (n.d.). *Interactive Brokers*. <https://www.i
 
 Cited in: [catalog/datasets/interactive-brokers-paper.json](../catalog/datasets/interactive-brokers-paper.json), [DAT-0019](datasets/0019-interactive-brokers-paper.md).
 
+### url-fbe25501
+
+Chen, Andrew Y.; Zimmermann, Tom (2026). Open Source Cross-Sectional Asset Pricing, data release 2026.10. *Hugging Face*. <https://huggingface.co/datasets/OpenSourceAP/CrossSection>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for RES-0031. Licence CC BY 4.0 per the dataset card.
+
+Cited in: [RES-0031](research/0031-do-published-stock-signals-that-pass-the-luck-check-keep-working.md).
+
 ### url-ffa2fc37
 
 BIS Data Portal (SDMX API). (n.d.). *Bank for International Settlements*. <https://data.bis.org>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3543,11 +3599,23 @@ Note: Page loads (HTTP 200); not read in detail.
 
 Cited in: [catalog/algorithms/opening-range-breakout-stocks-in-play.json](../catalog/algorithms/opening-range-breakout-stocks-in-play.json), [ALG-0103](algorithms/0103-opening-range-breakout-stocks-in-play.md).
 
+### url-00c665b4
+
+pineforge-4pass/pineforge-corpus. (2026). *github.com*. <https://github.com/pineforge-4pass/pineforge-corpus>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
+
 ### url-018a4057
 
 coinbase/coinbase-advanced-py. (n.d.). *GitHub*. <https://github.com/coinbase/coinbase-advanced-py>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0015](competitors/0015-coinbase-advanced.md).
+
+### url-02f1dd10
+
+pandas.DataFrame.ewm. (2026). *pandas.pydata.org*. <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ewm.html>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-0348b06c
 
@@ -3561,6 +3629,12 @@ QuantConnect/Tutorials/tree/master/04%20Strategy%20Library/20%20Forex%20Carry%20
 
 Cited in: [catalog/algorithms/fx-carry-g10.json](../catalog/algorithms/fx-carry-g10.json), [ALG-0001](algorithms/0001-fx-carry-g10.md).
 
+### url-0b180ad0
+
+alpacahq/alpaca-py. (2026). *github.com*. <https://github.com/alpacahq/alpaca-py>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
+
 ### url-0ec6f220
 
 polakowo/vectorbt. (n.d.). *GitHub*. <https://github.com/polakowo/vectorbt>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -3572,6 +3646,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 jesse-ai/jesse. (n.d.). *GitHub*. <https://github.com/jesse-ai/jesse>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/algorithms/technical-indicator-trading-bots.json](../catalog/algorithms/technical-indicator-trading-bots.json), [ALG-0036](algorithms/0036-technical-indicator-trading-bots.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-1287faa5
+
+Pine Script user manual: Strategies. (2026). *tradingview.com*. <https://www.tradingview.com/pine-script-docs/concepts/strategies/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-12fa1ece
 
@@ -3620,6 +3700,12 @@ Cited in: [catalog/algorithms/risk-parity.json](../catalog/algorithms/risk-parit
 QuantConnect/Lean. (n.d.). *GitHub*. <https://github.com/QuantConnect/Lean>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [CMP-0023](competitors/0023-quantconnect.md), [RES-0002](research/0002-open-source-and-public-results.md).
+
+### url-2eab3b36
+
+agusalex/tax\_calculator. (2026). *github.com*. <https://github.com/agusalex/tax_calculator>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-2ef0d137
 
@@ -3733,6 +3819,12 @@ rkohli3/TSMOM. (n.d.). *GitHub*. <https://github.com/rkohli3/TSMOM>. Accessed 20
 
 Cited in: [catalog/algorithms/fx-time-series-momentum.json](../catalog/algorithms/fx-time-series-momentum.json), [ALG-0015](algorithms/0015-fx-time-series-momentum.md).
 
+### url-546655e8
+
+Backtesting.py documentation. (2026). *kernc.github.io*. <https://kernc.github.io/backtesting.py/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
+
 ### url-56a1d432
 
 GitHub Models. (n.d.). *docs.github.com*. <https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models>. Accessed 2026-10-25. Verification: not checked.
@@ -3804,6 +3896,12 @@ Cited in: [catalog/algorithms/equity-cross-sectional-momentum.json](../catalog/a
 api-evangelist/imf. (n.d.). *GitHub*. <https://github.com/api-evangelist/imf>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-77266c72
+
+codecat92/apex-grid-ea. (2026). *github.com*. <https://github.com/codecat92/apex-grid-ea>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-7a0fda7c
 
@@ -3943,6 +4041,12 @@ PacktPublishing/Python-for-Algorithmic-Trading-Cookbook/issues/5. (n.d.). *Nasda
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a25a1dce
+
+binance/binance-spot-api-docs: rest api. (2026). *github.com*. <https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-a3d4a865
 
 QuickFIX/J. (n.d.). *github.com*. <https://github.com/quickfix-j/quickfixj>. Accessed 2026-10-24. Verification: not checked.
@@ -4023,6 +4127,14 @@ Chronicle Queue. (n.d.). *github.com*. <https://github.com/OpenHFT/Chronicle-Que
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-caa68e18
+
+pbo: Probability of Backtest Overfitting (R package). (n.d.). *CRAN*. <https://cran.r-project.org/package=pbo>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-cad44701
 
 Spotware GitHub. (n.d.). *github.com*. <https://github.com/spotware>. Accessed 2026-10-24. Verification: not checked.
@@ -4040,6 +4152,12 @@ Cited in: [catalog/algorithms/technical-indicator-trading-bots.json](../catalog/
 DeviaVir/zenbot/tree/unstable/extensions/strategies. (n.d.). *GitHub*. <https://github.com/DeviaVir/zenbot/tree/unstable/extensions/strategies>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-d7d63252
+
+Delta-Compute/DeltaCFOAgent. (2026). *github.com*. <https://github.com/Delta-Compute/DeltaCFOAgent>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
 
 ### url-d8847df0
 
@@ -4131,6 +4249,12 @@ Hyperliquid node. (n.d.). *github.com*. <https://github.com/hyperliquid-dex/node
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-ec3186c4
+
+PopovMP/mt-report-parser. (2026). *github.com*. <https://github.com/PopovMP/mt-report-parser>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0084](decisions/0084-verify-imports-are-tested-on-real-exports.md).
+
 ### url-ee22d42b
 
 hyperliquid-dex on GitHub. (n.d.). *github.com*. <https://github.com/hyperliquid-dex>. Accessed 2026-10-24. Verification: not checked.
@@ -4181,7 +4305,7 @@ Alpaca Terms and Conditions. (2026). *alpaca.markets*. <https://files.alpaca.mar
 
 Note: Read for DEC-0063 (public low-latency feed terms).
 
-Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md).
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
 
 ### base-run-a-node
 
@@ -4237,7 +4361,7 @@ PublicNode terms of service. (2026). *publicnode.com*. <https://www.publicnode.c
 
 Note: Read for DEC-0063 (public low-latency feed terms).
 
-Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [DEC-0063](decisions/0063-the-public-sees-live-prices-from-our-own-on-chain-feed.md), [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### pyth-dev-forum-pyth-network-t-863
 
@@ -4515,6 +4639,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
 
+### url-04e24492
+
+Interactive Brokers Flex Web Service: get statement. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/api-reference/get-statement>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-04e8250f
 
 custom-mcp-server.md. (n.d.). *developers.openai.com*. <https://developers.openai.com/api/docs/guides/custom-mcp-server.md>. Accessed 2026-10-27. Verification: not checked.
@@ -4677,13 +4807,19 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 
 Kraken global terms of service. (2026). *Kraken*. <https://www.kraken.com/legal/global-terms>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md), [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
 ### url-0b1f9975
 
 No title recorded. (n.d.). *Alpha Vantage Inc*. <https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=full&apikey=demo>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/alpha-vantage.json](../catalog/datasets/alpha-vantage.json), [DAT-0002](datasets/0002-alpha-vantage.md).
+
+### url-0b3147c5
+
+Alpaca support: usage limit api calls. (2026). *alpaca.markets*. <https://alpaca.markets/support/usage-limit-api-calls>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-0bf698b7
 
@@ -5573,6 +5709,12 @@ App Store. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/id370922777>
 
 Cited in: [CMP-0011](competitors/0011-oanda.md).
 
+### url-301e4f80
+
+Coinbase Developer Platform documentation: get api key permissions. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/data-api/get-api-key-permissions.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-3090dcf7
 
 Hiive to Clarity. (n.d.). *clarity.com*. <https://www.clarity.com/>. Accessed 2026-10-25. Verification: not checked.
@@ -5728,6 +5870,12 @@ Cited in: [CMP-0007](competitors/0007-interactive-brokers.md).
 No title recorded. (n.d.). *augment.market*. <https://augment.market/blog>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
+
+### url-360b6e3d
+
+Binance developer documentation: api key permission. (2026). *developers.binance.com*. <https://developers.binance.com/docs/wallet/account/api-key-permission>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-3644b717
 
@@ -6077,6 +6225,12 @@ Colorado Attorney General (n.d.). Colorado Privacy Act, Colorado Attorney Genera
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-43011619
+
+Kraken API documentation: get trades history. (2026). *docs.kraken.com*. <https://docs.kraken.com/api-reference/account-data/get-trades-history.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-431a0bea
 
 fee schedule. (n.d.). *kraken.com*. <https://www.kraken.com/features/fee-schedule>. Accessed 2026-10-24. Verification: not checked.
@@ -6166,6 +6320,12 @@ Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 1998-2002 Argentine great depression. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1998%E2%80%932002_Argentine_great_depression>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/argentina-default-2001.json](../catalog/events/argentina-default-2001.json).
+
+### url-4759dcf9
+
+Coinbase Developer Platform documentation: api key authentication. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/coinbase-app/authentication-authorization/api-key-authentication.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-4763ad6c
 
@@ -6399,6 +6559,12 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/aqr-datasets.json](../catalog/datasets/aqr-datasets.json), [DAT-0003](datasets/0003-aqr-datasets.md).
 
+### url-52115a81
+
+Alpaca customer agreement. (2026). *Alpaca*. <https://files.alpaca.markets/disclosures/library/AcctAppMarginAndCustAgmt.pdf>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-521aa37d
 
 2016 United States presidential election. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2016_United_States_presidential_election>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -6583,6 +6749,14 @@ FIX standards. (n.d.). *fixtrading.org*. <https://www.fixtrading.org/standards/>
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-583d7f70
+
+Quantpedia, in-sample against out-of-sample analysis of trading strategies. (n.d.). *quantpedia.com*. <https://quantpedia.com/tag/own-research/page/4/>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-587d126c
 
 eToro Smart Portfolios page. (n.d.). *etoro.com*. <https://www.etoro.com/smartportfolios/>. Accessed 2026-10-24. Verification: not checked.
@@ -6610,6 +6784,14 @@ IBKR colour grouping. (n.d.). *ibkrguides.com*. <https://ibkrguides.com/traderwo
 Note: Linked in this repo as: IBKR colour grouping.
 
 Cited in: [RES-0021](research/0021-how-trading-platforms-lay-out-a-workspace.md).
+
+### url-591ac0de
+
+Open Source Asset Pricing release notes 2026.10. (n.d.). *Hugging Face*. <https://huggingface.co/datasets/OpenSourceAP/CrossSection/blob/Data-Release-2026.10/Release%20Notes%202026.10.md>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
 
 ### url-591c197c
 
@@ -6961,6 +7143,12 @@ No title recorded. (n.d.). *The GDELT Project*. <https://api.gdeltproject.org/ap
 
 Cited in: [catalog/datasets/gdelt.json](../catalog/datasets/gdelt.json), [DAT-0016](datasets/0016-gdelt.md).
 
+### url-663687ee
+
+Kraken API documentation: ratelimits. (2026). *docs.kraken.com*. <https://docs.kraken.com/exchange/guides/rest/ratelimits.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-668d5b13
 
 MCP authorization, latest. (n.d.). *modelcontextprotocol.io*. <https://modelcontextprotocol.io/specification/latest/basic/authorization>. Accessed 2026-10-25. Verification: not checked.
@@ -7058,6 +7246,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 No title recorded. (n.d.). *Bank for International Settlements*. <https://stats.bis.org/api/v2/data/dataflow/BIS/WS_DER_OTC_TOV/1.0/A.U.*.B.5J.A.5J.A.*.TO1.A.A.3.C?format=csv>. Accessed 2026-10-21. Verification: not checked.
 
 Cited in: [catalog/datasets/bis-triennial-fx.json](../catalog/datasets/bis-triennial-fx.json), [DAT-0038](datasets/0038-bis-triennial-fx.md).
+
+### url-69f39364
+
+Kraken API documentation: authentication. (2026). *docs.kraken.com*. <https://docs.kraken.com/exchange/guides/rest/authentication.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-6a3cde2c
 
@@ -7222,6 +7416,12 @@ Cited in: [catalog/events/balakot-airstrike-2019.json](../catalog/events/balakot
 MetaTrader 4 home. (n.d.). *metatrader4.com*. <https://www.metatrader4.com/en>. Accessed 2026-10-24. Verification: not checked.
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
+
+### url-6fae220f
+
+OKX API agreement. (2026). *OKX*. <https://www.okx.com/en-us/help/okx-api-agreement>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
 
 ### url-7000c4fb
 
@@ -7474,6 +7674,12 @@ Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-l
 Legal Information Institute (n.d.). Lowe v. SEC, 472 U.S. 181 (1985). *law.cornell.edu*. <https://www.law.cornell.edu/supremecourt/text/472/181>. Accessed 2026-10-25. Verification: unchecked.
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
+
+### url-79a6e62d
+
+Interactive Brokers Flex Web Service: error codes. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/flex-web-service/error-codes>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-7a23b016
 
@@ -7753,6 +7959,14 @@ No title recorded. (n.d.). *US Bureau of Labor Statistics*. <https://api.bls.gov
 
 Cited in: [catalog/datasets/bls.json](../catalog/datasets/bls.json), [DAT-0007](datasets/0007-bls.md).
 
+### url-82637c93
+
+Prop Trading Statistics 2026: Pass Rates and Market Data. (n.d.). *track360.io*. <https://track360.io/blog/prop-trading-industry-statistics-2026>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md).
+
 ### url-828393a9
 
 FIX connectivity. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/exchange/fix-api/connectivity>. Accessed 2026-10-24. Verification: not checked.
@@ -7850,6 +8064,12 @@ Cited in: [CMP-0010](competitors/0010-webull.md).
 Darwinex for investors. (n.d.). *darwinex.com*. <https://www.darwinex.com/investors>. Accessed 2026-10-23. Verification: not checked.
 
 Cited in: [RES-0020](research/0020-verifying-trading-claims-market-size-and-competitors.md).
+
+### url-8584fd9c
+
+Bybit V5 API documentation: execution. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/order/execution>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-85993aa8
 
@@ -7973,6 +8193,12 @@ Virginia General Assembly (n.d.). Va. Code 59.1-575 and following. *law.lis.virg
 
 Cited in: [RES-0026](research/0026-laws-and-rules-that-apply-to-parity-now-and-later.md).
 
+### url-89ecfc73
+
+Binance Vision dataset terms of use. (2026). *Binance*. <https://data.binance.vision/Binance_Vision-Terms_of_Use.pdf>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-89fbee0d
 
 Fundrise Innovation Fund (VCX). (n.d.). *fundrise.com*. <https://fundrise.com/innovation>. Accessed 2026-10-25. Verification: not checked.
@@ -8029,6 +8255,14 @@ Contract specifications. (n.d.). *hyperliquid.gitbook.io*. <https://hyperliquid.
 
 Cited in: [CMP-0013](competitors/0013-hyperliquid.md).
 
+### url-8b97759b
+
+OpenSourceAP/CrossSection code. (n.d.). *GitHub*. <https://github.com/OpenSourceAP/CrossSection>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
+
 ### url-8bb819c6
 
 clustering. (n.d.). *bloomberg.github.io*. <https://bloomberg.github.io/blazingmq/docs/architecture/clustering/>. Accessed 2026-10-24. Verification: not checked.
@@ -8068,6 +8302,12 @@ Cited in: [CMP-0008](competitors/0008-thinkorswim.md), [RES-0021](research/0021-
 Trading Economics API: API documentation. (n.d.). *Trading Economics*. <https://docs.tradingeconomics.com/>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
 
 Cited in: [catalog/datasets/trading-economics.json](../catalog/datasets/trading-economics.json), [DAT-0030](datasets/0030-trading-economics.md).
+
+### url-8e10fd9b
+
+Binance.US API documentation:. (2026). *docs.binance.us*. <https://docs.binance.us/>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-8e1b8217
 
@@ -8489,6 +8729,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-a01473b5
+
+Open Source Asset Pricing, data page. (n.d.). *openassetpricing.com*. <https://www.openassetpricing.com/data/>. Accessed 2026-11-02. Verification: unchecked (checked 2026-11-02).
+
+Note: Added for DAT-0048.
+
+Cited in: [catalog/datasets/open-source-asset-pricing.json](../catalog/datasets/open-source-asset-pricing.json).
+
 ### url-a16db72b
 
 1994 bond market crisis. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/1994_bond_market_crisis>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
@@ -8731,6 +8979,12 @@ Note: Linked in this repo as: forum announcement.
 
 Cited in: [RES-0002](research/0002-open-source-and-public-results.md).
 
+### url-a90d5b50
+
+Interactive Brokers Flex Web Service: send request. (2026). *interactivebrokers.com*. <https://www.interactivebrokers.com/docs/web-api/api-reference/send-request>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-a940b923
 
 No title recorded. (n.d.). *fintech.global*. <https://fintech.global/2025/12/03/1-in-5-investors-refuse-to-trust-ai-with-money/>. Accessed 2026-10-25. Verification: not checked.
@@ -8805,6 +9059,12 @@ No title recorded. (n.d.). *Bank of England*. <https://www.bankofengland.co.uk/l
 
 Cited in: [catalog/datasets/bank-of-england-news.json](../catalog/datasets/bank-of-england-news.json), [DAT-0044](datasets/0044-bank-of-england-news.md), [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
 
+### url-aae2961c
+
+IEX historical data terms of use. (2026). *IEX*. <https://www.iex.io/legal/hist-data-terms>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-ab44c543
 
 terms of trade as trading signals. (n.d.). *macrosynergy.com*. <https://macrosynergy.com/research/terms-of-trade-as-trading-signals/>. Accessed 2026-10-21. Verification: blocked (checked 2026-10-21).
@@ -8836,6 +9096,12 @@ Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
 Nasdaq Data Link (formerly Quandl): API documentation. (n.d.). *Nasdaq*. <https://docs.data.nasdaq.com/>. Accessed 2026-10-21. Verification: not-found (checked 2026-10-21).
 
 Cited in: [catalog/datasets/nasdaq-data-link.json](../catalog/datasets/nasdaq-data-link.json), [DAT-0024](datasets/0024-nasdaq-data-link.md).
+
+### url-acd0e07b
+
+Bybit V5 API documentation: rate limit. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/rate-limit>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-ad566343
 
@@ -9113,6 +9379,12 @@ Realtime limits. (n.d.). *supabase.com*. <https://supabase.com/docs/guides/realt
 
 Cited in: [REF-0019](reference/0019-latency-budget-and-target-architecture.md).
 
+### url-b6a9ee4e
+
+Alpaca API documentation: account activities. (2026). *docs.alpaca.markets*. <https://docs.alpaca.markets/us/docs/account-activities.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-b6cdb784
 
 Zennbot - Automated Trading App. (n.d.). *zennbot.com*. <https://zennbot.com/>. Accessed 2026-10-21. Verification: redirect-ok (checked 2026-10-21).
@@ -9205,7 +9477,7 @@ Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-
 
 fee schedule. (n.d.). *binance.com*. <https://www.binance.com/en/fee/schedule>. Accessed 2026-10-24. Verification: not checked.
 
-Cited in: [CMP-0014](competitors/0014-binance.md).
+Cited in: [CMP-0014](competitors/0014-binance.md), [DEC-0083](decisions/0083-verify-runs-a-strategy-from-its-code-on-our-prices.md).
 
 ### url-bae37343
 
@@ -9343,6 +9615,12 @@ App Store customer review feed, Collective2 app. (n.d.). *itunes.apple.com*. <ht
 
 Cited in: [CMP-0022](competitors/0022-collective2.md).
 
+### url-c2019c86
+
+X robots.txt. (2026). *x.com*. <https://x.com/robots.txt>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0088](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md).
+
 ### url-c23b7529
 
 About LMAX Group. (n.d.). *lmax.com*. <https://www.lmax.com/about/>. Accessed 2026-10-24. Verification: not checked.
@@ -9430,6 +9708,12 @@ Cited in: [catalog/datasets/fred.json](../catalog/datasets/fred.json), [DAT-0015
 ECB copyright. (n.d.). *ecb.europa.eu*. <https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html>. Accessed 2026-10-22. Verification: not checked.
 
 Cited in: [REF-0015](reference/0015-getting-close-to-bloomberg-data-sources-costs-and-licences.md).
+
+### url-c706258a
+
+Bybit terms of service. (2026). *Bybit*. <https://www.bybit.com/en/legal/terms-of-service/terms-of-service>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
 
 ### url-c7460e97
 
@@ -9566,6 +9850,12 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Gemini CLI MCP servers. (n.d.). *geminicli.com*. <https://geminicli.com/docs/tools/mcp-server/>. Accessed 2026-10-25. Verification: not checked.
 
 Cited in: [RES-0024](research/0024-ai-apps-connecting-to-parity-and-bringing-your-own-model.md).
+
+### url-cb22e73a
+
+Robots Exclusion Protocol (RFC 9309). (2022). *rfc-editor.org*. <https://www.rfc-editor.org/rfc/rfc9309>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0088](decisions/0088-verify-reads-a-seller-s-claims-from-their-page.md), [REF-0030](reference/0030-parity-verify-methodology.md).
 
 ### url-cb6d397b
 
@@ -9933,6 +10223,12 @@ Gold-i MatrixNET. (n.d.). *gold-i.com*. <http://www.gold-i.com/matrix-net>. Acce
 
 Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-built.md).
 
+### url-d9789392
+
+Tenderly terms of service. (2026). *Tenderly*. <https://tenderly.co/terms-of-service>. Accessed 2026-11-04. Verification: unchecked.
+
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md).
+
 ### url-d98cc7cf
 
 Trade Ideas. (n.d.). *trade-ideas.com*. <https://www.trade-ideas.com/pricing/>. Accessed 2026-10-25. Verification: not checked.
@@ -10229,6 +10525,14 @@ App Store listing. (n.d.). *apps.apple.com*. <https://apps.apple.com/us/app/meta
 
 Cited in: [CMP-0004](competitors/0004-metatrader-4-and-5.md).
 
+### url-e6249d93
+
+Quantpedia's Research in 2023. (n.d.). *quantpedia.com*. <https://quantpedia.com/quantpedias-research-in-2023/>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-e62b20e2
 
 OilPriceAPI as an EIA API Alternative - Real-Time Oil Prices | OilPriceAPI Docs. (n.d.). *docs.oilpriceapi.com*. <https://docs.oilpriceapi.com/compare/eia-alternative>. Accessed 2026-10-21. Verification: ok (checked 2026-10-21).
@@ -10357,7 +10661,7 @@ Cited in: [catalog/events/bear-stearns-rescue-2008.json](../catalog/events/bear-
 
 Coinbase market data terms. (2026). *Coinbase*. <https://www.coinbase.com/legal/market_data>. Accessed 2026-10-22. Verification: not checked.
 
-Cited in: [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
+Cited in: [DEC-0092](decisions/0092-verify-checks-fill-prices-against-market-data-sending-only-symbol-time-and-price.md), [REF-0014](reference/0014-markets-data-crypto-perps-and-etf-sources-and-their-terms.md).
 
 ### url-ebc97b6b
 
@@ -10384,6 +10688,18 @@ Cited in: [RES-0022](research/0022-how-trading-and-market-data-platforms-are-bui
 Iraqi invasion of Kuwait. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/Iraqi_invasion_of_Kuwait>. Accessed 2026-10-21. Verification: verified (checked 2026-10-21).
 
 Cited in: [catalog/events/iraq-invades-kuwait-1990.json](../catalog/events/iraq-invades-kuwait-1990.json).
+
+### url-ec8624cb
+
+Coinbase Developer Platform documentation: list fills. (2026). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-fills.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
+### url-ec9e6ffe
+
+Alpaca API documentation: using oauth2 and trading api. (2026). *docs.alpaca.markets*. <https://docs.alpaca.markets/docs/using-oauth2-and-trading-api>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-ecada088
 
@@ -10491,6 +10807,14 @@ Note: Linked in this repo as: None.
 
 Cited in: [catalog/datasets/newsapi.json](../catalog/datasets/newsapi.json), [DAT-0025](datasets/0025-newsapi.md), [RES-0005](research/0005-zen-apps-and-free-apis.md).
 
+### url-f09d16b3
+
+AI Trading Benchmark: LLM Leaderboard for Crypto Trading. (n.d.). *oakresearch.io*. <https://oakresearch.io/en/ai/trading-benchmark>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-f0c9a34c
 
 Market Replay. (n.d.). *help.ctrader.com*. <https://help.ctrader.com/ctrader/>. Accessed 2026-10-24. Verification: not checked.
@@ -10562,6 +10886,14 @@ Vercel Security Checkpoint. (n.d.). *quantvps.com*. <https://www.quantvps.com/bl
 Note: Linked in this repo as: None.
 
 Cited in: [RES-0005](research/0005-zen-apps-and-free-apis.md).
+
+### url-f3b04298
+
+ESMA communicates supervisory expectations on copy trading services. (n.d.). *PwC Legal*. <https://legal.pwc.de/en/news/articles/esma-communicates-supervisory-expectations-on-copy-trading-services>. Accessed 2026-10-29. Verification: unchecked (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md).
 
 ### url-f47072f8
 
@@ -10735,6 +11067,14 @@ RavenPack on NexusFi. (n.d.). *nexusfi.com*. <https://nexusfi.com/d/data-provide
 
 Cited in: [RES-0025](research/0025-market-research-retail-trading-and-investing-leaders-weaknesses-and-gaps.md).
 
+### url-fa6d5610
+
+TradeRank AI trading leaderboard, October 2026. (n.d.). *traderank.ai*. <https://www.traderank.ai/ai-trading-leaderboard>. Accessed 2026-10-29. Verification: ok (checked 2026-10-29).
+
+Note: Added for RES-0029/RES-0030.
+
+Cited in: [RES-0029](research/0029-ayan-s-and-abanish-s-plans-compared-and-where-parity-fits.md), [RES-0030](research/0030-outside-data-to-grow-the-counted-trials-dataset.md).
+
 ### url-fa9296bc
 
 create order API. (n.d.). *docs.cdp.coinbase.com*. <https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/create-order>. Accessed 2026-10-24. Verification: not checked.
@@ -10821,6 +11161,12 @@ IndexNow documentation. (n.d.). *IndexNow*. <https://www.indexnow.org/documentat
 
 Cited in: [DEC-0073](decisions/0073-search-and-content-run-by-themselves-with-caps-a-log-and-a-kill-switch.md).
 
+### url-fd48c123
+
+Bybit V5 API documentation: apikey info. (2026). *bybit-exchange.github.io*. <https://bybit-exchange.github.io/docs/v5/user/apikey-info>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
+
 ### url-fe036392
 
 No title recorded. (n.d.). *fred.stlouisfed.org*. <https://fred.stlouisfed.org/series/DAAA>. Accessed 2026-10-22. Verification: not checked.
@@ -10858,6 +11204,12 @@ Cited in: [DEC-0046](decisions/0046-payments-through-stripe-and-real-trading-onl
 2014 Gaza War. (n.d.). *Wikipedia*. <https://en.wikipedia.org/wiki/2014_Gaza_War>. Accessed 2026-10-26. Verification: verified (checked 2026-10-26).
 
 Cited in: [catalog/events/gaza-war-2014.json](../catalog/events/gaza-war-2014.json).
+
+### url-ff1e011c
+
+Kraken API documentation: get api key info. (2026). *docs.kraken.com*. <https://docs.kraken.com/api-reference/account-data/get-api-key-info.md>. Accessed 2026-11-03. Verification: unchecked.
+
+Cited in: [DEC-0091](decisions/0091-verify-reads-trades-from-brokers-with-read-only-keys-and-marks-the-record-broker-connected.md).
 
 ### url-ff5a1dac
 

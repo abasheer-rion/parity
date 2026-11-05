@@ -1,8 +1,14 @@
 // Shareable badges (REF-0016): what a published badge stores, what the opt-in dataset
 // row holds, the badge image, the embed snippet and the line for social posts. Pure
 // functions with no browser or React imports, so the Cloudflare function that serves
-// /badge/<id>.svg can use them too.
+// /badge/<id>.svg can use them too. Every text that names the trust level takes the badge's
+// checked trust (lib/connect/attest.ts trustOf): self-reported unless a broker proof checks
+// out (DEC-0091).
+import type { Trust } from "../connect/attest";
+import { VENUES } from "../connect/venues";
+import type { VenueId } from "../connect/types";
 import { RAW } from "../../ui/tokens.gen";
+import { count } from "./words";
 
 export type VerdictKey = "holds_up" | "could_be_luck" | "fragile" | "does_not_hold_up" | "not_enough_data";
 
@@ -13,11 +19,29 @@ export const VERDICT_COLOR: Record<VerdictKey, string> = {
   holds_up: RAW["color-positive"], could_be_luck: RAW["color-warning"], fragile: RAW["color-warning"], does_not_hold_up: RAW["color-negative"], not_enough_data: RAW["color-text-muted"],
 };
 
-/** The words every MVP badge carries about trust (REF-0016). */
+/** The words a self-reported badge carries about trust (REF-0016). */
 export const TRUST_LINE = "Self-reported: Parity checked the numbers in the file, not where the file came from.";
+/** The words a broker-connected badge carries (DEC-0091). */
+export const CONNECTED_LINE = "Broker-connected: Parity read these trades from the broker itself, through a read-only link.";
 export const NOT_ADVICE = "Verification is not a recommendation.";
 
 export const KIND_WORDS = { real: "Self-reported real money", demo: "Self-reported demo account", backtest: "Self-reported backtest" } as const;
+export const CONNECTED_KIND_WORDS = { real: "Broker-connected real money", demo: "Broker-connected paper account", backtest: "Broker-connected record" } as const;
+
+export const SELF_REPORTED: Trust = { level: "self_reported" };
+
+export const venueName = (v: string | null | undefined) => (v && v in VENUES ? VENUES[v as VenueId].name : v ?? "a broker");
+
+/** "Self-reported backtest", "Broker-connected real money" and so on. */
+export function kindWords(b: Pick<PublicBadge, "input_kind">, trust: Trust = SELF_REPORTED): string {
+  if (trust.level === "broker_connected") return b.input_kind ? CONNECTED_KIND_WORDS[b.input_kind] : "Broker-connected record";
+  return b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record";
+}
+
+/** The trust sentence for a live badge. */
+export function trustLine(trust: Trust = SELF_REPORTED): string {
+  return trust.level === "broker_connected" ? `${CONNECTED_LINE.replace("the broker", venueName(trust.venue))}` : TRUST_LINE;
+}
 
 /** A badge as the public page and the image read it (the verify_badges_public view). */
 export interface PublicBadge {
@@ -35,6 +59,12 @@ export interface PublicBadge {
   cards: Record<string, unknown> | null;
   method_version: string | null;
   file_sha256: string | null;
+  /** The server's signed proof that it read the trades from a broker (DEC-0091). Checked before it counts. */
+  attestation?: string | null;
+  /** Copied from the proof when the badge was published; kept after a withdrawal. */
+  broker_venue?: string | null;
+  broker_account?: string | null;
+  broker_fetched_at?: string | null;
 }
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -60,18 +90,19 @@ export function survivesWords(n: number | null): string {
 }
 
 /** "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported backtest, 212 trades. paritytrading.app/v/<id>" */
-export function socialLine(b: Pick<PublicBadge, "id" | "verdict" | "survives_tries" | "input_kind" | "trade_count">, host: string): string {
+export function socialLine(b: Pick<PublicBadge, "id" | "verdict" | "survives_tries" | "input_kind" | "trade_count">, host: string, trust: Trust = SELF_REPORTED): string {
   const parts = [`Parity Verify: ${b.verdict ? VERDICT_WORDS[b.verdict] : "Withdrawn"}.`, `${survivesWords(b.survives_tries)}.`];
-  const kind = b.input_kind ? KIND_WORDS[b.input_kind] : "Self-reported record";
-  parts.push(`${kind}${b.trade_count != null ? `, ${b.trade_count.toLocaleString("en-US")} trades` : ""}.`);
+  const kind = trust.level === "broker_connected" ? `${kindWords(b, trust)} from ${venueName(trust.venue)}` : kindWords(b, trust);
+  parts.push(`${kind}${b.trade_count != null ? `, ${count(b.trade_count, "trade")}` : ""}.`);
   parts.push(`${host}/v/${b.id}`);
   return parts.join(" ");
 }
 
 /** The badge's words for a screen reader, e.g. "Parity Verify: Could be luck. Survives up to 4 tries. Self-reported record." */
-export function badgeAlt(b: Pick<PublicBadge, "verdict" | "survives_tries" | "withdrawn_at"> | null): string {
+export function badgeAlt(b: Pick<PublicBadge, "verdict" | "survives_tries" | "withdrawn_at"> | null, trust: Trust = SELF_REPORTED): string {
   if (!b || !b.verdict || b.withdrawn_at) return "Parity Verify badge: see what was checked";
-  return `Parity Verify: ${VERDICT_WORDS[b.verdict]}. ${survivesWords(b.survives_tries)}. Self-reported record.`;
+  const level = trust.level === "broker_connected" ? `Broker-connected record from ${venueName(trust.venue)}` : "Self-reported record";
+  return `Parity Verify: ${VERDICT_WORDS[b.verdict]}. ${survivesWords(b.survives_tries)}. ${level}.`;
 }
 
 const attr = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -94,24 +125,28 @@ export function cardSnippet(id: string, origin: string): string {
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /** The badge image, 320 by 80. A withdrawn badge says so; it never shows the old verdict. */
-export function badgeSvg(b: PublicBadge | null): string {
+export function badgeSvg(b: PublicBadge | null, trust: Trust = SELF_REPORTED): string {
   const live = !!b && !b.withdrawn_at && !!b.verdict;
   const verdict = !b ? "No such badge" : live ? VERDICT_WORDS[b.verdict!] : "Withdrawn by its owner";
   const color = live ? VERDICT_COLOR[b!.verdict!] : RAW["color-text-muted"];
   const line2 = !b ? "Check the link" : live
-    ? `${survivesWords(b.survives_tries)}${b.trade_count != null ? ` · ${b.trade_count.toLocaleString("en-US")} trades` : ""}`
+    ? `${survivesWords(b.survives_tries)}${b.trade_count != null ? ` · ${count(b.trade_count, "trade")}` : ""}`
     : `on ${b.withdrawn_at!.slice(0, 10)}`;
-  const label = `Parity Verify: ${verdict}. ${line2}. ${live ? TRUST_LINE : ""}`.trim();
+  const connected = trust.level === "broker_connected";
+  const label = `Parity Verify: ${verdict}. ${line2}. ${live ? trustLine(trust) : ""}`.trim();
+  const small = connected
+    ? [`Broker-connected: read by Parity from ${venueName(trust.venue)}`, `through a read-only link. Not a recommendation.`]
+    : ["Self-reported: Parity checked the numbers in the file,", "not where the file came from. Not a recommendation."];
   return `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="80" viewBox="0 0 320 80" role="img" aria-label="${esc(label)}">
 <rect width="320" height="80" rx="10" fill="${RAW["color-surface-raised"]}"/>
 <rect x="0.5" y="0.5" width="319" height="79" rx="9.5" fill="none" stroke="${RAW["palette-line-2"]}"/>
 <rect x="0" y="10" width="4" height="60" rx="2" fill="${color}"/>
 <g font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
-<text x="16" y="17" font-size="8.5" letter-spacing="1.2" fill="${RAW["color-text-muted"]}">PARITY VERIFY</text>
+<text x="16" y="17" font-size="8.5" letter-spacing="1.2" fill="${RAW["color-text-muted"]}">PARITY VERIFY${live && connected ? ` · BROKER-CONNECTED` : ""}</text>
 <text x="16" y="36" font-size="16" font-weight="600" fill="${color}">${esc(verdict)}</text>
 <text x="16" y="51" font-size="10" fill="${RAW["color-text"]}">${esc(line2)}</text>
-${live ? `<text x="16" y="64" font-size="7.4" fill="${RAW["color-text-muted"]}">Self-reported: Parity checked the numbers in the file,</text>
-<text x="16" y="73" font-size="7.4" fill="${RAW["color-text-muted"]}">not where the file came from. Not a recommendation.</text>` : ""}
+${live ? `<text x="16" y="64" font-size="7.4" fill="${RAW["color-text-muted"]}">${esc(small[0])}</text>
+<text x="16" y="73" font-size="7.4" fill="${RAW["color-text-muted"]}">${esc(small[1])}</text>` : ""}
 </g>
 </svg>`;
 }
@@ -121,12 +156,12 @@ ${live ? `<text x="16" y="64" font-size="7.4" fill="${RAW["color-text-muted"]}">
  * sit in another site's frame. It shows the verdict, the tries survived, the trade count,
  * the trust line and a link to the full record. A withdrawn badge says so and nothing else.
  */
-export function badgeCardHtml(b: PublicBadge | null, id: string, origin: string): string {
+export function badgeCardHtml(b: PublicBadge | null, id: string, origin: string, trust: Trust = SELF_REPORTED): string {
   const live = !!b && !b.withdrawn_at && !!b.verdict;
   const verdict = !b ? "No such record" : live ? VERDICT_WORDS[b.verdict!] : "Withdrawn by its owner";
   const color = live ? VERDICT_COLOR[b!.verdict!] : RAW["color-text-muted"];
   const lines = !b ? ["Check the link."] : live
-    ? [`${survivesWords(b.survives_tries)}.`, [b.trade_count != null ? `${b.trade_count.toLocaleString("en-US")} trades` : "", b.input_kind ? KIND_WORDS[b.input_kind] : ""].filter(Boolean).join(", ") + "."]
+    ? [`${survivesWords(b.survives_tries)}.`, [b.trade_count != null ? count(b.trade_count, "trade") : "", b.input_kind ? kindWords(b, trust) : ""].filter(Boolean).join(", ") + "."]
     : [`On ${b.withdrawn_at!.slice(0, 10)}.`];
   const link = `${origin}/v/${esc(id)}`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Parity Verify: ${esc(verdict)}</title>
@@ -143,7 +178,7 @@ p{margin:0}
 <p class="k">Parity Verify</p>
 <p class="v">${esc(verdict)}</p>
 ${lines.map((l) => `<p>${esc(l)}</p>`).join("\n")}
-${live ? `<p class="t">${esc(TRUST_LINE)} ${esc(NOT_ADVICE)}</p>` : ""}
+${live ? `<p class="t">${esc(trustLine(trust))} ${esc(NOT_ADVICE)}</p>` : ""}
 <p class="m">See what was checked</p>
 </a></body></html>`;
 }

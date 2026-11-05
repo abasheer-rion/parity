@@ -12,6 +12,7 @@ import { badgeSvg, embedSnippet, newBadgeId, socialLine, type PublicBadge } from
 import { checkFile } from "../../src/lib/verify/checks";
 import { parseText } from "../../src/lib/verify/parse";
 import { badgeRecord, datasetRow, publicCards } from "../../src/lib/verify/publish";
+import { METHOD_VERSION } from "../../src/lib/verify/types";
 import { badgeIdFromPath, VerifyBadge } from "../../src/pages/VerifyBadge";
 import { honestEdge } from "./fixtures";
 
@@ -117,7 +118,7 @@ describe("the public badge page", () => {
     const facts = container.querySelector(".vb-facts")!;
     expect(facts.textContent).toContain("Checked on24 Oct 2026");
     expect(facts.textContent).toContain("Trust levelSelf-reported.");
-    expect(facts.querySelector('a[href="/methodology/"]')?.textContent).toBe("verify-1.0");
+    expect(facts.querySelector('a[href="/methodology/"]')?.textContent).toBe(METHOD_VERSION);
     expect(facts.textContent).toContain("Record idAb3dEf6hIj9k");
     expect(facts.textContent).not.toMatch(/owner_id|user_id/);
     expect(screen.getByText(/Verification is not a recommendation/)).toBeInTheDocument();
