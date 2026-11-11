@@ -1,0 +1,71 @@
+{
+  "id": "ALG-0104",
+  "slug": "overnight-intraday-momentum",
+  "name": "Overnight versus intraday momentum (tug of war)",
+  "family": "momentum-trend",
+  "markets": [
+    "equities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "overnight",
+    "intraday",
+    "momentum",
+    "reversal",
+    "clienteles"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2019,
+    "authors": "Lou, Polk, Skouras",
+    "source_title": "A tug of war: Overnight versus intraday expected returns (Journal of Financial Economics 134(1), 192-213)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2019.03.011"
+  },
+  "how_it_works": {
+    "simple": "Split each stock's daily return into what happens while the market is shut (close to next open) and while it is open. Stocks that did well overnight last month tend to keep doing well overnight and badly during the day.",
+    "analogy": "Like two teams pulling a rope at different times of day: each wins its own shift, and the rope barely moves overall.",
+    "precise": "Sort stocks each month by last month's overnight return; the value-weighted top-minus-bottom decile earns a large positive overnight alpha and a large negative intraday alpha next month. Momentum profits are earned overnight; many other strategies earn theirs intraday. The authors link this to individuals trading near the open and institutions trading during the day."
+  },
+  "rule": "Each month, rank stocks by last month's summed overnight returns; hold the top decile long and the bottom decile short only overnight (buy at the close, sell at the next open).",
+  "data_needed": [
+    "Daily open and close prices for all US stocks (CRSP in the paper)"
+  ],
+  "economic_rationale": "Different investor groups trade at different times of day, and their opposing demands persist, so each part of the return is predictable on its own.",
+  "why_it_might_fail": "Trading twice a day costs a lot, and the profits sit in the gap between close and open, where spreads are wide. The close-to-close return of the combined strategy is small because the two parts offset.",
+  "reported_results": [
+    {
+      "source": "Lou, Polk and Skouras (2019), introduction",
+      "source_url": "https://personal.lse.ac.uk/polk/research/TugOfWar.pdf",
+      "period": "1993 to 2013",
+      "market": "US stocks (CRSP)",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Value-weight overnight winners minus losers: three-factor overnight alpha 3.47% per month (t 16.83) and intraday alpha -3.02% per month (t -9.74). Intraday winners minus losers: intraday alpha 2.41% per month, overnight -1.77%. Before costs; alphas, not Sharpe ratios."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Useful for Verify because 'buy at the close, sell at the open' bots are common, but we cannot test the cross-section without stock-level open prices."
+  },
+  "testable_with_free_data": false,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Needs daily open prices for all US stocks. Added by Amanda's library batch on 2026-10-25 (options, intraday and equity anomalies that retail traders and bots claim to use)."
+  },
+  "last_reviewed": "2026-10-25",
+  "authors": [
+    "amanda"
+  ]
+}

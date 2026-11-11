@@ -1,0 +1,111 @@
+---
+id: ALG-0108
+title: Industrial metal prices time the stock market
+type: algorithm
+status: sourced
+created: 2026-10-25
+updated: 2026-10-25
+authors: [amanda]
+tags: [commodities, strategy]
+related: []
+---
+
+# Industrial metal prices time the stock market
+
+## In plain words
+
+Use last month's moves in metal prices such as aluminium and zinc to decide whether to hold stocks or cash next month.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | macro-fundamental |
+| Markets | equities, commodities |
+| Horizon | monthly |
+| Tags | metals, copper, aluminium, zinc, market-timing, business-cycle |
+| Origin | academic: Jacobsen, Marshall, Visaltanachoti |
+| First published | 2019 (7 years ago) |
+| Primary source | [Stock Market Predictability and Industrial Metal Returns (Management Science 65(7), 3026-3042)](https://doi.org/10.1287/mnsc.2017.2933) |
+| Research stage | 2 of 9: sourced |
+| Relevance to us | 3 of 5: A claim to beat our own S&P 500 benchmark with free monthly metal prices, close to data we already fetch. |
+| Testable with free data | yes |
+
+This page is generated from `catalog/algorithms/industrial-metals-time-stocks.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** Use last month's moves in metal prices such as aluminium and zinc to decide whether to hold stocks or cash next month.
+
+<details><summary>Analogy</summary>
+
+Like a factory owner watching what raw materials cost: a sudden jump says demand is booming, which can mean higher costs and tighter money ahead.
+
+</details>
+
+<details><summary>Precise</summary>
+
+Regress next month's stock market excess return on recent industrial metal returns. The published version finds the sign depends on the business cycle: rising metal prices are bad news for stocks in expansions and good news in recessions. The working paper's trading rule holds stocks when the forecast beats the T-bill rate and T-bills otherwise.
+
+</details>
+
+### The rule
+
+Each month, forecast the stock market's next-month return from past returns of WTI crude, aluminium and zinc (the working paper's three strongest series), estimated on data up to that month; hold the stock market if the forecast is above the T-bill rate, otherwise T-bills.
+
+### Data needed
+
+- Monthly aluminium and zinc prices (IMF via FRED: PALUMUSDM is in our catalog, PZINCUSDM is not)
+- WTI crude oil
+- US stock market and T-bill returns
+
+### Why it might work
+
+Metal prices carry news about the real economy that reaches stock prices slowly (gradual information diffusion), and what that news means depends on where the economy is in the cycle.
+
+### Why it might fail
+
+The working paper's out-of-sample test is only five years (2003 to 2008), which includes the 2008 crash, so a few months decide it. The published version needs a recession indicator, and real-time recession dating is late. Its introduction says the US Sharpe ratio is 'almost three times' buy and hold while its text gives 0.483 against 0.076, about six times, so the numbers need checking against the tables.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Jacobsen, Marshall and Visaltanachoti (2008 working paper, Return Predictability Revisited), section 5.9](https://efmaefm.org/0EFMAMEETINGS/EFMA%20ANNUAL%20MEETINGS/2009-Milan/papers/383.pdf) | 2003-03 to 2008 (out of sample) | US stock market vs T-bills | 0.483 | n/a | n/a | n/a | backtest | yes | yes |
+
+Notes on these numbers:
+
+- **Jacobsen, Marshall and Visaltanachoti (2008 working paper, Return Predictability Revisited), section 5.9:** Trading rule from WTI, aluminium and zinc: Sharpe 0.483 against 0.076 for buy and hold in the US; UK 0.16 vs 0.05 and Japan 0.35 vs 0.06. About 30 switches in five years, so costs of about 0.6% a year, which the authors say the profits exceed. Correct signal only 50% of the time. The published 2019 paper was not read; it reports a one-standard-deviation metal rise predicting about -1.5% a month for stocks in expansions and about +0.5% in recessions (per a search summary, not checked).
+
+### After publication
+
+Not checked by us yet.
+
+### Implementations
+
+None found.
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | not yet |
+| 4. implemented | not yet |
+| 5. registered | not yet |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+
+Needs the IMF zinc series added; aluminium and WTI are already in the catalog. Added in Amanda's metals batch on 2026-10-25.
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+Nothing links here yet.
+<!-- backlinks:end -->

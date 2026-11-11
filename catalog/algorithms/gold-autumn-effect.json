@@ -1,0 +1,84 @@
+{
+  "id": "ALG-0109",
+  "slug": "gold-autumn-effect",
+  "name": "Gold autumn effect (September and November)",
+  "family": "seasonality-calendar",
+  "markets": [
+    "commodities"
+  ],
+  "horizon": "monthly",
+  "tags": [
+    "gold",
+    "metals",
+    "seasonality",
+    "calendar"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2013,
+    "authors": "Baur",
+    "source_title": "The autumn effect of gold (Research in International Business and Finance 27(1), 1-11)",
+    "source_url": "https://doi.org/10.1016/j.ribaf.2012.05.001"
+  },
+  "how_it_works": {
+    "simple": "Gold rose in September and November more reliably than in any other month from 1980 to 2010. Own gold in those months and hold cash the rest of the year.",
+    "analogy": "Like stocking up on umbrellas before the rainy season: it only works if the season keeps coming at the same time.",
+    "precise": "Baur regresses monthly gold returns on month dummies and finds September and November are the only months with positive, statistically significant price changes from 1980 to 2010, also after controlling for risk factors. He links it to jewellery demand before the Indian wedding season and to hedging of the stock market's weak autumn."
+  },
+  "rule": "Hold gold during September and November; hold cash in every other month.",
+  "data_needed": [
+    "World Bank Pink Sheet monthly gold, silver and platinum prices (free, DAT-0035)"
+  ],
+  "economic_rationale": "Seasonal physical demand (Indian weddings and festivals, autumn jewellery buying) and investors hedging equity risk in autumn.",
+  "why_it_might_fail": "Twelve months tested means one is likely to look significant by chance. A 2024 replication (Potrykus and Augustynowicz) finds the autumn effect reversed out of sample and replaced by a winter effect.",
+  "reported_results": [
+    {
+      "source": "Baur (2013), abstract",
+      "source_url": "https://ideas.repec.org/a/eee/riibaf/v27y2013i1p1-11.html",
+      "period": "1980 to 2010",
+      "market": "Gold",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Abstract: September and November are the only months with positive and statistically significant gold price changes, unconditionally and conditional on several risk factors. No return figures in the abstract; the paper itself is paywalled and was not read."
+    },
+    {
+      "source": "Potrykus and Augustynowicz (2024), International Journal of Management and Economics, abstract",
+      "source_url": "https://reference-global.com/download/article/10.2478/ijme-2024-0011.pdf",
+      "period": "1981-01-20 to 2022-07-29 (out of sample 2010-12-16 to 2022-07-29)",
+      "market": "Gold, silver, platinum, palladium",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Extended reproduction of Baur. Abstract: the autumn effect in gold has been reversed and replaced by a winter effect; a calendar effect was also found for silver, and platinum and palladium rose in January. Evidence against the strategy after publication."
+    }
+  ],
+  "post_publication_evidence": "Potrykus and Augustynowicz (2024, https://doi.org/10.2478/ijme-2024-0011) find the effect reversed after 2010 and replaced by a winter effect.",
+  "implementations": [],
+  "relevance": {
+    "score": 2,
+    "reason": "Seasonal gold calls are common in retail newsletters; this is a clean example of a calendar effect that faded after publication, which Verify can point to."
+  },
+  "testable_with_free_data": true,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Testable on the World Bank's monthly gold average, which smooths month-end prices, so a test would be approximate. Added in Amanda's metals batch on 2026-10-25."
+  },
+  "authors": [
+    "amanda"
+  ],
+  "last_reviewed": "2026-10-25"
+}

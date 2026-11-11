@@ -1,0 +1,110 @@
+---
+id: ALG-0107
+title: Gold real price mean reversion (the golden dilemma)
+type: algorithm
+status: sourced
+created: 2026-10-25
+updated: 2026-10-25
+authors: [amanda]
+tags: [commodities, strategy]
+related: []
+---
+
+# Gold real price mean reversion (the golden dilemma)
+
+## In plain words
+
+Divide the gold price by the cost of living. When that ratio is far above its long-run average, expect poor gold returns over the next decade; when it is far below, expect good ones.
+
+## Summary
+
+| | |
+| --- | --- |
+| Family | value-mean-reversion |
+| Markets | commodities |
+| Horizon | monthly |
+| Tags | gold, metals, value, inflation, long-horizon |
+| Origin | academic: Erb, Harvey |
+| First published | 2013 (13 years ago) |
+| Primary source | [The Golden Dilemma (Financial Analysts Journal 69(4), 10-42)](https://doi.org/10.2469/faj.v69.n4.1) |
+| Research stage | 2 of 9: sourced |
+| Relevance to us | 3 of 5: Gold is the metal retail investors buy most, and 'gold is cheap or expensive' is a common pitch; this is the most cited honest test of it, and free monthly data covers it. |
+| Testable with free data | yes |
+
+This page is generated from `catalog/algorithms/gold-real-price-mean-reversion.json`. Edit that file, then run `python3 scripts/docs.py index`. Terms are explained in the [glossary](../reference/0004-glossary.md).
+
+## How it works
+
+**Simple:** Divide the gold price by the cost of living. When that ratio is far above its long-run average, expect poor gold returns over the next decade; when it is far below, expect good ones.
+
+<details><summary>Analogy</summary>
+
+Like a house that costs ten times local incomes: it can stay expensive for years, but buyers who pay that much have usually done badly over the next decade.
+
+</details>
+
+<details><summary>Precise</summary>
+
+The real price of gold is the nominal price divided by the US CPI. Erb and Harvey show that since US gold futures began trading, a high real price has been followed by low subsequent 10-year real gold returns, as with stock market valuation ratios. A trading version holds less gold, or none, when the real price is in the top part of its history.
+
+</details>
+
+### The rule
+
+Our simple version, for testing: each month, compute gold / CPI and its percentile against all earlier months since 1975. Hold gold when the ratio is below its historical median, hold cash when above. This rule is ours, not the paper's.
+
+### Data needed
+
+- World Bank Pink Sheet monthly gold, silver and platinum prices (free, DAT-0035)
+- US CPI (FRED CPIAUCSL, free; not yet in our catalog)
+
+### Why it might work
+
+Gold has no cash flow, so over long horizons its price should track the general price level; deviations from that are eventually corrected as mine supply, recycling and jewellery demand respond to price.
+
+### Why it might fail
+
+The authors call the relation a 'known unknown': there are only a few independent decades since 1975, so the chart rests on one big cycle (1980 high, 2001 low, 2011 high). Central bank buying, which the paper flags as the other side of the dilemma, can keep the real price high for a long time.
+
+## Reported results
+
+Numbers as reported by each source, not checked by us unless the research stage says so. "Checked on page" means we read the number on the source itself rather than in a summary.
+
+| Source | Period | Market | Sharpe | Return a year | Volatility | Max drawdown | Evidence | Costs | Checked on page |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Erb and Harvey (2013), Financial Analysts Journal, Figure 5 and text](https://people.duke.edu/~charvey/Research/Published_Papers/P113_The_golden_dilemma.pdf) | 1975 to 2012 | Gold (real price, gold / CPI) | n/a | n/a | n/a | n/a | backtest | no | yes |
+
+Notes on these numbers:
+
+- **Erb and Harvey (2013), Financial Analysts Journal, Figure 5 and text:** Since gold futures began trading, gold / CPI averaged about 3.2, with a low of 1.46 (March 2001) and a high of 8.73 (January 1980); it was 7.3 at the end of March 2012. If the Figure 5 relation were stable, that level would imply a future 10-year real return of about -10% a year, which the authors stress is not a reliable forecast. A regression chart, not a trading backtest.
+
+### After publication
+
+Not checked by us yet. The paper's March 2012 reading gives a clean forecast to check against the World Bank's monthly gold price for 2012 to 2022.
+
+### Implementations
+
+None found.
+
+## Our research
+
+| Stage | Status |
+| --- | --- |
+| 1. catalogued | done |
+| 2. sourced | done |
+| 3. hypothesis | not yet |
+| 4. implemented | not yet |
+| 5. registered | not yet |
+| 6. official | not yet |
+| 7. reproduced | not yet |
+| 8. forward | not yet |
+| 9. verdict | not yet |
+
+
+Testable with the World Bank's monthly gold price and FRED CPI; neither is wired into the engine yet. Added in Amanda's metals batch on 2026-10-25.
+
+<!-- backlinks:start (generated by scripts/docs.py) -->
+## Referenced by
+
+Nothing links here yet.
+<!-- backlinks:end -->

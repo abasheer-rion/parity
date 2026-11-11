@@ -1,0 +1,74 @@
+{
+  "id": "ALG-0110",
+  "slug": "gold-safe-haven-after-crashes",
+  "name": "Gold as a short-lived safe haven after stock crashes",
+  "family": "portfolio-construction",
+  "markets": [
+    "multi-asset",
+    "commodities",
+    "equities"
+  ],
+  "horizon": "daily",
+  "tags": [
+    "gold",
+    "metals",
+    "safe-haven",
+    "crisis",
+    "hedge"
+  ],
+  "origin": {
+    "type": "academic",
+    "first_published": 2010,
+    "authors": "Baur, Lucey",
+    "source_title": "Is Gold a Hedge or a Safe Haven? An Analysis of Stocks, Bonds and Gold (Financial Review 45(2), 217-229)",
+    "source_url": "https://doi.org/10.1111/j.1540-6288.2010.00244.x"
+  },
+  "how_it_works": {
+    "simple": "Gold tends not to fall when stocks crash, but only for a couple of weeks. After an extreme down day in stocks, move some money into gold, then move it back after about 15 trading days.",
+    "analogy": "Like an umbrella that works during a downpour but not for the rest of the week.",
+    "precise": "Regressing gold returns on stock returns, with extra terms for days when stock returns are in their lowest 10%, 5% or 1%, Baur and Lucey find gold is uncorrelated with stocks on average (a hedge) and not negatively affected on extreme down days (a safe haven) in the US, UK and Germany. In their portfolio analysis the protection lasts only about 15 trading days."
+  },
+  "rule": "Our simple version, for testing: when the S&P 500's daily return is below its rolling 1st percentile, switch a fixed share of the stock holding into gold for 15 trading days, then switch back. This rule is ours.",
+  "data_needed": [
+    "Daily gold price (no free daily source in our catalog)",
+    "Daily stock index returns"
+  ],
+  "economic_rationale": "Flight to quality: in panics some investors sell stocks and buy an asset with no credit risk, which supports gold briefly.",
+  "why_it_might_fail": "The sample is one decade (1995 to 2005) with few extreme days. Gold can also fall in a crash when investors sell everything for cash. Fifteen days is an average, not a rule.",
+  "reported_results": [
+    {
+      "source": "Baur and Lucey (2010), working paper version (IIIS Discussion Paper 198), abstract and data section",
+      "source_url": "https://www.tcd.ie/triss/assets/PDFs/iiis/iiisdp198.pdf",
+      "period": "1995-11-30 to 2005-11-30",
+      "market": "US, UK and German stocks and bonds vs gold",
+      "sharpe": null,
+      "annual_return": null,
+      "volatility": null,
+      "max_drawdown": null,
+      "evidence_type": "backtest",
+      "costs_included": false,
+      "verified_on_page": true,
+      "notes": "Abstract: gold is a hedge against stocks, a safe haven in extreme stock market conditions, and a safe haven for stocks only for 15 trading days after an extreme shock. Correlation results, not a trading backtest; no returns reported for a strategy."
+    }
+  ],
+  "post_publication_evidence": "Not checked by us yet. Many later papers test this; we have not read them.",
+  "implementations": [],
+  "relevance": {
+    "score": 3,
+    "reason": "'Buy gold for protection' is one of the most common retail claims, and our crisis research (RES-0018 on the stack) asks the same question."
+  },
+  "testable_with_free_data": false,
+  "research": {
+    "stage": 2,
+    "hypothesis": null,
+    "strategy": null,
+    "registrations": [],
+    "runs": [],
+    "verdict": null,
+    "notes": "Needs a free daily gold price; none is in our catalog (FRED no longer carries the LBMA price). Added in Amanda's metals batch on 2026-10-25."
+  },
+  "authors": [
+    "amanda"
+  ],
+  "last_reviewed": "2026-10-25"
+}
