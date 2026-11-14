@@ -1,0 +1,95 @@
+{
+ "chart": {
+  "title": "Markets in the week to 14 November 2026",
+  "sub": "Each week's move against that market's usual weekly move (z score)",
+  "foot": "Source: Parity Terminal export, FRED (Cboe), FRED (Federal Reserve H.15), FRED (Federal Reserve), FRED (Federal Reserve H.10), FRED (US Energy Informati",
+  "source": "Parity Terminal export",
+  "rows": [
+   [
+    "VIX",
+    -2.757,
+    "-9.48 index"
+   ],
+   [
+    "UST2Y",
+    3.19,
+    "+40 bp"
+   ],
+   [
+    "UST10Y",
+    2.22,
+    "+26 bp"
+   ],
+   [
+    "UST30Y",
+    1.7,
+    "+18 bp"
+   ],
+   [
+    "TBILL",
+    3.125,
+    "+14 bp"
+   ],
+   [
+    "USDBROAD",
+    0.2874,
+    "+0.18%"
+   ],
+   [
+    "AUD",
+    -2.022,
+    "-2.32%"
+   ],
+   [
+    "CAD",
+    -1.531,
+    "-1.06%"
+   ],
+   [
+    "CHF",
+    0.4387,
+    "+0.46%"
+   ],
+   [
+    "EUR",
+    -0.08846,
+    "-0.08%"
+   ],
+   [
+    "GBP",
+    -0.2285,
+    "-0.20%"
+   ],
+   [
+    "JPY",
+    -0.3631,
+    "-0.48%"
+   ],
+   [
+    "WTI",
+    -0.3713,
+    "-2.30%"
+   ],
+   [
+    "BRENT",
+    0.04946,
+    "+0.33%"
+   ],
+   [
+    "GAS",
+    0.1741,
+    "+14.07%"
+   ],
+   [
+    "ADA",
+    -1.51,
+    "-13.30%"
+   ],
+   [
+    "AVAX",
+    -0.6703,
+    "-5.85%"
+   ]
+  ]
+ }
+}
